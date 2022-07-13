@@ -6,17 +6,18 @@ import { AnimatePresence, motion } from "framer-motion";
 function Landing() {
   const [images, setImages] = useState([
     { id: 1, href: "/office1-1.jpg", text: "Insurance made simple" },
-    { id: 2, href: "/house-2.jpeg", text: "Insurance made safe" },
+    { id: 2, href: "/house-2.jpeg", text: "Insurance made reliable" },
     { id: 3, href: "/cars-1.jpeg", text: "Insurance made easy" },
+    { id: 4, href: "/work-1.jpeg", text: "Insurance made safe" },
   ]);
   const [selectedImage, setSelectedImage] = useState(1);
 
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const maxLimit = images.length;
+      const maxLimit = images.length-1;
       const imageCheck = () =>
-        selectedImage < maxLimit ? Number(selectedImage) + 1 : 1;
+        selectedImage < maxLimit ? Number(selectedImage) + 1 : 0;
       setSelectedImage(imageCheck());
     }, 18000);
     return () => clearInterval(interval);
@@ -44,10 +45,10 @@ function Landing() {
   };
 
   return (
-    <div className="landing-base relative flex flex-col w-full h-[28vh] lg:h-[40vh] rounded-lg drop-shadow-xl overflow-hidden">
+    <div className="landing-base z-10 relative flex flex-col w-full h-[28vh] lg:h-[30vh] rounded-md overflow-hidden">
       <AnimatePresence initial={false} custom={1}>
         <motion.img
-          src={images.find((x) => x.id == selectedImage).href}
+          src={images[selectedImage].href}
           custom={1}
           variants={variants}
           initial="enter"
@@ -56,14 +57,14 @@ function Landing() {
           transition={{
             x: { type: "spring", stiffness: 300, damping: 30 },
           }}
-          className="w-full lg:top-[-200px] lg:max-w-[80vw]"
+          className="w-full lg:top-[-300px] lg:max-w-[80vw]"
           key={selectedImage}
         ></motion.img>
       </AnimatePresence>
-      <div className="absolute left-0 top-[50px] px-8 text-5xl flex drop-shadow-2xl landing-text text-white uppercase tracking-widest font-bold z-30 lg:text-[6rem]">
-        {images.find((x) => x.id == selectedImage).text}
+      <div className="absolute left-0 top-[30px] max-w-[95%] lg:max-w-[33%] pl-4 pr-40 text-3xl lg:text-6xl block drop-shadow-2xl landing-text text-white uppercase tracking-widest font-bold text-gradient z-30">
+        {images[selectedImage].text}
       </div>
-      <div className="absolute right-0 top-0 w-full h-full z-20 landing-bg opacity-40"></div>
+      <div className="absolute right-0 top-0 w-full h-full z-20 landing-bg"></div>
     </div>
   );
 }

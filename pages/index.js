@@ -16,16 +16,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
-        <Landing />
+        <div className="lg:px-4">
+          <Landing />
+        </div>
         <HeroContainer />
         <CarriersContainer />
-        <div className="flex flex-col-reverse lg:flex-row space-y-4 lg:space-y-0 lg:gap-4 w-full">
-          <BlogContainer />
-          <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4">
-            <ActionsContainer />
-            <TestemonialContainer />
-          </div>
-        </div>
+        {/* <ActionsContainer /> */}
+        <BlogContainer />
+        <TestemonialContainer />
       </div>
     </Base>
   );

@@ -59,11 +59,11 @@ function CarriersContainer() {
       },
   ];
   return (
-    <div className="flex flex-col w-full h-[10vh] rounded-lg">
+    <div className="flex flex-col w-full h-full rounded-md py-4">
       <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold">
         we only partner with the best
       </div>
-      <div className="flex flex-auto shrink-0 overflow-x-auto opacity-80">
+      <div className="flex max-w-[100vw] h-full py-2 lg:py-8 overflow-x-auto opacity-80 px-4">
         {carriers.map((item) => (
           <CarrierCarouselCard key={item.id} carrier={item} />
         ))}

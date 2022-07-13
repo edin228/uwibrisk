@@ -9,13 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@popmotion/popcorn": "^0.4.4",
     "framer-motion": "^6.4.2",
     "graphql": "^16.5.0",
     "graphql-request": "^4.3.0",
+    "lodash": "^4.17.21",
     "next": "12.2.0",
+    "popmotion": "9.0.0-beta-8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "react-lorem-ipsum": "^1.4.10"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

@@ -3,19 +3,19 @@ import HeroCard from "./HeroCard";
 
 function HeroContainer() {
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold">
+    <div className="flex flex-col w-full lg:!mt-[-40px] z-20">
+      {/* <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold">
         WE'RE LOCATED IN
-      </div>
-      <div className="flex flex-auto shrink-0 overflow-x-auto lg:overflow-x-visible space-x-2 lg:space-x-0 lg:gap-4 lg:w-full rounded-lg">
+      </div> */}
+      <div className="flex flex-auto shrink-0 overflow-x-auto lg:overflow-x-visible space-x-2 lg:space-x-0 lg:gap-4 lg:w-full rounded-md">
         <HeroCard
           image={"/laskyline.jpg"}
-          label={"Los Angeles"}
+          label={"California"}
           sublabel={"Est. 1995"}
         />
         <HeroCard
           image={"/seattleskyline.jpg"}
-          label={"Seattle"}
+          label={"Washington"}
           sublabel={"Est. 2018"}
         />
         <HeroCard

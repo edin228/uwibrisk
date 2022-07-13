@@ -24,7 +24,7 @@ export default function DesktopHeader() {
   };
 
   return (
-    <div className="hidden lg:flex fixed top-0 w-3/4 h-20 bg-white z-50">
+    <div className="hidden lg:flex fixed top-0 w-3/4 h-20 bg-white z-50 rounded-b-md">
       <div className="flex w-full justify-between items-center px-4">
         <Link href="/">
           <a className="w-[140px] h-full relative left-4">
@@ -52,7 +52,7 @@ export default function DesktopHeader() {
                     animate={selectedID ? "visible" : "hidden"}
                     variants={tile}
                     transition={{ ease: "easeInOut", duration: 0.25 }}
-                    className="rounded-lg h-[31px] deep-blue-gradient top-0 absolute z-10 w-full shadow-lg"
+                    className="rounded h-[31px] deep-blue-gradient top-0 absolute z-10 w-full shadow-lg"
                   />
                 )}
               </li>
