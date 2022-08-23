@@ -6,15 +6,13 @@ export const BlogImage = ({
   id,
   image,
   isSelected,
-  pointOfInterest = 0,
-  backgroundColor
 }) => {
   const inverted = useDeprecatedInvertedScale(15,15);
 
   return (
     <motion.div
       className="blog-card-image-container"
-      style={{...inverted, backgroundColor, originX: 0, originY: 0 }}
+      style={{...inverted, originX: 0, originY: 0 }}
     >
       <div className="z-10 flex absolute left-0 top-0 w-full blog-image-text-bg h-full"></div>
       <motion.img

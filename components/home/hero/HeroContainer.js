@@ -1,33 +1,18 @@
 import React from "react";
 import HeroCard from "./HeroCard";
 
-function HeroContainer() {
+function HeroContainer( {locations = []} ) {
   return (
     <div className="flex flex-col w-full lg:!mt-[-40px] z-20">
-      {/* <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold">
-        WE'RE LOCATED IN
-      </div> */}
       <div className="flex flex-auto shrink-0 overflow-x-auto lg:overflow-x-visible space-x-2 lg:space-x-0 lg:gap-4 lg:w-full rounded-md">
-        <HeroCard
-          image={"/laskyline.jpg"}
-          label={"California"}
-          sublabel={"Est. 1995"}
+      {locations.map((card) => (
+          <HeroCard
+          key={card.id}
+          image={card.image?.url}
+          label={card.state}
+          sublabel={card.subtitle}
         />
-        <HeroCard
-          image={"/seattleskyline.jpg"}
-          label={"Washington"}
-          sublabel={"Est. 2018"}
-        />
-        <HeroCard
-          image={"/idahoskyline.jpg"}
-          label={"Idaho"}
-          sublabel={"Est. 2020"}
-        />
-        <HeroCard
-          image={"/tnskyline.jpg"}
-          label={"Tennessee"}
-          sublabel={"Est. 2022"}
-        />
+        ))}
       </div>
     </div>
   );

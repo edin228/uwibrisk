@@ -1,13 +1,26 @@
 import Head from "next/head";
 import ActionsContainer from "../components/home/actions/ActionsContainer";
-import BlogContainer from "../components/home/blog/BlogContainer";
+import BlogContainer from "../components/blog/BlogContainer";
 import CarriersContainer from "../components/home/carriers/CarriersContainer";
 import HeroContainer from "../components/home/hero/HeroContainer";
 import Landing from "../components/home/landing/Landing";
 import TestemonialContainer from "../components/home/testemonials/TestemonialContainer";
 import Base from "../components/layout/Base";
+import {
+  getCarriers,
+  getLanding,
+  getOfficeLocations,
+  getRecentBlogPosts,
+  getTestemonials,
+} from "../services";
 
-export default function Home() {
+export default function Home({
+  landing = null,
+  officeLocations = null,
+  carriers = null,
+  posts = null,
+  testemonials = null,
+}) {
   return (
     <Base template={"home"}>
       <Head>
@@ -17,14 +30,27 @@ export default function Home() {
       </Head>
       <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
         <div className="lg:px-4">
-          <Landing />
+          <Landing locations={landing} />
         </div>
-        <HeroContainer />
-        <CarriersContainer />
-        {/* <ActionsContainer /> */}
-        <BlogContainer />
-        <TestemonialContainer />
+        <HeroContainer locations={officeLocations} />
+        <CarriersContainer carriers={carriers} />
+        <ActionsContainer />
+        <BlogContainer posts={posts} />
+        <TestemonialContainer testemonials={testemonials} />
       </div>
     </Base>
   );
+}
+
+// Fetch data at build time
+export async function getServerSideProps({ params }) {
+  const landing = await getLanding();
+  const officeLocations = await getOfficeLocations();
+  const carriers = await getCarriers();
+  const posts = await getRecentBlogPosts();
+  const testemonials = await getTestemonials();
+
+  return {
+    props: { landing, officeLocations, carriers, testemonials, posts },
+  };
 }

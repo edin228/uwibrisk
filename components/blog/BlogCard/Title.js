@@ -16,7 +16,9 @@ export const Title = ({ title, category, isSelected }) => {
       transformTemplate={scaleTranslate}
       style={{ ...inverted, originX: 0, originY: 0 }}
     >
-      <span className="category">{category}</span>
+      {category.map(cat => (
+        <span key={cat.id} className="category">{cat.title}</span>
+      ))}
       <h2 className="font-bold text-2xl">{title}</h2>
     </motion.div>
   );

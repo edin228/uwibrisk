@@ -1,6 +1,6 @@
 import React from "react";
 
-function TestemonialContainer() {
+function TestemonialContainer({testemonials}) {
   return (
     <div className="flex flex-col w-full h-full">
       <div className="flex w-full justify-center lg:justify-start text-center items-center uppercase tracking-widest font-semibold pl-4">

@@ -9,7 +9,7 @@ import {
   useInvertedBorderRadius,
   useScrollConstraints,
   useWheelScroll,
-} from "../../../../utils/utils";
+} from "../../../utils/utils";
 import { Placeholder } from "./Placeholder";
 import { useRouter } from "next/router";
 
@@ -19,7 +19,7 @@ const dismissDistance = 150;
 
 // eslint-disable-next-line react/display-name
 export const BlogCard = memo(
-  ({ id, image, title, category, pointOfInterest, backgroundColor }) => {
+  ({ id, featuredImage, excerpt, slug, title, blogCategories }) => {
     const [isSelected, setIsSelected] = useState(false);
     const router = useRouter();
     const y = useMotionValue(0);
@@ -92,13 +92,11 @@ export const BlogCard = memo(
           >
             <BlogImage
               id={id}
-              image={image}
+              image={featuredImage.url}
               isSelected={isSelected}
-              pointOfInterest={pointOfInterest}
-              backgroundColor={backgroundColor}
             />
-            <Title title={title} category={category} isSelected={isSelected} />
-            <Placeholder id={id} />
+            <Title title={title} category={blogCategories} isSelected={isSelected} />
+            <Placeholder id={id} excerpt={excerpt} slug={slug}/>
           </motion.div>
         </div>
       </li>

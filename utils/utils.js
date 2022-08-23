@@ -5,6 +5,8 @@ import { spring } from "popmotion";
 import { mix } from "@popmotion/popcorn";
 import { debounce } from "lodash";
 
+export const graphCMSImageLoader = ({ src }) => src;
+
 // Absolute distance a wheel scroll event can travel outside of
 // the defined constraints before we fire a "snap back" animation
 const deltaThreshold = 5;
