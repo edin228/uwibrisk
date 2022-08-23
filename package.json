@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.2.1",
     "@popmotion/popcorn": "^0.4.4",
     "@types/react": "^18.0.15",
     "framer-motion": "^6.4.2",

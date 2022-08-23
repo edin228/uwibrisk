@@ -4,6 +4,36 @@ import { useDomEvent, MotionValue, useMotionValue, useDeprecatedInvertedScale } 
 import { spring } from "popmotion";
 import { mix } from "@popmotion/popcorn";
 import { debounce } from "lodash";
+import { BsBox, BsPlusLg, BsClipboard, BsCheckCircleFill, BsSearch } from 'react-icons/bs'
+import { FaRegPaperPlane } from 'react-icons/fa'
+import { FiMail } from 'react-icons/fi'
+import { RiLinksLine } from 'react-icons/ri'
+import { HiOutlineOfficeBuilding } from 'react-icons/hi'
+import { TbCertificate } from 'react-icons/tb'
+import { MdOutlineStickyNote2, MdOutlineFolderShared,MdRequestQuote, MdOutlinePayments } from 'react-icons/md'
+import {
+  AiOutlineEdit,
+  AiOutlineFile,
+  AiOutlineLeft,
+  AiOutlineDown,
+  AiOutlineRight,
+  AiOutlineUp,
+  AiOutlineCalendar,
+  AiOutlineStar,
+  AiOutlineDelete,
+  AiOutlineClockCircle, AiOutlineCloudDownload ,
+  AiOutlineCloseCircle,
+  AiOutlineDollarCircle,
+  AiOutlinePhone
+} from 'react-icons/ai'
+import {
+  BiNotepad,
+  BiCommentDetail,
+  BiCommentAdd,
+  BiCircle,
+  BiTask,
+} from 'react-icons/bi'
+
 
 export const graphCMSImageLoader = ({ src }) => src;
 
@@ -135,4 +165,75 @@ export function useInvertedBorderRadius(radius) {
     borderBottomLeftRadius: borderRadius,
     borderBottomRightRadius: borderRadius,
   };
+}
+
+
+export const getIcon = (item) => {
+  return item == 'policy' ? (
+    <BsBox />
+  ) : item == 'activity' ? (
+    <MdOutlineStickyNote2 />
+  ) : item == 'client' ? (
+    <MdOutlineFolderShared />
+  ) : item == 'deal' ? (
+    <BsClipboard />
+  ) : item == 'emailCompose' ? (
+    <FaRegPaperPlane />
+  ) : item == 'email' ? (
+    <FiMail />
+  ) : item == 'plus' ? (
+    <BsPlusLg />
+  ) : item == 'calendar' ? (
+    <AiOutlineCalendar />
+  ) : item == 'note' ? (
+    <BiNotepad />
+  ) : item == 'down' ? (
+    <AiOutlineDown />
+  ) : item == 'left' ? (
+    <AiOutlineLeft />
+  ) : item == 'right' ? (
+    <AiOutlineRight />
+  ) : item == 'up' ? (
+    <AiOutlineUp />
+  ) : item == 'comment' ? (
+    <BiCommentDetail />
+  ) : item == 'newComment' ? (
+    <BiCommentAdd />
+  ) : item == 'circleCheck' ? (
+    <BsCheckCircleFill />
+  ) : item == 'circleX' ? (
+    <AiOutlineCloseCircle />
+  ) : item == 'circle' ? (
+    <BiCircle />
+  ) : item == 'file' ? (
+    <AiOutlineFile />
+  ) : item == 'link' ? (
+    <RiLinksLine />
+  ) : item == 'agency' ? (
+    <HiOutlineOfficeBuilding />
+  ) : item == 'edit' ? (
+    <AiOutlineEdit />
+  ) : item == 'trash' ? (
+    <AiOutlineDelete />
+  ) : item == 'star' ? (
+    <AiOutlineStar />
+  ) : item == 'task' ? (
+    <BiTask />
+  ) : item == 'clock' ? (
+    <AiOutlineClockCircle />
+  ) : item == 'cloudDownload' ? (
+    <AiOutlineCloudDownload />
+  ) : item == 'dollarSign' ? (
+    <AiOutlineDollarCircle />
+  ) : item == 'quote' ? (
+    <MdRequestQuote />
+  ) : item == 'payment' ? (
+    <MdOutlinePayments />
+  ) : item == 'certificate' ? (
+    <TbCertificate />
+  ) : item == 'search' ? (
+    <BsSearch />
+  ) : item == 'phone' ? (
+    <AiOutlinePhone />
+  ) : null
 }

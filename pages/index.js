@@ -8,6 +8,7 @@ import TestemonialContainer from "../components/home/testemonials/TestemonialCon
 import Base from "../components/layout/Base";
 import {
   getCarriers,
+  getHomeActionButtons,
   getLanding,
   getOfficeLocations,
   getRecentBlogPosts,
@@ -20,6 +21,7 @@ export default function Home({
   carriers = null,
   posts = null,
   testemonials = null,
+  homeButtons = null
 }) {
   return (
     <Base template={"home"}>
@@ -34,7 +36,7 @@ export default function Home({
         </div>
         <HeroContainer locations={officeLocations} />
         <CarriersContainer carriers={carriers} />
-        <ActionsContainer />
+        <ActionsContainer homeButtons={homeButtons}/>
         <BlogContainer posts={posts} />
         <TestemonialContainer testemonials={testemonials} />
       </div>
@@ -49,8 +51,9 @@ export async function getServerSideProps({ params }) {
   const carriers = await getCarriers();
   const posts = await getRecentBlogPosts();
   const testemonials = await getTestemonials();
+  const homeButtons = await getHomeActionButtons();
 
   return {
-    props: { landing, officeLocations, carriers, testemonials, posts },
+    props: { landing, officeLocations, carriers, testemonials, posts, homeButtons },
   };
 }

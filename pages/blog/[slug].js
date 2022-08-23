@@ -49,7 +49,10 @@ function BlogPost({ data, recentBlogs }) {
                     objectFit="cover"
                   />
                 </div>
-                <div className="font-bold flex">{data.teamMember?.name}</div>
+                <div className="flex flex-col">
+                  <div className="font-bold flex">{data.teamMember?.name}</div>
+                  <div>{data.teamMember?.position}</div>
+                </div>
               </div>
             ) : null}
             <div dangerouslySetInnerHTML={{ __html: data.content.html }}></div>

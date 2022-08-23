@@ -24,8 +24,9 @@ export const getLanding = async () => {
 export const getOfficeLocations = async () => {
   const query = gql`
       query GetOfficeLocations() {
-        officeLocations(where: {isActive: true}) {
+        officeLocations(where: {isActive: true}, orderBy: order_ASC) {
           id
+          order
           address
           addressState
           city
@@ -81,125 +82,292 @@ export const getTestemonials = async () => {
 
 export const getRecentBlogPosts = async () => {
   const query = gql`
-        query GetRecentBlogPosts() {
-        blogPosts(orderBy: publishedAt_ASC, where: {isActive: true}, last: 4) {
-            title
-            id
-            isActive
-            template
-            excerpt
-            blogTags(orderBy: title_ASC) {
-                title
-                id
-                backgroundColor {
-                hex
-                }
-                textColor {
-                hex
-                }
-            }
-            blogCategories {
-                title
-                id
-                isActive
-            }
-            slug
-            featuredImage {
-                id
+      query GetRecentBlogPosts() {
+      blogPosts(orderBy: publishedAt_ASC, where: {isActive: true}, last: 4) {
+          title
+          id
+          isActive
+          template
+          excerpt
+          blogTags(orderBy: title_ASC) {
+              title
+              id
+              backgroundColor {
+              hex
+              }
+              textColor {
+              hex
+              }
+          }
+          blogCategories {
+              title
+              id
+              isActive
+          }
+          slug
+          featuredImage {
+              id
+              url
+          }
+          teamMember {
+              id
+              isActive
+              name
+              photo {
                 url
-            }
-            teamMember {
-                id
-                isActive
-                name
-                photo {
-                  url
-                }
-            }
-            publishedAt
-            }
-        }
-    `;
+              }
+          }
+          publishedAt
+          }
+      }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.blogPosts;
+};
+
+export const getRecentTenBlogPosts = async () => {
+  const query = gql`
+      query GetRecentBlogPosts() {
+      blogPosts(orderBy: publishedAt_ASC, where: {isActive: true}, last: 10) {
+          title
+          id
+          isActive
+          template
+          excerpt
+          blogTags(orderBy: title_ASC) {
+              title
+              id
+              backgroundColor {
+              hex
+              }
+              textColor {
+              hex
+              }
+          }
+          blogCategories {
+              title
+              id
+              isActive
+          }
+          slug
+          featuredImage {
+              id
+              url
+          }
+          teamMember {
+              id
+              isActive
+              name
+              photo {
+                url
+              }
+          }
+          publishedAt
+          }
+      }
+  `;
   const result = await request(graphqlAPI, query);
 
   return result.blogPosts;
 };
 
 export const getBlogPost = async (slug) => {
-    const query = gql`
-          query GetBlogPost($slug: String!) {
-            blogPost(where: {slug: $slug}) {
-                blogCategories(where: {isActive: true}) {
-                  id
-                  isActive
-                  title
-                }
-                blogTags(where: {isActive: true}) {
-                  isActive
-                  title
-                  backgroundColor {
-                    hex
-                  }
-                  textColor {
-                    hex
-                  }
-                  id
-                }
-                id
-                isActive
-                rawHtml
-                slug
-                title
-                template
-                content {
-                  html
-                }
-                featuredImage {
-                  id
-                  url
-              }
-              teamMember {
-                  id
-                  isActive
-                  name
-                  photo {
-                    url
-                  }
-              }
-                publishedAt
-              }
+  const query = gql`
+    query GetBlogPost($slug: String!) {
+      blogPost(where: { slug: $slug }) {
+        blogCategories(where: { isActive: true }) {
+          id
+          isActive
+          title
+        }
+        blogTags(where: { isActive: true }) {
+          isActive
+          title
+          backgroundColor {
+            hex
           }
-      `;
-    const result = await request(graphqlAPI, query, {slug});
-  
-    return result.blogPost;
-  };
-
-  export const getPage = async (slug) => {
-    const query = gql`
-          query GetPage($slug: String!) {
-            page(where: {slug: $slug}) {
-              slug
-              template
-              title
-              createdAt
-              content {
-                html
-                raw
-                markdown
-                json
-                text
-              }
-              id
-              pageCategories {
-                name
-                id
-              }
-              rawHtml
+          textColor {
+            hex
+          }
+          id
+        }
+        id
+        isActive
+        rawHtml
+        slug
+        title
+        template
+        content {
+          html
+        }
+        featuredImage {
+          id
+          url
+        }
+        teamMember {
+          id
+          isActive
+          name
+          position
+          photo {
+            url
           }
         }
-      `;
-    const result = await request(graphqlAPI, query, {slug});
-  
-    return result.page;
-  };
+        publishedAt
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.blogPost;
+};
+
+export const getPage = async (slug) => {
+  const query = gql`
+    query GetPage($slug: String!) {
+      page(where: { slug: $slug }) {
+        slug
+        template
+        title
+        createdAt
+        content {
+          html
+          raw
+          markdown
+          json
+          text
+        }
+        id
+        pageCategories {
+          name
+          id
+        }
+        rawHtml
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.page;
+};
+
+export const getHomeActionButtons = async () => {
+  const query = gql`
+    query GetHomeActionButtons {
+      homeActionButtons(where: { isActive: true }) {
+        externalUrl
+        id
+        isActive
+        link
+        text
+        icon
+        useExternalUrl
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.homeActionButtons;
+};
+
+export const getNavMenuItems = async () => {
+  const query = gql`
+    query GetNavMenuItems {
+      navigationMenuItems(where: { isActive: true }) {
+        highlight
+        id
+        isActive
+        isDropdown
+        isExternalUrl
+        slug
+        externalUrl
+        text
+        pages(where: { isActive: true }) {
+          isActive
+          id
+          slug
+          title
+        }
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.navigationMenuItems;
+};
+
+export const getTeam = async () => {
+  const query = gql`
+    query GetTeam {
+      teamMembers(where: { isActive: true }, first: 500) {
+        id
+        isActive
+        name
+        phone
+        email
+        employeeCategory
+        position
+        slug
+        hasTeamPage
+        photo {
+          id
+          url
+        }
+      }
+      pets(where: { isActive: true }) {
+        id
+        isActive
+        name
+        slug
+        photo {
+          id
+          url
+        }
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result;
+};
+
+export const getTeamMember = async (slug) => {
+  const query = gql`
+    query GetTeamMember($slug: String!) {
+      teamMember(where: { slug: $slug }) {
+        employeeCategory
+        isActive
+        id
+        name
+        pets {
+          id
+          isActive
+          name
+          photo {
+            url
+            id
+          }
+        }
+        phone
+        photo {
+          id
+          url
+        }
+        position
+        slug
+        bIo {
+          html
+          markdown
+          raw
+          text
+        }
+        hasTeamPage
+        email
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.teamMember;
+};
