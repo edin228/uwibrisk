@@ -4,7 +4,7 @@ import { BlogCard } from "./BlogCard";
 function BlogContainer( {posts}) {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold pl-4">
+      <div className="flex w-full mb-4 justify-center text-center items-center uppercase tracking-widest font-semibold">
         See whats new
       </div>
       <ul className="flex flex-wrap items-start">
