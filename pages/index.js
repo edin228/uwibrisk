@@ -35,7 +35,7 @@ export default function Home({
           <Landing locations={landing} />
         </div>
         <HeroContainer locations={officeLocations} />
-        <CarriersContainer carriers={carriers} />
+        {/* <CarriersContainer carriers={carriers} /> */}
         <ActionsContainer homeButtons={homeButtons}/>
         <BlogContainer posts={posts} />
         <TestemonialContainer testemonials={testemonials} />
