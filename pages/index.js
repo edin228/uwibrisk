@@ -34,8 +34,8 @@ export default function Home({
         <div className="lg:px-4">
           <Landing locations={landing} />
         </div>
-        <HeroContainer locations={officeLocations} />
-        {/* <CarriersContainer carriers={carriers} /> */}
+        {/* <HeroContainer locations={officeLocations} /> */}
+        <CarriersContainer carriers={carriers} />
         <ActionsContainer homeButtons={homeButtons}/>
         <BlogContainer posts={posts} />
         <TestemonialContainer testemonials={testemonials} />
