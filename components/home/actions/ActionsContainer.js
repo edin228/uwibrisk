@@ -7,17 +7,6 @@ import { getIcon } from "../../../utils/utils";
 function ActionsContainer({homeButtons}) {
   const [selectedID, setSelectedID] = useState(null);
 
-  const actions = [
-    {
-      id: 1,
-      icon: getIcon("certificate"),
-      href: "/",
-      text: "Certificate of Insurance",
-    },
-    { id: 2, icon: getIcon("quote"), href: "/", text: "Get a Quote" },
-    { id: 3, icon: getIcon("payment"), href: "/", text: "Make a Payment" },
-  ];
-
   const tile = {
     visible: {
       opacity: 1,
@@ -27,7 +16,7 @@ function ActionsContainer({homeButtons}) {
 
   return (
     <div
-      className="relative w-full h-fit flex justify-center items-center bg-slate-100 drop-shadow-md rounded-md p-2"
+      className="relative w-full h-fit flex flex-auto shrink-0 justify-center items-center bg-slate-100 drop-shadow-md rounded-md p-2"
       onMouseOut={() => setSelectedID(null)}
     >
       <div className="flex flex-wrap items-start justify-center w-full rounded-md">
