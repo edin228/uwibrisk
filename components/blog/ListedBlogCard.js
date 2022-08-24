@@ -14,7 +14,6 @@ function ListedBlogCard({ post }) {
               <div className="flex font-bold mb-2">{post.title}</div>
             </a>
           </Link>
-
           <div className="flex flex-wrap space-x-2">
             {post.blogTags.map((tag) => (
               <div
@@ -29,6 +28,7 @@ function ListedBlogCard({ post }) {
               </div>
             ))}
           </div>
+          <div className="w-full h-[5px] blue-green-gradient rounded-lg mt-4" />
         </motion.div>
       </div>
     </li>

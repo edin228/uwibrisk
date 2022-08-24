@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import HeaderNavButton from "./HeaderNavButton";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { getNavMenuItems } from "../../../services";
 import { getIcon } from "../../../utils/utils";
+import { useRouter } from 'next/router';
 
 export default function DesktopHeader({navItems}) {
   const [selectedID, setSelectedID] = useState(null);
   const [searchInput, setSearchInput] = useState("");
+
+  const router = useRouter();
   
   const handleChange = (e) => {
     setSearchInput(e.target.value);
@@ -17,6 +19,7 @@ export default function DesktopHeader({navItems}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    router.push(`/search?q=${searchInput}`)
   };
 
   const tile = {

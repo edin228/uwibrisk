@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { getIcon } from "../../../../utils/utils";
 import HeaderNavButton from "../../desktop/HeaderNavButton";
-import { MenuItem } from "./MenuItem";
+import { useRouter } from "next/router";
 
 const variants = {
   open: {
@@ -16,20 +16,24 @@ const variants = {
 export const Navigation = ({ isOpen, navItems = [] }) => {
   const [searchInput, setSearchInput] = useState("");
 
+  const router = useRouter();
+  
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    router.push(`/search?q=${searchInput}`);
   };
+
   return (
     <motion.ul
-      className={!isOpen ? "hidden sb-ul" : "sb-ul w-full"}
+      className={!isOpen ? "hidden sb-ul z-0" : "sb-ul w-full"}
       variants={variants}
     >
       <form
-        className="flex w-full mr-4 rounded-lg border-slate-500/10 border-2 relative"
+        className="flex w-full mb-4 rounded-lg border-slate-500/10 border-2 relative"
         onSubmit={handleSubmit}
       >
         <input
@@ -54,4 +58,3 @@ export const Navigation = ({ isOpen, navItems = [] }) => {
     </motion.ul>
   );
 };
-

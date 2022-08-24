@@ -371,3 +371,79 @@ export const getTeamMember = async (slug) => {
 
   return result.teamMember;
 };
+
+export const getSearch = async (search) => {
+  const query = gql`
+    query GetSearch($search: String!) {
+      blogPosts(where: { _search: $search, isActive: true }, first: 500) {
+        title
+          id
+          isActive
+          template
+          excerpt
+          blogTags(orderBy: title_ASC) {
+              title
+              id
+              backgroundColor {
+              hex
+              }
+              textColor {
+              hex
+              }
+          }
+          blogCategories {
+              title
+              id
+              isActive
+          }
+          slug
+          featuredImage {
+              id
+              url
+          }
+          teamMember {
+              id
+              isActive
+              name
+              photo {
+                url
+              }
+          }
+          publishedAt
+      }
+      teamMembers(where: { isActive: true, _search: $search }, first: 500) {
+        id
+        isActive
+        name
+        phone
+        email
+        employeeCategory
+        position
+        slug
+        photo {
+          id
+          url
+        }
+        hasTeamPage
+        bIo {
+          text
+          raw
+          markdown
+          html
+        }
+      }
+      pages(where: { _search: $search, isActive: true }, first: 500) {
+        title
+        slug
+        content {
+          html
+          raw
+          text
+        }
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query, { search });
+
+  return result;
+};

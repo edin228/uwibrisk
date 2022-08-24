@@ -179,6 +179,7 @@ nav {
 .open-nav {
   bottom: 0;
   position: fixed;
+  z-index:999;
 }
 
 .sb-background {
