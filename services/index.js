@@ -377,39 +377,46 @@ export const getSearch = async (search) => {
     query GetSearch($search: String!) {
       blogPosts(where: { _search: $search, isActive: true }, first: 500) {
         title
+        id
+        isActive
+        template
+        excerpt
+        blogTags(orderBy: title_ASC) {
+          title
+          id
+          backgroundColor {
+            hex
+          }
+          textColor {
+            hex
+          }
+        }
+        blogCategories {
+          title
           id
           isActive
-          template
-          excerpt
-          blogTags(orderBy: title_ASC) {
-              title
-              id
-              backgroundColor {
-              hex
-              }
-              textColor {
-              hex
-              }
-          }
-          blogCategories {
-              title
-              id
-              isActive
-          }
+        }
+        slug
+        featuredImage {
+          id
+          url
+        }
+        teamMember {
+          id
+          isActive
+          name
+          phone
+          email
+          employeeCategory
+          position
           slug
-          featuredImage {
-              id
-              url
+          hasTeamPage
+          photo {
+            id
+            url
           }
-          teamMember {
-              id
-              isActive
-              name
-              photo {
-                url
-              }
-          }
-          publishedAt
+        }
+        publishedAt
       }
       teamMembers(where: { isActive: true, _search: $search }, first: 500) {
         id
@@ -420,19 +427,14 @@ export const getSearch = async (search) => {
         employeeCategory
         position
         slug
+        hasTeamPage
         photo {
           id
           url
         }
-        hasTeamPage
-        bIo {
-          text
-          raw
-          markdown
-          html
-        }
       }
       pages(where: { _search: $search, isActive: true }, first: 500) {
+        id
         title
         slug
         content {

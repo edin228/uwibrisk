@@ -14,7 +14,7 @@ function TeamCard({ member }) {
           initial={false}
         />
       </div>
-      <div className="flex flex-col justify-between px-4 w-[300px]">
+      <div className="flex flex-col justify-between px-4 w-[230px] md:w-[300px]">
         <div className="flex flex-col">
           <div className="font-bold text-lg">{member.name}</div>
           <div>{member.position}</div>
