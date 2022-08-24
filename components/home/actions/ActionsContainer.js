@@ -16,13 +16,13 @@ function ActionsContainer({homeButtons}) {
 
   return (
     <div
-      className="relative w-full flex justify-center items-center bg-slate-100 drop-shadow-md rounded-md p-2"
+      className="relative w-full h-[200px] flex justify-center items-center bg-slate-100 drop-shadow-md rounded-md p-2"
       onMouseOut={() => setSelectedID(null)}
     >
       <div className="flex flex-wrap items-start justify-center w-full rounded-md">
         {homeButtons.map((item) => (
           <div
-            className="relative flex h-[140px] lg:w-[149.5px] w-[119px] items-center"
+            className="relative flex h-[120px] lg:w-[149.5px] w-[119px] items-center"
             key={item.id}
             onMouseOver={() => setSelectedID(item.id)}
           >
