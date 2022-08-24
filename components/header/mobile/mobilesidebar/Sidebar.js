@@ -8,20 +8,11 @@ const sidebar = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     background: '#fff',
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      restDelta: 2,
-    },
+    
   }),
   closed: {
     clipPath: "circle(25px at 271px 42px)",
-    background: '#fff',
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
-    },
+    background: '#fff0',
   },
 };
 
@@ -36,7 +27,7 @@ export const Sidebar = ({navItems}) => {
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
-      className={isOpen?'open-nav':''}
+      className={isOpen?'open-nav':'z-10'}
     >
       <motion.div className="sb-background" variants={sidebar} />
       <Navigation isOpen={isOpen} navItems={navItems} />
