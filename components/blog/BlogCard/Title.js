@@ -19,7 +19,7 @@ export const Title = ({ title, category, isSelected }) => {
       {category.map(cat => (
         <span key={cat.id} className="category">{cat.title}</span>
       ))}
-      <h2 className="font-bold text-2xl">{title}</h2>
+      <h2 className="font-bold drop-shadow-2xl text-lg md:text-2xl">{title}</h2>
     </motion.div>
   );
 };
