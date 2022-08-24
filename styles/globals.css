@@ -216,7 +216,7 @@ li {
   padding: 25px;
   position: absolute;
   top: 100px;
-  width: 230px;
+  /* width: 230px; */
 }
 
 .sb-ul > li {

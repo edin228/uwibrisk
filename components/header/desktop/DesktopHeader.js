@@ -7,25 +7,10 @@ import Link from "next/link";
 import { getNavMenuItems } from "../../../services";
 import { getIcon } from "../../../utils/utils";
 
-export default function DesktopHeader() {
+export default function DesktopHeader({navItems}) {
   const [selectedID, setSelectedID] = useState(null);
-  const [navMenuItems, setNavMenuItems] = useState([]);
-  const runOnce = useRef(true);
   const [searchInput, setSearchInput] = useState("");
-
-  useEffect(() => {
-    if (runOnce.current) {
-      runOnce.current = false;
-      getNav();
-    }
-    return () => {};
-  }, []);
-
-  const getNav = async () => {
-    const req = await getNavMenuItems();
-    setNavMenuItems(req);
-  };
-
+  
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
@@ -72,7 +57,7 @@ export default function DesktopHeader() {
           </form>
           <div className="relative" onMouseOut={() => setSelectedID(null)}>
             <ul className="desktop-nav">
-              {navMenuItems?.map((item) => (
+              {navItems?.map((item) => (
                 <li
                   key={item.id}
                   onMouseOver={() => setSelectedID(item.id)}

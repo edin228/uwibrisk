@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Sidebar } from "./mobilesidebar/Sidebar";
 
-function MobileHeader() {
+function MobileHeader({navItems}) {
   return (
     <div className="flex lg:hidden w-full h-20 z-50">
       <div className="flex w-full justify-between items-center">
@@ -17,7 +17,7 @@ function MobileHeader() {
             />
           </a>
         </Link>
-        <Sidebar />
+        <Sidebar navItems={navItems} />
       </div>
     </div>
   );
