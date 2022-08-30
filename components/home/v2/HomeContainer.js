@@ -5,6 +5,7 @@ import TestemonialCard from "../testemonials/TestemonialCard";
 import { getIcon } from "../../../utils/utils";
 import HeroCard from "../hero/HeroCard";
 import Link from "next/link";
+import { set } from "lodash";
 
 function HomeContainer({
   landing,
@@ -15,7 +16,8 @@ function HomeContainer({
   testemonials,
 }) {
   const [selectedImage, setSelectedImage] = useState(1);
-
+  const [firstTestemonial, setFirstTestemonial] = useState(0)
+  const [secondTestemonial, setSecondTestemonial] = useState(1)
   useEffect(() => {
     const interval = setInterval(() => {
       const maxLimit = landing.length - 1;
@@ -23,6 +25,10 @@ function HomeContainer({
         selectedImage < maxLimit ? Number(selectedImage) + 1 : 0;
       setSelectedImage(imageCheck());
     }, 18000);
+    const firstRndm = Math.floor(Math.random()*testemonials?.length)
+    const secondRndm = Math.floor(Math.random()*testemonials?.length) == firstRndm ? Math.floor(Math.random()*testemonials?.length) : Math.floor(Math.random()*testemonials?.length)
+    setFirstTestemonial(firstRndm)
+    setSecondTestemonial(secondRndm)
     return () => clearInterval(interval);
   }, [selectedImage]);
 
@@ -95,10 +101,10 @@ function HomeContainer({
       </div>
       <div className="relative h-[280px] lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
         <div className="hidden lg:flex absolute z-40 top-[60px] left-0">
-          <TestemonialCard testemonial={testemonials[Math.floor(Math.random()*testemonials?.length)]} />
+          <TestemonialCard testemonial={testemonials[firstTestemonial]} />
         </div>
         <div className="hidden lg:flex absolute z-40 bottom-[320px] right-[350px]">
-          <TestemonialCard testemonial={testemonials[Math.floor(Math.random()*testemonials?.length)]} />
+          <TestemonialCard testemonial={testemonials[secondTestemonial]} />
         </div>
         <div className="hidden floating-6 absolute z-40 top-[130px] right-[160px] rounded-full shadow-2xl lg:w-[120px] lg:h-[120px] lg:flex justify-center items-center text-center lg:text-5xl blue-purple-gradient border-2 border-white text-white">
           {getIcon("agency")}
