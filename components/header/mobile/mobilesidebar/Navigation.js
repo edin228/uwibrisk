@@ -24,7 +24,7 @@ export const Navigation = ({ isOpen, navItems = [] }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push(`/search?q=${searchInput}`);
+    searchInput.length > 1 ? router.push(`/search?q=${searchInput}`) : null
   };
 
   return (

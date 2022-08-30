@@ -27,7 +27,7 @@ export const Sidebar = ({navItems}) => {
       animate={isOpen ? "open" : "closed"}
       custom={height}
       ref={containerRef}
-      className={isOpen?'open-nav':'z-10'}
+      className={isOpen?'open-nav':'z-0'}
     >
       <motion.div className="sb-background" variants={sidebar} />
       <Navigation isOpen={isOpen} navItems={navItems} />

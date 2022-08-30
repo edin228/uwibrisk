@@ -36,11 +36,13 @@ function TeamCard({ member }) {
             ) : null}
           </div>
         </div>
-        <Link href={`/${member.slug}`}>
-          <a className="flex justify-center w-full text-sm py-1 hover:text-white hover:bg-sky-500 transition ease-out duration-200 border-2 rounded-md font-bold uppercase tracking-widest">
-            View Bio
-          </a>
-        </Link>
+        {member.hasTeamPage ? (
+          <Link href={`/${member.slug}`}>
+            <a className="flex justify-center w-full text-sm py-1 bg-white hover:text-white hover:bg-sky-500 transition ease-out duration-200 border-2 rounded-md font-bold uppercase tracking-widest">
+              View Bio
+            </a>
+          </Link>
+        ) : null}
       </div>
     </div>
   );

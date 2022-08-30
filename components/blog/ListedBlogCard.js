@@ -6,11 +6,11 @@ import Link from "next/link";
 
 function ListedBlogCard({ post }) {
   return (
-    <li className="listed-blog-card py-1 lg:p-2">
+    <li className="listed-blog-card py-1 lg:p-2 w-full">
       <div className={`listed-blog-card-content-container`}>
         <motion.div className="flex flex-col cursor-pointer" layout={true}>
           <Link href={`/blog/${post.slug}`}>
-            <a className="flex justify-end w-full text-md hover:text-sky-500 transition duration-100 font-bold uppercase tracking-widest">
+            <a className="flex w-full text-md hover:text-sky-500 transition duration-100 font-bold uppercase tracking-widest">
               <div className="flex font-bold mb-2">{post.title}</div>
             </a>
           </Link>
