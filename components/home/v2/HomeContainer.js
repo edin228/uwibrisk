@@ -95,10 +95,10 @@ function HomeContainer({
       </div>
       <div className="relative h-[280px] lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
         <div className="hidden lg:flex absolute z-40 top-[60px] left-0">
-          <TestemonialCard testemonial={testemonials[selectedImage]} />
+          <TestemonialCard testemonial={testemonials[Math.floor(Math.random()*testemonials?.length)]} />
         </div>
         <div className="hidden lg:flex absolute z-40 bottom-[320px] right-[350px]">
-          <TestemonialCard testemonial={testemonials[testemonials.length <= selectedImage + 1 ? selectedImage + 1 : 0]} />
+          <TestemonialCard testemonial={testemonials[Math.floor(Math.random()*testemonials?.length)]} />
         </div>
         <div className="hidden floating-6 absolute z-40 top-[130px] right-[160px] rounded-full shadow-2xl lg:w-[120px] lg:h-[120px] lg:flex justify-center items-center text-center lg:text-5xl blue-purple-gradient border-2 border-white text-white">
           {getIcon("agency")}
