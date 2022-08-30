@@ -40,8 +40,6 @@
 
 /* hero */
 .hero-card {
-  background-attachment: fixed !important;
-  background-size: cover !important;
   background-position: top center !important;
 }
 /* colors */

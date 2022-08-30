@@ -5,7 +5,7 @@ import Header from "../header/Header";
 
 function Base({ children, template = null }) {
   return (
-    <div className="flex w-full h-fill overflow-hidden text-color texture-bg">
+    <div className="flex w-full h-fill overflow-hidden text-color">
       {/* <div className="fixed w-full h-full left-0 top-0  color-bg blood-orange-gradient " /> */}
       <div className="rounded-b-lg flex flex-col h-full w-full lg:mx-auto lg:w-3/4 overflow-hidden">
         <Header />
