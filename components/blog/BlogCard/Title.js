@@ -12,7 +12,6 @@ export const Title = ({ title, category, isSelected }) => {
       className="title-container z-40"
       initial={false}
       animate={{ x, y }}
-      transition={isSelected ? openSpring : closeSpring}
       transformTemplate={scaleTranslate}
       style={{ ...inverted, originX: 0, originY: 0 }}
     >
