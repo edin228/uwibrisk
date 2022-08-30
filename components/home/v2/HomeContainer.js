@@ -81,7 +81,7 @@ function HomeContainer({
 
   return (
     <div className="relative w-full lg:h-[650px] ultrawide-home-height flex flex-col-reverse lg:flex-row md:overflow-hidden">
-      <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-40">
+      <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-50">
         <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start h-[200px]">
           {landing[selectedImage].text}
         </div>

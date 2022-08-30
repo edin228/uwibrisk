@@ -448,7 +448,13 @@ p {
   }
 }
 
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 1200px) {
+  .circle-clip {
+    clip-path: circle(59.9% at 69% 64%);
+  }
+}
+@media only screen and (max-width: 900px) {
   .card-image {
     max-width: 100% !important;
   }

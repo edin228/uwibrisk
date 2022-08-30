@@ -7,7 +7,7 @@ function Base({ children, template = null }) {
   return (
     <div className="flex w-full h-fill overflow-hidden text-color">
       {/* <div className="fixed w-full h-full left-0 top-0  color-bg blood-orange-gradient " /> */}
-      <div className="rounded-b-lg flex flex-col h-full w-full lg:mx-auto lg:w-3/4 overflow-hidden">
+      <div className="rounded-b-lg flex flex-col h-full w-full mx-auto xl:w-3/4 overflow-hidden">
         <Header />
         <div className="flex flex-col overflow-y-auto lg:pt-20">
           <ContentBase template={template}>{children}</ContentBase>
