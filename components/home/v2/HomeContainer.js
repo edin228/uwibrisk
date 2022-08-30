@@ -120,8 +120,8 @@ function HomeContainer({
         </div>
         {/* <OfficeLocationBubbles /> */}
         <div className="overflow-hidden lg:h-[632px] w-full lg:pl-[48px] right-0">
-          <div className="flex w-full h-full absolute bg-black/20 z-30 rounded-2xl">
-            <div className="lg:hidden w-full h-full text-5xl lg:text-7xl flex drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient  text-center lg:text-start justify-center items-center py-8 px-20">
+          <div className="flex w-full h-full absolute  z-30 rounded-2xl">
+            <div className="lg:hidden w-3/4 h-full text-4xl sm:text-6xl lg:text-7xl flex drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient  text-start lg:text-start items-center py-8 px-4 sm:px-20">
               <div>{landing[selectedImage].text}</div>
             </div>
           </div>
