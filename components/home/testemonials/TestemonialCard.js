@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 function TestemonialCard({ testemonial }) {
   return (
     <div className="relative w-full">
-      <div className="absolute bg-teal-500 flex items-center text-center justify-center text-white text-3xl font-bold top-0 left-0 rounded-full w-[50px] h-[50px] z-30 shadow-lg border-2 border-white">
+      <div className="absolute deep-blue-gradient flex items-center text-center justify-center text-white text-3xl font-bold top-0 left-0 rounded-full w-[50px] h-[50px] z-30 shadow-lg border-2 border-white">
         {getIcon("quoteIcon")}
       </div>
 

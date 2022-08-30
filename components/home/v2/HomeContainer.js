@@ -103,10 +103,10 @@ function HomeContainer({
         <div className="hidden floating-6 absolute z-40 top-[130px] right-[160px] rounded-full shadow-2xl lg:w-[120px] lg:h-[120px] lg:flex justify-center items-center text-center lg:text-5xl blue-purple-gradient border-2 border-white text-white">
           {getIcon("agency")}
         </div>
-        <div className="hidden floating-6 absolute z-40 bottom-[50px] right-[260px] rounded-full shadow-2xl blood-orange-gradient border-2 border-white lg:w-[70px] lg:h-[70px] lg:flex justify-center items-center text-center lg:text-4xl text-white">
+        <div className="hidden floating-6 absolute z-40 bottom-[50px] right-[300px] rounded-full shadow-2xl blood-orange-gradient border-2 border-white lg:w-[70px] lg:h-[70px] lg:flex justify-center items-center text-center lg:text-4xl text-white">
           {getIcon("car")}
         </div>
-        <div className="hidden floating absolute z-40 bottom-[130px] left-[260px] rounded-full shadow-2xl pink-gradient border-2 border-white lg:w-[100px] lg:h-[100px] lg:flex justify-center items-center text-center lg:text-4xl text-white">
+        <div className="hidden floating absolute z-40 bottom-[130px] left-[240px] rounded-full shadow-2xl pink-gradient border-2 border-white lg:w-[100px] lg:h-[100px] lg:flex justify-center items-center text-center lg:text-5xl text-white">
           {getIcon("house")}
         </div>
         {/* <OfficeLocationBubbles /> */}

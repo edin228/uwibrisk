@@ -93,12 +93,12 @@
 .deep-blue-gradient {
   background: #1488cc; /* fallback for old browsers */
   background-image: -webkit-linear-gradient(
-    to top,
+    to right,
     #2b32b2,
     #1488cc
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-image: linear-gradient(
-    to top,
+    to right,
     #2b32b2,
     #1488cc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
