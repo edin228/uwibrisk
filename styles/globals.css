@@ -456,3 +456,8 @@ p {
     clip-path:unset;
   }
 }
+@media only screen and (min-width: 3400px) {
+  .ultrawide-home-height {
+    height:850px !important
+  }
+}

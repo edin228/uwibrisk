@@ -16,8 +16,8 @@ function HomeContainer({
   testemonials,
 }) {
   const [selectedImage, setSelectedImage] = useState(1);
-  const [firstTestemonial, setFirstTestemonial] = useState(0)
-  const [secondTestemonial, setSecondTestemonial] = useState(1)
+  const [firstTestemonial, setFirstTestemonial] = useState(0);
+  const [secondTestemonial, setSecondTestemonial] = useState(1);
   useEffect(() => {
     const interval = setInterval(() => {
       const maxLimit = landing.length - 1;
@@ -25,10 +25,13 @@ function HomeContainer({
         selectedImage < maxLimit ? Number(selectedImage) + 1 : 0;
       setSelectedImage(imageCheck());
     }, 18000);
-    const firstRndm = Math.floor(Math.random()*testemonials?.length)
-    const secondRndm = Math.floor(Math.random()*testemonials?.length) == firstRndm ? Math.floor(Math.random()*testemonials?.length) : Math.floor(Math.random()*testemonials?.length)
-    setFirstTestemonial(firstRndm)
-    setSecondTestemonial(secondRndm)
+    const firstRndm = Math.floor(Math.random() * testemonials?.length);
+    const secondRndm =
+      Math.floor(Math.random() * testemonials?.length) == firstRndm
+        ? Math.floor(Math.random() * testemonials?.length)
+        : Math.floor(Math.random() * testemonials?.length);
+    setFirstTestemonial(firstRndm);
+    setSecondTestemonial(secondRndm);
     return () => clearInterval(interval);
   }, [selectedImage]);
 
@@ -77,7 +80,7 @@ function HomeContainer({
   };
 
   return (
-    <div className="relative w-full lg:h-[650px] flex flex-col-reverse lg:flex-row">
+    <div className="relative w-full lg:h-[650px] ultrawide-home-height flex flex-col-reverse lg:flex-row md:overflow-hidden">
       <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-40">
         <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start h-[200px]">
           {landing[selectedImage].text}
@@ -116,11 +119,11 @@ function HomeContainer({
           {getIcon("house")}
         </div>
         {/* <OfficeLocationBubbles /> */}
-        <div className="overflow-hidden lg:h-[632px] lg:max-w-[900px] lg:pl-[48px] right-0">
+        <div className="overflow-hidden lg:h-[632px] w-full lg:pl-[48px] right-0">
           <div className="lg:hidden absolute top-[100px] pl-0 lg:pl-4 lg:pr-40 text-5xl lg:text-6xl block drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start">
             {landing[selectedImage].text}
           </div>
-          <div className="absolute top-0 lg:w-[900px] rounded-2xl h-full w-full z-20 landing-bg circle-clip"></div>
+          <div className="absolute top-0 right-0 rounded-2xl h-full w-full z-20 landing-bg circle-clip"></div>
           <AnimatePresence initial={false} custom={1}>
             <motion.img
               src={landing[selectedImage].image?.url}
@@ -132,7 +135,7 @@ function HomeContainer({
               transition={{
                 x: { type: "spring", stiffness: 300, damping: 30 },
               }}
-              className="absolute h-full w-fit rounded-2xl shadow-lg lg:max-w-[900px] circle-clip"
+              className="absolute h-full w-full bg-cover bg-fixed rounded-2xl shadow-lg  circle-clip right-0"
               key={landing[selectedImage].id}
             ></motion.img>
           </AnimatePresence>

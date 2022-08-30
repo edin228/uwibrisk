@@ -11,10 +11,10 @@ function TestemonialCard({ testemonial }) {
 
       <div className="flex text-xs lg:text-sm flex-col absolute top-5 left-7 z-10  bg-slate-100 w-[300px] h-fit p-4 rounded-2xl shadow-2xl">
         {testemonial.teamMembers.length > 0 ? (
-          <div className="absolute top-[-15px] right-[-18px]  bg-teal-500 flex items-center text-center justify-center text-white text-3xl font-bold rounded-full w-[45px] h-[45px] z-30 shadow-lg">
+          <div className="absolute top-[-15px] right-[-18px]  flex items-center text-center justify-center text-white text-3xl font-bold rounded-full w-[45px] h-[45px] z-30 shadow-lg">
             <motion.img
               src={testemonial?.teamMembers[0]?.photo?.url}
-              className="h-full w-fit rounded-full shadow-lg border-2 border-white"
+              className="w-[45px] h-[45px] bg-cover rounded-full shadow-lg border-2 border-white"
             ></motion.img>
           </div>
         ) : null}
