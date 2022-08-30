@@ -31,7 +31,7 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
-        <div className="lg:px-4">
+        <div>
           <Landing locations={landing} />
         </div>
         <HeroContainer locations={officeLocations} />
