@@ -51,6 +51,7 @@ export default function Home({
         <HeroContainer locations={officeLocations} />
         <CarriersContainer carriers={carriers} />
         <ActionsContainer homeButtons={homeButtons}/>
+        <BlogContainer posts={posts} />
       </div>
     </Base>
   );

@@ -98,7 +98,7 @@ function HomeContainer({
           <TestemonialCard testemonial={testemonials[selectedImage]} />
         </div>
         <div className="hidden lg:flex absolute z-40 bottom-[320px] right-[350px]">
-          <TestemonialCard testemonial={testemonials[testemonials.length <= selectedImage + 1 ? selectedImage+1 : 1]} />
+          <TestemonialCard testemonial={testemonials[testemonials.length <= selectedImage + 1 ? selectedImage+1 : 0]} />
         </div>
         <div className="hidden floating-6 absolute z-40 top-[130px] right-[160px] rounded-full shadow-2xl lg:w-[120px] lg:h-[120px] lg:flex justify-center items-center text-center lg:text-5xl blue-purple-gradient border-2 border-white text-white">
           {getIcon("agency")}
