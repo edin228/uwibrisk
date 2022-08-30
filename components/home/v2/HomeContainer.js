@@ -81,7 +81,7 @@ function HomeContainer({
 
   return (
     <div className="relative w-full lg:h-[650px] ultrawide-home-height flex flex-col-reverse lg:flex-row md:overflow-hidden">
-      <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-50">
+      <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-40">
         <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start h-[200px]">
           {landing[selectedImage].text}
         </div>
@@ -102,7 +102,7 @@ function HomeContainer({
           </Link>
         </div>
       </div>
-      <div className="relative h-[280px] lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
+      <div className="z-30 relative h-[280px] sm:h-[500px] xl:h-[650px] lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
         <div className="hidden lg:flex absolute z-40 top-[60px] left-0">
           <TestemonialCard testemonial={testemonials[firstTestemonial]} />
         </div>
@@ -120,8 +120,10 @@ function HomeContainer({
         </div>
         {/* <OfficeLocationBubbles /> */}
         <div className="overflow-hidden lg:h-[632px] w-full lg:pl-[48px] right-0">
-          <div className="lg:hidden absolute top-[100px] pl-0 lg:pl-4 lg:pr-40 text-5xl lg:text-6xl block drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start">
-            {landing[selectedImage].text}
+          <div className="flex w-full h-full absolute bg-black/20 z-30 rounded-2xl">
+            <div className="lg:hidden w-full h-full text-5xl lg:text-7xl flex drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient  text-center lg:text-start justify-center items-center py-8 px-20">
+              <div>{landing[selectedImage].text}</div>
+            </div>
           </div>
           <div className="absolute top-0 right-0 rounded-2xl h-full w-full z-20 landing-bg circle-clip"></div>
           <AnimatePresence initial={false} custom={1}>
