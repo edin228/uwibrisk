@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { getPage } from "../services";
 import Base from "../components/layout/Base";
+import Router, { useRouter } from 'next/router'
+
+
 
 function Page({ data }) {
+  
+
   const Content = () => {
     return (
       <div className="flex flex-col w-full h-full">
-        {data.rawHtml.map((card,i) => (
+        {data.rawHtml.map((card, i) => (
           <div
-            key={i}
+            key={Date()}
+            strategy="afterInteractive"
             className="flex h-full w-full"
             dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
           ></div>
@@ -20,7 +26,7 @@ function Page({ data }) {
   };
 
   return (
-    <Base template={"Blog"}>
+    <Base template={data.template}>
       <Head>
         <title>UWIBRISK</title>
         <meta name="description" content="United Western Insurance Brokers" />
@@ -40,7 +46,6 @@ export default Page;
 // Fetch data at build time
 export async function getServerSideProps({ params }) {
   const data = await getPage(params.slug);
-
   return {
     props: { data },
   };

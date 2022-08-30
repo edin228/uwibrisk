@@ -5,21 +5,21 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { getIcon } from "../../../utils/utils";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-export default function DesktopHeader({navItems}) {
+export default function DesktopHeader({ navItems }) {
   const [selectedID, setSelectedID] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
   const router = useRouter();
-  
+
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    searchInput.length > 1 ? router.push(`/search?q=${searchInput}`) : null
+    searchInput.length > 1 ? router.push(`/search?q=${searchInput}`) : null;
   };
 
   const tile = {
@@ -43,7 +43,10 @@ export default function DesktopHeader({navItems}) {
           </a>
         </Link>
         <div className="flex w-full justify-end items-center">
-          <form className="flex w-1/4 mr-4 rounded-lg border-slate-500/10 border-2 relative" onSubmit={handleSubmit}>
+          <form
+            className="flex w-1/4 mr-4 rounded-lg border-slate-500/10 border-2 relative"
+            onSubmit={handleSubmit}
+          >
             <input
               className="rounded-md py-1 px-2 w-full"
               type="search"
@@ -56,7 +59,9 @@ export default function DesktopHeader({navItems}) {
               type="submit"
               name="search"
               className="cursor-pointer rounded-r-md p-2 items-center justify-center flex uppercase tracking-widest font-bold text-lg"
-            >{getIcon('search')}</div>
+            >
+              {getIcon("search")}
+            </div>
           </form>
           <div className="relative" onMouseOut={() => setSelectedID(null)}>
             <ul className="desktop-nav">
@@ -66,7 +71,7 @@ export default function DesktopHeader({navItems}) {
                   onMouseOver={() => setSelectedID(item.id)}
                   className="relative"
                 >
-                  <HeaderNavButton navItem={item} />
+                  <HeaderNavButton navItem={item} selectedID={selectedID} />
                   {selectedID === item.id && (
                     <motion.div
                       layoutId="tile"
@@ -74,9 +79,34 @@ export default function DesktopHeader({navItems}) {
                       animate={selectedID ? "visible" : "hidden"}
                       variants={tile}
                       transition={{ ease: "easeInOut", duration: 0.25 }}
-                      className="rounded h-[31px] deep-blue-gradient top-0 absolute z-10 w-full shadow-lg"
+                      className={`${
+                        item.isDropdown ? "rounded-t" : "rounded"
+                      } h-[31px] deep-blue-gradient top-0 absolute z-10 w-full shadow-lg`}
                     />
                   )}
+                  {selectedID === item.id && item.isDropdown ? (
+                    <motion.div
+                      initial="hidden"
+                      animate={selectedID ? "visible" : "hidden"}
+                      variants={tile}
+                      transition={{ ease: "easeInOut", duration: 0.25 }}
+                      className="absolute top-[31px] w-[300px] right-0 bg-white rounded-lg shadow-2xl"
+                    >
+                      <div className="w-full h-[5px] deep-blue-gradient" />
+                      <ul className="p-2">
+                        {item.pages?.map((pg) => (
+                          <li
+                            key={pg.id}
+                            className="font-semibold transition duration-100 w-full cursor-pointer border-2 rounded-lg p-4 border-slate-100/0 hover:border-slate-200 mb-2"
+                          >
+                            <a href={pg.slug} className="relative w-full">
+                              {pg.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ) : null}
                 </li>
               ))}
             </ul>
