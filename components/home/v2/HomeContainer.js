@@ -102,7 +102,7 @@ function HomeContainer({
           </Link>
         </div>
       </div>
-      <div className="z-30 relative h-[280px] sm:h-[500px] xl:h-[650px] lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
+      <div className="z-30 relative h-[280px] sm:h-[500px] xl:h-auto lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
         <div className="hidden lg:flex absolute z-40 top-[60px] left-0">
           <TestemonialCard testemonial={testemonials[firstTestemonial]} />
         </div>
