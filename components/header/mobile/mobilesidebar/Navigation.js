@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getIcon } from "../../../../utils/utils";
 import HeaderNavButton from "../../desktop/HeaderNavButton";
 import { useRouter } from "next/router";
+import MobileNavButton from "./MobileNavButton";
 
 const variants = {
   open: {
@@ -53,7 +54,7 @@ export const Navigation = ({ isOpen, navItems = [] }) => {
         </div>
       </form>
       {navItems.map((item, i) => (
-        <HeaderNavButton key={i} navItem={item} />
+        <MobileNavButton key={i} navItem={item} />
       ))}
     </motion.ul>
   );
