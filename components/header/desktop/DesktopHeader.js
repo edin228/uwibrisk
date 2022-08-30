@@ -31,7 +31,7 @@ export default function DesktopHeader({ navItems }) {
 
   return (
     <div className="hidden lg:flex fixed top-0 w-full h-20 bg-white z-50 rounded-b-md">
-      <div className="flex justify-between items-center w-full px-4">
+      <div className="flex justify-between items-center w-full xl:w-3/4 px-4">
         <Link href="/">
           <a className="w-[140px] h-full relative left-4">
             <Image
