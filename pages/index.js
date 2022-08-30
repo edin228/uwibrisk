@@ -14,6 +14,7 @@ import {
   getRecentBlogPosts,
   getTestemonials,
 } from "../services";
+import HomeContainer from "../components/home/v2/HomeContainer";
 
 export default function Home({
   landing = null,
@@ -21,7 +22,7 @@ export default function Home({
   carriers = null,
   posts = null,
   testemonials = null,
-  homeButtons = null
+  homeButtons = null,
 }) {
   return (
     <Base template={"home"}>
@@ -31,14 +32,25 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
-        <div>
+        {/* <div>
           <Landing locations={landing} />
         </div>
         <HeroContainer locations={officeLocations} />
         <CarriersContainer carriers={carriers} />
         <ActionsContainer homeButtons={homeButtons}/>
         <BlogContainer posts={posts} />
-        <TestemonialContainer testemonials={testemonials} />
+        <TestemonialContainer testemonials={testemonials} /> */}
+        <HomeContainer
+          landing={landing}
+          officeLocations={officeLocations}
+          carriers={carriers}
+          posts={posts}
+          testemonials={testemonials}
+          homeButtons={homeButtons}
+        />
+        <HeroContainer locations={officeLocations} />
+        <CarriersContainer carriers={carriers} />
+        <ActionsContainer homeButtons={homeButtons}/>
       </div>
     </Base>
   );
@@ -54,6 +66,13 @@ export async function getServerSideProps({ params }) {
   const homeButtons = await getHomeActionButtons();
 
   return {
-    props: { landing, officeLocations, carriers, testemonials, posts, homeButtons },
+    props: {
+      landing,
+      officeLocations,
+      carriers,
+      testemonials,
+      posts,
+      homeButtons,
+    },
   };
 }

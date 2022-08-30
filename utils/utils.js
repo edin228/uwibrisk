@@ -10,6 +10,7 @@ import { FiMail } from 'react-icons/fi'
 import { RiLinksLine } from 'react-icons/ri'
 import { HiOutlineOfficeBuilding } from 'react-icons/hi'
 import { TbCertificate } from 'react-icons/tb'
+import { IoMdQuote } from 'react-icons/io'
 import { MdOutlineStickyNote2, MdOutlineFolderShared,MdRequestQuote, MdOutlinePayments } from 'react-icons/md'
 import {
   AiOutlineEdit,
@@ -24,7 +25,9 @@ import {
   AiOutlineClockCircle, AiOutlineCloudDownload ,
   AiOutlineCloseCircle,
   AiOutlineDollarCircle,
-  AiOutlinePhone
+  AiOutlinePhone,
+  AiFillCar,
+  AiOutlineHome
 } from 'react-icons/ai'
 import {
   BiNotepad,
@@ -235,5 +238,12 @@ export const getIcon = (item) => {
     <BsSearch />
   ) : item == 'phone' ? (
     <AiOutlinePhone />
+  ) : item == 'quoteIcon' ? (
+    <IoMdQuote />
+  ) : item == 'car' ? (
+    <AiFillCar />
+  ) : item == 'house' ? (
+    <AiOutlineHome />
   ) : null
 }
+

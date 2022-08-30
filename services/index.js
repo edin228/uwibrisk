@@ -67,14 +67,25 @@ export const getCarriers = async () => {
 
 export const getTestemonials = async () => {
   const query = gql`
-        query GetTestemonials() {
-            testemonials {
-              id
-              text
-              from
-            }
+    query MyQuery {
+      testemonials(where: { isActive: true }) {
+        from
+        id
+        subText
+        text
+        teamMembers {
+          id
+          name
+          position
+          slug
+          photo {
+            id
+            url
           }
-      `;
+        }
+      }
+    }
+  `;
   const result = await request(graphqlAPI, query);
 
   return result.testemonials;

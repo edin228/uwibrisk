@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function HeroCard({ image = "/", label, sublabel }) {
   return (
-    <div className="flex w-10/12 lg:flex-1 shrink-0 relative rounded-md shadow-lg h-[180px] blue-orange-gradient hero-card lg:bg-cover lg:bg-fixed  text-white">
+    <div className="flex w-10/12 lg:flex-1 shrink-0 relative rounded-md h-[120px] blue-orange-gradient hero-card lg:bg-cover lg:bg-fixed  text-white  shadow-2xl border-2 border-white/20">
       <div className="w-full h-full relative opacity-50 rounded-md overflow-hidden">
         <Image src={image} alt="LA" layout="fill" objectFit="cover" />
       </div>

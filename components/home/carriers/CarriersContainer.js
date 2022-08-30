@@ -3,7 +3,7 @@ import CarrierCarouselCard from "./CarrierCarouselCard";
 
 function CarriersContainer({ carriers }) {
   return (
-    <div className="flex flex-col w-full h-[400px] rounded-md">
+    <div className="flex flex-col w-full h-[200px] rounded-md">
       <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold">
         we only partner with the best
       </div>
