@@ -114,7 +114,7 @@ function HomeContainer({
           <div className="lg:hidden absolute top-[100px] pl-0 lg:pl-4 lg:pr-40 text-5xl lg:text-6xl block drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start">
             {landing[selectedImage].text}
           </div>
-          <div className="absolute top-0 lg:w-[900px] rounded-2xl h-full w-full z-20 landing-bg"></div>
+          <div className="absolute top-0 lg:w-[900px] rounded-2xl h-full w-full z-20 landing-bg circle-clip"></div>
           <AnimatePresence initial={false} custom={1}>
             <motion.img
               src={landing[selectedImage].image?.url}
@@ -126,7 +126,7 @@ function HomeContainer({
               transition={{
                 x: { type: "spring", stiffness: 300, damping: 30 },
               }}
-              className="absolute h-full w-fit rounded-2xl shadow-lg lg:max-w-[900px]"
+              className="absolute h-full w-fit rounded-2xl shadow-lg lg:max-w-[900px] circle-clip"
               key={landing[selectedImage].id}
             ></motion.img>
           </AnimatePresence>
