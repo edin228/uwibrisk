@@ -462,7 +462,7 @@ p {
     clip-path:circle(43.9% at 69% 64%);
   }
 }
-@media only screen and (min-width: 3400px) {
+@media only screen and (min-width: 3200px) {
   .ultrawide-home-height {
     height:885px !important
   }
