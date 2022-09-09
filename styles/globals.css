@@ -24,18 +24,18 @@
 /*  text gradient */
 
 .text-gradient {
-  background: #ffca33; /* fallback for old browsers */
+  background: #3790ff; /* fallback for old browsers */
   background-image: -webkit-linear-gradient(
     to left,
-    #396dff,
+    #ff8b39,
     #ff39f9,
-    #ffd437
+    #3790ff
   ); /* Chrome 10-25, Safari 5.1-6 */
   background-image: linear-gradient(
     to left,
-    #396dff,
+    #ff8b39,
     #ff39f9,
-    #ffd437
+    #3790ff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -64,6 +64,18 @@
   background-position: top center !important;
 }
 /* colors */
+.pink__gradient {
+  background: linear-gradient(90deg, #f5c5f3 0%, #fc67fa 100%);
+  filter: blur(60px);
+}
+.blue__gradient {
+  background: linear-gradient(90deg, #10a8cb 0%, #fc67fa 100%);
+  filter: blur(100px);
+}
+.orange__gradient {
+  background: linear-gradient(90deg, #cb5510  0%, #fc67fa 100%);
+  filter: blur(100px);
+}
 .blue-purple-gradient {
   background: #4776e6; /* fallback for old browsers */
   background-image: -webkit-linear-gradient(
@@ -408,6 +420,10 @@ p {
   color: #24252a;
   margin: 20px 0;
 }
+
+.half-clip {
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
 @media (min-width: 1024px) {
   .blog-card {
     position: relative;
@@ -459,7 +475,7 @@ p {
     max-width: 100% !important;
   }
   .circle-clip{
-    clip-path:circle(43.9% at 69% 64%);
+    clip-path: unset;
   }
 }
 @media only screen and (min-width: 3200px) {

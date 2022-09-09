@@ -82,19 +82,27 @@ function HomeContainer({
   return (
     <div className="relative w-full lg:h-[650px] ultrawide-home-height flex flex-col-reverse lg:flex-row md:overflow-hidden">
       <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-40">
-        <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl text-white uppercase tracking-widest font-bold text-gradient z-30 text-center lg:text-start h-[200px]">
-          {landing[selectedImage].text}
+        <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl uppercase tracking-widest font-poppins font-bold z-30 text-center lg:text-start h-[200px]">
+          {/* {landing[selectedImage].text} */}
+          <h1>
+            Insurance Made
+            <br className="sm:block hidden"></br>
+            <span className="text-gradient">Simple</span>
+          </h1>
         </div>
-        <div className="flex pl-4 my-4 font-bold lg:pr-40 text-center lg:text-start">
-          Work with us! We can help you save money and get the coverage you or
-          your business deserves with quality customer service!
-        </div>
+        <p className="flex pl-4 my-4 font-semibold lg:pr-40 text-center lg:text-start font-poppins">
+          Work with us! <br className="sm:block hidden"></br> We can help you
+          save money and get the coverage you or your business deserves with
+          quality customer service.
+        </p>
         <div className="flex items-center px-4 space-x-2 mt-8">
-          <Link href={`/get-quotes`}>
-            <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md purple-gradient text-white p-4 font-bold">
-              Get Quotes
-            </a>
-          </Link>
+          <div className="relative flex flex-1">
+            <Link href={`/get-quotes`}>
+              <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md purple-gradient text-white p-4 font-bold">
+                Get Quotes
+              </a>
+            </Link>
+          </div>
           <Link href={`/contact`}>
             <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md p-4 font-bold border-2 border-purple-500 bg-white">
               Contact Us
@@ -102,7 +110,7 @@ function HomeContainer({
           </Link>
         </div>
       </div>
-      <div className="z-30 relative h-[280px] sm:h-[500px] xl:h-auto lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
+      <div className="z-30 relative h-[140px] sm:h-[400px] xl:h-auto lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
         <div className="hidden lg:flex absolute z-40 top-[60px] left-0">
           <TestemonialCard testemonial={testemonials[firstTestemonial]} />
         </div>
@@ -120,12 +128,18 @@ function HomeContainer({
         </div>
         {/* <OfficeLocationBubbles /> */}
         <div className="overflow-hidden lg:h-[632px] w-full lg:pl-[48px] right-0">
-          <div className="flex w-full h-full absolute  z-30 rounded-2xl">
-            <div className="lg:hidden w-3/4 h-full text-4xl sm:text-6xl lg:text-7xl flex drop-shadow-6xl text-white uppercase tracking-widest font-bold text-gradient  text-start lg:text-start items-center py-8 px-4 sm:px-20">
-              <div>{landing[selectedImage].text}</div>
+          <div className="flex lg:hidden w-full h-full absolute  z-30 rounded-xl">
+            <div className="flex text-center items-center justify-center lg:hidden relative pl-4 text-4xl drop-shadow-2xl uppercase tracking-widest font-poppins font-bold z-30 h-[200px] w-full">
+              {/* {landing[selectedImage].text} */}
+              <h1 className="flex flex-col items-center w-full">
+                Insurance
+                <span>Made</span>
+                <br className="sm:block hidden"></br>
+                <span className="text-gradient">Simple</span>
+              </h1>
             </div>
           </div>
-          <div className="absolute top-0 right-0 rounded-2xl h-full w-full z-20 landing-bg circle-clip"></div>
+          <div className="hidden lg:flex absolute top-0 right-0 rounded-2xl h-full w-full z-20 landing-bg circle-clip"></div>
           <AnimatePresence initial={false} custom={1}>
             <motion.img
               src={landing[selectedImage].image?.url}
@@ -137,10 +151,12 @@ function HomeContainer({
               transition={{
                 x: { type: "spring", stiffness: 300, damping: 30 },
               }}
-              className="absolute h-full w-full bg-cover bg-fixed rounded-2xl shadow-lg  circle-clip right-0"
+              className="hidden lg:flex absolute h-full w-full bg-cover bg-fixed rounded-2xl shadow-lg circle-clip right-0 z-[1]"
               key={landing[selectedImage].id}
             ></motion.img>
           </AnimatePresence>
+          <div className="blue__gradient absolute top-0 z-[0] w-[40%] h-[90%] lg:h-[35%]" />
+          <div className="pink__gradient rounded-full absolute left-0 bottom-30 z-[0] w-[40%] h-[10%] lg:h-[25%]" />
         </div>
       </div>
     </div>
