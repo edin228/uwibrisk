@@ -83,7 +83,6 @@ function HomeContainer({
     <div className="relative w-full lg:h-[650px] ultrawide-home-height flex flex-col-reverse lg:flex-row md:overflow-hidden">
       <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-40">
         <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl uppercase tracking-widest font-poppins font-bold z-30 text-center lg:text-start h-[200px]">
-          {/* {landing[selectedImage].text} */}
           <h1>
             Insurance Made
             <br className="sm:block hidden"></br>
@@ -103,11 +102,13 @@ function HomeContainer({
               </a>
             </Link>
           </div>
-          <Link href={`/contact`}>
-            <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md p-4 font-bold border-2 border-purple-500 bg-white">
-              Contact Us
-            </a>
-          </Link>
+          <div className="relative flex flex-1">
+            <Link href={`/contact`}>
+              <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md p-4 font-bold border-2 border-purple-500 bg-white">
+                Contact Us
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="z-30 relative h-[140px] sm:h-[400px] xl:h-auto lg:h-auto mb-4 lg:mb-0 w-full lg:w-2/3 flex flex-auto bg-cover bg-fixed right-0 rounded-lg">
@@ -130,7 +131,6 @@ function HomeContainer({
         <div className="overflow-hidden lg:h-[632px] w-full lg:pl-[48px] right-0">
           <div className="flex lg:hidden w-full h-full absolute  z-30 rounded-xl">
             <div className="flex text-center items-center justify-center lg:hidden relative pl-4 text-4xl drop-shadow-2xl uppercase tracking-widest font-poppins font-bold z-30 h-[200px] w-full">
-              {/* {landing[selectedImage].text} */}
               <h1 className="flex flex-col items-center w-full">
                 Insurance
                 <span>Made</span>
@@ -156,7 +156,6 @@ function HomeContainer({
             ></motion.img>
           </AnimatePresence>
           <div className="blue__gradient absolute top-0 z-[0] w-[40%] h-[90%] lg:h-[35%]" />
-          <div className="pink__gradient rounded-full absolute left-0 bottom-30 z-[0] w-[40%] h-[10%] lg:h-[25%]" />
         </div>
       </div>
     </div>

@@ -70,7 +70,7 @@
 }
 .blue__gradient {
   background: linear-gradient(90deg, #10a8cb 0%, #fc67fa 100%);
-  filter: blur(100px);
+  filter: blur(200px);
 }
 .orange__gradient {
   background: linear-gradient(90deg, #cb5510  0%, #fc67fa 100%);
@@ -478,8 +478,13 @@ p {
     clip-path: unset;
   }
 }
+@media only screen and (min-width: 2400px) {
+  .ultrawide-home-height {
+    height:750px !important
+  }
+}
 @media only screen and (min-width: 3200px) {
   .ultrawide-home-height {
-    height:885px !important
+    height:970px !important
   }
 }
