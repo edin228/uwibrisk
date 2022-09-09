@@ -18,7 +18,7 @@ export default function DesktopHeader({ navItems }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     searchInput.length > 1 ? router.push(`/search?q=${searchInput}`) : null;
   };
 
@@ -58,6 +58,7 @@ export default function DesktopHeader({ navItems }) {
             <div
               type="submit"
               name="search"
+              onClick={() => handleSubmit()}
               className="cursor-pointer rounded-r-md p-2 items-center justify-center flex uppercase tracking-widest font-bold text-lg"
             >
               {getIcon("search")}

@@ -1,2 +1,2 @@
-export const openSpring = { type: "spring", stiffness: 5000, damping: 60 };
-export const closeSpring = { type: "spring", stiffness: 5000, damping: 65 };
+export const openSpring = { type: "spring", stiffness: 500, damping: 30 };
+export const closeSpring = { type: "spring", stiffness: 1000, damping: 50 };

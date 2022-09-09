@@ -50,7 +50,7 @@ function HomeContainer({
     exit: (direction) => {
       return {
         zIndex: 0,
-        x: direction < 0 ? 1000 : -1000,
+        x: 0,
         opacity: 0,
       };
     },
