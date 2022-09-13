@@ -31,15 +31,9 @@ export default function Home({
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
-        {/* <div>
-          <Landing locations={landing} />
-        </div>
-        <HeroContainer locations={officeLocations} />
-        <CarriersContainer carriers={carriers} />
-        <ActionsContainer homeButtons={homeButtons}/>
-        <BlogContainer posts={posts} />
-        <TestemonialContainer testemonials={testemonials} /> */}
+      {/* <div className="hidden xl:block absolute w-[40%] h-[40%] right-[58%] top-[15%] orange__gradient z-[-1]" /> */}
+      {/* <div className="hidden xl:block absolute w-[30%] h-[30%] right-[48%] top-[50%] orange__gradient z-[-1]" /> */}
+      <div className="flex w-full flex-col space-y-4 p-2 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         <HomeContainer
           landing={landing}
           officeLocations={officeLocations}

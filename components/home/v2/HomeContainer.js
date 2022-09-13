@@ -83,7 +83,7 @@ function HomeContainer({
     <div className="relative w-full lg:h-[650px] ultrawide-home-height flex flex-col-reverse lg:flex-row md:overflow-hidden">
       <div className="flex flex-col justify-center relative lg:w-2/5 lg:mr-[-100px] z-40">
         <div className="hidden lg:block relative pl-0 lg:pl-4 lg:pr-40 text-3xl lg:text-6xl  drop-shadow-2xl uppercase tracking-widest font-poppins font-bold z-30 text-center lg:text-start h-[200px]">
-          <h1>
+          <h1 className="drop-shadow-sm">
             Insurance Made
             <br className="sm:block hidden"></br>
             <span className="text-gradient">Simple</span>
@@ -155,7 +155,7 @@ function HomeContainer({
               key={landing[selectedImage].id}
             ></motion.img>
           </AnimatePresence>
-          <div className="blue__gradient absolute top-0 z-[0] w-[40%] h-[90%] lg:h-[35%]" />
+          {/* <div className="blue__gradient absolute top-0 z-[0] w-[40%] h-[90%] lg:h-[35%]" /> */}
         </div>
       </div>
     </div>

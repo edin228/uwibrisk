@@ -16,7 +16,7 @@ function ActionsContainer({homeButtons}) {
 
   return (
     <div
-      className="relative w-full h-[200px] flex justify-center items-center bg-slate-100 drop-shadow-md rounded-md p-2"
+      className="relative w-full h-[200px] flex justify-center items-center bg-white rounded-md"
       onMouseOut={() => setSelectedID(null)}
     >
       <div className="flex flex-wrap items-start justify-center w-full rounded-md">

@@ -72,8 +72,12 @@
   background: linear-gradient(90deg, #10a8cb 0%, #fc67fa 100%);
   filter: blur(200px);
 }
+.purple_blue__gradient {
+  background: linear-gradient(90deg, #6910cbfc 0%, #67c5fc 100%);
+  filter: blur(100px);
+}
 .orange__gradient {
-  background: linear-gradient(90deg, #cb5510  0%, #fc67fa 100%);
+  background: linear-gradient(90deg, #cb5510 0%, #fc67fa 100%);
   filter: blur(100px);
 }
 .blue-purple-gradient {
@@ -183,6 +187,45 @@
     to right,
     #b91d73,
     #f953c6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.lime-gradient {
+  background: #a9ffdb; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #11ffbd,
+    #a9ffdb
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #11ffbd,
+    #a9ffdb
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.buring-orange-gradient {
+  background: #ff416c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ff4b2b,
+    #ff416c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ff4b2b,
+    #ff416c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.blue-haze-gradient {
+  background: #24c6dc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #514a9d,
+    #24c6dc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #514a9d,
+    #24c6dc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .landing-base > img {
@@ -464,7 +507,6 @@ p {
   }
 }
 
-
 @media only screen and (max-width: 1200px) {
   .circle-clip {
     clip-path: circle(59.9% at 69% 64%);
@@ -474,17 +516,17 @@ p {
   .card-image {
     max-width: 100% !important;
   }
-  .circle-clip{
+  .circle-clip {
     clip-path: unset;
   }
 }
 @media only screen and (min-width: 2400px) {
   .ultrawide-home-height {
-    height:750px !important
+    height: 750px !important;
   }
 }
 @media only screen and (min-width: 3200px) {
   .ultrawide-home-height {
-    height:970px !important
+    height: 970px !important;
   }
 }

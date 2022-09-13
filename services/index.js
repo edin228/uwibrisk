@@ -285,7 +285,7 @@ export const getHomeActionButtons = async () => {
 export const getNavMenuItems = async () => {
   const query = gql`
     query GetNavMenuItems {
-      navigationMenuItems(where: { isActive: true }) {
+      navigationMenuItems(where: { isActive: true }, orderBy: order_ASC) {
         highlight
         id
         isActive

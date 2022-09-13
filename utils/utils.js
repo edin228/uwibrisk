@@ -5,7 +5,7 @@ import { spring } from "popmotion";
 import { mix } from "@popmotion/popcorn";
 import { debounce } from "lodash";
 import { BsBox, BsPlusLg, BsClipboard, BsCheckCircleFill, BsSearch } from 'react-icons/bs'
-import { FaRegPaperPlane } from 'react-icons/fa'
+import { FaRegPaperPlane,FaBriefcaseMedical } from 'react-icons/fa'
 import { FiMail } from 'react-icons/fi'
 import { RiLinksLine } from 'react-icons/ri'
 import { HiOutlineOfficeBuilding } from 'react-icons/hi'
@@ -244,6 +244,8 @@ export const getIcon = (item) => {
     <AiFillCar />
   ) : item == 'house' ? (
     <AiOutlineHome />
+  ) : item == 'medical' ? (
+    <FaBriefcaseMedical />
   ) : null
 }
 

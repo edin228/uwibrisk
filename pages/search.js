@@ -2,6 +2,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import ListedBlogCard from "../components/blog/ListedBlogCard";
 import Base from "../components/layout/Base";
+import ListedPageCard from "../components/page/ListedPageCard";
 import TeamCard from "../components/team/TeamCard";
 import { getSearch } from "../services";
 
@@ -20,7 +21,9 @@ function Search({ data, term }) {
       <div className="flex flex-col w-full h-full">
         <div className="flex flex-col w-full text-3xl tracking-widest justify-center items-center mb-4">
           <div>Search for: </div>
-          <div className="flex items-center text-center ml-4 font-bold">{term}</div>
+          <div className="flex items-center text-center ml-4 font-bold">
+            {term}
+          </div>
         </div>
         <div className="flex w-full justify-center space-x-2">
           <div className="flex items-center">
@@ -64,22 +67,26 @@ function Search({ data, term }) {
         {showTeam && data.teamMembers.length > 0 ? (
           <ul className="flex flex-col items-start py-4 px-4 md:px-0">
             {data.teamMembers.map((member) => (
-              <TeamCard key={member.id} member={member} />
+              <div className="py-2" key={member.id}>
+                <TeamCard member={member} />
+              </div>
             ))}
           </ul>
         ) : null}
         {showPages && data.pages.length > 0 ? (
           <ul className="flex flex-col items-start py-4 px-4 md:px-0">
             {data.pages.map((card) => (
-              <div key={card.id}>{card.title}</div>
+              <ListedPageCard key={card.id} page={card} />
             ))}
           </ul>
         ) : null}
-        {data.blogPosts.length < 1 && data.teamMembers.length < 1 && data.pages.length < 1 ?
-            <div className="font-bold text-4xl py-8 text-center w-full">No Results</div>
-            :null
-        }
-
+        {data.blogPosts.length < 1 &&
+        data.teamMembers.length < 1 &&
+        data.pages.length < 1 ? (
+          <div className="font-bold text-4xl py-8 text-center w-full">
+            No Results
+          </div>
+        ) : null}
       </div>
     </Base>
   );

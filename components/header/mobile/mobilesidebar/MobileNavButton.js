@@ -16,24 +16,17 @@ function MobileNavButton({ navItem, selectedID = null }) {
       {navItem?.isDropdown ? (
         <div className="flex flex-col w-full">
           <div className="flex items-center justify-between">
-            <Link
-              href={
-                navItem?.isExternalUrl
-                  ? navItem?.externalUrl
-                  : `/${navItem?.slug}`
-              }
-            >
-              <a
-                className={`relative w-full flex z-20 items-center uppercase tracking-widest font-semibold 
+            <div
+              className={`relative w-full flex z-20 items-center cursor-pointer uppercase tracking-widest font-semibold 
           p-2 ${
             navItem?.highlight ? "blood-orange-gradient rounded text-white" : ""
           } ${selectedID == navItem.id ? "text-white" : ""}`}
-              >
-                <div className="text-xs transition duration-200 ease-in-out">
-                  {navItem?.text}
-                </div>
-              </a>
-            </Link>
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <div className="text-xs transition duration-200 ease-in-out">
+                {navItem?.text}
+              </div>
+            </div>
             <div
               className="cursor-pointer"
               onClick={() => setShowDropdown(!showDropdown)}

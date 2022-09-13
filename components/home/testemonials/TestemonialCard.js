@@ -9,7 +9,7 @@ function TestemonialCard({ testemonial }) {
         {getIcon("quoteIcon")}
       </div>
 
-      <div className="flex text-xs lg:text-sm flex-col absolute top-5 left-7 z-10  bg-slate-100 w-[300px] h-fit p-4 rounded-2xl shadow-2xl">
+      <div className="flex text-xs lg:text-sm flex-col absolute top-5 left-7 z-10  bg-white w-[300px] h-fit p-4 rounded-2xl shadow-2xl">
         {testemonial.teamMembers.length > 0 ? (
           <div className="absolute top-[-15px] right-[-18px]  flex items-center text-center justify-center text-white text-3xl font-bold rounded-full w-[45px] h-[45px] z-30 shadow-lg">
             <motion.img
