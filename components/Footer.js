@@ -25,10 +25,10 @@ function Footer() {
 
   return (
     <div className="flex flex-col w-full h-full rounded-t-md bg-slate-100 min-h-[20vh]">
-      <div className="uppercase text-3xl tracking-widest font-bold p-4">
+      <div className="p-4 text-3xl font-bold tracking-widest uppercase">
         Contact Us
       </div>
-      <div className="flex flex-col lg:flex-row w-full gap-4 p-4">
+      <div className="flex flex-col w-full gap-4 p-4 lg:flex-row">
         {
           locations?.map( location => (
             <LocationInfo key={location.id} info={location} /> 
@@ -39,11 +39,11 @@ function Footer() {
         <div className="font-bold">
           © 2022 uwib. All rights reserved.
         </div>
-        <div className="flex flex-col lg:flex-row gap-2">
-          <div>Terms and Conditions</div>
-          <div>Privacy</div>
-          <div>State Licenses</div>
-          <div>Compensation Disclosure</div>
+        <div className="flex flex-col gap-2 lg:flex-row">
+          <a className="text-xs uppercase" href={"/terms-of-use"}>Terms and Conditions</a>
+          <a className="text-xs uppercase" href={"/privacy-policy"}>Privacy</a>
+          <a className="text-xs uppercase" href={"/licenses"}>State Licenses</a>
+          <a className="text-xs uppercase" href={"/compensation-disclosure"}>Compensation Disclosure</a>
         </div>
       </div>
     </div>
