@@ -12,38 +12,38 @@ function GetQuotes() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col w-full h-full">
-        <h1 className="text-3xl font-bold w-full text-center py-4">
+        <h1 className="w-full py-4 text-3xl font-bold text-center">
           Get Quotes
         </h1>
-        <div className="flex flex-col py-8 xl:py-20 px-4 space-y-4 xl:space-y-0 xl:flex-row xl:flex-wrap xl:gap-8 w-full h-full xl:items-center xl:justify-center">
+        <div className="flex flex-col w-full h-full px-4 py-8 space-y-4 xl:py-20 xl:space-y-0 xl:flex-row xl:flex-wrap xl:gap-8 xl:items-center xl:justify-center">
           <a href={"/commercial-quote"} className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col bg-white shadow-lg border-2 border-slate-100 rounded-xl h-[300px] xl:h-[500px] w-full xl:w-[300px]">
-            <div className="flex rounded-t-xl h-full blue-haze-gradient text-white justify-center items-center text-center">
-              <div className="flex border-4 border-white drop-shadow-xl rounded-xl text-5xl p-8">
+            <div className="flex items-center justify-center h-full text-center text-white rounded-t-xl blue-haze-gradient">
+              <div className="flex p-8 text-5xl border-4 border-white drop-shadow-xl rounded-xl">
                 {getIcon("agency")}
               </div>
             </div>
             <div className="flex text-center items-center justify-center font-bold rounded-b-xl h-[100px] bg-white">
-              Business Quote
+              Coverage For Your Business
             </div>
           </a>
           <a href={"/personal-quote"} className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col bg-white shadow-lg border-2 border-slate-100 rounded-xl h-[300px] xl:h-[500px] w-full xl:w-[300px]">
-            <div className="flex rounded-t-xl h-full buring-orange-gradient text-white justify-center items-center text-center">
-              <div className="flex border-4 border-white drop-shadow-xl rounded-xl text-5xl p-8">
+            <div className="flex items-center justify-center h-full text-center text-white rounded-t-xl buring-orange-gradient">
+              <div className="flex p-8 text-5xl border-4 border-white drop-shadow-xl rounded-xl">
                 {getIcon("house")}
               </div>
             </div>
             <div className="flex text-center items-center justify-center font-bold rounded-b-xl h-[100px] bg-white">
-              Home & Auto Quote
+              Home & Auto Coverage
             </div>
           </a>
           <a href={"/benefits-quote"} className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col bg-white shadow-lg border-2 border-slate-100 rounded-xl h-[300px] xl:h-[500px] w-full xl:w-[300px]">
-            <div className="flex rounded-t-xl h-full lime-gradient text-white justify-center items-center text-center">
-              <div className="flex border-4 border-white drop-shadow-xl rounded-xl text-5xl p-8">
+            <div className="flex items-center justify-center h-full text-center text-white rounded-t-xl lime-gradient">
+              <div className="flex p-8 text-5xl border-4 border-white drop-shadow-xl rounded-xl">
                 {getIcon("medical")}
               </div>
             </div>
             <div className="flex text-center items-center justify-center font-bold rounded-b-xl h-[100px] bg-white">
-              Benefits Quote
+              Employee Healthcare, Benefits, Payroll and HR
             </div>
           </a>
         </div>

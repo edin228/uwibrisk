@@ -40,7 +40,6 @@ function MobileNavButton({ navItem, selectedID = null }) {
               animate={showDropdown ? "visible" : "hidden"}
               variants={tile}
               transition={{ ease: "easeInOut", duration: 0.25 }}
-              className=" bg-white rounded-lg shadow-2xl"
             >
               <div className="w-full h-[5px] deep-blue-gradient" />
               <ul className="p-2">
