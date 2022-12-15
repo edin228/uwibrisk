@@ -419,8 +419,10 @@ li {
   left: 0;
   max-width: 300px;
 }
-
 h2 {
+  font-weight: bold;
+}
+.title-container > h2 {
   color: #fff;
   margin: 8px 0;
 }

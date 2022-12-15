@@ -9,7 +9,14 @@ function Page({ data }) {
   const Content = () => {
     return (
       <div className="flex flex-col w-full h-full">
-        {data.content.map((card, i) => data.content[i])}
+        {data.content.map((c, i) => (
+          <div
+            key={Date()}
+            strategy="afterInteractive"
+            className=""
+            dangerouslySetInnerHTML={{ __html: c.html }}
+          ></div>
+        ))}
         {data.rawHtml.map((card, i) => (
           <div
             key={Date()}

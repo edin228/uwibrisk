@@ -12,7 +12,7 @@ function ContentBase({ children, template = null }) {
   ) : template == "WebForm" ? (
     <div className="flex w-full">{children}</div>
   ) : template == "SingleColumn" ? (
-    <div className="flex w-full">{children}</div>
+    <div className="flex flex-col w-full">{children}</div>
   ) : template == "DualColumn" ? (
     <div className="flex w-full">{children}</div>
   ) : template == "TripleColumn" ? (
