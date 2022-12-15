@@ -3,24 +3,25 @@ import Head from "next/head";
 import Image from "next/image";
 import { getPage } from "../services";
 import Base from "../components/layout/Base";
-import Router, { useRouter } from 'next/router'
-
-
+import Router, { useRouter } from "next/router";
 
 function Page({ data }) {
-  
-
   const Content = () => {
+    const hasContent = data.content;
     return (
       <div className="flex flex-col w-full h-full">
-        {data.rawHtml.map((card, i) => (
-          <div
-            key={Date()}
-            strategy="afterInteractive"
-            className="flex h-full w-full"
-            dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
-          ></div>
-        ))}
+        {!hasContent
+          ? data.rawHtml.map((card, i) => (
+              <div
+                key={Date()}
+                strategy="afterInteractive"
+                className="flex w-full h-full"
+                dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
+              ></div>
+            ))
+          : data.content.map((card, i) => (
+              data.content[i]
+            ))}
       </div>
     );
   };
@@ -32,8 +33,8 @@ function Page({ data }) {
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
-        <div className="flex h-full w-full">
+      <div className="flex flex-col w-full px-2 py-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
+        <div className="flex w-full h-full">
           <Content />
         </div>
       </div>
