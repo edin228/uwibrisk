@@ -7,21 +7,17 @@ import Router, { useRouter } from "next/router";
 
 function Page({ data }) {
   const Content = () => {
-    const hasContent = data.content;
     return (
       <div className="flex flex-col w-full h-full">
-        {!hasContent
-          ? data.rawHtml.map((card, i) => (
-              <div
-                key={Date()}
-                strategy="afterInteractive"
-                className="flex w-full h-full"
-                dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
-              ></div>
-            ))
-          : data.content.map((card, i) => (
-              data.content[i]
-            ))}
+        {data.content.map((card, i) => data.content[i])}
+        {data.rawHtml.map((card, i) => (
+          <div
+            key={Date()}
+            strategy="afterInteractive"
+            className="flex w-full h-full"
+            dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
+          ></div>
+        ))}
       </div>
     );
   };
