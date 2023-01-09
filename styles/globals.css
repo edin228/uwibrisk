@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.masonry { 
+  display: flex;
+  flex-flow: column wrap;
+}
+
 @supports (-webkit-touch-callout: none) {
   .h-screen {
     height: -webkit-fill-available;
@@ -22,7 +27,26 @@
   clip-path: polygon(100% 0, 0 0, 0 38%);
 }
 /*  text gradient */
-
+.green-shadow {
+  -webkit-box-shadow: 0px 0px 10px 0.5px #41f3ca7a, 0 4px 6px -2px #00000045;
+  box-shadow: 0px 0px 10px 0.5px #41f3ca7a, 0 4px 6px -2px #00000045;
+}
+.blue-shadow {
+  -webkit-box-shadow: 0px 0px 10px 0.5px #24f5ff7a, 0 4px 6px -2px #00000045;
+  box-shadow: 0px 0px 10px 0.5px #24f5ff7a, 0 4px 6px -2px #00000045;
+}
+.orange-shadow {
+  -webkit-box-shadow: 0px 0px 10px 0.5px #f383417a, 0 4px 6px -2px #00000045;
+  box-shadow: 0px 0px 10px 0.5px #f383417a, 0 4px 6px -2px #00000045;
+}
+.pink-shadow {
+  -webkit-box-shadow: 0px 0px 10px 0.5px #ed30bc75, 0 4px 6px -2px #00000045;
+  box-shadow: 0px 0px 10px 0.5px #ed30bc75, 0 4px 6px -2px #00000045;
+}
+.purple-shadow {
+  -webkit-box-shadow: 0px 0px 10px 0.5px #7930ed7a, 0 4px 6px -2px #00000045;
+  box-shadow: 0px 0px 10px 0.5px #7930ed7a, 0 4px 6px -2px #00000045;
+}
 .text-gradient {
   background: #3790ff; /* fallback for old browsers */
   background-image: -webkit-linear-gradient(

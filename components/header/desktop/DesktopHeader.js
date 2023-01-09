@@ -44,7 +44,7 @@ export default function DesktopHeader({ navItems }) {
         </Link>
         <div className="flex w-full justify-end items-center">
           <form
-            className="flex w-1/4 mr-4 rounded-lg border-slate-500/10 border-2 relative"
+            className="flex w-1/4 mr-4 rounded-lg border-slate-500/20 border-2 relative"
             onSubmit={handleSubmit}
           >
             <input

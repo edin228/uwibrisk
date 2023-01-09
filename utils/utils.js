@@ -1,17 +1,33 @@
 import { RefObject } from "react";
 import { useState, useEffect } from "react";
-import { useDomEvent, MotionValue, useMotionValue, useDeprecatedInvertedScale } from "framer-motion";
+import {
+  useDomEvent,
+  MotionValue,
+  useMotionValue,
+  useDeprecatedInvertedScale,
+} from "framer-motion";
 import { spring } from "popmotion";
 import { mix } from "@popmotion/popcorn";
 import { debounce } from "lodash";
-import { BsBox, BsPlusLg, BsClipboard, BsCheckCircleFill, BsSearch } from 'react-icons/bs'
-import { FaRegPaperPlane,FaBriefcaseMedical } from 'react-icons/fa'
-import { FiMail } from 'react-icons/fi'
-import { RiLinksLine } from 'react-icons/ri'
-import { HiOutlineOfficeBuilding } from 'react-icons/hi'
-import { TbCertificate } from 'react-icons/tb'
-import { IoMdQuote } from 'react-icons/io'
-import { MdOutlineStickyNote2, MdOutlineFolderShared,MdRequestQuote, MdOutlinePayments } from 'react-icons/md'
+import {
+  BsBox,
+  BsPlusLg,
+  BsClipboard,
+  BsCheckCircleFill,
+  BsSearch,
+} from "react-icons/bs";
+import { FaRegPaperPlane, FaBriefcaseMedical } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
+import { RiLinksLine } from "react-icons/ri";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { TbCertificate } from "react-icons/tb";
+import { IoMdQuote } from "react-icons/io";
+import {
+  MdOutlineStickyNote2,
+  MdOutlineFolderShared,
+  MdRequestQuote,
+  MdOutlinePayments,
+} from "react-icons/md";
 import {
   AiOutlineEdit,
   AiOutlineFile,
@@ -22,21 +38,21 @@ import {
   AiOutlineCalendar,
   AiOutlineStar,
   AiOutlineDelete,
-  AiOutlineClockCircle, AiOutlineCloudDownload ,
+  AiOutlineClockCircle,
+  AiOutlineCloudDownload,
   AiOutlineCloseCircle,
   AiOutlineDollarCircle,
   AiOutlinePhone,
   AiFillCar,
-  AiOutlineHome
-} from 'react-icons/ai'
+  AiOutlineHome,
+} from "react-icons/ai";
 import {
   BiNotepad,
   BiCommentDetail,
   BiCommentAdd,
   BiCircle,
   BiTask,
-} from 'react-icons/bi'
-
+} from "react-icons/bi";
 
 export const graphCMSImageLoader = ({ src }) => src;
 
@@ -170,82 +186,111 @@ export function useInvertedBorderRadius(radius) {
   };
 }
 
-
 export const getIcon = (item) => {
-  return item == 'policy' ? (
+  return item == "policy" ? (
     <BsBox />
-  ) : item == 'activity' ? (
+  ) : item == "activity" ? (
     <MdOutlineStickyNote2 />
-  ) : item == 'client' ? (
+  ) : item == "client" ? (
     <MdOutlineFolderShared />
-  ) : item == 'deal' ? (
+  ) : item == "deal" ? (
     <BsClipboard />
-  ) : item == 'emailCompose' ? (
+  ) : item == "emailCompose" ? (
     <FaRegPaperPlane />
-  ) : item == 'email' ? (
+  ) : item == "email" ? (
     <FiMail />
-  ) : item == 'plus' ? (
+  ) : item == "plus" ? (
     <BsPlusLg />
-  ) : item == 'calendar' ? (
+  ) : item == "calendar" ? (
     <AiOutlineCalendar />
-  ) : item == 'note' ? (
+  ) : item == "note" ? (
     <BiNotepad />
-  ) : item == 'down' ? (
+  ) : item == "down" ? (
     <AiOutlineDown />
-  ) : item == 'left' ? (
+  ) : item == "left" ? (
     <AiOutlineLeft />
-  ) : item == 'right' ? (
+  ) : item == "right" ? (
     <AiOutlineRight />
-  ) : item == 'up' ? (
+  ) : item == "up" ? (
     <AiOutlineUp />
-  ) : item == 'comment' ? (
+  ) : item == "comment" ? (
     <BiCommentDetail />
-  ) : item == 'newComment' ? (
+  ) : item == "newComment" ? (
     <BiCommentAdd />
-  ) : item == 'circleCheck' ? (
+  ) : item == "circleCheck" ? (
     <BsCheckCircleFill />
-  ) : item == 'circleX' ? (
+  ) : item == "circleX" ? (
     <AiOutlineCloseCircle />
-  ) : item == 'circle' ? (
+  ) : item == "circle" ? (
     <BiCircle />
-  ) : item == 'file' ? (
+  ) : item == "file" ? (
     <AiOutlineFile />
-  ) : item == 'link' ? (
+  ) : item == "link" ? (
     <RiLinksLine />
-  ) : item == 'agency' ? (
+  ) : item == "agency" ? (
     <HiOutlineOfficeBuilding />
-  ) : item == 'edit' ? (
+  ) : item == "edit" ? (
     <AiOutlineEdit />
-  ) : item == 'trash' ? (
+  ) : item == "trash" ? (
     <AiOutlineDelete />
-  ) : item == 'star' ? (
+  ) : item == "star" ? (
     <AiOutlineStar />
-  ) : item == 'task' ? (
+  ) : item == "task" ? (
     <BiTask />
-  ) : item == 'clock' ? (
+  ) : item == "clock" ? (
     <AiOutlineClockCircle />
-  ) : item == 'cloudDownload' ? (
+  ) : item == "cloudDownload" ? (
     <AiOutlineCloudDownload />
-  ) : item == 'dollarSign' ? (
+  ) : item == "dollarSign" ? (
     <AiOutlineDollarCircle />
-  ) : item == 'quote' ? (
+  ) : item == "quote" ? (
     <MdRequestQuote />
-  ) : item == 'payment' ? (
+  ) : item == "payment" ? (
     <MdOutlinePayments />
-  ) : item == 'certificate' ? (
+  ) : item == "certificate" ? (
     <TbCertificate />
-  ) : item == 'search' ? (
+  ) : item == "search" ? (
     <BsSearch />
-  ) : item == 'phone' ? (
+  ) : item == "phone" ? (
     <AiOutlinePhone />
-  ) : item == 'quoteIcon' ? (
+  ) : item == "quoteIcon" ? (
     <IoMdQuote />
-  ) : item == 'car' ? (
+  ) : item == "car" ? (
     <AiFillCar />
-  ) : item == 'house' ? (
+  ) : item == "house" ? (
     <AiOutlineHome />
-  ) : item == 'medical' ? (
+  ) : item == "medical" ? (
     <FaBriefcaseMedical />
-  ) : null
-}
+  ) : null;
+};
 
+export const searchText = (data, search = "") => {
+  function flattenDeep(val) {
+    return Object.values(val || []).reduce(
+      (acc, val) =>
+        typeof val === "object"
+          ? acc.concat(flattenDeep(val))
+          : acc.concat(val),
+      []
+    );
+  }
+
+  function getValues(obj) {
+    return flattenDeep(obj).filter(function (item) {
+      return typeof item === "string" || typeof item === "number";
+    });
+  }
+
+  function normalize(text) {
+    return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  const searchNormalize = normalize(search);
+
+  return data.filter((item) => {
+    return normalize(getValues(item).toString()).indexOf(searchNormalize) != -1;
+  });
+};

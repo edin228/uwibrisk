@@ -34,7 +34,7 @@ export const Navigation = ({ isOpen, navItems = [] }) => {
       variants={variants}
     >
       <form
-        className="flex w-full mb-4 rounded-lg border-slate-500/10 border-2 relative"
+        className="flex w-full mb-4 rounded-lg border-slate-500/20 border-2 relative"
         onSubmit={handleSubmit}
       >
         <input

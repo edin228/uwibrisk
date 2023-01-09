@@ -3,13 +3,13 @@ import ContentBase from "../content/ContentBase";
 import Footer from "../Footer";
 import Header from "../header/Header";
 
-function Base({ children, template = null }) {
+function Base({ children, template = null, data = null, title=null }) {
   return (
-    <div className="flex w-full h-fill overflow-hidden text-color">
-      <div className="rounded-b-lg flex flex-col h-full w-full mx-auto xl:w-3/4 overflow-hidden">
+    <div className="flex w-full overflow-hidden h-fill text-color">
+      <div className="flex flex-col w-full h-full mx-auto overflow-hidden rounded-b-lg xl:w-3/4">
         <Header />
         <div className="flex flex-col overflow-y-auto lg:pt-20">
-          <ContentBase template={template}>{children}</ContentBase>
+          <ContentBase title={title} data={data} template={template}>{children}</ContentBase>
           <Footer />
         </div>
       </div>

@@ -47,25 +47,29 @@ export const getOfficeLocations = async () => {
   return result.officeLocations;
 };
 
-export const getCarriers = async () => {
+export const getCarrierInfo = async () => {
   const query = gql`
-      query GetCarriers() {
-        carrierBanners {
-            id
-            name
-            payLink
-            website
-            generalPhoneNumber
-            claimsPhoneNumber
-            billingPhoneNumber
-            claimLink
-            logo {
-              url
-            }
-            showInCarousel
-          }
+    query MyQuery {
+      carrierBanners(
+        first:100
+        orderBy: publishedAt_ASC
+        where: { isActive: true }
+      ) {
+        id
+        name
+        payLink
+        website
+        generalPhoneNumber
+        claimsPhoneNumber
+        billingPhoneNumber
+        claimLink
+        logo {
+          url
+        }
+        isActive
       }
-    `;
+    }
+  `;
   const result = await request(graphqlAPI, query);
 
   return result.carrierBanners;
@@ -74,7 +78,7 @@ export const getCarriers = async () => {
 export const getCarrierCarousel = async () => {
   const query = gql`
       query GetCarrierCarousel() {
-        carrierBanners(where: {showInCarousel: true}) {
+        carrierBanners(where: {isActive: true, showInCarousel: true}) {
             id
             name
             logo {

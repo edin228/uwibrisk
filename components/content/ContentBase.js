@@ -1,6 +1,30 @@
 import React from "react";
+import GridWithSearch from "./layouts/GridWithSearch";
 
-function ContentBase({ children, template = null }) {
+function ContentBase({ children, template = null, data = null, title = null }) {
+  const Content = () => {
+    return (
+      <div className="flex flex-col w-full h-full">
+        {data.content.map((c, i) => (
+          <div
+            key={Date()}
+            strategy="afterInteractive"
+            className=""
+            dangerouslySetInnerHTML={{ __html: c.html }}
+          ></div>
+        ))}
+        {data.rawHtml.map((card, i) => (
+          <div
+            key={Date()}
+            strategy="afterInteractive"
+            className="flex w-full h-full"
+            dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
+          ></div>
+        ))}
+      </div>
+    );
+  };
+
   return template == "Blog" ? (
     <div className="flex w-full">{children}</div>
   ) : template == "Team" ? (
@@ -21,6 +45,8 @@ function ContentBase({ children, template = null }) {
     <div className="flex w-full">{children}</div>
   ) : template == "TripleRow" ? (
     <div className="flex w-full">{children}</div>
+  ) : template == "GridWithSearch" ? (
+    <GridWithSearch data={data} title={title}>{children}</GridWithSearch>
   ) : (
     <div className="flex w-full">{children}</div>
   );
