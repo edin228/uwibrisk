@@ -52,7 +52,6 @@ export const getCarriers = async () => {
       query GetCarriers() {
         carrierBanners {
             id
-            link
             name
             logo {
               url
