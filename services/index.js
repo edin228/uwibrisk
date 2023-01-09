@@ -53,9 +53,34 @@ export const getCarriers = async () => {
         carrierBanners {
             id
             name
+            payLink
+            website
+            generalPhoneNumber
+            claimsPhoneNumber
+            billingPhoneNumber
+            claimLink
             logo {
               url
             }
+            showInCarousel
+          }
+      }
+    `;
+  const result = await request(graphqlAPI, query);
+
+  return result.carrierBanners;
+};
+
+export const getCarrierCarousel = async () => {
+  const query = gql`
+      query GetCarrierCarousel() {
+        carrierBanners(where: {showInCarousel: true}) {
+            id
+            name
+            logo {
+              url
+            }
+            showInCarousel
           }
       }
     `;

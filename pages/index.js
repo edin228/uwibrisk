@@ -7,6 +7,7 @@ import Landing from "../components/home/landing/Landing";
 import TestemonialContainer from "../components/home/testemonials/TestemonialContainer";
 import Base from "../components/layout/Base";
 import {
+  getCarrierCarousel,
   getCarriers,
   getHomeActionButtons,
   getLanding,
@@ -31,7 +32,7 @@ export default function Home({
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex w-full flex-col space-y-4 p-2 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
+      <div className="flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         <HomeContainer
           landing={landing}
           officeLocations={officeLocations}
@@ -53,7 +54,7 @@ export default function Home({
 export async function getServerSideProps({ params }) {
   const landing = await getLanding();
   const officeLocations = await getOfficeLocations();
-  const carriers = await getCarriers();
+  const carriers = await getCarrierCarousel();
   const posts = await getRecentBlogPosts();
   const testemonials = await getTestemonials();
   const homeButtons = await getHomeActionButtons();
