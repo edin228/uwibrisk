@@ -30,7 +30,7 @@ function Page({ data }) {
   };
 
   return (
-    <Base template={data.template}>
+    <Base template={data?.template}>
       <Head>
         <title>UWIBRISK</title>
         <meta name="description" content="United Western Insurance Brokers" />
