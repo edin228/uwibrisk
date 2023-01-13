@@ -28,6 +28,19 @@
 .button-link > p {
   color:white;
 }
+.page-content > img {
+  display:flex;
+  justify-content: center;
+  width: 100%;
+  border-radius:12px;
+}
+.page-content > ul {
+  padding:10px;
+  margin:10px;
+}
+.page-content > ul > li {
+  list-style-type: disc;
+}
 /* texture bg */
 .texture-bg {
   background-size: contain;

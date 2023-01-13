@@ -8,12 +8,12 @@ import Router, { useRouter } from "next/router";
 function Page({ data }) {
   const Content = () => {
     return (
-      <div className="flex flex-col w-full h-full">
+      <div className="flex flex-col w-full h-full ">
         {data.content.map((c, i) => (
           <div
             key={Date()}
             strategy="afterInteractive"
-            className=""
+            className="page-content"
             dangerouslySetInnerHTML={{ __html: c.html }}
           ></div>
         ))}
@@ -21,7 +21,7 @@ function Page({ data }) {
           <div
             key={Date()}
             strategy="afterInteractive"
-            className="flex w-full h-full"
+            className="flex w-full h-full page-content"
             dangerouslySetInnerHTML={{ __html: data.rawHtml[i] }}
           ></div>
         ))}
