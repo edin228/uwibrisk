@@ -283,6 +283,10 @@ export const getPage = async (slug) => {
           id
         }
         rawHtml
+        headerImage {
+          id
+          url
+        }
       }
     }
   `;

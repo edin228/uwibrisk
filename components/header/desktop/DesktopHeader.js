@@ -30,8 +30,8 @@ export default function DesktopHeader({ navItems }) {
   };
 
   return (
-    <div className="hidden lg:flex fixed top-0 h-20 bg-white z-50 rounded-bl-xl" style={{width:'inherit'}}>
-      <div className="flex justify-between items-center px-4 w-full">
+    <div className="fixed top-0 z-50 hidden h-20 bg-white lg:flex rounded-bl-xl" style={{width:'inherit'}}>
+      <div className="flex items-center justify-between w-full px-4">
         <Link href="/">
           <a className="w-[140px] h-full relative left-4">
             <Image
@@ -42,13 +42,13 @@ export default function DesktopHeader({ navItems }) {
             />
           </a>
         </Link>
-        <div className="flex w-full justify-end items-center">
+        <div className="flex items-center justify-end w-full">
           <form
-            className="flex w-1/4 mr-4 rounded-lg border-slate-500/20 border-2 relative"
+            className="relative flex w-1/4 mr-4 border-2 rounded-lg border-slate-500/20"
             onSubmit={handleSubmit}
           >
             <input
-              className="rounded-md py-1 px-2 w-full"
+              className="w-full px-2 py-1 rounded-md"
               type="search"
               name="search"
               placeholder="Search"
@@ -59,7 +59,7 @@ export default function DesktopHeader({ navItems }) {
               type="submit"
               name="search"
               onClick={() => handleSubmit()}
-              className="cursor-pointer rounded-r-md p-2 items-center justify-center flex uppercase tracking-widest font-bold text-lg"
+              className="flex items-center justify-center p-2 text-lg font-bold tracking-widest uppercase cursor-pointer rounded-r-md"
             >
               {getIcon("search")}
             </div>
@@ -98,9 +98,9 @@ export default function DesktopHeader({ navItems }) {
                         {item.pages?.map((pg) => (
                           <li
                             key={pg.id}
-                            className="font-semibold transition duration-100 w-full cursor-pointer border-2 rounded-lg p-4 border-slate-100/0 hover:border-slate-200 mb-2"
+                            className="w-full h-full p-4 mb-2 font-semibold transition duration-100 border-2 rounded-lg cursor-pointer border-slate-100/0 hover:border-slate-200"
                           >
-                            <a href={pg.slug} className="relative w-full">
+                            <a href={pg.slug} className="w-full">
                               {pg.title}
                             </a>
                           </li>
