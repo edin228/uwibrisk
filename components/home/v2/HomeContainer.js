@@ -142,7 +142,7 @@ function HomeContainer({
           <div className="flex justify-center w-full overflow-hidden rounded-lg bg-blend-saturation">
             <AnimatePresence initial={false} custom={1}>
               <motion.img
-                src={landing[selectedImage].image?.url}
+                src={landing[0].image?.url}
                 custom={1}
                 variants={variants}
                 initial="enter"
@@ -152,7 +152,7 @@ function HomeContainer({
                   x: { type: "spring", stiffness: 200, damping: 30 },
                 }}
                 className="hidden lg:flex w-10/12 object-contain shadow-lg right-0 z-[1] rounded-full bg-blend-saturation"
-                key={landing[selectedImage].id}
+                key={landing[0].id}
               ></motion.img>
             </AnimatePresence>
           </div>
