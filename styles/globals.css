@@ -15,7 +15,10 @@
 .text-color {
   color: #211c3c;
 }
-
+.testimonial-card-bg {
+  background: #ffffff96;
+  backdrop-filter: blur(24px);
+}
 .button-link {
   background:#c49c54;
   border-radius:12px;

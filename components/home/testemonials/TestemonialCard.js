@@ -9,7 +9,7 @@ function TestemonialCard({ testemonial }) {
         {getIcon("quoteIcon")}
       </div>
 
-      <div className="flex text-xs lg:text-sm flex-col absolute top-5 left-7 z-10  bg-white w-[300px] h-fit p-4 rounded-2xl shadow-2xl">
+      <div className="flex text-xs lg:text-sm flex-col absolute top-5 left-7 z-10 testimonial-card-bg w-[300px] h-fit p-4 rounded-2xl shadow-2xl">
         {testemonial.teamMembers.length > 0 ? (
           <div className="absolute top-[-15px] right-[-18px]  flex items-center text-center justify-center text-white text-3xl font-bold rounded-full w-[45px] h-[45px] z-30 shadow-lg">
             <motion.img
@@ -19,10 +19,10 @@ function TestemonialCard({ testemonial }) {
           </div>
         ) : null}
         <div className="font-semibold">{testemonial.text}</div>
-        <div className="flex w-full justify-end font-bold mt-4">
+        <div className="flex justify-end w-full mt-4 font-bold">
           {testemonial.from}
         </div>
-        <div className="flex w-full justify-end font-semibold italic opacity-80 text-xs">
+        <div className="flex justify-end w-full text-xs italic font-semibold opacity-80">
           {testemonial.subText}
         </div>
       </div>
