@@ -67,7 +67,7 @@ function LandingPageContent({ data }) {
       </div>
       <motion.img
         src={data?.headerImage?.url}
-        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[424px] 2xl:max-w-[600px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
+        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[424px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
       ></motion.img>
 
       <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
