@@ -4,8 +4,7 @@ import { getLanding } from "../services";
 import { getIcon } from "../utils/utils";
 import { motion } from "framer-motion";
 
-const form =
-  '<script type="text/javascript" src="https://form.jotform.com/jsform/230266316072045"></script>';
+
 
 export default function PrivateClient({
   landing = null,
@@ -41,11 +40,11 @@ export default function PrivateClient({
           </div>
         </div>
         <motion.img
-          src={"/bently.png"}
-          className="absolute w-full md:top-[-10%] lg:top-0 lg:w-auto right-0 lg:right-[5%] z-[10] bg-cover lg:rounded-[20%] bg-blend-multiply"
+          src={"/field.jpg"}
+          className="absolute w-full md:top-[-10%] lg:top-0 lg:max-w-[600px] lg:w-auto right-0 lg:right-[4%] z-[10] bg-cover bg-blend-multiply"
         ></motion.img>
         <motion.img
-          src={"/bently.png"}
+          src={"/field.jpg"}
           className="hidden lg:flex absolute blur w-full lg:w-1/2 right-0 z-[-1] bg-cover"
         ></motion.img>
         <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
@@ -89,7 +88,7 @@ export default function PrivateClient({
             </div>
           </div>
         </div>
-        <div className="h-[600px] w-full py-4 z-40">
+        {/* <div className="h-[600px] w-full py-4 z-40">
           <div
             className="flex h-full w-1/2 "
             strategy="afterInteractive"
@@ -97,7 +96,7 @@ export default function PrivateClient({
               __html: form,
             }}
           ></div>
-        </div>
+        </div> */}
       </div>
     </Base>
   );
