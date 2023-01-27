@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { getPage } from "../services";
 import Base from "../components/layout/Base";
 import Router, { useRouter } from "next/router";
+import { getIcon } from "../utils/utils";
 
-function DefaultContent({data}) {
+function DefaultContent({ data }) {
   return (
     <>
       {data?.headerImage?.url ? (
@@ -44,8 +45,65 @@ function DefaultContent({data}) {
   );
 }
 
+function LandingPageContent({ data }) {
+  return (
+    <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
+      <div className=" flex w-full h-[750px] p-4 rounded-lg">
+        <div className="text-white lg:text-inherit bg-slate-900/60 lg:bg-transparent backdrop-blur-lg rounded-lg p-2 z-40 flex flex-col w-full lg:w-1/2 py-4  justify-center">
+          <div className="text-2xl font-bold">{data?.title}</div>
+          <div className="text-md font-semibold py-2">
+            {data?.wordingUnderTitle}
+          </div>
+          {/* <div className="py-4 flex items-center space-x-2">
+            <div className="cursor-pointer flex items-center p-2 text-xl rounded-lg border-2 border-sky-500 shadow-lg w-[200px] text-center justify-center font-bold duration-100 transition bg-sky-500 text-white">
+              Contact Us
+            </div>
+          </div> */}
+        </div>
+      </div>
+      <motion.img
+        src={data?.headerImage?.url}
+        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-0 lg:max-w-[600px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
+      ></motion.img>
+      <motion.img
+        src={data?.headerImage?.url}
+        className="hidden lg:flex absolute blur w-full lg:w-6/12 top-[-6%] right-0 z-[-1] bg-cover"
+      ></motion.img>
+      <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
+        {data?.components.map((card, i) => (
+          <div
+            key={card.id}
+            className="text-white flex flex-col w-full lg:flex-auto h-[300px] bg-slate-900/80 backdrop-blur rounded-lg shadow-lg p-4"
+          >
+            <div className="flex justify-center text-center font-bold">
+              {card.title}
+            </div>
+            <div className="flex items-center justify-center w-full text-6xl py-6 text-yellow-500">
+              {getIcon(card.icon)}
+            </div>
+            <div className="font-bold flex justify-center text-center text-sm">
+              {card.description}
+            </div>
+          </div>
+        ))}
+      </div>
+      {data?.rawHtml.map((card, i) => (
+        <div
+          key={Date()}
+          strategy="afterInteractive"
+          className="flex w-full h-full page-content rounded-lg overflow-hidden"
+          dangerouslySetInnerHTML={{ __html: data?.rawHtml[i] }}
+        ></div>
+      ))}
+    </div>
+  );
+}
+
 function Page({ data }) {
   const Content = () => {
+    if (data?.template == "LandingPage") {
+      return <LandingPageContent data={data} />;
+    }
     return <DefaultContent data={data} />;
   };
 

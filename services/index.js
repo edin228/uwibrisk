@@ -287,6 +287,16 @@ export const getPage = async (slug) => {
           id
           url
         }
+        wordingUnderTitle
+        components {
+          ... on InfoCard {
+            id
+            icon
+            description
+            stage
+            title
+          }
+        }
       }
     }
   `;

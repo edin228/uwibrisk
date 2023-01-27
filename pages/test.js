@@ -40,11 +40,11 @@ export default function PrivateClient({
           </div>
         </div>
         <motion.img
-          src={"/field.jpg"}
+          src={"/bently.png"}
           className="absolute w-full md:top-[-10%] lg:top-0 lg:max-w-[600px] lg:w-auto right-0 lg:right-[4%] z-[10] bg-cover bg-blend-multiply"
         ></motion.img>
         <motion.img
-          src={"/field.jpg"}
+          src={"/bently.png"}
           className="hidden lg:flex absolute blur w-full lg:w-1/2 right-0 z-[-1] bg-cover"
         ></motion.img>
         <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
