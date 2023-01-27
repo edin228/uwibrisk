@@ -49,8 +49,8 @@ function LandingPageContent({ data }) {
   return (
     <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
       <div className="relative flex w-full h-[750px] p-4 rounded-lg overflow-hidden">
-        <div className="text-white  bg-slate-900/60 lg:bg-transparent backdrop-blur-lg rounded-lg p-2 z-40 flex flex-col w-full lg:w-1/2 py-4  justify-center">
-          <div className="text-5xl font-bold">{data?.title}</div>
+        <div className="text-white  bg-slate-900/60 lg:bg-transparent backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
+          <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>
           <div className="text-md font-semibold py-2">
             {data?.wordingUnderTitle}
           </div>
@@ -62,12 +62,12 @@ function LandingPageContent({ data }) {
         </div>
         <motion.img
           src={data?.headerImage?.url}
-          className="hidden lg:flex absolute blur w-full top-[-70%] right-0 z-[-1] bg-cover"
+          className="hidden lg:flex absolute blur w-full top-[-70%] right-0 z-[-1] bg-cover scale-x-[-1]"
         ></motion.img>
       </div>
       <motion.img
         src={data?.headerImage?.url}
-        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[-1%] lg:max-w-[600px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
+        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[424px] 2xl:max-w-[600px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
       ></motion.img>
 
       <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
