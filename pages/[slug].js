@@ -49,7 +49,7 @@ function LandingPageContent({ data }) {
   return (
     <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
       <div className="relative flex w-full h-[750px] p-4 rounded-lg overflow-hidden">
-        <div className="text-white  bg-slate-900/60 lg:bg-transparent backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
+        <div className="text-white  bg-slate-900/60 lg:bg-slate-900/20 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
           <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>
           <div className="text-md font-semibold py-2">
             {data?.wordingUnderTitle}
