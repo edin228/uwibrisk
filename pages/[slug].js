@@ -62,7 +62,7 @@ function LandingPageContent({ data }) {
         </div>
         <motion.img
           src={data?.headerImage?.url}
-          className="hidden lg:flex absolute blur w-full top-[-70%] right-0 z-[-1] bg-cover scale-x-[-1]"
+          className="hidden lg:flex absolute blur w-full top-[-70%] right-0 z-[-1] bg-cover scale-150"
         ></motion.img>
       </div>
       <motion.img
