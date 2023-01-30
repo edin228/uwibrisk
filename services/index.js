@@ -119,6 +119,33 @@ export const getTestemonials = async () => {
   return result.testemonials;
 };
 
+export const getHighlightedTestemonials = async () => {
+  const query = gql`
+    query MyQuery {
+      testemonials(where: { isActive: true, highlight: true }) {
+        from
+        id
+        subText
+        text
+        highlight
+        teamMembers {
+          id
+          name
+          position
+          slug
+          photo {
+            id
+            url
+          }
+        }
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.testemonials;
+};
+
 export const getOfficeResources = async () => {
   const query = gql`
     query MyQuery {

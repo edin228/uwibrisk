@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { motion } from "framer-motion";
-import { getPage } from "../services";
+import { getHighlightedTestemonials, getPage } from "../services";
 import Base from "../components/layout/Base";
 import Router, { useRouter } from "next/router";
 import { getIcon } from "../utils/utils";
+import TestemonialCard from "../components/home/testemonials/TestemonialCard";
+import TestemonialPageCard from "../components/home/testemonials/TestemonialPageCard";
 
 function DefaultContent({ data }) {
   return (
@@ -46,6 +48,20 @@ function DefaultContent({ data }) {
 }
 
 function LandingPageContent({ data }) {
+  
+  const [testemonials, setTestemonials] = useState([])
+
+  useEffect(() => {
+    getTestemonials()
+    return () => {}
+  }, [data])
+  
+  
+  const getTestemonials = async () => {
+    const testemonials = await getHighlightedTestemonials()
+    setTestemonials(testemonials)
+    return testemonials
+  }
   return (
     <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
       <div className="relative flex w-full h-[750px] p-4 rounded-lg overflow-hidden">
@@ -86,6 +102,11 @@ function LandingPageContent({ data }) {
               {card.description}
             </div>
           </div>
+        ))}
+      </div>
+      <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
+        {testemonials?.map((card, i) => (
+          <TestemonialPageCard key={card.id} testemonial={card} />
         ))}
       </div>
       {data?.rawHtml.map((card, i) => (
