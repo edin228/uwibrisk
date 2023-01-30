@@ -177,9 +177,9 @@ function OfficeResources({ data = null }) {
 
   const OfficeResourceCard = ({ data }) => {
     return (
-      <div className="flex flex-col w-full lg:h-[208px] lg:w-[187px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-slate-500/20">
+      <div className="flex flex-col w-full lg:h-[208px] lg:w-[214px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-slate-500/20">
         <div className="relative flex items-center overflow-hidden rounded-lg">
-          <a href={data.link} target="_blank" rel="noreferrer">
+          <a href={data.link} target="_blank" rel="noreferrer" className="w-full">
             {data.image?.id ? (
               <motion.img
                 className="object-contain rounded-lg h-36 w-96"
@@ -188,7 +188,9 @@ function OfficeResources({ data = null }) {
                 initial={false}
               />
             ) : (
-              data.altLogoText
+              <div className="flex items-center justify-center text-center font-bold h-36 w-full">
+                {data.altLogoText}
+              </div>
             )}
           </a>
         </div>
