@@ -62,7 +62,7 @@ function LandingPageContent({ data }) {
   };
   return (
     <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
-      <div className="relative flex w-full h-[750px] p-4 rounded-lg overflow-hidden">
+      <div className="relative flex w-full h-[395px] p-4 rounded-lg overflow-hidden">
         <div className="text-white  bg-slate-900/60 lg:bg-slate-900/50 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
           <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>
           <div className="py-2 w-full">
@@ -99,7 +99,7 @@ function LandingPageContent({ data }) {
             <div className="flex items-center justify-center w-full text-6xl py-6 text-yellow-500">
               {getIcon(card.icon)}
             </div>
-            <div className="font-bold flex justify-center text-center text-sm">
+            <div className="font-bold flex justify-center text-center text-sm border-[2px] border-slate-400/20 rounded-lg h-full items-center shadow-lg">
               {card.description}
             </div>
           </div>
@@ -114,7 +114,7 @@ function LandingPageContent({ data }) {
         <div
           key={Date()}
           strategy="afterInteractive"
-          className="flex w-full h-full page-content rounded-lg overflow-hidden"
+          className="page-content rounded-lg overflow-hidden"
           dangerouslySetInnerHTML={{ __html: data?.rawHtml[i] }}
         ></div>
       ))}
