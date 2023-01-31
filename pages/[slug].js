@@ -48,25 +48,26 @@ function DefaultContent({ data }) {
 }
 
 function LandingPageContent({ data }) {
-  
-  const [testemonials, setTestemonials] = useState([])
+  const [testemonials, setTestemonials] = useState([]);
 
   useEffect(() => {
-    getTestemonials()
-    return () => {}
-  }, [data])
-  
-  
+    getTestemonials();
+    return () => {};
+  }, [data]);
+
   const getTestemonials = async () => {
-    const testemonials = await getHighlightedTestemonials()
-    setTestemonials(testemonials)
-    return testemonials
-  }
+    const testemonials = await getHighlightedTestemonials();
+    setTestemonials(testemonials);
+    return testemonials;
+  };
   return (
     <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
       <div className="relative flex w-full h-[750px] p-4 rounded-lg overflow-hidden">
-        <div className="text-white  bg-slate-900/60 lg:bg-slate-900/20 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
+        <div className="text-white  bg-slate-900/60 lg:bg-slate-900/50 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
           <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>
+          <div className="py-2 w-full">
+            <div className="rounded-full w-1/2 h-[4px] bg-yellow-500"></div>
+          </div>
           <div className="text-md font-semibold py-2">
             {data?.wordingUnderTitle}
           </div>
@@ -83,7 +84,7 @@ function LandingPageContent({ data }) {
       </div>
       <motion.img
         src={data?.headerImage?.url}
-        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[424px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
+        className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[366px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
       ></motion.img>
 
       <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
