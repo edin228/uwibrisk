@@ -104,7 +104,7 @@ function LandingPageContent({ data }) {
           </div>
         ))}
       </div>
-      <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
+      <div className="z-40 flex flex-col flex-wrap 2xl:flex-nowrap lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
         {testemonials?.map((card, i) => (
           <TestemonialPageCard key={card.id} testemonial={card} />
         ))}

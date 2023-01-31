@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function TestemonialPageCard({ testemonial }) {
   return (
-    <div className="flex items-center relative w-full">
+    <div className="flex items-center relative w-[450px]">
       <div className="flex justify-center flex-auto text-xs lg:text-sm flex-col top-5 left-7 z-10 testimonial-card-bg w-[300px] h-[300px] p-4 rounded-2xl">
         <div className="flex min-h-[170px] font-semibold">{testemonial.text}</div>
         <div className="flex items-center justify-between w-full">
