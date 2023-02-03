@@ -327,6 +327,8 @@ export const getPage = async (slug) => {
           text
         }
         id
+        isPasswordProtected
+        password
         pageCategories {
           name
           id

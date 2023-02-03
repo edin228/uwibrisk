@@ -45,6 +45,7 @@ import {
   AiOutlinePhone,
   AiFillCar,
   AiOutlineHome,
+  AiFillLock
 } from "react-icons/ai";
 import {
   BiNotepad,
@@ -261,6 +262,8 @@ export const getIcon = (item) => {
     <AiOutlineHome />
   ) : item == "medical" ? (
     <FaBriefcaseMedical />
+  ) : item == "lock" ? (
+    <AiFillLock />
   ) : null;
 };
 

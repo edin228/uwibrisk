@@ -3,10 +3,14 @@ import Base from "../components/layout/Base";
 import { getOfficeResources } from "../services";
 import { getIcon, searchText } from "../utils/utils";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 function OfficeResources({ data = null }) {
   const [gridData, setGridData] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [pagePassword, setpagePassword] = useState("uwib");
+  const [passWordInput, setpassWordInput] = useState("");
 
   useEffect(() => {
     const handler = () => {
@@ -179,7 +183,12 @@ function OfficeResources({ data = null }) {
     return (
       <div className="flex flex-col w-full lg:h-[208px] lg:w-[214px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-slate-500/20">
         <div className="relative flex items-center overflow-hidden rounded-lg">
-          <a href={data.link} target="_blank" rel="noreferrer" className="w-full">
+          <a
+            href={data.link}
+            target="_blank"
+            rel="noreferrer"
+            className="w-full"
+          >
             {data.image?.id ? (
               <motion.img
                 className="object-contain rounded-lg h-36 w-96"
@@ -204,39 +213,63 @@ function OfficeResources({ data = null }) {
   return (
     <Base data={data} title={"Office Resources"} template={"GridWithSearch"}>
       <div className="flex flex-col w-full h-full">
-        <h1 className="w-full py-4 text-3xl font-bold text-center">
-          Office Resources
-        </h1>
-        <div className="flex items-center justify-center w-full px-4">
-          <div className="relative flex w-full my-4 border-2 rounded-lg lg:w-1/2 border-slate-500/20">
-            <input
-              className="w-full px-2 py-1 rounded-md"
-              type="search"
-              name="search"
-              placeholder="Search"
-              onInput={(e) => search(e.target.value)}
-            />
-            <div
-              type="submit"
-              name="search"
-              className="flex items-center justify-center p-2 text-lg font-bold tracking-widest uppercase cursor-pointer rounded-r-md"
-            >
-              {getIcon("search")}
+        {passWordInput != pagePassword ? (
+          <div className="flex items-center justify-center mt-[-10%] flex-col w-full h-[80vh] ">
+            <div className="flex items-center justify-center text-center text-6xl p-6">{getIcon("lock")}</div>
+            <div className="w-full flex items-center justify-center">
+              <input
+                className="w-1/2 px-2 py-1 rounded-md border-2 "
+                type="Password"
+                name="Password"
+                placeholder="Password"
+                onInput={(e) => setpassWordInput(e.target.value)}
+              />
             </div>
           </div>
-        </div>
-        {categories.map((category, i) => (
-          <div key={category} className="flex w-full flex-col px-4 pb-4 lg:justify-center">
-            <div className="flex justify-center text-center w-full font-bold text-2xl px-4">{category}</div>
-            <div
-              className={`flex flex-wrap w-full h-full gap-2 lg:justify-center`}
-            >
-              {gridData.filter(x => x.category == category).map((c, i) => (
-                <OfficeResourceCard key={c.id} data={c} />
-              ))}
+        ) : (
+          <>
+            <h1 className="w-full py-4 text-3xl font-bold text-center">
+              Office Resources
+            </h1>
+            <div className="flex items-center justify-center w-full px-4">
+              <div className="relative flex w-full my-4 border-2 rounded-lg lg:w-1/2 border-slate-500/20">
+                <input
+                  className="w-full px-2 py-1 rounded-md"
+                  type="search"
+                  name="search"
+                  placeholder="Search"
+                  onInput={(e) => search(e.target.value)}
+                />
+                <div
+                  type="submit"
+                  name="search"
+                  className="flex items-center justify-center p-2 text-lg font-bold tracking-widest uppercase cursor-pointer rounded-r-md"
+                >
+                  {getIcon("search")}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+            {categories.map((category, i) => (
+              <div
+                key={category}
+                className="flex w-full flex-col px-4 pb-4 lg:justify-center"
+              >
+                <div className="flex justify-center text-center w-full font-bold text-2xl px-4">
+                  {category}
+                </div>
+                <div
+                  className={`flex flex-wrap w-full h-full gap-2 lg:justify-center`}
+                >
+                  {gridData
+                    .filter((x) => x.category == category)
+                    .map((c, i) => (
+                      <OfficeResourceCard key={c.id} data={c} />
+                    ))}
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       </div>
     </Base>
   );
