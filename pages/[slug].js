@@ -61,7 +61,7 @@ function LandingPageContent({ data }) {
     return testemonials;
   };
   return (
-    <div className="relative flex flex-col w-3/4 p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4 mx-auto">
+    <div className="relative flex flex-col w-3/4 p-2 space-y-4 lg:space-y-0 lg:gap-4  mx-auto py-4">
       <div className="relative flex w-full h-[395px] p-4 rounded-lg overflow-hidden">
         <div className="text-white  bg-zinc-900/60 lg:bg-zinc-900/50 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
           <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>

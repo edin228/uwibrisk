@@ -14,17 +14,17 @@ function BlogPost({ data, recentBlogs }) {
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex w-full flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
+      <div className="flex w-full xl:w-3/4 xl:mx-auto flex-col py-2 px-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
         <BlogHeader
-          title={data.title}
-          id={data.featuredImage.id}
-          image={data.featuredImage.url}
+          title={data?.title}
+          id={data?.featuredImage.id}
+          image={data?.featuredImage.url}
         />
 
         <div className="flex flex-col lg:flex-row w-full">
           <div className="flex flex-col w-full px-4">
             <div className="flex flex-wrap space-x-2">
-              {data.blogTags.map((tag) => (
+              {data?.blogTags.map((tag) => (
                 <div
                   key={tag.id}
                   className="text-sm rounded-md px-2"
@@ -37,11 +37,11 @@ function BlogPost({ data, recentBlogs }) {
                 </div>
               ))}
             </div>
-            {data.teamMember?.photo ? (
+            {data?.teamMember?.photo ? (
               <div className="flex w-full mt-4 ">
                 <div className="rounded-lg mr-4">
                   <Image
-                    src={data.teamMember?.photo?.url}
+                    src={data?.teamMember?.photo?.url}
                     alt="author-pic"
                     width={50}
                     height={50}
@@ -50,12 +50,12 @@ function BlogPost({ data, recentBlogs }) {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <div className="font-bold flex">{data.teamMember?.name}</div>
-                  <div>{data.teamMember?.position}</div>
+                  <div className="font-bold flex">{data?.teamMember?.name}</div>
+                  <div>{data?.teamMember?.position}</div>
                 </div>
               </div>
             ) : null}
-            <div dangerouslySetInnerHTML={{ __html: data.content.html }}></div>
+            <div dangerouslySetInnerHTML={{ __html: data?.content.html }}></div>
           </div>
           <div className="flex w-full lg:w-1/4 px-4">
             <RecentBlogColumn posts={recentBlogs} />

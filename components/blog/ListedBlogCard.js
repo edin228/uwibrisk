@@ -10,7 +10,7 @@ function ListedBlogCard({ post }) {
       <div className={`listed-blog-card-content-container`}>
         <motion.div className="flex flex-col cursor-pointer" layout={true}>
           <Link href={`/blog/${post.slug}`}>
-            <a className="flex w-full text-md hover:text-sky-500 transition duration-100 font-bold uppercase tracking-widest">
+            <a className="flex w-full text-md hover:text-yellow-500 transition duration-100 font-bold uppercase tracking-widest">
               <div className="flex font-bold mb-2">{post.title}</div>
             </a>
           </Link>
@@ -28,7 +28,7 @@ function ListedBlogCard({ post }) {
               </div>
             ))}
           </div>
-          <div className="w-full h-[5px] blue-green-gradient rounded-lg mt-4" />
+          <div className="w-full h-[5px] gold-gradient rounded-lg mt-4" />
         </motion.div>
       </div>
     </li>

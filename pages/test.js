@@ -33,7 +33,7 @@ export default function PrivateClient({
               things you care about most.
             </div>
             <div className="py-4 flex items-center space-x-2">
-              <div className="cursor-pointer flex items-center p-2 text-xl rounded-lg border-2 border-sky-500 shadow-lg w-[200px] text-center justify-center font-bold duration-100 transition bg-sky-500 text-white">
+              <div className="cursor-pointer flex items-center p-2 text-xl rounded-lg border-2 border-yellow-500 shadow-lg w-[200px] text-center justify-center font-bold duration-100 transition bg-yellow-500 text-white">
                 Contact Us
               </div>
             </div>

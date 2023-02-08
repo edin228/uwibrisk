@@ -100,7 +100,7 @@ export default function DesktopHeader({ navItems }) {
                       <ul className="p-2">
                         {item.pages?.map((pg) => (
                           <li key={pg.id} className="w-full h-full">
-                            <a href={pg.slug} className="w-full h-full">
+                            <a href={`/${pg?.slug}`} className="w-full h-full">
                               <div className="w-full h-full p-4 mb-2 font-semibold transition duration-100 border-2 rounded-lg cursor-pointer border-zinc-100/0 hover:border-zinc-200">
                                 {pg.title}
                               </div>
