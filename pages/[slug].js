@@ -14,7 +14,7 @@ function DefaultContent({ data }) {
       {data?.headerImage?.url ? (
         <div className="relative rounded-lg">
           <motion.img
-            className="object-cover w-full h-full max-h-[300px] rounded-lg shadow-lg z-[10]"
+            className="object-cover w-full h-full max-h-[400px] shadow-lg z-[10]"
             src={data?.headerImage?.url}
             alt=""
             initial={false}
@@ -25,7 +25,7 @@ function DefaultContent({ data }) {
           </div>
         </div>
       ) : null}
-      <div className="flex flex-col w-full h-full ">
+      <div className={`flex flex-col w-full h-full ${data.template != 'WebForm' ? 'px-8':''}`}>
         {data?.content.map((c, i) => (
           <div
             key={Date()}
@@ -61,9 +61,9 @@ function LandingPageContent({ data }) {
     return testemonials;
   };
   return (
-    <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
+    <div className="relative flex flex-col w-3/4 p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4 mx-auto">
       <div className="relative flex w-full h-[395px] p-4 rounded-lg overflow-hidden">
-        <div className="text-white  bg-slate-900/60 lg:bg-slate-900/50 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
+        <div className="text-white  bg-zinc-900/60 lg:bg-zinc-900/50 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
           <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>
           <div className="py-2 w-full">
             <div className="rounded-full w-1/2 h-[4px] bg-yellow-500"></div>
@@ -79,19 +79,19 @@ function LandingPageContent({ data }) {
         </div>
         <motion.img
           src={data?.headerImage?.url}
-          className="hidden lg:flex absolute blur w-full top-[-70%] right-0 z-[-1] bg-cover scale-150"
+          className="hidden lg:flex absolute blur-[4px] w-full top-[-70%] right-0 z-[-1] bg-cover scale-150"
         ></motion.img>
       </div>
-      <motion.img
+      {/* <motion.img
         src={data?.headerImage?.url}
         className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[366px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
-      ></motion.img>
+      ></motion.img> */}
 
       <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
         {data?.components.map((card, i) => (
           <div
             key={card.id}
-            className="text-white flex flex-col w-full lg:flex-auto h-[300px] bg-slate-900/80 backdrop-blur rounded-lg shadow-lg p-4"
+            className="flex flex-col w-full lg:flex-auto h-[300px] backdrop-blur rounded-lg  p-4"
           >
             <div className="flex justify-center text-center font-bold">
               {card.title}
@@ -99,7 +99,7 @@ function LandingPageContent({ data }) {
             <div className="flex items-center justify-center w-full text-6xl py-6 text-yellow-500">
               {getIcon(card.icon)}
             </div>
-            <div className="font-bold flex justify-center text-center text-sm border-[2px] border-slate-400/20 rounded-lg h-full items-center shadow-lg">
+            <div className="font-bold flex justify-center text-center text-sm  rounded-lg h-full items-center ">
               {card.description}
             </div>
           </div>
@@ -137,7 +137,7 @@ function Page({ data }) {
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col w-full px-2 py-2 space-y-4 lg:space-y-0 lg:gap-4 lg:py-4">
+      <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4">
         <div className="flex flex-col w-full h-full">
           <Content />
         </div>

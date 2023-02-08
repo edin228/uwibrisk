@@ -181,7 +181,7 @@ function OfficeResources({ data = null }) {
 
   const OfficeResourceCard = ({ data }) => {
     return (
-      <div className="flex flex-col w-full lg:h-[208px] lg:w-[214px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-slate-500/20">
+      <div className="flex flex-col w-full lg:h-[208px] lg:w-[214px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-zinc-500/20">
         <div className="relative flex items-center overflow-hidden rounded-lg">
           <a
             href={data.link}
@@ -232,7 +232,7 @@ function OfficeResources({ data = null }) {
               Office Resources
             </h1>
             <div className="flex items-center justify-center w-full px-4">
-              <div className="relative flex w-full my-4 border-2 rounded-lg lg:w-1/2 border-slate-500/20">
+              <div className="relative flex w-full my-4 border-2 rounded-lg lg:w-1/2 border-zinc-500/20">
                 <input
                   className="w-full px-2 py-1 rounded-md"
                   type="search"

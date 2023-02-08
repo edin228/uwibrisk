@@ -229,6 +229,19 @@
     #ff416c
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.gold-gradient {
+  background: #ffa912; /* fallback for old browsers */
+  background-image: -webkit-linear-gradient(
+    to left,
+    #ffa912,
+    #b98802
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(
+    to left,
+    #ffa912,
+    #b98802
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .pink-gradient {
   background: #f953c6; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -562,7 +575,7 @@ p {
     left: 0;
     overflow: hidden;
     height: 420px;
-    width: 50vw;
+    width: 100%;
     transform: translateZ(0);
   }
   .content-container {
@@ -570,9 +583,9 @@ p {
     max-width: 700px;
     width: 90vw;
   }
-  .card-image {
+  /* .card-image {
     transform: translateX(-85px) translateY(-120px);
-  }
+  } */
 }
 
 @media only screen and (max-width: 1200px) {

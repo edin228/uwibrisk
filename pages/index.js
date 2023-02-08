@@ -33,17 +33,16 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
-        <HomeContainer
+        {/* <HomeContainer
           landing={landing}
           officeLocations={officeLocations}
           carriers={carriers}
           posts={posts}
           testemonials={testemonials}
           homeButtons={homeButtons}
-        />
-        <HeroContainer locations={officeLocations} />
+        /> */}
+        {/* <HeroContainer locations={officeLocations} /> */}
         <CarriersContainer carriers={carriers} />
-        {/* <ActionsContainer homeButtons={homeButtons}/> */}
         <BlogContainer posts={posts} />
       </div>
     </Base>

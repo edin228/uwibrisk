@@ -24,7 +24,7 @@ function Footer() {
   }
 
   return (
-    <div className="flex flex-col w-full h-full rounded-t-md bg-slate-100 min-h-[20vh]">
+    <div className="flex flex-col w-full h-full rounded-t-md bg-zinc-100 min-h-[20vh]">
       <div className="p-4 text-3xl font-bold tracking-widest uppercase">
         Contact Us
       </div>
@@ -35,7 +35,7 @@ function Footer() {
           ))
         }
       </div>
-      <div className="flex flex-col lg:flex-row lg:items-center px-4 lg:justify-between bg-slate-200 w-full min-h-[40px]">
+      <div className="flex flex-col lg:flex-row lg:items-center px-4 lg:justify-between bg-zinc-200 w-full min-h-[40px]">
         <div className="font-bold">
           © 2022 uwib. All rights reserved.
         </div>

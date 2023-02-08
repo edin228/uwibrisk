@@ -22,7 +22,7 @@ function TeamCard({ member }) {
             {member.email ? (
               <a
                 href={`mailto:${member.email}`}
-                className="flex items-center w-full transition duration-200 hover:text-sky-500"
+                className="flex items-center w-full transition duration-200 hover:text-yellow-500"
               >
                 <div className="pr-4">{getIcon("email")}</div>
                 <div>{member.email}</div>
@@ -38,7 +38,7 @@ function TeamCard({ member }) {
         </div>
         {member.hasTeamPage ? (
           <Link href={`/${member.slug}`}>
-            <a className="flex justify-center w-full text-sm py-1 bg-white hover:text-white hover:bg-sky-500 transition ease-out duration-200 border-[1px] border-sky-500 rounded-md font-bold uppercase tracking-widest">
+            <a className="flex justify-center w-full text-sm py-1 bg-white hover:text-white hover:bg-yellow-500 transition ease-out duration-200 border-[1px] border-yellow-500 rounded-md font-bold uppercase tracking-widest">
               View Bio
             </a>
           </Link>

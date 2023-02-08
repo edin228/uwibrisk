@@ -23,7 +23,7 @@ export default function PrivateClient({
       </Head>
       <div className="relative flex flex-col w-full p-2 space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         <div className=" flex w-full h-[450px] p-4 rounded-lg">
-          <div className="text-white lg:text-inherit bg-slate-900/60 lg:bg-transparent backdrop-blur-lg rounded-lg p-2 z-40 flex flex-col w-full lg:w-1/2 py-4 items-center justify-center">
+          <div className="text-white lg:text-inherit bg-zinc-900/60 lg:bg-transparent backdrop-blur-lg rounded-lg p-2 z-40 flex flex-col w-full lg:w-1/2 py-4 items-center justify-center">
             <div className="text-2xl font-bold">Private Client Services</div>
             <div className="text-md font-semibold py-2 text-center">
               As you continue to grow your wealth and make plans for the future,
@@ -48,7 +48,7 @@ export default function PrivateClient({
           className="hidden lg:flex absolute blur w-full lg:w-1/2 right-0 z-[-1] bg-cover"
         ></motion.img>
         <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
-          <div className="text-white flex flex-col w-full lg:flex-auto h-[250px] bg-slate-900 rounded-lg shadow-lg p-4">
+          <div className="text-white flex flex-col w-full lg:flex-auto h-[250px] bg-zinc-900 rounded-lg shadow-lg p-4">
             <div className="flex justify-center text-center font-bold">
               Amet dolore mollit{" "}
             </div>
@@ -61,7 +61,7 @@ export default function PrivateClient({
               officia.
             </div>
           </div>
-          <div className="text-white flex flex-col w-full lg:flex-auto h-[250px] bg-slate-900 rounded-lg shadow-lg p-4">
+          <div className="text-white flex flex-col w-full lg:flex-auto h-[250px] bg-zinc-900 rounded-lg shadow-lg p-4">
             <div className="flex justify-center text-center font-bold">
               Amet dolore mollit{" "}
             </div>
@@ -74,7 +74,7 @@ export default function PrivateClient({
               officia.
             </div>
           </div>
-          <div className="text-white flex flex-col w-full lg:flex-auto h-[250px] bg-slate-900 rounded-lg shadow-lg p-4">
+          <div className="text-white flex flex-col w-full lg:flex-auto h-[250px] bg-zinc-900 rounded-lg shadow-lg p-4">
             <div className="flex justify-center text-center font-bold">
               Amet dolore mollit{" "}
             </div>

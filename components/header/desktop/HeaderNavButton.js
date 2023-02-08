@@ -5,9 +5,9 @@ function HeaderNavButton({ navItem = null, selectedID = null }) {
   return navItem?.isDropdown ? (
     <div
       className={`relative flex z-20 items-center uppercase cursor-pointer tracking-widest font-semibold 
-      p-2 ${
-        navItem?.highlight ? "blood-orange-gradient rounded text-white" : ""
-      } ${selectedID == navItem.id ? "text-white" : ""}`}
+      p-2 text-white ${
+        navItem?.highlight ? "gold-gradient rounded text-white" : ""
+      } ${selectedID == navItem.id ? "text-white" : "text-white"}`}
     >
       <div className="text-xs transition duration-200 ease-in-out">
         {navItem?.text}
@@ -19,8 +19,8 @@ function HeaderNavButton({ navItem = null, selectedID = null }) {
     >
       <a
         className={`relative flex z-20 items-center uppercase tracking-widest font-semibold 
-      p-2 ${
-        navItem?.highlight ? "blood-orange-gradient rounded text-white" : ""
+      p-2 text-white ${
+        navItem?.highlight ? "gold-gradient rounded text-white" : ""
       } ${selectedID == navItem.id ? "text-white" : ""}`}
       >
         <div className="text-xs transition duration-200 ease-in-out">
