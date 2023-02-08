@@ -51,7 +51,7 @@ export default function DesktopHeader({ navItems }) {
             onSubmit={handleSubmit}
           >
             <input
-              className="w-full px-2 py-1 rounded-md bg-transparent"
+              className="w-full px-2 py-1 rounded-md bg-transparent text-white"
               type="search"
               name="search"
               placeholder="Search"

@@ -5,7 +5,7 @@ function BlogContainer( {posts}) {
   return (
     <div className="flex flex-col w-full">
       <div className="flex w-full mb-4 justify-center text-center items-center uppercase tracking-widest font-semibold">
-        See whats new
+        News & Insights
       </div>
       <ul className="flex px-4 flex-wrap items-start h-[800px] lg:h-[600px]">
         {posts.map((card) => (
