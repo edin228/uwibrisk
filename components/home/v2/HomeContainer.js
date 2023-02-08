@@ -97,14 +97,14 @@ function HomeContainer({
         <div className="flex items-center px-4 mt-8 space-x-2">
           <div className="relative flex flex-1">
             <Link href={`/get-quotes`}>
-              <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md purple-gradient text-white p-4 font-bold">
+              <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md purple-gradient text-white p-4 font-bold">
                 Get Quotes
               </a>
             </Link>
           </div>
           <div className="relative flex flex-1">
             <Link href={`/contact`}>
-              <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-2xl cursor-pointer shadow-md p-4 font-bold border-2 border-purple-500 bg-white">
+              <a className="duration-200 hover:mt-[-10px] flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md p-4 font-bold border-2 border-purple-500 bg-white">
                 Contact Us
               </a>
             </Link>

@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 function TestemonialPageCard({ testemonial }) {
   return (
-    <div className="flex items-center relative w-[450px]">
-      <div className="flex justify-center flex-auto text-xs lg:text-sm flex-col top-5 left-7 z-10 testimonial-card-bg w-[300px] h-[300px] p-4 rounded-2xl">
-        <div className="flex min-h-[170px] font-semibold">{testemonial.text}</div>
+    <div className="flex items-center relative w-full xl:w-[450px]">
+      <div className="flex justify-center flex-auto text-xs lg:text-sm flex-col top-5 left-7 z-10 testimonial-card-bg w-[300px] xl:h-[300px] p-4 rounded-2xl border-2 border-zinc-500/20">
+        <div className="flex min-h-[120px] xl:min-h-[170px] font-semibold">{testemonial.text}</div>
         <div className="flex items-center justify-between w-full">
           {testemonial.teamMembers.length > 0 ? (
             <div className="flex items-center text-center justify-center text-white text-3xl font-bold rounded-full  z-30 shadow-lg">
