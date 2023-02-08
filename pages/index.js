@@ -90,15 +90,15 @@ export default function Home({
             <div className="flex items-center xl:mt-8 xl:py-4 space-x-2">
               <div className="relative flex flex-1">
                 <Link href={`/get-quotes`}>
-                  <a className="w-[150px] xl:w-[300px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md border-yellow-500 border-2 text-white p-4 font-bold text-lg">
+                  <a className="w-[150px] xl:w-[300px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md border-yellow-500 border-2 text-white p-2 xl:p-4 font-bold text-sm xl:text-lg">
                     Get Quotes
                   </a>
                 </Link>
               </div>
               <div className="relative flex flex-1">
                 <Link href={`/contact`}>
-                  <a className="w-[150px] xl:w-[300px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md p-4 font-bold border-2 border-yellow-500 text-lg">
-                    Contact Us
+                  <a className="w-[200px] xl:w-[300px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md p-2 xl:p-4 font-bold border-2 border-yellow-500 text-sm xl:text-lg">
+                    Contact An Advisor
                   </a>
                 </Link>
               </div>
