@@ -27,18 +27,20 @@ const TypingText = () => {
     <TypeAnimation
       sequence={[
         "Business Insurance", // Types 'One'
-        1000, // Waits 1s
+        3000, // Waits 1s
         "Personal Insurance", // Deletes 'One' and types 'Two'
-        2000, // Waits 2s
+        3000, // Waits 2s
         "Health Insurance", // Deletes 'One' and types 'Two'
-        2000, // Waits 2s
+        3000, // Waits 2s
         "Employee Benefits", // Deletes 'One' and types 'Two'
-        2000, // Waits 2s
+        3000, // Waits 2s
         () => {},
       ]}
       wrapper="div"
       cursor={true}
       repeat={Infinity}
+      speed={2}
+      deletionSpeed={88}
       style={{ fontSize: "1em" }}
     />
   );
@@ -87,18 +89,19 @@ export default function Home({
               <div className="bg-yellow-500 w-3/5 h-[5px] rounded-lg"></div>
             </div>
             <div className="py-2 tracking-wide">Made Simple</div>
-            <div className="flex items-center xl:mt-8 xl:py-4 space-x-2">
-              <div className="relative flex flex-1">
+            <div className="flex items-center xl:mt-8 xl:py-4 space-x-2 max-w-[200px]">
+              {/* <div className="relative flex flex-1">
                 <Link href={`/get-quotes`}>
-                  <a className="w-[150px] xl:w-[300px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md border-yellow-500 border-2 text-white p-2 xl:p-4 font-bold text-sm xl:text-lg">
-                    Get Quotes
+                  <a className="w-[150px] xl:w-[180px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md border-yellow-500 border-2 text-white p-2 xl:p-4 font-bold text-sm xl:text-lg">
+                    Start Building Your Portfolio
                   </a>
                 </Link>
-              </div>
+              </div> */}
               <div className="relative flex flex-1">
                 <Link href={`/contact`}>
-                  <a className="w-[200px] xl:w-[300px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md p-2 xl:p-4 font-bold border-2 border-yellow-500 text-sm xl:text-lg">
-                    Contact An Advisor
+                  <a className="w-[140px] max-w-[140px] transition duration-200 hover:bg-yellow-500 flex rounded-xl cursor-pointer shadow-md font-bold border-2 border-yellow-500 text-sm flex-col items-center py-2">
+                    <span className="my-0 leading-3 text-xl">Contact An </span>
+                    <span className="leading-8 text-3xl">Advisor</span>
                   </a>
                 </Link>
               </div>
@@ -128,7 +131,7 @@ export default function Home({
           homeButtons={homeButtons}
         /> */}
         <div className="flex flex-col w-full xl:w-3/4 xl:mx-auto h-full">
-          <HeroContainer locations={officeLocations} />
+          {/* <HeroContainer locations={officeLocations} /> */}
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
             <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold mb-2">

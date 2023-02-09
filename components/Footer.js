@@ -24,18 +24,18 @@ function Footer() {
   }
 
   return (
-    <div className="flex flex-col w-full h-full rounded-t-md bg-zinc-100 min-h-[20vh]">
-      <div className="p-4 text-3xl font-bold tracking-widest uppercase">
+    <div className="flex flex-col w-full h-full rounded-t-md bg-zinc-100">
+      {/* <div className="p-4 text-3xl font-bold tracking-widest uppercase">
         Contact Us
-      </div>
-      <div className="flex flex-col w-full gap-4 p-4 lg:flex-row">
+      </div> */}
+      {/* <div className="flex flex-col w-full gap-4 p-4 lg:flex-row">
         {
           locations?.map( location => (
             <LocationInfo key={location.id} info={location} /> 
           ))
         }
-      </div>
-      <div className="flex flex-col lg:flex-row lg:items-center px-4 lg:justify-between bg-zinc-200 w-full min-h-[40px]">
+      </div> */}
+      <div className="flex flex-col lg:flex-row lg:items-center px-4 lg:justify-between bg-zinc-200 w-full">
         <div className="font-bold">
           © 2022 uwib. All rights reserved.
         </div>
