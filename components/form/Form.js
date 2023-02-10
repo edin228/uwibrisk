@@ -1,12 +1,31 @@
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import * as Fields from "./FormFields";
 
-export default function Form({ style, fields = [] }) {
+export default function Form({ style, id, fields = [] }) {
   const { handleSubmit, getValues, ...methods } = useForm();
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
   if (!fields) return null;
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (values) => {
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        body: JSON.stringify({ id, ...values }),
+      });
+
+      if (!response.ok)
+        throw new Error(`Something went wrong submitting the form.`);
+
+      setSuccess(true);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  if (success) return <p>Form submitted. We&apos;ll be in touch!</p>;
   return (
     <FormProvider {...methods}>
       <form className={style} onSubmit={handleSubmit(onSubmit)}>
@@ -24,6 +43,7 @@ export default function Form({ style, fields = [] }) {
         >
           Submit
         </button>
+        {error && <span>{error}</span>}
       </form>
     </FormProvider>
   );

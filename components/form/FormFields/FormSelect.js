@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { motion } from "framer-motion";
 
 export default function FormSelect({ selectLabel, formOptions, ...rest }) {
   const { register } = useFormContext();
@@ -6,10 +7,24 @@ export default function FormSelect({ selectLabel, formOptions, ...rest }) {
   const { name } = rest;
 
   return (
-    <div className="flex flex-col py-2">
-      <label className="font-bold pl-2 text-sm" htmlFor={name}>{selectLabel || name}</label>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          opacity: 1,
+          y: 0,
+        },
+        hidden: { opacity: 0, y: -10 },
+      }}
+      transition={{ ease: "easeInOut", duration: 0.25 }}
+      className="flex flex-col py-2"
+    >
+      <label className="font-bold pl-2 text-sm" htmlFor={name}>
+        {selectLabel || name}
+      </label>
       <select
-        {...register(name,{
+        {...register(name, {
           required: true,
         })}
         id={name}
@@ -22,6 +37,6 @@ export default function FormSelect({ selectLabel, formOptions, ...rest }) {
           </option>
         ))}
       </select>
-    </div>
+    </motion.div>
   );
 }

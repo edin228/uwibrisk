@@ -540,6 +540,10 @@ h2 {
   width: 90vw;
 }
 
+.black-box p {
+  color: inherit;
+}
+
 p {
   color: #24252a;
   margin: 20px 0;

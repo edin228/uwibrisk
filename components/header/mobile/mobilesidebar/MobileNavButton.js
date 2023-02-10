@@ -19,7 +19,7 @@ function MobileNavButton({ navItem, selectedID = null }) {
             <div
               className={`relative w-full flex z-20 items-center cursor-pointer uppercase tracking-widest font-semibold 
           p-2 ${
-            navItem?.highlight ? "blood-orange-gradient rounded text-white" : ""
+            navItem?.highlight ? "gold-gradient rounded text-white" : ""
           } ${selectedID == navItem.id ? "text-white" : ""}`}
               onClick={() => setShowDropdown(!showDropdown)}
             >
@@ -41,7 +41,7 @@ function MobileNavButton({ navItem, selectedID = null }) {
               variants={tile}
               transition={{ ease: "easeInOut", duration: 0.25 }}
             >
-              <div className="w-full h-[5px] deep-blue-gradient" />
+              <div className="w-full h-[5px] gold-gradient" />
               <ul className="p-2">
                 {navItem.pages?.map((pg) => (
                   <li
@@ -66,7 +66,7 @@ function MobileNavButton({ navItem, selectedID = null }) {
           <a
             className={`relative flex z-20 items-center uppercase tracking-widest font-semibold 
           p-2 ${
-            navItem?.highlight ? "blood-orange-gradient rounded text-white" : ""
+            navItem?.highlight ? "gold-gradient rounded text-white" : ""
           } ${selectedID == navItem.id ? "text-white" : ""}`}
           >
             <div className="text-xs transition duration-200 ease-in-out">
