@@ -1868,6 +1868,11 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
 
+"react-hook-form@^7.43.1":
+  "integrity" "sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg=="
+  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.1.tgz"
+  "version" "7.43.1"
+
 "react-icons@^4.4.0":
   "integrity" "sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg=="
   "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.4.0.tgz"
@@ -1893,7 +1898,7 @@
   "resolved" "https://registry.npmjs.org/react-type-animation/-/react-type-animation-2.1.2.tgz"
   "version" "2.1.2"
 
-"react@*", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 15.0.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@0.14 || 15 || 16 || 17 || 18", "react@18.2.0":
+"react@*", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 15.0.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@0.14 || 15 || 16 || 17 || 18", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

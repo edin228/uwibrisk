@@ -357,7 +357,7 @@ nav {
   background: #ffffff00;
 }
 
-button {
+.mobile-menu-toggle {
   outline: none;
   border: none;
   -webkit-user-select: none;

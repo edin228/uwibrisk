@@ -340,12 +340,52 @@ export const getPage = async (slug) => {
         }
         wordingUnderTitle
         components {
+          __typename
           ... on InfoCard {
             id
             icon
             description
             stage
             title
+          }
+        }
+        forms {
+          id
+          name
+          fields {
+            __typename
+            ... on FormInput {
+              id
+              name
+              type
+              inputLabel: label
+              placeholder
+              required
+            }
+            ... on FormTextArea {
+              id
+              name
+              textareaLabel: label
+              placeholder
+              required
+            }
+            ... on FormCheckbox {
+              id
+              name
+              checkboxLabel: label
+              required
+            }
+            ... on FormSelect {
+              id
+              name
+              selectLabel: label
+              formOptions {
+                id
+                value
+                option
+              }
+              required
+            }
           }
         }
       }
