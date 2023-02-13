@@ -72,24 +72,6 @@ export default function ContactForm({ style, id, fields = [] }) {
               }
             })}
           </div>
-          {showProducerPanel && (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                },
-                hidden: { opacity: 1, y: 50 },
-              }}
-              transition={{ ease: "easeInOut", duration: 0.25 }}
-              className="flex flex-col w-full h-full mt-4 lg:mt-0 lg:pl-4"
-            >
-              <div className="bg-zinc-500 rounded-lg overflow-hidden shadow-lg h-[200px]">Image</div>
-              <div className="mt-2">Pariatur in consequat sunt adipisicing est officia deserunt. Do labore amet anim aliquip nisi sit duis. Nulla voluptate Lorem voluptate est eiusmod et deserunt eu occaecat esse. Lorem irure mollit nisi sint eu incididunt magna nulla. Enim aliqua ea tempor excepteur excepteur reprehenderit voluptate cillum ad reprehenderit quis deserunt. Consectetur officia dolor ad id consectetur. Deserunt consequat elit qui cupidatat voluptate ipsum commodo.</div>
-            </motion.div>
-          )}
         </div>
         <button
           className="gold-gradient text-white rounded-lg p-2 mt-12"

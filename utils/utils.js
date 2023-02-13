@@ -27,6 +27,7 @@ import {
   MdOutlineFolderShared,
   MdRequestQuote,
   MdOutlinePayments,
+  MdSwipe
 } from "react-icons/md";
 import {
   AiOutlineEdit,
@@ -264,6 +265,8 @@ export const getIcon = (item) => {
     <FaBriefcaseMedical />
   ) : item == "lock" ? (
     <AiFillLock />
+  ) : item == "swipe" ? (
+    <MdSwipe />
   ) : null;
 };
 
