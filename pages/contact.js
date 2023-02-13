@@ -39,7 +39,7 @@ const ContactIntro = ({ data }) => {
         ))}
       </div>
       <div className="flex items-end justify-end w-full h-full p-4">
-        <div className="w-[300px] flex text-xl bg-yellow-500 h-[60px] rounded-lg shadow-lg font-bold justify-center items-center px-4">Swipe to begin! <span className="mx-4">{getIcon('swipe')}</span></div>
+        <div className="w-[300px] flex text-xl gold-gradient h-[60px] rounded-lg shadow-lg font-bold justify-center items-center px-4">Swipe to begin! <span className="mx-4">{getIcon('swipe')}</span></div>
       </div>
     </>
   );

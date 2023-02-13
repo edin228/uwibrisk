@@ -7,7 +7,7 @@ function CarriersContainer({ carriers }) {
       <div className="flex items-center justify-center w-full font-semibold tracking-widest text-center uppercase">
         we only partner with the best
       </div>
-      <div className="flex overflow-x-auto bg-white rounded-md">
+      <div className="flex  bg-white w-[400px] lg:w-full overflow-x-auto rounded-md">
         {carriers.map((item) => (
           <CarrierCarouselCard key={item.id} carrier={item} />
         ))}
