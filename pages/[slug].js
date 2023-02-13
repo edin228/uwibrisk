@@ -25,7 +25,7 @@ function DefaultContent({ data }) {
           </div>
         </div>
       ) : null}
-      <div className={`flex flex-col w-full h-full ${data.template != 'WebForm' ? 'px-8':''}`}>
+      <div className={`flex flex-col w-full h-full ${data?.template != 'WebForm' ? 'px-8':''}`}>
         {data?.content.map((c, i) => (
           <div
             key={Date()}
@@ -61,17 +61,17 @@ function LandingPageContent({ data }) {
     return testemonials;
   };
   return (
-    <div className="relative flex flex-col w-3/4 p-2 space-y-4 lg:space-y-0 lg:gap-4  mx-auto py-4">
+    <div className="relative flex flex-col w-3/4 p-2 py-4 mx-auto space-y-4 lg:space-y-0 lg:gap-4">
       <div className="relative flex w-full h-[395px] p-4 rounded-lg overflow-hidden">
-        <div className="text-white  bg-zinc-900/60 lg:bg-zinc-900/50 backdrop-blur-lg rounded-lg p-4 z-40 flex flex-col w-full lg:w-1/2 shadow-lg  justify-center">
-          <div className="text-lg lg:text-5xl font-bold">{data?.title}</div>
-          <div className="py-2 w-full">
+        <div className="z-40 flex flex-col justify-center w-full p-4 text-white rounded-lg shadow-lg bg-zinc-900/60 lg:bg-zinc-900/50 backdrop-blur-lg lg:w-1/2">
+          <div className="text-lg font-bold lg:text-5xl">{data?.title}</div>
+          <div className="w-full py-2">
             <div className="rounded-full w-1/2 h-[4px] bg-yellow-500"></div>
           </div>
-          <div className="text-md font-semibold py-2">
+          <div className="py-2 font-semibold text-md">
             {data?.wordingUnderTitle}
           </div>
-          {/* <div className="py-4 flex items-center space-x-2">
+          {/* <div className="flex items-center py-4 space-x-2">
             <div className="cursor-pointer flex items-center p-2 text-xl rounded-lg border-2 border-sky-500 shadow-lg w-[200px] text-center justify-center font-bold duration-100 transition bg-sky-500 text-white">
               Contact Us
             </div>
@@ -87,25 +87,25 @@ function LandingPageContent({ data }) {
         className="absolute w-full rounded-lg lg:rounded-[10%] top-[-5%] md:top-[-10%] lg:top-[1%] lg:max-w-[366px] lg:w-auto right-0 lg:right-[3%] z-[10] bg-cover bg-blend-multiply"
       ></motion.img> */}
 
-      <div className="z-40 flex flex-col lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
+      <div className="z-40 flex flex-col items-center justify-center w-full space-y-2 lg:flex-row lg:space-y-0 lg:space-x-2">
         {data?.components.map((card, i) => (
           <div
             key={card.id}
             className="flex flex-col w-full lg:flex-auto h-[300px] backdrop-blur rounded-lg  p-4"
           >
-            <div className="flex justify-center text-center font-bold">
+            <div className="flex justify-center font-bold text-center">
               {card.title}
             </div>
-            <div className="flex items-center justify-center w-full text-6xl py-6 text-yellow-500">
+            <div className="flex items-center justify-center w-full py-6 text-6xl text-yellow-500">
               {getIcon(card.icon)}
             </div>
-            <div className="font-bold flex justify-center text-center text-sm  rounded-lg h-full items-center ">
+            <div className="flex items-center justify-center h-full text-sm font-bold text-center rounded-lg ">
               {card.description}
             </div>
           </div>
         ))}
       </div>
-      <div className="z-40 flex flex-col flex-wrap 2xl:flex-nowrap lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
+      <div className="z-40 flex flex-col flex-wrap items-center justify-center w-full space-y-2 2xl:flex-nowrap lg:flex-row lg:space-y-0 lg:space-x-2">
         {testemonials?.map((card, i) => (
           <TestemonialPageCard key={card.id} testemonial={card} />
         ))}
@@ -114,7 +114,7 @@ function LandingPageContent({ data }) {
         <div
           key={Date()}
           strategy="afterInteractive"
-          className="page-content rounded-lg overflow-hidden"
+          className="overflow-hidden rounded-lg page-content"
           dangerouslySetInnerHTML={{ __html: data?.rawHtml[i] }}
         ></div>
       ))}

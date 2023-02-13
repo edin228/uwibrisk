@@ -118,7 +118,7 @@ export default function Home({
             poster
           >
             <source
-              src="https://www.relationinsurance.com/wp-content/uploads/brand_window_video-1.mp4"
+              src="/stock-video.mp4"
               type="video/mp4"
             />
           </video>
