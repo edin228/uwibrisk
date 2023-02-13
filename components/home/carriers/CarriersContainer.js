@@ -4,10 +4,10 @@ import CarrierCarouselCard from "./CarrierCarouselCard";
 function CarriersContainer({ carriers }) {
   return (
     <div className="flex flex-col w-full h-[200px] rounded-md">
-      <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold">
+      <div className="flex items-center justify-center w-full font-semibold tracking-widest text-center uppercase">
         we only partner with the best
       </div>
-      <div className="flex px-8 overflow-x-auto space-x-2 lg:space-x-0 lg:gap-4 lg:w-full rounded-md bg-white">
+      <div className="flex overflow-x-auto bg-white rounded-md">
         {carriers.map((item) => (
           <CarrierCarouselCard key={item.id} carrier={item} />
         ))}
