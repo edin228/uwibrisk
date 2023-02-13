@@ -82,7 +82,8 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
-        <div className="relative overflow-hidden max-h-[600px]">
+        { testemonials ?
+          <div className="relative overflow-hidden max-h-[600px]">
           <div className="flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl">
             <TypingText />
             <div className="pt-2">
@@ -100,16 +101,16 @@ export default function Home({
               <div className="relative flex flex-1">
                 <Link href={`/contact`}>
                   <a className="w-[140px] max-w-[140px] transition duration-200 hover:bg-yellow-500 flex rounded-xl cursor-pointer shadow-md font-bold border-2 border-yellow-500 text-sm flex-col items-center py-2">
-                    <span className="my-0 leading-3 text-xl">Contact An </span>
-                    <span className="leading-8 text-3xl">Advisor</span>
+                    <span className="my-0 text-xl leading-3">Contact An </span>
+                    <span className="text-3xl leading-8">Advisor</span>
                   </a>
                 </Link>
               </div>
             </div>
           </div>
-          <div className="h-full w-full bg-zinc-900/70 z-30 absolute top-0"></div>
+          <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
           <video
-            className="flex justify-center w-full z-30"
+            className="z-30 flex justify-center w-full"
             autoPlay
             muted
             loop
@@ -121,23 +122,15 @@ export default function Home({
               type="video/mp4"
             />
           </video>
-        </div>
-        {/* <HomeContainer
-          landing={landing}
-          officeLocations={officeLocations}
-          carriers={carriers}
-          posts={posts}
-          testemonials={testemonials}
-          homeButtons={homeButtons}
-        /> */}
-        <div className="flex flex-col w-full xl:w-3/4 xl:mx-auto h-full">
-          {/* <HeroContainer locations={officeLocations} /> */}
+        </div> : null
+        }
+        <div className="flex flex-col w-full h-full xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
-            <div className="flex w-full justify-center text-center items-center uppercase tracking-widest font-semibold mb-2">
+            <div className="flex items-center justify-center w-full mb-2 font-semibold tracking-widest text-center uppercase">
               See what our clients think
             </div>
-            <div className="z-40 flex flex-col flex-wrap 2xl:flex-nowrap lg:flex-row w-full items-center justify-center space-y-2 lg:space-y-0 lg:space-x-2">
+            <div className="z-40 flex flex-col flex-wrap items-center justify-center w-full space-y-2 2xl:flex-nowrap lg:flex-row lg:space-y-0 lg:space-x-2">
               {testemonials?.slice(3, 7).map((card, i) => (
                 <TestemonialPageCard key={card.id} testemonial={card} />
               ))}

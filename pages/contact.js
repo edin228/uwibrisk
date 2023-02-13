@@ -121,7 +121,7 @@ function Contact({ data }) {
                     ...cardStyle,
                     cursor: canDrag ? "grab" : "auto",
                   }}
-                  className="flex flex-col text-white bg-zinc-900/80 backdrop-blur-lg rounded-lg shadow-lg w-[400px] p-4 h-[800px] lg:w-[500px] lg:h-[800px] xl:w-[800px] xl:h-[800px]"
+                  className="flex flex-col text-white bg-zinc-900/80 backdrop-blur-lg rounded-lg shadow-lg w-[400px] p-4 h-[400px] lg:w-[500px] lg:h-[800px] xl:w-[800px] xl:h-[800px]"
                   animate={{
                     left: -CARD_OFFSET,
                     scale: 1 - index * SCALE_FACTOR,
