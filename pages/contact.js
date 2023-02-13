@@ -28,7 +28,7 @@ const ContactIntro = ({ data }) => {
       <div className="w-full py-2">
         <div className="rounded-full w-1/2 h-[4px] bg-yellow-500"></div>
       </div>
-      <div className="text-md font-semibold py-2 !text-white">
+      <div className="text-xs lg:text-md font-semibold py-2 !text-white">
         {data?.content.map((c, i) => (
           <div
             key={Date()}
@@ -108,7 +108,7 @@ function Contact({ data }) {
         />
         <div className="relative flex items-center justify-center w-full h-full">
           <ul
-            className="relative w-[400px] lg:w-[500px] xl:w-[800px] h-full"
+            className="relative w-[370px] lg:w-[500px] xl:w-[800px] h-full"
             ref={constraintsRef}
           >
             {cards.map((card, index) => {
@@ -121,9 +121,9 @@ function Contact({ data }) {
                     ...cardStyle,
                     cursor: canDrag ? "grab" : "auto",
                   }}
-                  className="flex flex-col text-white bg-zinc-900/80 backdrop-blur-lg rounded-lg shadow-lg w-[400px] p-4 h-[400px] lg:w-[500px] lg:h-[800px] xl:w-[800px] xl:h-[800px]"
+                  className="flex flex-col text-white bg-zinc-900/80 backdrop-blur-lg rounded-lg shadow-lg w-[370px] p-4 h-[700px] lg:w-[500px] lg:h-[800px] xl:w-[800px] xl:h-[800px]"
                   animate={{
-                    left: -CARD_OFFSET,
+                    left: index-CARD_OFFSET,
                     scale: 1 - index * SCALE_FACTOR,
                     zIndex: cards.length - index,
                   }}
