@@ -28,7 +28,7 @@ const ContactIntro = ({ data }) => {
       <div className="w-full py-2">
         <div className="rounded-full w-1/2 h-[4px] bg-yellow-500"></div>
       </div>
-      <div className="text-xs lg:text-md font-semibold py-2 !text-white">
+      <div className="text-xs lg:text-sm font-semibold py-2 !text-white">
         {data?.content.map((c, i) => (
           <div
             key={Date()}
@@ -137,34 +137,6 @@ function Contact({ data }) {
             })}
           </ul>
         </div>
-        {/* <div className="relative flex flex-col items-center justify-center w-full h-full gap-4">
-
-          <motion.div className="absolute xl:w-[800px] flex items-center justify-center w-full lg:p-4 transition-all duration-250 ease-out">
-            {data ? (
-              <ContactForm
-                style={`lg:h-[700px] w-full flex flex-col p-4 rounded-lg border-2 border-zinc-900/20 shadow-lg bg-zinc-900/80 backdrop-blur-lg  text-white`}
-                {...formFields}
-              />
-            ) : null}
-          </motion.div>
-          <motion.div className="absolute xl:w-[800px] flex items-center justify-center w-full lg:p-4 transition-all duration-250 ease-out">
-            <div className="flex flex-col text-white  bg-zinc-900/80 backdrop-blur-lg rounded-lg p-4 z-40 w-full shadow-lg justify-center xl:justify-start lg:h-[700px]">
-              <div className="bg-zinc-500 rounded-lg overflow-hidden shadow-lg h-[200px]">
-                Image
-              </div>
-              <div className="mt-2">
-                Pariatur in consequat sunt adipisicing est officia deserunt. Do
-                labore amet anim aliquip nisi sit duis. Nulla voluptate Lorem
-                voluptate est eiusmod et deserunt eu occaecat esse. Lorem irure
-                mollit nisi sint eu incididunt magna nulla. Enim aliqua ea
-                tempor excepteur excepteur reprehenderit voluptate cillum ad
-                reprehenderit quis deserunt. Consectetur officia dolor ad id
-                consectetur. Deserunt consequat elit qui cupidatat voluptate
-                ipsum commodo.
-              </div>
-            </div>
-          </motion.div>
-        </div> */}
       </div>
     </Base>
   );

@@ -23,7 +23,7 @@ export default function ContactForm({ style, id, fields = [] }) {
         }
       }
       if (name == "Estimated Revenue" || name == "Industry") {
-        if (value["Estimated Revenue"] >= 10000 && value["Industry"] != '') {
+        if (value["Estimated Revenue"] >= 10000 && value["Industry"] != "") {
           setShowProducerPanel(true);
         } else {
           setShowProducerPanel(false);
@@ -51,12 +51,24 @@ export default function ContactForm({ style, id, fields = [] }) {
     }
   };
 
-  if (success) return <p>Form submitted. We&apos;ll be in touch!</p>;
+  if (success)
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full mt-[-80px]">
+        <motion.img
+          src={`/Asset 6.png`}
+          className="flex w-3/4 my-4 xl:w-1/2"
+        />
+        <div className="my-4 text-5xl font-bold text-center text-yellow-500">Thank You!</div>
+        <div className="text-lg font-bold text-center">
+          We&apos;ll be in touch soon!
+        </div>
+      </div>
+    );
   return (
     <FormProvider {...methods}>
       <form className={style} onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col lg:flex-row w-full h-full">
-          <div className="flex flex-col w-full h-full duration-100 transition-all ease-out">
+        <div className="flex flex-col w-full h-full lg:flex-row">
+          <div className="flex flex-col w-full h-full transition-all duration-100 ease-out">
             {fields?.map(({ __typename, ...field }, index) => {
               const Field = Fields[__typename];
               if (!Field) return null;
@@ -74,7 +86,7 @@ export default function ContactForm({ style, id, fields = [] }) {
           </div>
         </div>
         <button
-          className="gold-gradient text-white rounded-lg p-2 mt-12"
+          className="p-2 mt-12 text-white rounded-lg gold-gradient"
           type="submit"
         >
           Submit

@@ -101,7 +101,7 @@ export default function Home({
               <div className="relative flex flex-1">
                 <Link href={`/contact`}>
                   <a className="w-[140px] max-w-[140px] transition duration-200 hover:bg-yellow-500 flex rounded-xl cursor-pointer shadow-md font-bold border-2 border-yellow-500 text-sm flex-col items-center py-2">
-                    <span className="my-0 text-xl leading-3">Contact An </span>
+                    <span className="my-0 text-xl leading-3">Contact An</span>
                     <span className="text-3xl leading-8">Advisor</span>
                   </a>
                 </Link>
