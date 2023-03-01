@@ -14,7 +14,7 @@ function DefaultContent({ data }) {
       {data?.headerImage?.url ? (
         <div className="relative rounded-lg">
           <motion.img
-            className="object-cover w-full h-full max-h-[400px] shadow-lg z-[10]"
+            className="object-cover w-full h-full max-h-[240px] shadow-lg z-[10]"
             src={data?.headerImage?.url}
             alt=""
             initial={false}
@@ -25,12 +25,12 @@ function DefaultContent({ data }) {
           </div>
         </div>
       ) : null}
-      <div className={`flex flex-col w-full h-full ${data?.template != 'WebForm' ? 'px-8':''}`}>
+      <div className={`flex items-center flex-col w-full h-full ${data?.template != 'WebForm' ? 'px-8': ''}`}>
         {data?.content.map((c, i) => (
           <div
             key={Date()}
             strategy="afterInteractive"
-            className="page-content"
+            className="w-full xl:w-3/4 page-content"
             dangerouslySetInnerHTML={{ __html: c.html }}
           ></div>
         ))}

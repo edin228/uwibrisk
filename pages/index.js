@@ -124,7 +124,7 @@ export default function Home({
           </video>
         </div> : null
         }
-        <div className="flex flex-col w-full h-full xl:w-3/4 xl:mx-auto">
+        <div className="flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
             <div className="flex items-center justify-center w-full mb-2 font-semibold tracking-widest text-center uppercase">

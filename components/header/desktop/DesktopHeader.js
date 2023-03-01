@@ -31,7 +31,7 @@ export default function DesktopHeader({ navItems }) {
 
   return (
     <div
-      className="fixed top-0 z-50 hidden h-20 bg-zinc-800 lg:flex shadow-lg"
+      className="fixed top-0 z-50 hidden h-20 shadow-lg bg-zinc-800 lg:flex"
       style={{ width: "inherit" }}
     >
       <div className="flex items-center justify-between w-full px-4">
@@ -51,7 +51,7 @@ export default function DesktopHeader({ navItems }) {
             onSubmit={handleSubmit}
           >
             <input
-              className="w-full px-2 py-1 rounded-md bg-transparent text-white"
+              className="w-full px-2 py-1 text-white bg-transparent rounded-md"
               type="search"
               name="search"
               placeholder="Search"
@@ -62,7 +62,7 @@ export default function DesktopHeader({ navItems }) {
               type="submit"
               name="search"
               onClick={() => handleSubmit()}
-              className="flex items-center justify-center p-2 text-lg font-bold tracking-widest uppercase cursor-pointer rounded-r-md text-white"
+              className="flex items-center justify-center p-2 text-lg font-bold tracking-widest text-white uppercase cursor-pointer rounded-r-md"
             >
               {getIcon("search")}
             </div>
@@ -101,7 +101,7 @@ export default function DesktopHeader({ navItems }) {
                         {item.pages?.map((pg) => (
                           <li key={pg.id} className="w-full h-full">
                             <a href={`/${pg?.slug}`} className="w-full h-full">
-                              <div className="w-full h-full p-4 mb-2 font-semibold transition duration-100 border-2 rounded-lg cursor-pointer border-zinc-100/0 hover:border-zinc-200">
+                              <div className="w-full h-full px-2 font-semibold transition duration-100 border-2 rounded-lg cursor-pointer border-zinc-100/0 hover:border-zinc-200">
                                 {pg.title}
                               </div>
                             </a>
