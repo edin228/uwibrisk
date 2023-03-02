@@ -128,7 +128,7 @@ export default function Home({
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
             <div className="flex items-center justify-center w-full mb-2 font-semibold tracking-widest text-center uppercase">
-              See what our clients are saying
+              Hear what our clients are saying
             </div>
             <div className="z-40 flex flex-col flex-wrap items-center justify-center w-full space-y-2 2xl:flex-nowrap lg:flex-row lg:space-y-0 lg:space-x-2">
               {testemonials?.slice(3, 7).map((card, i) => (
