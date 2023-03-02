@@ -46,7 +46,7 @@ function MobileNavButton({ navItem, selectedID = null }) {
                 {navItem.pages?.map((pg) => (
                   <li
                     key={pg.id}
-                    className="font-semibold transition duration-100 w-full cursor-pointer border-2 rounded-lg p-4 border-slate-100/0 hover:border-slate-200 mb-2"
+                    className="w-full px-2 font-semibold transition duration-100 border-2 rounded-lg cursor-pointer border-slate-100/0 hover:border-slate-200"
                   >
                     <a href={pg.slug} className="relative w-full">
                       {pg.title}
@@ -66,7 +66,7 @@ function MobileNavButton({ navItem, selectedID = null }) {
           <a
             className={`relative flex z-20 items-center uppercase tracking-widest font-semibold 
           p-2 ${
-            navItem?.highlight ? "gold-gradient rounded text-white" : ""
+            navItem?.highlight ? "buring-orange-gradient rounded text-white" : ""
           } ${selectedID == navItem.id ? "text-white" : ""}`}
           >
             <div className="text-xs transition duration-200 ease-in-out">
