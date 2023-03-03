@@ -119,7 +119,7 @@ function Contact({ data }) {
                   key={card.id}
                   style={{
                     ...cardStyle,
-                    cursor: canDrag ? "grab" : "auto",
+                    cursor: canDrag && card.id != 'card-id-2' ? "grab" : "auto",
                   }}
                   className="flex flex-col text-white bg-zinc-900/80 backdrop-blur-lg rounded-lg shadow-lg w-[370px] p-4 h-[700px] lg:w-[500px] lg:h-[800px] xl:w-[800px] xl:h-[800px]"
                   animate={{
@@ -127,7 +127,7 @@ function Contact({ data }) {
                     scale: 1 - index * SCALE_FACTOR,
                     zIndex: cards.length - index,
                   }}
-                  drag={canDrag ? "x" : false}
+                  drag={canDrag && card.id != 'card-id-2'? "x" : false}
                   dragConstraints={constraintsRef}
                   onDragEnd={() => moveToEnd(index)}
                 >
