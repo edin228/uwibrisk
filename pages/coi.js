@@ -61,7 +61,7 @@ function COI() {
             </a>
             <div className="flex items-center justify-center w-full h-[100px]">
               <a
-                href={"https://clientportal.vertafore.com/Login/3004020-1"}
+                href={"https://uwibrisk.com/client-portal-request"}
                 className="relative flex items-center justify-center w-full h-full p-4 text-xl font-bold text-white rounded-lg shadow-lg orange-yellow-gradient"
               >
                 <div className="relative">
