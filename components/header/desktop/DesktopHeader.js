@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { getIcon } from "../../../utils/utils";
+import { getIcon, sortByProperty } from "../../../utils/utils";
 import { useRouter } from "next/router";
 
 export default function DesktopHeader({ navItems }) {
@@ -12,6 +12,10 @@ export default function DesktopHeader({ navItems }) {
   const [searchInput, setSearchInput] = useState("");
 
   const router = useRouter();
+
+  const orderedNav = () => {
+    return navItems? sortByProperty(navItems, 'order') : []
+  }
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
@@ -68,8 +72,8 @@ export default function DesktopHeader({ navItems }) {
             </div>
           </form>
           <div className="relative" onMouseOut={() => setSelectedID(null)}>
-            <ul className="desktop-nav">
-              {navItems?.map((item) => (
+            <ul className="space-x-2 desktop-nav">
+              {orderedNav().map((item) => (
                 <li
                   key={item.id}
                   onMouseOver={() => setSelectedID(item.id)}
@@ -84,8 +88,8 @@ export default function DesktopHeader({ navItems }) {
                       variants={tile}
                       transition={{ ease: "easeInOut", duration: 0.25 }}
                       className={`${
-                        item.isDropdown ? "rounded-t" : "rounded"
-                      } h-[31px] gold-gradient top-0 absolute z-10 w-full shadow-lg`}
+                        item.isDropdown ? "rounded-t-lg" : "rounded-lg"
+                      } h-[34px] bg-yellow-500  top-0 absolute z-10 w-full shadow-lg`}
                     />
                   )}
                   {selectedID === item.id && item.isDropdown ? (

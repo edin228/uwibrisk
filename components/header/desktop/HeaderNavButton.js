@@ -4,7 +4,7 @@ import React from "react";
 function HeaderNavButton({ navItem = null, selectedID = null }) {
   return navItem?.isDropdown ? (
     <div
-      className={`relative flex z-20 items-center uppercase cursor-pointer tracking-widest font-semibold 
+      className={`relative rounded-lg border-[1px] border-yellow-500  flex z-20 items-center uppercase cursor-pointer tracking-widest font-semibold 
       p-2 text-white ${
         navItem?.highlight ? "buring-orange-gradient rounded text-white" : ""
       } ${selectedID == navItem.id ? "text-white" : "text-white"}`}
@@ -18,9 +18,9 @@ function HeaderNavButton({ navItem = null, selectedID = null }) {
       href={navItem?.isExternalUrl ? navItem?.externalUrl : `/${navItem?.slug}`}
     >
       <a
-        className={`relative flex z-20 items-center uppercase tracking-widest font-semibold 
+        className={`relative rounded-lg border-[1px] border-yellow-500 flex z-20 items-center uppercase tracking-widest font-semibold 
       p-2 text-white ${
-        navItem?.highlight ? "buring-orange-gradient rounded text-white" : ""
+        navItem?.highlight ? "buring-orange-gradient border-0 rounded text-white" : ""
       } ${selectedID == navItem.id ? "text-white" : ""}`}
       >
         <div className="text-xs transition duration-200 ease-in-out">

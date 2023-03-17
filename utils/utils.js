@@ -300,3 +300,10 @@ export const searchText = (data, search = "") => {
     return normalize(getValues(item).toString()).indexOf(searchNormalize) != -1;
   });
 };
+
+export const sortByProperty = (data = [], prop = '', asc = true) => {
+  const sorted = asc
+    ? data?.sort((a, b) => (a[prop] < b[prop] ? 1 : -1))
+    : data?.sort((a, b) => (a[prop] > b[prop] ? 1 : -1))
+  return sorted
+}

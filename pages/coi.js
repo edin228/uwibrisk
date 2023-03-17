@@ -13,7 +13,7 @@ function COI() {
       </Head>
       <div className="flex flex-col w-full h-full">
         <h1 className="w-full py-8 text-3xl font-bold text-center">
-          Proof of Insurance
+          Coverage Management
         </h1>
         <div className="flex flex-col w-full h-full px-4 space-y-4 xl:space-y-0 xl:flex-row xl:flex-wrap xl:gap-8 xl:items-center xl:justify-center">
           <div className="flex flex-col gap-4">
