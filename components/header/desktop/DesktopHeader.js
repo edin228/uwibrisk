@@ -13,9 +13,7 @@ export default function DesktopHeader({ navItems }) {
 
   const router = useRouter();
 
-  const orderedNav = () => {
-    return navItems? sortByProperty(navItems, 'order', false) : []
-  }
+  const orderedNav = sortByProperty(navItems, 'order')
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
