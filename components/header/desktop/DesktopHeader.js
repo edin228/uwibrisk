@@ -71,7 +71,7 @@ export default function DesktopHeader({ navItems }) {
           </form>
           <div className="relative" onMouseOut={() => setSelectedID(null)}>
             <ul className="space-x-2 desktop-nav">
-              {orderedNav().map((item) => (
+              {orderedNav?.map((item) => (
                 <li
                   key={item.id}
                   onMouseOver={() => setSelectedID(item.id)}
