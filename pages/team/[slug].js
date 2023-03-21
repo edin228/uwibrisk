@@ -14,20 +14,20 @@ function TeamMember({ data, posts }) {
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col w-full h-full">
-        <div className="flex flex-col md:flex-row h-full justify-center items-center md:justify-start md:items-start">
+      <div className="flex flex-col w-full h-full px-12">
+        <div className="flex flex-col items-center justify-center h-full md:flex-row md:justify-start md:items-start">
           <div className="flex relative min-w-[350px] h-[350px] md:my-8 overflow-hidden rounded-lg shadow-lg">
             <motion.img
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
               src={data.photo.url}
               alt=""
               initial={false}
             />
           </div>
-          <div className="flex flex-col mt-4 md:mt-0 mb-8 px-6">
+          <div className="flex flex-col px-6 mt-4 mb-8 md:mt-0">
             <div className="text-4xl font-bold">{data.name}</div>
             <div className="text-2xl font-semibold">{data.position}</div>
-            <div className="flex items-center space-x-2 py-2">
+            <div className="flex items-center py-2 space-x-2">
               {data.email ? (
                 <a
                   href={`mailto:${data.email}`}
