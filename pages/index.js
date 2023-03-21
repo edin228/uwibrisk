@@ -8,6 +8,7 @@ import TestemonialContainer from "../components/home/testemonials/TestemonialCon
 import Base from "../components/layout/Base";
 import {
   getCarrierCarousel,
+  getCarrierInfo,
   getCarriers,
   getHomeActionButtons,
   getLanding,
@@ -54,25 +55,25 @@ export default function Home({
   testemonials = null,
   homeButtons = null,
 }) {
-  const [insuranceList, setInsuranceList] = useState([
-    "Business Insurance",
-    "Personal Insurance",
-    "Health Insurance",
-    "Employee Benefits",
-  ]);
-  const [selectedInsuranceText, setselectedInsuranceText] = useState(0);
+  // const [insuranceList, setInsuranceList] = useState([
+  //   "Business Insurance",
+  //   "Personal Insurance",
+  //   "Health Insurance",
+  //   "Employee Benefits",
+  // ]);
+  // const [selectedInsuranceText, setselectedInsuranceText] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const maxLength = insuranceList.length - 1;
-      const getInsuranceText = () =>
-        selectedInsuranceText < maxLength
-          ? Number(selectedInsuranceText) + 1
-          : 0;
-      setselectedInsuranceText(getInsuranceText());
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [selectedInsuranceText, insuranceList]);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const maxLength = insuranceList.length - 1;
+  //     const getInsuranceText = () =>
+  //       selectedInsuranceText < maxLength
+  //         ? Number(selectedInsuranceText) + 1
+  //         : 0;
+  //     setselectedInsuranceText(getInsuranceText());
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, [selectedInsuranceText, insuranceList]);
 
   return (
     <Base template={"home"}>
@@ -82,48 +83,45 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
-        { testemonials ?
+        {testemonials ? (
           <div className="relative overflow-hidden max-h-[600px]">
-          <div className="flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl">
-            <TypingText />
-            <div className="pt-2">
-              <div className="bg-yellow-500 w-3/5 h-[5px] rounded-lg"></div>
-            </div>
-            <div className="py-2 tracking-wide">Made Simple</div>
-            <div className="flex items-center xl:mt-8 xl:py-4 space-x-2 max-w-[200px]">
-              {/* <div className="relative flex flex-1">
+            <div className="flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl">
+              <TypingText />
+              <div className="pt-2">
+                <div className="bg-yellow-500 w-3/5 h-[5px] rounded-lg"></div>
+              </div>
+              <div className="py-2 tracking-wide">Made Simple</div>
+              <div className="flex items-center xl:mt-8 xl:py-4 space-x-2 max-w-[200px]">
+                {/* <div className="relative flex flex-1">
                 <Link href={`/get-quotes`}>
                   <a className="w-[150px] xl:w-[180px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md border-yellow-500 border-2 text-white p-2 xl:p-4 font-bold text-sm xl:text-lg">
                     Start Building Your Portfolio
                   </a>
                 </Link>
               </div> */}
-              <div className="relative flex flex-1">
-                <Link href={`/contact`}>
-                  <a className="w-[140px] max-w-[140px] transition duration-200 hover:bg-yellow-500 flex rounded-xl cursor-pointer shadow-md font-bold border-2 border-yellow-500 text-sm flex-col items-center py-2">
-                    <span className="my-0 text-xl leading-3">Contact An</span>
-                    <span className="text-3xl leading-8">Advisor</span>
-                  </a>
-                </Link>
+                <div className="relative flex flex-1">
+                  <Link href={`/contact`}>
+                    <a className="w-[140px] max-w-[140px] transition duration-200 hover:bg-yellow-500 flex rounded-xl cursor-pointer shadow-md font-bold border-2 border-yellow-500 text-sm flex-col items-center py-2">
+                      <span className="my-0 text-xl leading-3">Contact An</span>
+                      <span className="text-3xl leading-8">Advisor</span>
+                    </a>
+                  </Link>
+                </div>
               </div>
             </div>
+            <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
+            <video
+              className="z-30 flex justify-center w-full"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster
+            >
+              <source src="/stock-video.mp4" type="video/mp4" />
+            </video>
           </div>
-          <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
-          <video
-            className="z-30 flex justify-center w-full"
-            autoPlay
-            muted
-            loop
-            playsinline
-            poster
-          >
-            <source
-              src="/stock-video.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div> : null
-        }
+        ) : null}
         <div className="flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
@@ -147,7 +145,7 @@ export default function Home({
 export async function getServerSideProps({ params }) {
   const landing = await getLanding();
   const officeLocations = await getOfficeLocations();
-  const carriers = await getCarrierCarousel();
+  const carriers = await getCarrierInfo();
   const posts = await getRecentBlogPosts();
   const testemonials = await getTestemonials();
   const homeButtons = await getHomeActionButtons();
