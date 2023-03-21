@@ -427,6 +427,7 @@ export const getNavMenuItems = async () => {
         slug
         externalUrl
         text
+        order
         pages(where: { isActive: true }) {
           isActive
           id
