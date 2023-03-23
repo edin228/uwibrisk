@@ -75,6 +75,29 @@ export const getCarrierInfo = async () => {
   return result.carrierBanners;
 };
 
+export const getProgramInfo = async () => {
+  const query = gql`
+    query MyQuery {
+      programs(
+        first:100
+        orderBy: publishedAt_ASC
+        where: { isActive: true }
+      ) {
+        id
+        title
+        url
+        description
+        image {
+          url
+        }
+        isActive
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+  return result.programs;
+};
+
 export const getCarrierCarousel = async () => {
   const query = gql`
       query GetCarrierCarousel() {
