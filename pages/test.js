@@ -25,8 +25,8 @@ export default function PrivateClient({
         data-value="5ccc99bddb83f601b57306fb"
         data-text="Sign Your Waiver Online"
         data-position="right"
-        data-backgroundColor="#428bca"
-        data-fontColor="#ffffff"
+        data-backgroundColor="#ad8574"
+        data-fontColor="#000000"
       >
         <Script src="https://www.waiverelectronic.com/js/splashId.js"></Script>
       </div>
