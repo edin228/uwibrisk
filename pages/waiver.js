@@ -20,6 +20,7 @@ export default function PrivateClient({
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="flex items-center justify-center w-full h-[600px] font-bold text-center">This page is a demonstration of the waiver tab once installed on your website</div>
       <div
         id="splashId"
         data-value="5ccc99bddb83f601b57306fb"
