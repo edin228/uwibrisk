@@ -186,7 +186,7 @@ function Programs({ programs = null }) {
           {data.description}
         </div>
         <div className="flex items-center justify-center w-full py-4">
-          <LinkButton link={data.url} text={"View Form"} color={"sky"} />
+          <LinkButton link={data.url} text={"Click Through to Qualify"} color={"sky"} />
         </div>
       </div>
     );
