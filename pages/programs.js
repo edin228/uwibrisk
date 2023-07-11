@@ -17,10 +17,10 @@ function Programs({ programs = null }) {
 
   const search = (val) => {
     if (val.length > 1) {
-      const filtered = searchText(carriers, val);
+      const filtered = searchText(programs, val);
       setGridData(filtered);
     } else {
-      setGridData(carriers);
+      setGridData(programs);
     }
   };
 
