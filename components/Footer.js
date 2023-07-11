@@ -24,7 +24,7 @@ function Footer() {
   }
 
   return (
-    <div className="absolute bottom-0 flex flex-col w-full rounded-t-md bg-zinc-100">
+    <div className="flex flex-col w-full rounded-t-md bg-zinc-100">
       {/* <div className="p-4 text-3xl font-bold tracking-widest uppercase">
         Contact Us
       </div> */}
