@@ -34,7 +34,7 @@ function ContentBase({ children, template = null, data = null, title = null }) {
   ) : template == "Member" ? (
     <div className="flex w-full min-h-[89vh]">{children}</div>
   ) : template == "WebForm" ? (
-    <div className="flex w-full">{children}</div>
+    <div className="flex w-full h-full  min-h-[89vh]">{children}</div>
   ) : template == "SingleColumn" ? (
     <div className="flex flex-col w-full min-h-[89vh]">{children}</div>
   ) : template == "DualColumn" ? (

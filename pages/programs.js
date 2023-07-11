@@ -172,7 +172,7 @@ function Programs({ programs = null }) {
             rel="noreferrer"
           >
             <motion.img
-              className="absolute top-[-160px] object-contain w-full rounded-lg"
+              className="flex object-cover w-full h-full rounded-lg"
               src={data.image.url}
               alt={data.title}
               initial={false}
@@ -199,7 +199,7 @@ function Programs({ programs = null }) {
 
   return (
     <Base data={programs} title={"Programs"} template={"GridWithSearch"}>
-      <div className="flex flex-col w-full h-full">
+      <div className="flex flex-col w-full h-full  min-h-[92vh]">
         <h1 className="w-full py-4 text-3xl font-bold text-center">Programs</h1>
         <div className="flex items-center justify-center w-full px-4">
           <div className="relative flex w-full my-4 border-2 rounded-lg lg:w-1/2 border-slate-500/20">
