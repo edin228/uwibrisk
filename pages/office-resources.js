@@ -181,7 +181,7 @@ function OfficeResources({ data = null }) {
 
   const OfficeResourceCard = ({ data }) => {
     return (
-      <div className="flex flex-col w-full lg:h-[160px] lg:w-[140px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-zinc-500/20">
+      <div className="flex flex-col w-full lg:h-[180px] lg:w-[160px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-zinc-500/20">
         <div className="relative flex items-center overflow-hidden rounded-lg">
           <a
             href={data.link}
