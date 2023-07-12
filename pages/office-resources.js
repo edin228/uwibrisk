@@ -181,7 +181,7 @@ function OfficeResources({ data = null }) {
 
   const OfficeResourceCard = ({ data }) => {
     return (
-      <div className="flex flex-col w-full lg:h-[208px] lg:w-[214px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-zinc-500/20">
+      <div className="flex flex-col w-full lg:h-[160px] lg:w-[140px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-zinc-500/20">
         <div className="relative flex items-center overflow-hidden rounded-lg">
           <a
             href={data.link}
@@ -197,7 +197,7 @@ function OfficeResources({ data = null }) {
                 initial={false}
               />
             ) : (
-              <div className="flex items-center justify-center text-center font-bold h-36 w-full">
+              <div className="flex items-center justify-center w-full font-bold text-center h-36">
                 {data.altLogoText}
               </div>
             )}
@@ -215,10 +215,10 @@ function OfficeResources({ data = null }) {
       <div className="flex flex-col w-full h-full">
         {passWordInput != pagePassword ? (
           <div className="flex items-center justify-center mt-[-10%] flex-col w-full h-[80vh] ">
-            <div className="flex items-center justify-center text-center text-6xl p-6">{getIcon("lock")}</div>
-            <div className="w-full flex items-center justify-center">
+            <div className="flex items-center justify-center p-6 text-6xl text-center">{getIcon("lock")}</div>
+            <div className="flex items-center justify-center w-full">
               <input
-                className="w-1/2 px-2 py-1 rounded-md border-2 "
+                className="w-1/2 px-2 py-1 border-2 rounded-md "
                 type="Password"
                 name="Password"
                 placeholder="Password"
@@ -252,9 +252,9 @@ function OfficeResources({ data = null }) {
             {categories.map((category, i) => (
               <div
                 key={category}
-                className="flex w-full flex-col px-4 pb-4 lg:justify-center"
+                className="flex flex-col w-full px-4 pb-4 lg:justify-center"
               >
-                <div className="flex justify-center text-center w-full font-bold text-2xl px-4">
+                <div className="flex justify-center w-full px-4 text-2xl font-bold text-center">
                   {category}
                 </div>
                 <div
