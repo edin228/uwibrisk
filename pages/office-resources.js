@@ -265,7 +265,7 @@ function OfficeResources({ data = null }) {
                 key={category}
                 className="flex flex-col w-full px-4 pb-4 lg:justify-center"
               >
-                <div className="flex justify-center w-full px-4 text-2xl font-bold text-center">
+                <div className="flex justify-center w-full px-4 text-xl font-bold tracking-wide text-center uppercase opacity-80">
                   {category}
                 </div>
                 <div className="flex justify-center w-full">
