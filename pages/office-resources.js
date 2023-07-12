@@ -23,12 +23,21 @@ function OfficeResources({ data = null }) {
 
   const filterCatgories = (inData) => {
     const tags = [];
+    const sortOrder = {
+      Insurtech: 1,
+      Carriers: 2,
+      CRM: 3,
+      Office: 4,
+      Resources: 5,
+      Insuretech: 6,
+    };
     if (inData) {
       inData.forEach((x) => {
         if (!tags.includes(x.category)) {
           tags.push(x.category);
         }
       });
+      tags.sort((a, b) => sortOrder[a] - sortOrder[b]);
     }
     setCategories(tags);
   };
@@ -203,7 +212,7 @@ function OfficeResources({ data = null }) {
             )}
           </a>
         </div>
-        <div className="flex justify-center text-xl font-bold text-center">
+        <div className="flex justify-center font-bold text-center text-md">
           {data.title}
         </div>
       </div>
@@ -215,7 +224,9 @@ function OfficeResources({ data = null }) {
       <div className="flex flex-col w-full h-full">
         {passWordInput != pagePassword ? (
           <div className="flex items-center justify-center mt-[-10%] flex-col w-full h-[80vh] ">
-            <div className="flex items-center justify-center p-6 text-6xl text-center">{getIcon("lock")}</div>
+            <div className="flex items-center justify-center p-6 text-6xl text-center">
+              {getIcon("lock")}
+            </div>
             <div className="flex items-center justify-center w-full">
               <input
                 className="w-1/2 px-2 py-1 border-2 rounded-md "
@@ -257,14 +268,16 @@ function OfficeResources({ data = null }) {
                 <div className="flex justify-center w-full px-4 text-2xl font-bold text-center">
                   {category}
                 </div>
-                <div
-                  className={`flex flex-wrap w-full h-full gap-2 lg:justify-center`}
-                >
-                  {gridData
-                    .filter((x) => x.category == category)
-                    .map((c, i) => (
-                      <OfficeResourceCard key={c.id} data={c} />
-                    ))}
+                <div className="flex justify-center w-full">
+                  <div
+                    className={`flex flex-wrap w-1/2 h-full gap-2 lg:justify-center`}
+                  >
+                    {gridData
+                      .filter((x) => x.category == category)
+                      .map((c, i) => (
+                        <OfficeResourceCard key={c.id} data={c} />
+                      ))}
+                  </div>
                 </div>
               </div>
             ))}
