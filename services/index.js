@@ -172,7 +172,7 @@ export const getHighlightedTestemonials = async () => {
 export const getOfficeResources = async () => {
   const query = gql`
     query MyQuery {
-      officeResources(where: {isActive: true}, first: 500) {
+      officeResources(orderBy: order_ASC, where: {isActive: true}, first: 500) {
         altLogoText
         category
         id
@@ -183,6 +183,7 @@ export const getOfficeResources = async () => {
         isActive
         link
         title
+        order
       }
     }
   `;

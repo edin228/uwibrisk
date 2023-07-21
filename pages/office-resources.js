@@ -274,6 +274,12 @@ function OfficeResources({ data = null }) {
                   >
                     {gridData
                       .filter((x) => x.category == category)
+                      .sort((a, b) => {
+                        if (category === "Carriers") {
+                          return a.title.localeCompare(b.title);
+                        }
+                        return 0;
+                      })
                       .map((c, i) => (
                         <OfficeResourceCard key={c.id} data={c} />
                       ))}
