@@ -52,7 +52,7 @@ export const getCarrierInfo = async () => {
     query MyQuery {
       carrierBanners(
         first:100
-        orderBy: publishedAt_ASC
+        orderBy: name_ASC
         where: { isActive: true }
       ) {
         id
