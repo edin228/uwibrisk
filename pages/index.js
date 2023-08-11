@@ -22,6 +22,7 @@ import { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
 import TestemonialPageCard from "../components/home/testemonials/TestemonialPageCard";
+import HomeContactForm from "../components/contact/HomeContactForm";
 
 const TypingText = () => {
   return (
@@ -108,6 +109,9 @@ export default function Home({
                   </Link>
                 </div>
               </div>
+            </div>
+            <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] bg-white/70 backdrop-blur-sm rounded-md absolute right-[5%] top-[10%] overflow-hidden shadow-lg">
+              <HomeContactForm />
             </div>
             <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
             <video
