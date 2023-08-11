@@ -30,7 +30,7 @@ function HomeContactForm() {
     const value = direction == "forward" ? 1 : -1;
     const newPage = page + value;
     const finalPageValue =
-      newPage >= 0 && newPage <= contactData.length ? newPage : 0;
+      newPage >= 0 && newPage <= contactData?.length ? newPage : 0;
     setPage(finalPageValue);
   };
 
@@ -52,7 +52,7 @@ function HomeContactForm() {
         <div className="flex justify-end w-full">
           <button
             className={`p-2 w-[100px] text-white shadow-lg rounded-lg blue-button-gradient ${
-              page == contactData.length ? `hidden` : ""
+              page == contactData?.length ? `hidden` : ""
             }`}
             onClick={() => changePage("forward")}
           >
