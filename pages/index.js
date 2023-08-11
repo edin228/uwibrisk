@@ -110,9 +110,9 @@ export default function Home({
                 </div>
               </div>
             </div>
-            <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] bg-white/70 backdrop-blur-sm rounded-md absolute right-[5%] top-[10%] overflow-hidden shadow-lg">
+            {/* <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] bg-white/70 backdrop-blur-sm rounded-md absolute right-[5%] top-[10%] overflow-hidden shadow-lg">
               <HomeContactForm />
-            </div>
+            </div> */}
             <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
             <video
               className="z-30 flex justify-center w-full"
