@@ -307,3 +307,42 @@ export const sortByProperty = (data = [], prop = '', asc = true) => {
     : data?.sort((a, b) => (a[prop] > b[prop] ? 1 : -1))
   return sorted
 }
+
+export const isMobile = () => {
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => setWidth(window.innerWidth)
+    handleWindowSizeChange()
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => window.removeEventListener('resize', handleWindowSizeChange)
+  }, [])
+
+  return width <= 768
+}
+
+export const isLaptop = () => {
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => setWidth(window.innerWidth)
+    handleWindowSizeChange()
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => window.removeEventListener('resize', handleWindowSizeChange)
+  }, [])
+
+  return width <= 1440
+}
+
+export const isTablet = () => {
+  const [width, setWidth] = useState(0)
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => setWidth(window.innerWidth)
+    handleWindowSizeChange()
+    window.addEventListener('resize', handleWindowSizeChange)
+    return () => window.removeEventListener('resize', handleWindowSizeChange)
+  }, [])
+
+  return width <= 1180
+}

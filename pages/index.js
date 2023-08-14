@@ -86,7 +86,7 @@ export default function Home({
       <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         {testemonials ? (
           <div className="relative overflow-hidden max-h-[600px]">
-            <div className="flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl">
+            <div className="flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl text-shadow">
               <TypingText />
               <div className="pt-2">
                 <div className="bg-yellow-500 w-3/5 h-[5px] rounded-lg"></div>
@@ -110,9 +110,9 @@ export default function Home({
                 </div>
               </div>
             </div>
-            {/* <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] bg-white/70 backdrop-blur-sm rounded-md absolute right-[5%] top-[10%] overflow-hidden shadow-lg">
+            <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] absolute right-[5%] top-[10%]">
               <HomeContactForm />
-            </div> */}
+            </div>
             <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
             <video
               className="z-30 flex justify-center w-full"
@@ -126,6 +126,9 @@ export default function Home({
             </video>
           </div>
         ) : null}
+        <div className="flex items-center justify-center w-full 2xl:hidden">
+          <HomeContactForm />
+        </div>
         <div className="flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">

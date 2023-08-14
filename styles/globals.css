@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+
+path {
+  pointer-events: all;
+}
+path:hover {
+  opacity: 0.80;
+  fill:#eab308;
+  cursor: pointer;
+}
+
+.AK, .HI {
+  display:none;
+}
+
+.text-shadow {
+  text-shadow: 0px 4px 16px #000000;
+}
+
+.yellow-button {
+  border: 1px solid #eab308;
+}
+
 .masonry { 
   display: flex;
   flex-flow: column wrap;
