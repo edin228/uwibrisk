@@ -81,8 +81,10 @@ function HomeContactForm() {
     switch (agent.name) {
       case "Jesse Nielsen":
         if (
-          projectedSales >= 50000000 ||
+          projectedSales > 5000000 ||
+          projectedSales < 1000000 ||
           selectedIndustry === "Mfg/Wholesale/Import/Export" ||
+          selectedIndustry === "Real Estate Investment" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Security" ||
           employeeCount > 100
@@ -92,18 +94,21 @@ function HomeContactForm() {
         break;
       case "Dana Coates":
         if (
-          (projectedSales < 10000000 && projectedSales >= 5000000) ||
+          projectedSales < 50000000 ||
+          projectedSales < 1000000 ||
           selectedIndustry === "Transportation/Automotive" ||
           selectedIndustry === "Construction" ||
           selectedIndustry === "Entertainment" ||
-          (selectedIndustry === "Security" && employeeCount < 60)
+          selectedIndustry === "Retail" ||
+          employeeCount < 60
         ) {
           valid = false;
         }
         break;
       case "Eric Schirding":
         if (
-          projectedSales < 5000000 ||
+          projectedSales < 1000000 ||
+          selectedIndustry === "Transportation/Automotive" ||
           selectedIndustry === "Construction" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Security" ||
@@ -115,16 +120,16 @@ function HomeContactForm() {
       case "Josh Acosta":
         if (
           projectedSales >= 50000000 ||
-          (projectedSales <= 10000000 && projectedSales >= 5000000) ||
-          selectedIndustry === "Entertainment" ||
-          (selectedIndustry === "Security" && employeeCount < 20)
+          projectedSales < 1000000 ||
+          (projectedSales <= 5000000 || projectedSales > 10000000) ||
+          selectedIndustry === "Entertainment"
         ) {
           valid = false;
         }
         break;
       case "Nick Latshaw":
         if (
-          projectedSales < 10000000 ||
+          (projectedSales < 10000000 && selectedIndustry !== "Entertainment") ||
           selectedIndustry === "Real Estate Investment" ||
           selectedIndustry === "Software & Technology" ||
           selectedIndustry === "Medical" ||
@@ -133,7 +138,7 @@ function HomeContactForm() {
           selectedIndustry === "Retail" ||
           selectedIndustry === "Transportation/Automotive" ||
           selectedIndustry === "Security" ||
-          employeeCount < 40
+          (employeeCount < 40 && selectedIndustry !== "Entertainment")
         ) {
           valid = false;
         }
