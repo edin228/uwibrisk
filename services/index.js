@@ -403,7 +403,7 @@ export const getPage = async (slug) => {
               id
               name
               selectLabel: label
-              formOptions {
+              formOptions(first:500) {
                 id
                 value
                 option

@@ -12,6 +12,33 @@ path:hover {
   cursor: pointer;
 }
 
+.dropdown-toggle {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 250px;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background-color: #393939;
+}
 .AK, .HI {
   display:none;
 }

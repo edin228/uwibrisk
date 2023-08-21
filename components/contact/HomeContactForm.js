@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import Map from "./Map";
 import Link from "next/link";
+import Dropdown from "../form/Dropdown";
 
 function HomeContactForm() {
   const [page, setPage] = useState(0);
@@ -66,7 +67,81 @@ function HomeContactForm() {
 
   const industryOptions = contactData?.find((x) => x.name == "Industry");
 
-  const jesseObj = team?.filter((x) => x.name == "Jesse Nielsen");
+  const jesseObj = team?.filter((x) => x.name == "Jesse Nielsen")[0];
+  const danaObj = team?.filter((x) => x.name == "Dana Coates")[0];
+  const ericObj = team?.filter((x) => x.name == "Eric Schirding")[0];
+  const joshObj = team?.filter((x) => x.name == "Josh Acosta")[0];
+  const nickObj = team?.filter((x) => x.name == "Nick Latshaw")[0];
+
+  const validAgent = (agent) => {
+    let valid = true;
+    const employeeCount = parseInt(numberOfEmployees, 10);
+    const projectedSales = parseInt(estimatedRevenue, 10);
+
+    switch (agent.name) {
+      case "Jesse Nielsen":
+        if (
+          projectedSales >= 50000000 ||
+          selectedIndustry === "Mfg/Wholesale/Import/Export" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Security" ||
+          employeeCount > 100
+        ) {
+          valid = false;
+        }
+        break;
+      case "Dana Coates":
+        if (
+          (projectedSales < 10000000 && projectedSales >= 5000000) ||
+          selectedIndustry === "Transportation/Automotive" ||
+          selectedIndustry === "Construction" ||
+          selectedIndustry === "Entertainment" ||
+          (selectedIndustry === "Security" && employeeCount < 60)
+        ) {
+          valid = false;
+        }
+        break;
+      case "Eric Schirding":
+        if (
+          projectedSales < 5000000 ||
+          selectedIndustry === "Construction" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Security" ||
+          employeeCount < 20
+        ) {
+          valid = false;
+        }
+        break;
+      case "Josh Acosta":
+        if (
+          projectedSales >= 50000000 ||
+          (projectedSales <= 10000000 && projectedSales >= 5000000) ||
+          selectedIndustry === "Entertainment" ||
+          (selectedIndustry === "Security" && employeeCount < 20)
+        ) {
+          valid = false;
+        }
+        break;
+      case "Nick Latshaw":
+        if (
+          projectedSales < 10000000 ||
+          selectedIndustry === "Real Estate Investment" ||
+          selectedIndustry === "Software & Technology" ||
+          selectedIndustry === "Medical" ||
+          selectedIndustry === "Law" ||
+          selectedIndustry === "Other Professional Services" ||
+          selectedIndustry === "Retail" ||
+          selectedIndustry === "Transportation/Automotive" ||
+          selectedIndustry === "Security" ||
+          employeeCount < 40
+        ) {
+          valid = false;
+        }
+        break;
+    }
+
+    return valid ? "visible" : "opacity-30";
+  };
 
   return (
     <div
@@ -90,7 +165,9 @@ function HomeContactForm() {
             >
               Let us help you
             </div>
-            <div className={`font-bold  text-lg text-white text-shadow`}>
+            <div
+              className={`font-bold  text-xl text-[#eab308] uppercase text-shadow`}
+            >
               Tell us where you&apos;re located
             </div>
           </div>
@@ -168,7 +245,7 @@ function HomeContactForm() {
                   <div className="relative w-[150px] h-[150px] overflow-hidden rounded-lg shadow-lg my-4">
                     <motion.img
                       className="object-cover w-full h-full"
-                      src={jesseObj[0].photo.url}
+                      src={jesseObj.photo.url}
                       alt=""
                       initial={false}
                     />
@@ -211,61 +288,77 @@ function HomeContactForm() {
             </div>
           )}
         {page == 2 && selectedLineofBusiness == "Business Insurance" && (
-          <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-white">
+          <div className="flex flex-col items-center w-full h-full gap-4 text-white">
             <div className="flex items-center justify-center w-full gap-4">
-              <div className="relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4">
+              <div
+                className={`${validAgent(
+                  jesseObj
+                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
                 <motion.img
                   className="object-cover w-full h-full"
-                  src={jesseObj[0].photo.url}
+                  src={jesseObj.photo.url}
                   alt=""
                   initial={false}
                 />
               </div>
-              <div className="relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4">
+              <div
+                className={`${validAgent(
+                  danaObj
+                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
                 <motion.img
                   className="object-cover w-full h-full"
-                  src={jesseObj[0].photo.url}
+                  src={danaObj.photo.url}
                   alt=""
                   initial={false}
                 />
               </div>
-              <div className="relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4">
+              <div
+                className={`${validAgent(
+                  ericObj
+                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
                 <motion.img
                   className="object-cover w-full h-full"
-                  src={jesseObj[0].photo.url}
+                  src={ericObj.photo.url}
                   alt=""
                   initial={false}
                 />
               </div>
-              <div className="relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4">
+              <div
+                className={`${validAgent(
+                  joshObj
+                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
                 <motion.img
                   className="object-cover w-full h-full"
-                  src={jesseObj[0].photo.url}
+                  src={joshObj.photo.url}
                   alt=""
                   initial={false}
                 />
               </div>
-              <div className="relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4">
+              <div
+                className={`${validAgent(
+                  nickObj
+                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
                 <motion.img
                   className="object-cover w-full h-full"
-                  src={jesseObj[0].photo.url}
+                  src={nickObj.photo.url}
                   alt=""
                   initial={false}
                 />
               </div>
             </div>
-            <div className="w-full mb-2 font-bold text-center 2xl:w-1/2">
-              Please answer a few questions so we can determine which of our
-              Account Executives are best fit for your needs
+            <div className="flex items-center justify-center w-full mb-2 text-3xl font-bold text-center 2xl:w-3/4">
+              <div>Now, lets match you with the right advisor</div>
             </div>
-            <div className="flex flex-col items-center justify-center w-full">
-              <div className="font-semibold">
-                What industry is your business in?
-              </div>
+            <div className="flex items-center justify-center w-full gap-2">
+              <div className="text-3xl font-semibold">Select your industry</div>
               <select
                 id={0}
-                type=""
-                className="w-1/2 p-2 rounded-lg form-input bg-zinc-400/20"
+                className="w-3/12 p-2 overflow-y-auto rounded-lg bg-zinc-400/20"
                 onChange={(e) => setSelectedIndustry(e.target.value)}
                 value={selectedIndustry}
               >
@@ -281,27 +374,32 @@ function HomeContactForm() {
                   )
                 )}
               </select>
+              {/* <Dropdown
+                options={industryOptions.formOptions}
+                onSelect={setSelectedIndustry}
+                selectedValue={selectedIndustry}
+              /> */}
             </div>
-            <div className="flex flex-col items-center justify-center w-full">
-              <div className="font-semibold">
-                How many people does your business employ?
+            <div className="flex items-center justify-center w-full gap-2">
+              <div className="text-3xl font-semibold">
+                How many people do you employ?
               </div>
               <input
                 id={1}
                 type="number"
-                className="w-1/2 p-2 rounded-lg form-input bg-zinc-400/20"
+                className="w-2/12 p-2 rounded-lg form-input bg-zinc-400/20"
                 onChange={(e) => setNumberOfEmployees(e.target.value)}
                 value={numberOfEmployees}
               />
             </div>
-            <div className="flex flex-col items-center justify-center w-full">
-              <div className="font-semibold">
-                What is your business&apos;s estimated annual revenue?
+            <div className="flex items-center justify-center w-full gap-2">
+              <div className="text-3xl font-semibold">
+                Projected sales for the next 12 months?
               </div>
               <input
                 id={2}
                 type="number"
-                className="w-1/2 p-2 rounded-lg form-input bg-zinc-400/20"
+                className="w-2/12 p-2 rounded-lg form-input bg-zinc-400/20"
                 onChange={(e) => setEstimatedRevenue(e.target.value)}
                 value={estimatedRevenue}
               />
