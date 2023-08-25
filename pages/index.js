@@ -86,33 +86,32 @@ export default function Home({
       <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         {testemonials ? (
           <div className="relative overflow-hidden max-h-[600px]">
-            <div className="flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl text-shadow">
+            <div className=" w-[400px] 2xl:w-[760px] flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl text-shadow">
               <TypingText />
               <div className="pt-2">
                 <div className="bg-yellow-500 w-3/5 h-[5px] rounded-lg"></div>
               </div>
               <div className="py-2 tracking-wide">Made Simple</div>
-              <div className="flex items-center xl:mt-8 xl:py-4 space-x-2 max-w-[200px]">
-                {/* <div className="relative flex flex-1">
-                <Link href={`/get-quotes`}>
-                  <a className="w-[150px] xl:w-[180px] transition duration-200 hover:bg-yellow-500 flex flex-1 items-center justify-center rounded-xl cursor-pointer shadow-md border-yellow-500 border-2 text-white p-2 xl:p-4 font-bold text-sm xl:text-lg">
-                    Start Building Your Portfolio
+              <div className="absolute bottom-[-50px] flex 2xl:hidden">
+                <Link href={`/contact`}>
+                  <a className="flex flex-col items-center w-full px-4 py-2 text-sm font-bold transition duration-200 border-2 border-yellow-500 shadow-md cursor-pointer hover:bg-yellow-500 rounded-xl">
+                    <span className="text-xl">Contact An Advisor</span>
+                    {/* <span className="text-3xl leading-8"></span> */}
                   </a>
                 </Link>
-              </div> */}
-                <div className="relative flex flex-1">
-                  <Link href={`/contact`}>
-                    <a className="w-[140px] max-w-[140px] transition duration-200 hover:bg-yellow-500 flex rounded-xl cursor-pointer shadow-md font-bold border-2 border-yellow-500 text-sm flex-col items-center py-2">
-                      <span className="my-0 text-xl leading-3">Contact An</span>
-                      <span className="text-3xl leading-8">Advisor</span>
-                    </a>
-                  </Link>
-                </div>
               </div>
             </div>
-            <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] absolute right-[5%] top-[10%]">
-              <HomeContactForm />
+            <div className="absolute right-[420px] top-[200px] z-50 hidden 2xl:flex">
+              <Link href={`/contact`}>
+                <a className="flex flex-col items-center w-full px-4 py-2 font-bold text-white transition duration-200 border-2 border-yellow-500 shadow-md cursor-pointer text-shadow hover:bg-yellow-500 rounded-xl">
+                  <span className="text-4xl ">Contact An Advisor</span>
+                  {/* <span className="text-3xl leading-8"></span> */}
+                </a>
+              </Link>
             </div>
+            {/* <div className="hidden 2xl:flex z-40 2xl:w-[850px] 2xl:h-[470px] absolute right-[5%] top-[10%]">
+              <HomeContactForm />
+            </div> */}
             <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
             <video
               className="z-30 flex justify-center w-full"
@@ -126,9 +125,9 @@ export default function Home({
             </video>
           </div>
         ) : null}
-        <div className="flex items-center justify-center w-full 2xl:hidden">
+        {/* <div className="flex items-center justify-center w-full 2xl:hidden">
           <HomeContactForm />
-        </div>
+        </div> */}
         <div className="flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">

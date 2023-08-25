@@ -121,7 +121,8 @@ function HomeContactForm() {
         if (
           projectedSales >= 50000000 ||
           projectedSales < 1000000 ||
-          (projectedSales <= 5000000 || projectedSales > 10000000) ||
+          projectedSales <= 5000000 ||
+          projectedSales > 10000000 ||
           selectedIndustry === "Entertainment"
         ) {
           valid = false;
@@ -162,16 +163,20 @@ function HomeContactForm() {
             className={`${
               selectedStates.length == 0
                 ? " 2xl:top-[-25px] 2xl:right-[25px]  2xl:text-right"
-                : "bottom-[20px] left-[20px]"
+                : "bottom-[60px] left-[20px]"
             } absolute transition duration-200`}
           >
             <div
-              className={`font-bold  text-xl text-[#eab308] uppercase tracking-tight text-shadow`}
+              className={`${
+                selectedStates.length == 0 ? `` : `text-[#eab308]`
+              } font-bold  text-xl uppercase tracking-tight`}
             >
               Let us help you
             </div>
             <div
-              className={`font-bold  text-xl text-[#eab308] uppercase text-shadow`}
+              className={`${
+                selectedStates.length == 0 ? `` : `text-[#eab308]`
+              } font-bold  text-xl  uppercase`}
             >
               Tell us where you&apos;re located
             </div>
@@ -356,11 +361,11 @@ function HomeContactForm() {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-center w-full mb-2 text-3xl font-bold text-center 2xl:w-3/4">
+            <div className="flex items-center justify-center w-full mb-2 font-bold text-center 2xl:text-3xl 2xl:w-3/4">
               <div>Now, lets match you with the right advisor</div>
             </div>
             <div className="flex items-center justify-center w-full gap-2">
-              <div className="text-3xl font-semibold">Select your industry</div>
+              <div className="font-semibold 2xl:text-3xl">Select your industry</div>
               <select
                 id={0}
                 className="w-3/12 p-2 overflow-y-auto rounded-lg bg-zinc-400/20"
@@ -386,7 +391,7 @@ function HomeContactForm() {
               /> */}
             </div>
             <div className="flex items-center justify-center w-full gap-2">
-              <div className="text-3xl font-semibold">
+              <div className="font-semibold 2xl:text-3xl">
                 How many people do you employ?
               </div>
               <input
@@ -398,7 +403,7 @@ function HomeContactForm() {
               />
             </div>
             <div className="flex items-center justify-center w-full gap-2">
-              <div className="text-3xl font-semibold">
+              <div className="font-semibold 2xl:text-3xl">
                 Projected sales for the next 12 months?
               </div>
               <input

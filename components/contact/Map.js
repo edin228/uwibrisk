@@ -36,7 +36,7 @@ export default function Map({ mapCallback, selectedStates }) {
       <USAMap
         customize={colorMap}
         onClick={mapHandler}
-        width={mobile ? 440: 800}
+        width={mobile ? 380: 800}
         height={400}
       />
     </div>
