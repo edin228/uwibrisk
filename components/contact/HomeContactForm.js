@@ -100,7 +100,7 @@ function HomeContactForm() {
           projectedSales < 50000000 ||
           projectedSales < 1000000 ||
           selectedIndustry === "Transportation/Automotive" ||
-          selectedIndustry === "Construction" ||
+          selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Retail" ||
           employeeCount < 60
@@ -112,7 +112,7 @@ function HomeContactForm() {
         if (
           projectedSales < 1000000 ||
           selectedIndustry === "Transportation/Automotive" ||
-          selectedIndustry === "Construction" ||
+          selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Security" ||
           employeeCount < 20
@@ -149,7 +149,7 @@ function HomeContactForm() {
         break;
     }
 
-    return valid ? "visible" : "opacity-30";
+    return valid ? true : false;
   };
 
   const validAgentOption = (agent) => {
@@ -176,7 +176,7 @@ function HomeContactForm() {
           projectedSales < 50000000 ||
           projectedSales < 1000000 ||
           selectedIndustry === "Transportation/Automotive" ||
-          selectedIndustry === "Construction" ||
+          selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Retail" ||
           employeeCount < 60
@@ -188,7 +188,7 @@ function HomeContactForm() {
         if (
           projectedSales < 1000000 ||
           selectedIndustry === "Transportation/Automotive" ||
-          selectedIndustry === "Construction" ||
+          selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Security" ||
           employeeCount < 20
@@ -250,14 +250,14 @@ function HomeContactForm() {
                 selectedStates.length == 0 ? `` : `text-[#eab308]`
               } font-bold  text-xl uppercase tracking-tight`}
             >
-              Let us help you
+              We can help
             </div>
             <div
               className={`${
                 selectedStates.length == 0 ? `` : `text-[#eab308]`
               } font-bold  text-xl  uppercase`}
             >
-              Tell us where you&apos;re located
+              What state are you in
             </div>
           </div>
         )}
@@ -268,7 +268,7 @@ function HomeContactForm() {
         {page == 1 && (
           <div className="flex flex-col justify-center w-full h-full text-white">
             <div className="flex items-center justify-center w-full my-8 text-2xl font-bold text-center">
-              Are you looking for Personal Insurance or Business Insurance?
+              Do you need Personal or Business Insurance?
             </div>
             <div className="flex items-center justify-center w-full gap-4">
               <button
@@ -340,16 +340,15 @@ function HomeContactForm() {
                     />
                   </div>
                   <div className="flex w-[400px] px-4 text-center">
-                    With years of experience in insurance, Jesse Nielsen is the
-                    perfect asset to help you navigate what insurance you need
-                    for your Home and Auto.
+                    Jesse Nielsen is the perfect asset to help navigate your
+                    private client needs.
                   </div>
                   <div className="flex justify-center mt-4">
                     <Link href={`#`}>
                       <button
                         className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
                       >
-                        Schedule a Meeting
+                        Schedule a Consultation
                       </button>
                     </Link>
                   </div>
@@ -380,9 +379,9 @@ function HomeContactForm() {
           <div className="flex flex-col items-center w-full h-full gap-4 text-white">
             <div className="flex items-center justify-center w-full gap-4">
               <div
-                className={`${validAgent(
-                  jesseObj
-                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                className={`${
+                  validAgent(jesseObj) ? "visible" : "opacity-30"
+                }  relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -394,7 +393,7 @@ function HomeContactForm() {
               <div
                 className={`${validAgent(
                   danaObj
-                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -406,7 +405,7 @@ function HomeContactForm() {
               <div
                 className={`${validAgent(
                   ericObj
-                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -418,7 +417,7 @@ function HomeContactForm() {
               <div
                 className={`${validAgent(
                   joshObj
-                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -430,7 +429,7 @@ function HomeContactForm() {
               <div
                 className={`${validAgent(
                   nickObj
-                )} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -503,7 +502,7 @@ function HomeContactForm() {
         {page == 3 && selectedLineofBusiness == "Business Insurance" && (
           <div className="flex w-full overflow-x-auto text-white">
             {producers
-              .filter((x) => validAgentOption(x))
+              .filter((x) => validAgent(x))
               .map((prod) => (
                 <div
                   key={prod.id}
@@ -529,7 +528,7 @@ function HomeContactForm() {
                           <button
                             className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
                           >
-                            Schedule a Meeting
+                            Schedule a Consultation
                           </button>
                         </Link>
                       </div>
