@@ -7,6 +7,7 @@ import { useRef } from "react";
 import Map from "./Map";
 import Link from "next/link";
 import Dropdown from "../form/Dropdown";
+import CurrencyInput from "react-currency-input-field";
 
 function HomeContactForm() {
   const [page, setPage] = useState(0);
@@ -72,6 +73,8 @@ function HomeContactForm() {
   const ericObj = team?.filter((x) => x.name == "Eric Schirding")[0];
   const joshObj = team?.filter((x) => x.name == "Josh Acosta")[0];
   const nickObj = team?.filter((x) => x.name == "Nick Latshaw")[0];
+
+  const producers = [jesseObj, danaObj, ericObj, joshObj, nickObj];
 
   const validAgent = (agent) => {
     let valid = true;
@@ -147,6 +150,82 @@ function HomeContactForm() {
     }
 
     return valid ? "visible" : "opacity-30";
+  };
+
+  const validAgentOption = (agent) => {
+    let valid = true;
+    const employeeCount = parseInt(numberOfEmployees, 10);
+    const projectedSales = parseInt(estimatedRevenue, 10);
+
+    switch (agent.name) {
+      case "Jesse Nielsen":
+        if (
+          projectedSales > 5000000 ||
+          projectedSales < 1000000 ||
+          selectedIndustry === "Mfg/Wholesale/Import/Export" ||
+          selectedIndustry === "Real Estate Investment" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Security" ||
+          employeeCount > 100
+        ) {
+          valid = false;
+        }
+        break;
+      case "Dana Coates":
+        if (
+          projectedSales < 50000000 ||
+          projectedSales < 1000000 ||
+          selectedIndustry === "Transportation/Automotive" ||
+          selectedIndustry === "Construction" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Retail" ||
+          employeeCount < 60
+        ) {
+          valid = false;
+        }
+        break;
+      case "Eric Schirding":
+        if (
+          projectedSales < 1000000 ||
+          selectedIndustry === "Transportation/Automotive" ||
+          selectedIndustry === "Construction" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Security" ||
+          employeeCount < 20
+        ) {
+          valid = false;
+        }
+        break;
+      case "Josh Acosta":
+        if (
+          projectedSales >= 50000000 ||
+          projectedSales < 1000000 ||
+          projectedSales <= 5000000 ||
+          projectedSales > 10000000 ||
+          selectedIndustry === "Entertainment"
+        ) {
+          valid = false;
+        }
+        break;
+      case "Nick Latshaw":
+        if (
+          (projectedSales < 10000000 && selectedIndustry !== "Entertainment") ||
+          selectedIndustry === "Real Estate Investment" ||
+          selectedIndustry === "Software & Technology" ||
+          selectedIndustry === "Medical" ||
+          selectedIndustry === "Law" ||
+          selectedIndustry === "Other Professional Services" ||
+          selectedIndustry === "Retail" ||
+          selectedIndustry === "Transportation/Automotive" ||
+          selectedIndustry === "Security" ||
+          (employeeCount < 40 && selectedIndustry !== "Entertainment")
+        ) {
+          valid = false;
+        }
+        break;
+    }
+
+    return valid ? true : false;
   };
 
   return (
@@ -365,7 +444,9 @@ function HomeContactForm() {
               <div>Now, lets match you with the right advisor</div>
             </div>
             <div className="flex items-center justify-center w-full gap-2">
-              <div className="font-semibold 2xl:text-3xl">Select your industry</div>
+              <div className="font-semibold 2xl:text-3xl">
+                Select your industry
+              </div>
               <select
                 id={0}
                 className="w-3/12 p-2 overflow-y-auto rounded-lg bg-zinc-400/20"
@@ -406,14 +487,56 @@ function HomeContactForm() {
               <div className="font-semibold 2xl:text-3xl">
                 Projected sales for the next 12 months?
               </div>
-              <input
-                id={2}
-                type="number"
+              <CurrencyInput
+                id="input-example"
+                prefix="$"
+                name="input-name"
+                placeholder=""
+                defaultValue={1000000}
+                decimalsLimit={2}
                 className="w-2/12 p-2 rounded-lg form-input bg-zinc-400/20"
-                onChange={(e) => setEstimatedRevenue(e.target.value)}
-                value={estimatedRevenue}
+                onValueChange={(value, name) => setEstimatedRevenue(value)}
               />
             </div>
+          </div>
+        )}
+        {page == 3 && selectedLineofBusiness == "Business Insurance" && (
+          <div className="flex w-full overflow-x-auto text-white">
+            {producers
+              .filter((x) => validAgentOption(x))
+              .map((prod) => (
+                <div
+                  key={prod.id}
+                  className="flex flex-col justify-center w-full h-full text-white"
+                >
+                  <div className="flex items-center justify-center w-full mb-2">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="text-2xl font-bold">{prod.name}</div>
+                      <div className="font-bold ">Account Executive</div>
+                      <div className="relative w-[150px] h-[150px] overflow-hidden rounded-lg shadow-lg my-4">
+                        <motion.img
+                          className="object-cover w-full h-full"
+                          src={prod.photo.url}
+                          alt=""
+                          initial={false}
+                        />
+                      </div>
+                      <div className="flex w-[400px] px-4 text-center">
+                        {prod.miniBio ? prod.miniBio : ""}
+                      </div>
+                      <div className="flex justify-center mt-4">
+                        <Link href={prod.meetingLink ? prod.meetingLink : "#"}>
+                          <button
+                            className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
+                          >
+                            Schedule a Meeting
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
         )}
       </div>
@@ -433,7 +556,13 @@ function HomeContactForm() {
                 page == contactData?.length ||
                 (page == 3 && selectedLineofBusiness == "Personal Insurance") ||
                 page == 1 ||
-                (page == 2 && selectedLineofBusiness == "Personal Insurance")
+                (page == 2 && selectedLineofBusiness == "Personal Insurance") ||
+                (page == 2 &&
+                  selectedLineofBusiness == "Business Insurance" &&
+                  !selectedIndustry &&
+                  !numberOfEmployees &&
+                  !estimatedRevenue) ||
+                (page == 3 && selectedLineofBusiness == "Business Insurance")
                   ? `hidden`
                   : ""
               }`}

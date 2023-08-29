@@ -1887,6 +1887,11 @@
   dependencies:
     "vanilla-swipe" "^2.4.1"
 
+"react-currency-input-field@^3.6.11":
+  "integrity" "sha512-M9vOx1eaioSaYWirm7W2WSBi4bpLg+LK4Gf7C1kNhy6MvoSoOzd0mYZPxA78OC9UBIQ2nM080Wu9D1CwTY6n3w=="
+  "resolved" "https://registry.npmjs.org/react-currency-input-field/-/react-currency-input-field-3.6.11.tgz"
+  "version" "3.6.11"
+
 "react-dom@^16.13.1", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>= 15.0.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", "react-dom@18.2.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
@@ -1932,7 +1937,7 @@
   dependencies:
     "babel-runtime" "^6.26.0"
 
-"react@*", "react@^16.13.1", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 15.0.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=15.4", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@0.14 || 15 || 16 || 17 || 18", "react@18.2.0":
+"react@*", "react@^16.13.1", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0-0", "react@^18.2.0", "react@>= 15.0.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=15.4", "react@>=16.8 || ^17.0.0 || ^18.0.0", "react@0.14 || 15 || 16 || 17 || 18", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

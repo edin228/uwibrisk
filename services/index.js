@@ -479,6 +479,8 @@ export const getTeam = async () => {
         position
         slug
         hasTeamPage
+        meetingLink
+        miniBio
         photo {
           id
           url
