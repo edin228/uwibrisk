@@ -103,6 +103,8 @@ function HomeContactForm() {
           selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Retail" ||
+          (selectedIndustry === "Restaurant/Coffee Bar" &&
+            projectedSales < 10000000) ||
           employeeCount < 60
         ) {
           valid = false;
@@ -115,6 +117,11 @@ function HomeContactForm() {
           selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
           selectedIndustry === "Security" ||
+          (selectedIndustry === "Restaurant/Coffee Bar" &&
+            projectedSales <= 10000000 &&
+            projectedSales >= 2000000) ||
+          (employeeCount < 10 &&
+            selectedIndustry === "Restaurant/Coffee Bar") ||
           employeeCount < 20
         ) {
           valid = false;
@@ -126,7 +133,11 @@ function HomeContactForm() {
           projectedSales < 1000000 ||
           projectedSales <= 5000000 ||
           projectedSales > 10000000 ||
-          selectedIndustry === "Entertainment"
+          (selectedIndustry === "Restaurant/Coffee Bar" &&
+            projectedSales <= 10000000 &&
+            projectedSales >= 2000000) ||
+          selectedIndustry === "Entertainment" ||
+          (employeeCount < 10 && selectedIndustry === "Restaurant/Coffee Bar")
         ) {
           valid = false;
         }
@@ -142,6 +153,7 @@ function HomeContactForm() {
           selectedIndustry === "Retail" ||
           selectedIndustry === "Transportation/Automotive" ||
           selectedIndustry === "Security" ||
+          selectedIndustry === "Restaurant/Coffee Bar" ||
           (employeeCount < 40 && selectedIndustry !== "Entertainment")
         ) {
           valid = false;
@@ -391,9 +403,9 @@ function HomeContactForm() {
                 />
               </div>
               <div
-                className={`${validAgent(
-                  danaObj
-                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                className={`${
+                  validAgent(danaObj) ? "visible" : "opacity-30"
+                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -403,9 +415,9 @@ function HomeContactForm() {
                 />
               </div>
               <div
-                className={`${validAgent(
-                  ericObj
-                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                className={`${
+                  validAgent(ericObj) ? "visible" : "opacity-30"
+                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -415,9 +427,9 @@ function HomeContactForm() {
                 />
               </div>
               <div
-                className={`${validAgent(
-                  joshObj
-                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                className={`${
+                  validAgent(joshObj) ? "visible" : "opacity-30"
+                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
@@ -427,9 +439,9 @@ function HomeContactForm() {
                 />
               </div>
               <div
-                className={`${validAgent(
-                  nickObj
-                ) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                className={`${
+                  validAgent(nickObj) ? "visible" : "opacity-30"
+                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
                 <motion.img
                   className="object-cover w-full h-full"
