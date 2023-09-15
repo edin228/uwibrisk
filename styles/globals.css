@@ -125,6 +125,9 @@ path:hover {
   -webkit-box-shadow: 0px 0px 10px 0.5px #7930ed7a, 0 4px 6px -2px #00000045;
   box-shadow: 0px 0px 10px 0.5px #7930ed7a, 0 4px 6px -2px #00000045;
 }
+.white-shadow {
+  box-shadow: 0px 0px 10px 0.5px #ffffff47, 0 4px 6px -2px #00000045;
+}
 .text-gradient {
   background: #3790ff; /* fallback for old browsers */
   background-image: -webkit-linear-gradient(
@@ -220,6 +223,11 @@ path:hover {
     #2b32b2,
     #1488cc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.black-gradient {
+  background: #000;
+  background-image: linear-gradient(to top, #2b292d,#000);
 }
 
 .blue-green-gradient {
