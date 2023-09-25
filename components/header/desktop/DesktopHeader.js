@@ -39,7 +39,7 @@ export default function DesktopHeader({ navItems }) {
 
   return (
     <div
-      className="fixed top-0 z-50 hidden h-20 shadow-lg bg-zinc-800 lg:flex"
+      className="fixed top-0 z-[9999] hidden h-20 shadow-lg bg-[#161414] lg:flex"
       style={{ width: "inherit" }}
     >
       <div className="flex items-center justify-between w-full px-4">

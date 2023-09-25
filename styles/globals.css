@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+a {
+  color: #3d7aed;
+}
 
 path {
   pointer-events: all;
