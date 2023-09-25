@@ -16,7 +16,7 @@ import {
   BsCheckCircleFill,
   BsSearch,
 } from "react-icons/bs";
-import { FaRegPaperPlane, FaBriefcaseMedical } from "react-icons/fa";
+import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { RiLinksLine } from "react-icons/ri";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
@@ -27,7 +27,8 @@ import {
   MdOutlineFolderShared,
   MdRequestQuote,
   MdOutlinePayments,
-  MdSwipe
+  MdSwipe,
+  MdApartment
 } from "react-icons/md";
 import {
   AiOutlineEdit,
@@ -55,6 +56,8 @@ import {
   BiCircle,
   BiTask,
 } from "react-icons/bi";
+
+import { GiBigDiamondRing } from "react-icons/gi"
 
 export const graphCMSImageLoader = ({ src }) => src;
 
@@ -267,6 +270,12 @@ export const getIcon = (item) => {
     <AiFillLock />
   ) : item == "swipe" ? (
     <MdSwipe />
+  ) : item == "apartment" ? (
+    <MdApartment />
+  ) : item == "ring" ? (
+    <GiBigDiamondRing />
+  ) : item == "horse" ? (
+    <FaHorse />
   ) : null;
 };
 
