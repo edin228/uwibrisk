@@ -9,16 +9,16 @@ export const Title = ({ title, category, isSelected }) => {
 
   return (
     <motion.div
-      className="title-container z-40"
+      className="z-40 title-container"
       initial={false}
       animate={{ x, y }}
       transformTemplate={scaleTranslate}
       style={{ ...inverted, originX: 0, originY: 0 }}
     >
       {category.map(cat => (
-        <span key={cat.id} className="category">{cat.title}</span>
+        <span key={cat.id} className="category text-shadow">{cat.title}</span>
       ))}
-      <h2 className="font-bold drop-shadow-2xl text-lg md:text-2xl">{title}</h2>
+      <h2 className="text-lg font-bold drop-shadow-2xl md:text-2xl text-shadow">{title}</h2>
     </motion.div>
   );
 };
