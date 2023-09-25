@@ -195,7 +195,7 @@ export const getOfficeResources = async () => {
 export const getRecentBlogPosts = async () => {
   const query = gql`
       query GetRecentBlogPosts() {
-      blogPosts(orderBy: publishedAt_DESC, where: {isActive: true}, first: 4) {
+      blogPosts(orderBy: createdAt_DESC, where: {isActive: true}, first: 4) {
           title
           id
           isActive
@@ -241,7 +241,7 @@ export const getRecentBlogPosts = async () => {
 export const getRecentTenBlogPosts = async () => {
   const query = gql`
       query GetRecentBlogPosts() {
-      blogPosts(orderBy: publishedAt_DESC, where: {isActive: true}, last: 10) {
+      blogPosts(orderBy: createdAt_DESC, where: {isActive: true}, last: 10) {
           title
           id
           isActive
