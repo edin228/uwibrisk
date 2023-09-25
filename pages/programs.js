@@ -179,14 +179,22 @@ function Programs({ programs = null }) {
             />
           </a>
         </div>
-        <div className="flex justify-center py-4 text-xl font-bold text-center">
-          {data.title}
-        </div>
-        <div className="flex justify-center text-sm text-center">
-          {data.description}
-        </div>
-        <div className="flex items-center justify-center w-full py-4">
-          <LinkButton link={data.url} text={"Click Through to Qualify"} color={"sky"} />
+        <div className="flex flex-col justify-between h-full">
+          <div className="flex flex-col h-full">
+            <div className="flex justify-center py-4 text-xl font-bold text-center min-h-[100px] items-center ">
+              {data.title}
+            </div>
+            <div className="flex justify-center text-sm text-center">
+              {data.description}
+            </div>
+          </div>
+          <div className="flex items-center justify-center w-full py-4">
+            <LinkButton
+              link={data.url}
+              text={"Click Through to Qualify"}
+              color={"sky"}
+            />
+          </div>
         </div>
       </div>
     );
