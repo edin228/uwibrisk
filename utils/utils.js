@@ -15,8 +15,9 @@ import {
   BsClipboard,
   BsCheckCircleFill,
   BsSearch,
+  BsFillHeartPulseFill
 } from "react-icons/bs";
-import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse } from "react-icons/fa";
+import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse, FaDog, FaPlane } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { RiLinksLine } from "react-icons/ri";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
@@ -276,6 +277,12 @@ export const getIcon = (item) => {
     <GiBigDiamondRing />
   ) : item == "horse" ? (
     <FaHorse />
+  ) : item == "life" ? (
+    <BsFillHeartPulseFill />
+  ) : item == "travel" ? (
+    <FaPlane />
+  ) : item == "pet" ? (
+    <FaDog />
   ) : null;
 };
 
