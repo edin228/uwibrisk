@@ -18,14 +18,8 @@ function Search({ data, term }) {
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col w-full h-full">
-        <div className="flex flex-col w-full text-3xl tracking-widest justify-center items-center mb-4">
-          <div>Search for: </div>
-          <div className="flex items-center text-center ml-4 font-bold">
-            {term}
-          </div>
-        </div>
-        <div className="flex w-full justify-center space-x-2">
+      <div className="flex flex-col w-full h-full 2xl:px-[400px]">
+        <div className="flex justify-center w-full space-x-2">
           <div className="flex items-center">
             <div
               onClick={() => setShowBlog(!showBlog)}
@@ -58,14 +52,14 @@ function Search({ data, term }) {
           </div>
         </div>
         {showBlog && data.blogPosts.length > 0 ? (
-          <ul className="flex flex-col items-start py-4 px-4 md:px-0">
+          <ul className="flex flex-col items-start gap-2 px-4 py-4 md:px-0">
             {data.blogPosts.map((card) => (
-              <ListedBlogCard key={card.id} post={card} />
+              <ListedBlogCard key={card.id} post={card} large />
             ))}
           </ul>
         ) : null}
         {showTeam && data.teamMembers.length > 0 ? (
-          <ul className="flex flex-col items-start py-4 px-4 md:px-0">
+          <ul className="flex flex-col items-start px-4 py-4 md:px-0">
             {data.teamMembers.map((member) => (
               <div className="py-2" key={member.id}>
                 <TeamCard member={member} />
@@ -74,7 +68,7 @@ function Search({ data, term }) {
           </ul>
         ) : null}
         {showPages && data.pages.length > 0 ? (
-          <ul className="flex flex-col items-start py-4 px-4 md:px-0">
+          <ul className="flex flex-col items-start px-4 py-4 md:px-0">
             {data.pages.map((card) => (
               <ListedPageCard key={card.id} page={card} />
             ))}
@@ -83,7 +77,7 @@ function Search({ data, term }) {
         {data.blogPosts.length < 1 &&
         data.teamMembers.length < 1 &&
         data.pages.length < 1 ? (
-          <div className="font-bold text-4xl py-8 text-center w-full">
+          <div className="w-full py-8 text-4xl font-bold text-center">
             No Results
           </div>
         ) : null}
