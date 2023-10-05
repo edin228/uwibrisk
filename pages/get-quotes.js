@@ -56,7 +56,7 @@ function GetQuotes() {
             </div>
           </a>
           <a
-            href={"https://bxsurety.com/bx-pro-landing/92507"}
+            href={"/life-insurance-needs"}
             target="_blank"
             className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col  shadow-lg border-2 border-zinc-100 rounded-xl h-[450px] w-full xl:w-[237px] 2xl:w-[300px] black-gradient"
             rel="noreferrer"
@@ -72,7 +72,7 @@ function GetQuotes() {
           </a>
 
           <a
-            href={"https://bxsurety.com/bx-pro-landing/92507"}
+            href={"/travel-insurance"}
             target="_blank"
             className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col  shadow-lg border-2 border-zinc-100 rounded-xl h-[450px] w-full xl:w-[237px] 2xl:w-[300px] black-gradient"
             rel="noreferrer"
@@ -103,7 +103,7 @@ function GetQuotes() {
           </a>
 
           <a
-            href={"https://bxsurety.com/bx-pro-landing/92507"}
+            href={"https://agency.petinsurance.com/uwib"}
             target="_blank"
             className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col  shadow-lg border-2 border-zinc-100 rounded-xl h-[450px] w-full xl:w-[237px] 2xl:w-[300px] black-gradient"
             rel="noreferrer"
