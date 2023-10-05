@@ -63,7 +63,7 @@ function GetQuotes() {
           >
             <div className="flex items-center justify-center  h-[200px] text-center text-white rounded-t-xl ">
               <div className="flex p-8 text-5xl border-4 border-white white-shadow rounded-xl">
-                {getIcon("certificate")}
+                {getIcon("life")}
               </div>
             </div>
             <div className="flex items-center justify-center p-2 text-4xl font-bold text-center text-white rounded-b-xl text-shadow">
@@ -79,7 +79,7 @@ function GetQuotes() {
           >
             <div className="flex items-center justify-center  h-[200px] text-center text-white rounded-t-xl ">
               <div className="flex p-8 text-5xl border-4 border-white white-shadow rounded-xl">
-                {getIcon("certificate")}
+                {getIcon("travel")}
               </div>
             </div>
             <div className="flex items-center justify-center p-2 text-4xl font-bold text-center text-white rounded-b-xl text-shadow">
@@ -110,7 +110,7 @@ function GetQuotes() {
           >
             <div className="flex items-center justify-center  h-[200px] text-center text-white rounded-t-xl ">
               <div className="flex p-8 text-5xl border-4 border-white white-shadow rounded-xl">
-                {getIcon("certificate")}
+                {getIcon("pet")}
               </div>
             </div>
             <div className="flex items-center justify-center p-2 text-4xl font-bold text-center text-white rounded-b-xl text-shadow">
