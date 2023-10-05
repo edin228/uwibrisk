@@ -6,7 +6,7 @@ function HeaderNavButton({ navItem = null, selectedID = null }) {
     <div
       className={`relative rounded-lg border-[1px] border-yellow-500  flex z-20 items-center uppercase cursor-pointer tracking-widest font-semibold 
       p-2 text-white ${
-        navItem?.highlight ? "buring-orange-gradient rounded text-white" : ""
+        navItem?.highlight ? "bg-yellow-500 rounded text-white" : ""
       } ${selectedID == navItem.id ? "text-white" : "text-white"}`}
     >
       <div className="text-xs transition duration-200 ease-in-out">
@@ -20,7 +20,7 @@ function HeaderNavButton({ navItem = null, selectedID = null }) {
       <a
         className={`relative rounded-lg border-[1px] border-yellow-500 flex z-20 items-center uppercase tracking-widest font-semibold 
       p-2 text-white ${
-        navItem?.highlight ? "buring-orange-gradient border-0 rounded text-white" : ""
+        navItem?.highlight ? "bg-yellow-500 border-0 rounded text-white" : ""
       } ${selectedID == navItem.id ? "text-white" : ""}`}
       >
         <div className="text-xs transition duration-200 ease-in-out">
