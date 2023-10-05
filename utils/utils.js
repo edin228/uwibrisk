@@ -15,7 +15,7 @@ import {
   BsClipboard,
   BsCheckCircleFill,
   BsSearch,
-  BsFillHeartPulseFill
+  BsHeartPulseFill
 } from "react-icons/bs";
 import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse, FaDog, FaPlane } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
@@ -56,6 +56,7 @@ import {
   BiCommentAdd,
   BiCircle,
   BiTask,
+  BiPulse,
 } from "react-icons/bi";
 
 import { GiBigDiamondRing } from "react-icons/gi"
@@ -278,7 +279,7 @@ export const getIcon = (item) => {
   ) : item == "horse" ? (
     <FaHorse />
   ) : item == "life" ? (
-    <BsFillHeartPulseFill />
+    <BiPulse />
   ) : item == "travel" ? (
     <FaPlane />
   ) : item == "pet" ? (
