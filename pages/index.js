@@ -15,6 +15,7 @@ import {
   getOfficeLocations,
   getRecentBlogPosts,
   getTestemonials,
+  postTerms,
 } from "../services";
 import HomeContainer from "../components/home/v2/HomeContainer";
 import { useEffect } from "react";

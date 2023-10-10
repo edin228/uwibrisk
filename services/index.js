@@ -1,7 +1,43 @@
 import { request, gql } from "graphql-request";
 import moment from "moment";
+import terms from "../utils/glossary";
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+// const graphKey = process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN
+
+// const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// export const postTerms = async () => {
+//   try {
+//     for (let index = 0; index < terms.length; index++) {
+//       await delay(500);  // Introduces a 500ms delay between each request
+
+//       const term = terms[index];
+//       const glossaryType = term.glossaryType ? term.glossaryType : 'Business';
+//       const cleanedDefinition = term.definition.replace(/\n/g, ' ');
+
+//       const mutation = gql`
+//         mutation {
+//           createGlossaryTerm(data: {
+//             term: "${term.term}",
+//             definition: "${cleanedDefinition.replace(/"/g, '\\"')}",
+//             glossaryType: ${glossaryType},
+//           }) {
+//             id
+//           }
+//         }
+//       `;
+//       const result = await request(graphqlAPI, mutation, null, {
+//         headers: {
+//           authorization: `Bearer ${graphKey}`,
+//         },
+//       });
+//       console.log('Term Created:', result);
+//     }
+//   } catch (error) {
+//     console.error('Error occurred:', error);
+//   }
+// };
 
 export const getLanding = async () => {
   const query = gql`
@@ -50,11 +86,7 @@ export const getOfficeLocations = async () => {
 export const getCarrierInfo = async () => {
   const query = gql`
     query MyQuery {
-      carrierBanners(
-        first:100
-        orderBy: name_ASC
-        where: { isActive: true }
-      ) {
+      carrierBanners(first: 100, orderBy: name_ASC, where: { isActive: true }) {
         id
         name
         payLink
@@ -75,11 +107,27 @@ export const getCarrierInfo = async () => {
   return result.carrierBanners;
 };
 
+export const getGlossaryTerms = async () => {
+  const query = gql`
+    query MyQuery {
+      glossaryTerms(first: 500, orderBy: term_ASC) {
+        definition
+        term
+        id
+        glossaryType
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.glossaryTerms;
+};
+
 export const getProgramInfo = async () => {
   const query = gql`
     query MyQuery {
       programs(
-        first:100
+        first: 100
         orderBy: publishedAt_ASC
         where: { isActive: true }
       ) {
@@ -172,7 +220,11 @@ export const getHighlightedTestemonials = async () => {
 export const getOfficeResources = async () => {
   const query = gql`
     query MyQuery {
-      officeResources(orderBy: order_ASC, where: {isActive: true}, first: 500) {
+      officeResources(
+        orderBy: order_ASC
+        where: { isActive: true }
+        first: 500
+      ) {
         altLogoText
         category
         id
@@ -403,7 +455,7 @@ export const getPage = async (slug) => {
               id
               name
               selectLabel: label
-              formOptions(first:500) {
+              formOptions(first: 500) {
                 id
                 value
                 option
@@ -613,6 +665,12 @@ export const getSearch = async (search) => {
           raw
           text
         }
+      }
+      glossaryTerms(where: { _search: $search }, first: 500, orderBy: term_ASC) {
+        definition
+        term
+        id
+        glossaryType
       }
     }
   `;

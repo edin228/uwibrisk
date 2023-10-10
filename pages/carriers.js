@@ -229,7 +229,7 @@ function Carriers({ carriers = null }) {
 
   return (
     <Base data={carriers} title={"Carriers"} template={"GridWithSearch"}>
-      <div className="flex flex-col w-full h-full">
+      <div className="flex flex-col w-full  min-h-[89vh] h-full">
         <h1 className="w-full py-4 text-3xl font-bold text-center">Carriers</h1>
         <div className="flex items-center justify-center w-full px-4">
           <div className="relative flex w-full my-4 border-2 rounded-lg lg:w-1/2 border-slate-500/20">

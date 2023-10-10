@@ -5,6 +5,7 @@ import Base from "../components/layout/Base";
 import ListedPageCard from "../components/page/ListedPageCard";
 import TeamCard from "../components/team/TeamCard";
 import { getSearch } from "../services";
+import TermCard from "../components/term/TermCard";
 
 function Search({ data, term }) {
   const [showBlog, setShowBlog] = useState(true);
@@ -51,6 +52,13 @@ function Search({ data, term }) {
             </div>
           </div>
         </div>
+        {data.glossaryTerms.length > 0 ? (
+          <ul className="flex flex-col items-start gap-2 px-4 py-4 md:px-0">
+            {data.glossaryTerms.map((card) => (
+              <TermCard key={card.id} data={card} />
+            ))}
+          </ul>
+        ) : null}
         {showBlog && data.blogPosts.length > 0 ? (
           <ul className="flex flex-col items-start gap-2 px-4 py-4 md:px-0">
             {data.blogPosts.map((card) => (
@@ -76,7 +84,8 @@ function Search({ data, term }) {
         ) : null}
         {data.blogPosts.length < 1 &&
         data.teamMembers.length < 1 &&
-        data.pages.length < 1 ? (
+        data.pages.length < 1 &&
+        data.glossaryTerms.length < 1 ? (
           <div className="w-full py-8 text-4xl font-bold text-center">
             No Results
           </div>
