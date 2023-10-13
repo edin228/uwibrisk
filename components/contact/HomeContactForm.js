@@ -356,7 +356,7 @@ function HomeContactForm() {
                     private client needs.
                   </div>
                   <div className="flex justify-center mt-4">
-                    <Link href={`#`}>
+                    <Link  href={jesseObj.meetingLink ? jesseObj.meetingLink : "#"}>
                       <button
                         className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
                       >
