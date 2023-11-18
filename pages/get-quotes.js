@@ -117,6 +117,21 @@ function GetQuotes() {
               Pet
             </div>
           </a>
+          <a
+            href={"https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin"}
+            target="_blank"
+            className="transition duration-100 hover:scale-105 cursor-pointer flex flex-col  shadow-lg border-2 border-zinc-100 rounded-xl h-[450px] w-full xl:w-[237px] 2xl:w-[300px] black-gradient"
+            rel="noreferrer"
+          >
+            <div className="flex items-center justify-center  h-[200px] text-center text-white rounded-t-xl ">
+              <div className="flex p-8 text-5xl border-4 border-white white-shadow rounded-xl">
+                {getIcon("drone")}
+              </div>
+            </div>
+            <div className="flex items-center justify-center p-2 text-4xl font-bold text-center text-white rounded-b-xl text-shadow">
+              Drone
+            </div>
+          </a>
         </div>
       </div>
     </Base>
