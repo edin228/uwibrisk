@@ -37,7 +37,7 @@ function Footer() {
       </div> */}
       <div className="flex flex-col w-full px-4 lg:flex-row lg:items-center lg:justify-between bg-zinc-200">
         <div className="font-bold">
-          © 2023 UWIBRisk All rights reserved.
+          © 2024 UWIBRisk All rights reserved.
         </div>
         <div className="flex flex-col gap-2 lg:flex-row">
           <a className="text-xs uppercase" href={"/terms-of-use"}>Terms and Conditions</a>
