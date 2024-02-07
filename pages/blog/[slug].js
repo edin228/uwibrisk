@@ -37,11 +37,11 @@ function BlogPost({ data, recentBlogs }) {
                 </div>
               ))}
             </div>
-            {data?.teamMember?.photo ? (
-              <div className="flex w-full mt-4 ">
-                <div className="mr-4 rounded-lg">
+            {data?.teamMember?.blogPhoto ? (
+              <div className="flex w-full mt-4">
+                <div className="flex items-center justify-center mr-4 rounded-lg shadow-lg">
                   <Image
-                    src={data?.teamMember?.photo?.url}
+                    src={data?.teamMember?.blogPhoto?.url}
                     alt="author-pic"
                     width={50}
                     height={50}

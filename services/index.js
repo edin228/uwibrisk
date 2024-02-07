@@ -181,6 +181,10 @@ export const getTestemonials = async () => {
             id
             url
           }
+          blogPhoto {
+            id
+            url
+          }
         }
       }
     }
@@ -205,6 +209,10 @@ export const getHighlightedTestemonials = async () => {
           position
           slug
           photo {
+            id
+            url
+          }
+          blogPhoto {
             id
             url
           }
@@ -278,6 +286,9 @@ export const getRecentBlogPosts = async () => {
               isActive
               name
               photo {
+                url
+              }
+              blogPhoto {
                 url
               }
           }
@@ -375,6 +386,10 @@ export const getBlogPost = async (slug) => {
           name
           position
           photo {
+            url
+          }
+          blogPhoto {
+            id
             url
           }
         }
@@ -577,6 +592,10 @@ export const getTeamMember = async (slug) => {
           id
           url
         }
+        blogPhoto {
+          id
+          url
+        }
         position
         slug
         bIo {
@@ -638,6 +657,10 @@ export const getSearch = async (search) => {
             id
             url
           }
+          blogPhoto {
+            id
+            url
+          }
         }
         publishedAt
       }
@@ -652,6 +675,10 @@ export const getSearch = async (search) => {
         slug
         hasTeamPage
         photo {
+          id
+          url
+        }
+        blogPhoto {
           id
           url
         }
