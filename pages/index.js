@@ -132,8 +132,15 @@ export default function Home({
         <div className="flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
-            <div className="flex items-center justify-center w-full mb-2 font-semibold tracking-widest text-center uppercase">
-              Hear what our clients are saying
+            <div className="flex flex-col items-center justify-center w-full gap-2 mb-2 font-semibold text-center">
+              <div className="tracking-widest uppercase ">
+                Hear what our clients are saying
+              </div>
+              <a target="_blank" rel="noreferrer" href="http://UWIBRiskInsuranceSolutions.rocketresponses.com/review_us/rs74UQg5yobEwrSfv1KJAQ">
+                <div className="px-2 text-white bg-yellow-500 rounded-md shadow-md">
+                  Leave us a Review
+                </div>
+              </a>
             </div>
             <div className="z-40 flex flex-col flex-wrap items-center justify-center w-full space-y-2 2xl:flex-nowrap lg:flex-row lg:space-y-0 lg:space-x-2">
               {testemonials?.slice(3, 7).map((card, i) => (
