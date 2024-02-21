@@ -167,6 +167,11 @@ path:hover {
     transform: translateY(0);
   }
 }
+.triangle {
+  height: 0;
+  border-right: 50px solid transparent; /* Adjust size by changing the border size */
+  border-bottom: 100px solid white; /* Adjust size by changing the border size, color for the triangle */
+}
 /* hero */
 .hero-card {
   background-position: top center !important;
@@ -510,7 +515,7 @@ li {
 }
 
 .blog-card-content-container.blog-open {
-  top: 0;
+  top:100px;
   left: 0;
   right: 0;
   position: fixed;
@@ -535,6 +540,9 @@ li {
   overflow: hidden;
 }
 
+/* .card-image {
+  max-height:320px;
+} */
 .blog-card-open-link {
   position: absolute;
   top: 0;
@@ -599,7 +607,7 @@ h2 {
 }
 
 .content-container {
-  padding: 220px 35px 35px 35px;
+  padding: 35px 35px 35px 35px;
   max-width: 700px;
   width: 90vw;
 }
@@ -642,12 +650,12 @@ p {
     top: 0;
     left: 0;
     overflow: hidden;
-    height: 420px;
+    height: 320px;
     width: 100%;
     transform: translateZ(0);
   }
   .content-container {
-    padding: 460px 35px 35px 35px;
+    padding: 335px 35px 35px 35px;
     max-width: 700px;
     width: 90vw;
   }

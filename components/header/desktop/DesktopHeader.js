@@ -44,7 +44,7 @@ export default function DesktopHeader({ navItems }) {
     >
       <div className="flex items-center justify-between w-full px-4">
         <Link href="/">
-          <a className="w-[140px] h-full relative left-4">
+          <a className="w-[200px] h-full relative left-4">
             <Image
               src="/UWIBRIS-White.png"
               alt="logo"

@@ -84,7 +84,7 @@ export default function Home({
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
+      <div className="relative flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         {testemonials ? (
           <div className="relative overflow-hidden max-h-[600px]">
             <div className=" w-[400px] 2xl:w-[760px] flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl text-shadow">
@@ -129,14 +129,18 @@ export default function Home({
         {/* <div className="flex items-center justify-center w-full 2xl:hidden">
           <HomeContactForm />
         </div> */}
-        <div className="flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
+        <div className="relative flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
           <div className="py-4">
             <div className="flex flex-col items-center justify-center w-full gap-2 mb-2 font-semibold text-center">
               <div className="tracking-widest uppercase ">
                 Hear what our clients are saying
               </div>
-              <a target="_blank" rel="noreferrer" href="http://UWIBRiskInsuranceSolutions.rocketresponses.com/review_us/rs74UQg5yobEwrSfv1KJAQ">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="http://UWIBRiskInsuranceSolutions.rocketresponses.com/review_us/rs74UQg5yobEwrSfv1KJAQ"
+              >
                 <div className="px-2 text-white bg-yellow-500 rounded-md shadow-md">
                   Leave us a Review
                 </div>
