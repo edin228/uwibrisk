@@ -46,7 +46,7 @@ export default function DesktopHeader({ navItems }) {
         <Link href="/">
           <a className="w-[140px] h-full relative left-4">
             <Image
-              src="/Asset 6.png"
+              src="/UWIBRIS-White.png"
               alt="logo"
               layout="fill"
               objectFit="contain"
