@@ -304,7 +304,7 @@ export const getRecentBlogPosts = async () => {
 export const getRecentTenBlogPosts = async () => {
   const query = gql`
       query GetRecentBlogPosts() {
-      blogPosts(orderBy: createdAt_DESC, where: {isActive: true}, last: 10) {
+      blogPosts(orderBy: createdAt_DESC, where: {isActive: true}, last: 40) {
           title
           id
           isActive
