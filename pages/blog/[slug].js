@@ -12,6 +12,8 @@ function BlogPost({ data, recentBlogs }) {
       <Head>
         <title>UWIBRISK</title>
         <meta name="description" content="United Western Insurance Brokers" />
+        <meta property="og:title" content={data?.title} />
+        <meta property="og:image" content={data?.featuredImage.url} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col w-full px-2 py-2 space-y-4 xl:w-3/4 xl:mx-auto lg:space-y-0 lg:gap-4 lg:py-4">
