@@ -13,7 +13,7 @@ function BlogPost({ data, recentBlogs }) {
         <meta
           name="description"
           property="og:description"
-          content={data?.title}
+          content={data?.excerpt}
         />
         <meta name="type" property="og:type" content="website" />
         <meta name="title" property="og:title" content={data?.title} />

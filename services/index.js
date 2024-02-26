@@ -370,6 +370,7 @@ export const getBlogPost = async (slug) => {
         id
         isActive
         rawHtml
+        excerpt
         slug
         title
         template
