@@ -96,11 +96,11 @@ function Contact({ data }) {
 
   return (
     <Base template={"SingleColumn"}>
-      <Head>
+      {/* <Head>
         <title>UWIBRISK</title>
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
       <div className="relative flex flex-col w-full h-full p-2 py-4 mx-auto space-y-4 xl:flex-row xl:w-3/4 lg:space-y-0">
         <motion.img
           src={data?.headerImage?.url}

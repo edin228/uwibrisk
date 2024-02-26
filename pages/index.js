@@ -79,11 +79,11 @@ export default function Home({
 
   return (
     <Base template={"home"}>
-      <Head>
+      {/* <Head>
         <title>UWIBRISK</title>
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Head> */}
       <div className="relative flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         {testemonials ? (
           <div className="relative overflow-hidden max-h-[600px]">
