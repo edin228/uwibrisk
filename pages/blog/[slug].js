@@ -22,6 +22,7 @@ function BlogPost({ data, recentBlogs }) {
           property="og:image"
           content={data?.featuredImage.url}
         />
+        <meta name="url" property="og:url" content={`uwibrisk.com/${data?.slug}`} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base template={"Blog"}>
