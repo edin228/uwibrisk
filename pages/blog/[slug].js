@@ -31,14 +31,16 @@ function BlogPost({ data, recentBlogs }) {
       </Head>
       <Base template={"Blog"}>
         <div className="flex flex-col w-full px-2 py-2 space-y-4 xl:w-3/4 xl:mx-auto lg:space-y-0 lg:gap-4 lg:py-4">
-          <div className="h-[15vh] lg:h-[30vh]">
+          <div className="h-[15vh] md:h-[20vh] lg:h-[30vh]">
             <BlogHeader
               title={data?.title}
               id={data?.featuredImage.id}
               image={data?.featuredImage.url}
             />
           </div>
-
+          <div className="z-30 flex px-2 pt-2 text-xl font-bold xl:hidden lg:text-4xl">
+            {data?.title}
+          </div>
           <div className="flex flex-col w-full lg:flex-row">
             <div className="flex flex-col w-full px-4 blog">
               <div className="flex flex-wrap space-x-2">
