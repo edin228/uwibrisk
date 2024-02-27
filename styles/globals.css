@@ -687,3 +687,12 @@ p {
     height: 970px !important;
   }
 }
+@media print {
+  img, .next-image {
+    display: block !important;
+    max-height: none !important;
+  }
+  #LeadboosterContainer {
+    display: none !important;
+  }
+}

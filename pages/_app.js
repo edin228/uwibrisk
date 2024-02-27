@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
+import { useEffect } from "react";
 
 const progress = new ProgressBar({
   size: 4,

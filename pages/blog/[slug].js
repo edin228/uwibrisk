@@ -22,16 +22,22 @@ function BlogPost({ data, recentBlogs }) {
           property="og:image"
           content={data?.featuredImage.url}
         />
-        <meta name="url" property="og:url" content={`uwibrisk.com/${data?.slug}`} />
+        <meta
+          name="url"
+          property="og:url"
+          content={`uwibrisk.com/${data?.slug}`}
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base template={"Blog"}>
         <div className="flex flex-col w-full px-2 py-2 space-y-4 xl:w-3/4 xl:mx-auto lg:space-y-0 lg:gap-4 lg:py-4">
-          <BlogHeader
-            title={data?.title}
-            id={data?.featuredImage.id}
-            image={data?.featuredImage.url}
-          />
+          <div className="h-[15vh] lg:h-[30vh]">
+            <BlogHeader
+              title={data?.title}
+              id={data?.featuredImage.id}
+              image={data?.featuredImage.url}
+            />
+          </div>
 
           <div className="flex flex-col w-full lg:flex-row">
             <div className="flex flex-col w-full px-4 blog">
