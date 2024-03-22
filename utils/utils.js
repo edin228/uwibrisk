@@ -59,7 +59,7 @@ import {
   BiPulse,
 } from "react-icons/bi";
 
-import { GiBigDiamondRing, GiDeliveryDrone } from "react-icons/gi"
+import { GiBigDiamondRing, GiDeliveryDrone, GiFlood } from "react-icons/gi"
 
 export const graphCMSImageLoader = ({ src }) => src;
 
@@ -286,6 +286,8 @@ export const getIcon = (item) => {
     <FaDog />
   ) : item == "drone" ? (
     <GiDeliveryDrone />
+  ) : item == "flood" ? (
+    <GiFlood />
   ) : null;
 };
 

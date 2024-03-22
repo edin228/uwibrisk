@@ -10,6 +10,7 @@ function BlogPost({ data, recentBlogs }) {
   return (
     <>
       <Head>
+        <title>{data?.title}</title>
         <meta
           name="description"
           property="og:description"
