@@ -507,6 +507,28 @@ export const getHomeActionButtons = async () => {
   return result.homeActionButtons;
 };
 
+export const getQuoteCards = async () => {
+  const query = gql`
+    query GetQuoteCards {
+      quoteCards(where: {isActive: true}, orderBy: order_ASC) {
+        id
+        icon
+        image {
+          id
+          url
+        }
+        isActive
+        label
+        order
+        slug
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.quoteCards;
+};
+
 export const getNavMenuItems = async () => {
   const query = gql`
     query GetNavMenuItems {

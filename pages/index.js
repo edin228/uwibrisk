@@ -1,29 +1,16 @@
-import Head from "next/head";
-import ActionsContainer from "../components/home/actions/ActionsContainer";
 import BlogContainer from "../components/blog/BlogContainer";
 import CarriersContainer from "../components/home/carriers/CarriersContainer";
-import HeroContainer from "../components/home/hero/HeroContainer";
-import Landing from "../components/home/landing/Landing";
-import TestemonialContainer from "../components/home/testemonials/TestemonialContainer";
 import Base from "../components/layout/Base";
 import {
-  getCarrierCarousel,
   getCarrierInfo,
-  getCarriers,
-  getHomeActionButtons,
   getLanding,
   getOfficeLocations,
   getRecentBlogPosts,
   getTestemonials,
-  postTerms,
 } from "../services";
-import HomeContainer from "../components/home/v2/HomeContainer";
-import { useEffect } from "react";
-import { useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
 import TestemonialPageCard from "../components/home/testemonials/TestemonialPageCard";
-import HomeContactForm from "../components/contact/HomeContactForm";
 
 const TypingText = () => {
   return (
@@ -50,12 +37,9 @@ const TypingText = () => {
 };
 
 export default function Home({
-  landing = null,
-  officeLocations = null,
   carriers = null,
   posts = null,
   testemonials = null,
-  homeButtons = null,
 }) {
   // const [insuranceList, setInsuranceList] = useState([
   //   "Business Insurance",
@@ -166,7 +150,6 @@ export async function getServerSideProps({ params }) {
   const carriers = await getCarrierInfo();
   const posts = await getRecentBlogPosts();
   const testemonials = await getTestemonials();
-  const homeButtons = await getHomeActionButtons();
 
   return {
     props: {
@@ -175,7 +158,6 @@ export async function getServerSideProps({ params }) {
       carriers,
       testemonials,
       posts,
-      homeButtons,
     },
   };
 }
