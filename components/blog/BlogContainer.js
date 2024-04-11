@@ -4,10 +4,10 @@ import { BlogCard } from "./BlogCard";
 function BlogContainer( {posts}) {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex w-full mb-4 justify-center text-center items-center uppercase tracking-widest font-semibold">
+      <div className="flex items-center justify-center w-full mb-4 font-semibold tracking-widest text-center uppercase">
         News & Insights
       </div>
-      <ul className="flex flex-wrap items-start h-[800px] lg:h-[600px]">
+      <ul className="flex flex-wrap items-start">
         {posts.map((card) => (
           <BlogCard
             key={card.id}

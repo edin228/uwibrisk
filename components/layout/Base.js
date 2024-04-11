@@ -10,8 +10,9 @@ function Base({ children, template = null, data = null, title=null }) {
         <Header />
         <div className="relative flex flex-col h-full overflow-x-hidden overflow-y-auto lg:pt-20">
           <ContentBase title={title} data={data} template={template}>{children}</ContentBase>
-          <Footer />
+          
         </div>
+        <Footer />
       </div>
     </div>
   );
