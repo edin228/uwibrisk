@@ -16,7 +16,7 @@ export default function PrivateClient({
   return (
     <Base template={"home"}>
       <Head>
-        <title>UWIBRISK</title>
+        <title>UWIB Risk</title>
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

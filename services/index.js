@@ -454,13 +454,6 @@ export const getPage = async (slug) => {
               placeholder
               required
             }
-            ... on FormTextArea {
-              id
-              name
-              textareaLabel: label
-              placeholder
-              required
-            }
             ... on FormCheckbox {
               id
               name
@@ -527,6 +520,28 @@ export const getQuoteCards = async () => {
   const result = await request(graphqlAPI, query);
 
   return result.quoteCards;
+};
+
+export const getCheckUps = async () => {
+  const query = gql`
+    query GetCheckUpCards {
+      checkUpCards(where: {isActive: true}, orderBy: order_ASC) {
+        id
+        icon
+        image {
+          id
+          url
+        }
+        isActive
+        label
+        order
+        slug
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result.checkUpCards;
 };
 
 export const getNavMenuItems = async () => {

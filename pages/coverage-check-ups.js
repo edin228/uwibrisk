@@ -3,9 +3,9 @@ import React from "react";
 import Base from "../components/layout/Base";
 import { getIcon } from "../utils/utils";
 import QuoteCard from "../components/quote/QuoteCard";
-import { getQuoteCards } from "../services";
+import { getCheckUps } from "../services";
 
-function GetQuotes({ data }) {
+function CoverageCheckUps({ data }) {
   return (
     <Base template={"Grid"}>
       <Head>
@@ -15,7 +15,7 @@ function GetQuotes({ data }) {
       </Head>
       <div className="flex flex-col w-full h-full">
         <h1 className="w-full py-4 text-3xl font-bold text-center">
-          Get Quotes
+          Coverage Checkups
         </h1>
         <div className="flex flex-col w-full h-full px-4 py-8 space-y-4 xl:py-20 xl:space-y-0 xl:flex-row xl:flex-wrap xl:px-80 xl:gap-8 xl:items-center xl:justify-center">
           {data.map((x) => (
@@ -30,11 +30,11 @@ function GetQuotes({ data }) {
   );
 }
 
-export default GetQuotes;
+export default CoverageCheckUps;
 
 // Fetch data at build time
 export async function getServerSideProps() {
-  const data = await getQuoteCards();
+  const data = await getCheckUps();
   return {
     props: {
       data,

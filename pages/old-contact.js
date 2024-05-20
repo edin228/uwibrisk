@@ -97,7 +97,7 @@ function Contact({ data }) {
   return (
     <Base template={"SingleColumn"}>
       {/* <Head>
-        <title>UWIBRISK</title>
+        <title>UWIB Risk</title>
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head> */}
