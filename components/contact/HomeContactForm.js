@@ -99,6 +99,8 @@ function HomeContactForm() {
         if (
           projectedSales < 50000000 ||
           projectedSales < 1000000 ||
+          selectedIndustry === "Municipal Insurance" ||
+          selectedIndustry === "Agriculture" ||
           selectedIndustry === "Transportation/Automotive" ||
           selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
@@ -113,6 +115,8 @@ function HomeContactForm() {
       case "Eric Schirding":
         if (
           projectedSales < 1000000 ||
+          selectedIndustry === "Municipal Insurance" ||
+          selectedIndustry === "Agriculture" ||
           selectedIndustry === "Transportation/Automotive" ||
           selectedIndustry === "Contracting Trades" ||
           selectedIndustry === "Entertainment" ||
