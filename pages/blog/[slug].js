@@ -33,7 +33,7 @@ function BlogPost({ data, recentBlogs }) {
       <Base template={"Blog"}>
         <div className="flex flex-col w-full p-4 xl:flex-row xl:w-3/4 xl:mx-auto">
           <div className="flex flex-col w-full">
-            <div className="block h-[10vh] md:h-[25vh]">
+            <div className="block mb-4">
               <BlogHeader
                 title={data?.title}
                 id={data?.featuredImage.id}

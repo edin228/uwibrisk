@@ -6,7 +6,6 @@ import QuoteCard from "../components/quote/QuoteCard";
 import { getProgramInfo, getQuoteCards } from "../services";
 import { motion } from "framer-motion";
 
-
 const ProgramGridItem = ({ data }) => {
   return (
     <div className="flex flex-col h-[500px] w-full lg:w-[300px] m-1 p-4 rounded-lg shadow-lg border-2 border-slate-500/20">
@@ -197,17 +196,14 @@ function GetQuotes({ data, programs }) {
         </h1>
         <div className="flex flex-col w-full h-full px-4 py-8 space-y-4 xl:py-20 xl:space-y-0 xl:flex-row xl:flex-wrap xl:px-80 xl:gap-8 xl:items-center xl:justify-center">
           {data.map((x) => (
-            <QuoteCard
-              key={x.id}
-              data={x}
-            />
+            <QuoteCard key={x.id} data={x} />
           ))}
         </div>
         <h1 className="w-full py-4 text-3xl font-bold text-center">
           Niche Programs
         </h1>
         <div
-          className={`flex flex-wrap w-full h-full gap-2 px-4 pb-4 lg:justify-center`}
+          className={`flex flex-wrap w-full h-full gap-2  xl:px-80 px-4 pb-4 lg:justify-center`}
         >
           {programs?.map((c, i) => (
             <ProgramGridItem key={c.id} data={c} />
@@ -227,7 +223,7 @@ export async function getServerSideProps() {
   return {
     props: {
       data,
-      programs
+      programs,
     },
   };
 }
