@@ -3,7 +3,7 @@ import React from "react";
 import Base from "../components/layout/Base";
 import { getIcon } from "../utils/utils";
 import QuoteCard from "../components/quote/QuoteCard";
-import { getQuoteCards } from "../services";
+import { getProgramInfo, getQuoteCards } from "../services";
 import { motion } from "framer-motion";
 
 
@@ -209,7 +209,7 @@ function GetQuotes({ data, programs }) {
         <div
           className={`flex flex-wrap w-full h-full gap-2 px-4 pb-4 lg:justify-center`}
         >
-          {gridData?.map((c, i) => (
+          {programs?.map((c, i) => (
             <ProgramGridItem key={c.id} data={c} />
           ))}
         </div>
