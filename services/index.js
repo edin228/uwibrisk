@@ -110,7 +110,7 @@ export const getCarrierInfo = async () => {
 export const getGlossaryTerms = async () => {
   const query = gql`
     query MyQuery {
-      glossaryTerms(first: 500, orderBy: term_ASC) {
+      glossaryTerms(first: 900, orderBy: term_ASC) {
         definition
         term
         id
