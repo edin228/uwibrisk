@@ -110,7 +110,17 @@ export const getCarrierInfo = async () => {
 export const getGlossaryTerms = async () => {
   const query = gql`
     query MyQuery {
-      glossaryTerms(first: 900, orderBy: term_ASC) {
+      glossaryTerms(first: 100, orderBy: term_ASC) {
+        definition
+        term
+        id
+        glossaryType
+      }
+    }
+  `;
+  const query2 = gql`
+    query MyQuery {
+      glossaryTerms(first: 100,skip:100, orderBy: term_ASC) {
         definition
         term
         id
@@ -119,8 +129,9 @@ export const getGlossaryTerms = async () => {
     }
   `;
   const result = await request(graphqlAPI, query);
+  const result2 = await request(graphqlAPI, query2);
 
-  return result.glossaryTerms;
+  return [...result.glossaryTerms,...result2.glossaryTerms];
 };
 
 export const getProgramInfo = async () => {
