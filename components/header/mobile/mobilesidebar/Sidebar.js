@@ -30,9 +30,13 @@ export const Sidebar = ({ navItems }) => {
       className={isOpen ? "open-nav" : "z-0"}
     >
       <motion.div className="sb-background" variants={sidebar} />
-      <div className={`${isOpen ? 'block':'hidden'} w-[140px] h-[80px] fixed top-0 left-4`}>
+      <div
+        className={`${
+          isOpen ? "block" : "hidden"
+        } w-[240px] h-[80px] fixed top-0 left-4`}
+      >
         <Image
-          src="/logo-full.png"
+          src="/UWIB-Wide-Black.jpg"
           alt="logo"
           layout="fill"
           objectFit="contain"

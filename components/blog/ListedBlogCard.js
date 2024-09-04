@@ -6,10 +6,6 @@ import Link from "next/link";
 import { truncateString } from "../../utils/utils";
 
 
-
-
-
-
 function ListedBlogCard({ post, large = false }) {
   return (
     <li className="w-full py-1 listed-blog-card lg:p-2">

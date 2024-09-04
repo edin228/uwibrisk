@@ -8,9 +8,9 @@ function MobileHeader({navItems}) {
     <div className="z-50 flex w-full h-20 lg:hidden">
       <div className="flex items-center justify-between w-full">
         <Link href="/">
-          <a className="w-[180px] h-full relative left-4">
+          <a className="w-[240px] h-full relative left-4">
             <Image
-              src="/UWIBRIS.png"
+              src="/UWIB-Wide-Black.jpg"
               alt="logo"
               layout="fill"
               objectFit="contain"
