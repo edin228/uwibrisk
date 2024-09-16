@@ -8,6 +8,8 @@ export const Placeholder = React.memo(({ slug, excerpt }) => {
   return (
     <motion.div
       className="content-container text-white flex flex-col"
+      data-excerpt={excerpt}
+      data-description={excerpt}
       style={{ ...inverted, originY: 0, originX: 0 }}
     >
       {excerpt}
