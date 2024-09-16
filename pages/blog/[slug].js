@@ -28,6 +28,7 @@ function BlogPost({ data, recentBlogs }) {
           content={`https://uwibrisk.com/${data?.slug}`}
         />
         <link rel="icon" href="/favicon.ico" />
+        <meta property="article:published_time" content={data?.publishedAt} />
       </Head>
       <Base template={"Blog"}>
         <div className="flex flex-col w-full p-4 xl:flex-row xl:w-3/4 xl:mx-auto">

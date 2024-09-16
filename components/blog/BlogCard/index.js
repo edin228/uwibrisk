@@ -19,7 +19,15 @@ const dismissDistance = 150;
 
 // eslint-disable-next-line react/display-name
 export const BlogCard = memo(
-  ({ id, featuredImage, excerpt, slug, title, blogCategories }) => {
+  ({
+    id,
+    featuredImage,
+    excerpt,
+    slug,
+    title,
+    blogCategories,
+    publishedAt,
+  }) => {
     const [isSelected, setIsSelected] = useState(false);
     const router = useRouter();
     const y = useMotionValue(0);
@@ -89,13 +97,25 @@ export const BlogCard = memo(
             onUpdate={checkZIndex}
             onClick={() => setIsSelected(!isSelected)}
           >
+            <div className="text-sm text-gray-500/0">
+              Published on:{" "}
+              {new Date(publishedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
             <BlogImage
               id={id}
               image={featuredImage.url}
               isSelected={isSelected}
             />
-            <Title title={title} category={blogCategories} isSelected={isSelected} />
-            <Placeholder id={id} excerpt={excerpt} slug={slug}/>
+            <Title
+              title={title}
+              category={blogCategories}
+              isSelected={isSelected}
+            />
+            <Placeholder id={id} excerpt={excerpt} slug={slug} />
           </motion.div>
         </div>
       </li>
