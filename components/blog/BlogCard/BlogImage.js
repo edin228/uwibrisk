@@ -18,7 +18,8 @@ export const BlogImage = ({
       <motion.img
         className="card-image"
         src={image}
-        alt=""
+        alt="Blog featured image"
+        data-featured-image={image}
         initial={false}
         animate={
           isSelected ? { maxWidth:'100%' } : { maxWidth:'100%' }

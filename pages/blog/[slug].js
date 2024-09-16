@@ -12,21 +12,20 @@ function BlogPost({ data, recentBlogs }) {
       <Head>
         <title>{data?.title}</title>
         <meta
-          name="description"
           property="og:description"
           content={data?.excerpt}
         />
-        <meta name="type" property="og:type" content="website" />
-        <meta name="title" property="og:title" content={data?.title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={data?.title} />
         <meta
-          name="image"
           property="og:image"
           content={data?.featuredImage.url}
         />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta
-          name="url"
           property="og:url"
-          content={`uwibrisk.com/${data?.slug}`}
+          content={`https://uwibrisk.com/${data?.slug}`}
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

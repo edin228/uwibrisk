@@ -16,7 +16,8 @@ function ListedBlogCard({ post, large = false }) {
               <motion.img
                 className="w-[340px] rounded-lg shadow-lg hidden 2xl:flex"
                 src={post.featuredImage?.url}
-                alt=""
+                alt="Blog featured image"
+                data-featured-image={post.featuredImage?.url}
                 initial={false}
               />
             )}
