@@ -70,6 +70,7 @@ function BlogPost({ data, recentBlogs }) {
                         className="rounded-full"
                         objectFit="cover"
                       />
+                      <img src={data?.teamMember?.blogPhoto?.url} alt="featured image" className="hidden" />
                     </div>
                     <div className="flex flex-col">
                       <div className="flex font-bold">

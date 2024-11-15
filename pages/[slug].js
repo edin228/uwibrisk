@@ -7,6 +7,7 @@ import Router, { useRouter } from "next/router";
 import { getIcon } from "../utils/utils";
 import TestemonialCard from "../components/home/testemonials/TestemonialCard";
 import TestemonialPageCard from "../components/home/testemonials/TestemonialPageCard";
+import Link from "next/link";
 
 function DefaultContent({ data }) {
   return (
@@ -25,7 +26,11 @@ function DefaultContent({ data }) {
           </div>
         </div>
       ) : null}
-      <div className={`flex items-center flex-col w-full h-full ${data?.template != 'WebForm' ? 'px-8': ''}`}>
+      <div
+        className={`flex items-center flex-col w-full h-full ${
+          data?.template != "WebForm" ? "px-8" : ""
+        }`}
+      >
         {data?.content.map((c, i) => (
           <div
             key={Date()}
@@ -71,16 +76,20 @@ function LandingPageContent({ data }) {
           <div className="py-2 font-semibold text-md">
             {data?.wordingUnderTitle}
           </div>
-          {/* <div className="flex items-center py-4 space-x-2">
-            <div className="cursor-pointer flex items-center p-2 text-xl rounded-lg border-2 border-sky-500 shadow-lg w-[200px] text-center justify-center font-bold duration-100 transition bg-sky-500 text-white">
-              Contact Us
-            </div>
-          </div> */}
         </div>
         <motion.img
           src={data?.headerImage?.url}
           className="hidden lg:flex absolute blur-[4px] w-full top-[-70%] right-0 z-[-1] bg-cover scale-150"
         ></motion.img>
+        <div className="flex items-center py-4 absolute top-[30%] right-[15%] hover:scale-110 transition duration-100">
+          <Link href={"https://outlook.office.com/bookwithme/user/64af5564721d47918b0c4061dff559e0@uwib.com/meetingtype/zPlzuawutkij0GZ1BCf8KA2?anonymous&ep=mlink"}>
+            <button
+              className={`bg-[#eab308] text-shadow-sm text-white p-2 rounded-md bg-shadow-lg text-2xl font-bold border-[2px] border-[#eab308]  transition duration-200 `}
+            >
+              Schedule a Consultation
+            </button>
+          </Link>
+        </div>
       </div>
       {/* <motion.img
         src={data?.headerImage?.url}

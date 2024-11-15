@@ -295,7 +295,7 @@ function HomeContactForm() {
                 }`}
                 onClick={() => changeLine(`Personal Insurance`)}
               >
-                Personal Insurance
+                Personal or Private Client
               </button>
               <button
                 className={`min-w-[150px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200  ${

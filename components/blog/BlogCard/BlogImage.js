@@ -20,6 +20,7 @@ export const BlogImage = ({
         src={image}
         alt="Blog featured image"
         data-featured-image={image}
+        data-image-url={image}
         initial={false}
         animate={
           isSelected ? { maxWidth:'100%' } : { maxWidth:'100%' }
