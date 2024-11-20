@@ -34,9 +34,8 @@ class MyDocument extends Document {
               `,
             }}
           />
-          <script src="https://leadbooster-chat.pipedrive.com/assets/loader.js" async />
-          
-          <script src="https://cdn.userway.org/widget.js" data-account="YFNZVyXaJ6"></script>
+          <script src="https://leadbooster-chat.pipedrive.com/assets/loader.js" async />          
+          <script src="https://cdn.userway.org/widget.js" data-account="YFNZVyXaJ6" async />
         </Head>
         <body>
           <Main />
