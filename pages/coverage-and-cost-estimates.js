@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 
 const ProgramGridItem = ({ data }) => {
   return (
-    <div className="flex flex-col h-[500px] w-full lg:w-[300px] m-1 p-4 rounded-lg shadow-lg border-2 border-slate-500/20">
+    <div className="flex flex-col h-[500px] w-full lg:w-[300px] m-1 p-4 rounded-lg bg-white shadow-lg border-2 border-slate-500/20">
       <div className="relative flex items-center justify-center overflow-hidden rounded-lg">
         <a
           href={data.url}
