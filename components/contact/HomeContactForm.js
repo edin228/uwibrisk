@@ -73,8 +73,18 @@ function HomeContactForm() {
   const ericObj = team?.filter((x) => x.name == "Eric Schirding")[0];
   const joshObj = team?.filter((x) => x.name == "Josh Acosta")[0];
   const nickObj = team?.filter((x) => x.name == "Nick Latshaw")[0];
+  const shaneObj = team?.filter((x) => x.name == "Shane Shoemaker")[0];
+  const michaelObj = team?.filter((x) => x.name == "Michael Kenneth")[0];
 
-  const producers = [jesseObj, danaObj, ericObj, joshObj, nickObj];
+  const producers = [
+    jesseObj,
+    danaObj,
+    ericObj,
+    joshObj,
+    nickObj,
+    shaneObj,
+    michaelObj,
+  ];
 
   const validAgent = (agent) => {
     let valid = true;
@@ -246,7 +256,7 @@ function HomeContactForm() {
 
   return (
     <div
-      className={`relative flex flex-col w-full h-[470px] transition duration-200 ease-out ${
+      className={`relative flex flex-col w-full h-[500px] transition duration-200 ease-out ${
         page > 0 || selectedStates.length > 0
           ? `rounded-md shadow-lg bg-zinc-800/70 backdrop-blur-sm`
           : `bg-transparent`
@@ -360,7 +370,9 @@ function HomeContactForm() {
                     private client needs.
                   </div>
                   <div className="flex justify-center mt-4">
-                    <Link  href={jesseObj.meetingLink ? jesseObj.meetingLink : "#"}>
+                    <Link
+                      href={jesseObj.meetingLink ? jesseObj.meetingLink : "#"}
+                    >
                       <button
                         className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
                       >
@@ -392,7 +404,7 @@ function HomeContactForm() {
             </div>
           )}
         {page == 2 && selectedLineofBusiness == "Business Insurance" && (
-          <div className="flex flex-col items-center w-full h-full gap-4 text-white">
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 text-white">
             <div className="flex items-center justify-center w-full gap-4">
               <div
                 className={`${
@@ -454,64 +466,90 @@ function HomeContactForm() {
                   initial={false}
                 />
               </div>
-            </div>
-            <div className="flex items-center justify-center w-full mb-2 font-bold text-center 2xl:text-3xl 2xl:w-3/4">
-              <div>Now, lets match you with the right advisor</div>
-            </div>
-            <div className="flex items-center justify-center w-full gap-2">
-              <div className="font-semibold 2xl:text-3xl">
-                Select your industry
-              </div>
-              <select
-                id={0}
-                className="w-3/12 p-2 overflow-y-auto rounded-lg bg-zinc-400/20"
-                onChange={(e) => setSelectedIndustry(e.target.value)}
-                value={selectedIndustry}
+              <div
+                className={`${
+                  validAgent(shaneObj) ? "visible" : "opacity-30"
+                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
               >
-                {industryOptions.formOptions.map(
-                  ({ option, ...opt }, index) => (
-                    <option
-                      className="text-white bg-zinc-700"
-                      key={index}
-                      {...opt}
-                    >
-                      {option}
-                    </option>
-                  )
-                )}
-              </select>
-              {/* <Dropdown
+                <motion.img
+                  className="object-cover w-full h-full"
+                  src={shaneObj.photo.url}
+                  alt=""
+                  initial={false}
+                />
+              </div>
+              <div
+                className={`${
+                  validAgent(michaelObj) ? "visible" : "opacity-30"
+                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
+                <motion.img
+                  className="object-cover w-full h-full"
+                  src={michaelObj.photo.url}
+                  alt=""
+                  initial={false}
+                />
+              </div>
+            </div>
+            <div className="flex items-center justify-center w-full mb-1 font-bold text-center 2xl:text-2xl 2xl:w-3/4">
+              <div>Lets match you with the right advisor</div>
+            </div>
+            <div className="flex flex-col gap-2 justify-center items-center">
+              <div className="flex flex-col w-full gap-2">
+                <div className="font-semibold 2xl:text-2xl">
+                  Select your industry
+                </div>
+                <select
+                  id={0}
+                  className="w-6/12 p-2 overflow-y-auto rounded-lg bg-zinc-400/20"
+                  onChange={(e) => setSelectedIndustry(e.target.value)}
+                  value={selectedIndustry}
+                >
+                  {industryOptions.formOptions.map(
+                    ({ option, ...opt }, index) => (
+                      <option
+                        className="text-white bg-zinc-700"
+                        key={index}
+                        {...opt}
+                      >
+                        {option}
+                      </option>
+                    )
+                  )}
+                </select>
+                {/* <Dropdown
                 options={industryOptions.formOptions}
                 onSelect={setSelectedIndustry}
                 selectedValue={selectedIndustry}
               /> */}
-            </div>
-            <div className="flex items-center justify-center w-full gap-2">
-              <div className="font-semibold 2xl:text-3xl">
-                How many people do you employ?
               </div>
-              <input
-                id={1}
-                type="number"
-                className="w-2/12 p-2 rounded-lg form-input bg-zinc-400/20"
-                onChange={(e) => setNumberOfEmployees(e.target.value)}
-                value={numberOfEmployees}
-              />
-            </div>
-            <div className="flex items-center justify-center w-full gap-2">
-              <div className="font-semibold 2xl:text-3xl">
-                Projected sales for the next 12 months?
+              <div className="flex flex-col w-full gap-2">
+                <div className="font-semibold 2xl:text-2xl">
+                  How many people do you employ?
+                </div>
+                <input
+                  id={1}
+                  type="number"
+                  className="w-6/12 p-2 rounded-lg form-input bg-zinc-400/20"
+                  onChange={(e) => setNumberOfEmployees(e.target.value)}
+                  value={numberOfEmployees}
+                />
               </div>
-              <CurrencyInput
-                id="input-example"
-                prefix="$"
-                name="input-name"
-                placeholder=""
-                defaultValue={1000000}
-                decimalsLimit={2}
-                className="w-2/12 p-2 rounded-lg form-input bg-zinc-400/20"
-                onValueChange={(value, name) => setEstimatedRevenue(value)}
-              />
+              <div className="flex flex-col w-full gap-2">
+                <div className="font-semibold 2xl:text-2xl">
+                  Projected sales for the next 12 months?
+                </div>
+                <CurrencyInput
+                  id="input-example"
+                  prefix="$"
+                  name="input-name"
+                  placeholder=""
+                  defaultValue={1000000}
+                  decimalsLimit={2}
+                  className="w-6/12 p-2 rounded-lg form-input bg-zinc-400/20"
+                  onValueChange={(value, name) => setEstimatedRevenue(value)}
+                />
+              </div>
             </div>
           </div>
         )}

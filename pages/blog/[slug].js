@@ -11,16 +11,10 @@ function BlogPost({ data, recentBlogs }) {
     <>
       <Head>
         <title>{data?.title}</title>
-        <meta
-          property="og:description"
-          content={data?.excerpt}
-        />
+        <meta property="og:description" content={data?.excerpt} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={data?.title} />
-        <meta
-          property="og:image"
-          content={data?.featuredImage.url}
-        />
+        <meta property="og:image" content={data?.featuredImage.url} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta
@@ -44,7 +38,7 @@ function BlogPost({ data, recentBlogs }) {
               {data?.title}
             </div>
             <div className="flex flex-col w-full lg:flex-row">
-              <div className="flex flex-col w-full blog">
+              <div className="flex flex-col w-full blog gap-2">
                 <div className="flex flex-wrap space-x-2">
                   {data?.blogTags.map((tag) => (
                     <div
@@ -70,7 +64,11 @@ function BlogPost({ data, recentBlogs }) {
                         className="rounded-full"
                         objectFit="cover"
                       />
-                      <img src={data?.teamMember?.blogPhoto?.url} alt="featured image" className="hidden" />
+                      <img
+                        src={data?.teamMember?.blogPhoto?.url}
+                        alt="featured image"
+                        className="hidden"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <div className="flex font-bold">
@@ -80,9 +78,11 @@ function BlogPost({ data, recentBlogs }) {
                     </div>
                   </div>
                 ) : null}
-                <div
-                  dangerouslySetInnerHTML={{ __html: data?.content.html }}
-                ></div>
+                <div className="flex w-full h-full bg-white rounded-md p-2">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: data?.content.html }}
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
