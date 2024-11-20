@@ -20,7 +20,7 @@ import {
 import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse, FaDog, FaPlane } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { RiLinksLine } from "react-icons/ri";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight, HiOutlineOfficeBuilding } from "react-icons/hi";
 import { TbCertificate } from "react-icons/tb";
 import { IoMdQuote } from "react-icons/io";
 import {
@@ -288,6 +288,10 @@ export const getIcon = (item) => {
     <GiDeliveryDrone />
   ) : item == "flood" ? (
     <GiFlood />
+  ) : item == "arrowLeft" ? (
+    <HiOutlineArrowNarrowLeft />
+  )  : item == "arrowRight" ? (
+    <HiOutlineArrowNarrowRight />
   ) : null;
 };
 

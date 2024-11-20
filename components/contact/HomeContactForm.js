@@ -8,6 +8,7 @@ import Map from "./Map";
 import Link from "next/link";
 import Dropdown from "../form/Dropdown";
 import CurrencyInput from "react-currency-input-field";
+import { getIcon } from "../../utils/utils";
 
 function HomeContactForm() {
   const [page, setPage] = useState(0);
@@ -554,7 +555,7 @@ function HomeContactForm() {
           </div>
         )}
         {page == 3 && selectedLineofBusiness == "Business Insurance" && (
-          <div className="flex w-full overflow-x-auto text-white">
+          <div className="flex w-full overflow-x-auto text-white h-[90%] z-[50] gap-4">
             {producers
               .filter((x) => validAgent(x))
               .map((prod) => (
@@ -562,7 +563,7 @@ function HomeContactForm() {
                   key={prod.id}
                   className="flex flex-col justify-center w-full h-full text-white"
                 >
-                  <div className="flex items-center justify-center w-full mb-2">
+                  <div className="flex items-center justify-center mb-2">
                     <div className="flex flex-col items-center justify-center">
                       <div className="text-2xl font-bold">{prod.name}</div>
                       <div className="font-bold ">Account Executive</div>
@@ -574,7 +575,7 @@ function HomeContactForm() {
                           initial={false}
                         />
                       </div>
-                      <div className="flex w-[400px] px-4 text-center">
+                      <div className="flex px-4 text-center">
                         {prod.miniBio ? prod.miniBio : ""}
                       </div>
                       <div className="flex justify-center mt-4">
@@ -596,16 +597,17 @@ function HomeContactForm() {
       {selectedStates.length > 0 && (
         <div className="absolute bottom-0 flex items-center justify-between w-full p-4">
           <button
-            className={`p-2 w-[100px] text-white shadow-lg rounded-lg blue-button-gradient ${
+            className={`p-2 text-white shadow-lg rounded-lg gap-2 flex items-center border-[1px] hover:border-yellow-500 transition duration-200 hover:text-yellow-500 ${
               page == 0 ? `hidden` : ""
             }`}
             onClick={() => changePage("back")}
           >
-            Back
+            <span>{getIcon("arrowLeft")}</span>
+            <span>Back</span>
           </button>
           <div className="flex justify-end w-full">
             <button
-              className={`p-2 w-[100px] text-white shadow-lg rounded-lg blue-button-gradient ${
+              className={`p-2  text-white shadow-lg rounded-lg flex items-center gap-2 yellow-button-gradient ${
                 page == contactData?.length ||
                 (page == 3 && selectedLineofBusiness == "Personal Insurance") ||
                 page == 1 ||
@@ -621,7 +623,8 @@ function HomeContactForm() {
               }`}
               onClick={() => changePage("forward")}
             >
-              Next
+              <span>Next</span>
+              <span>{getIcon("arrowRight")}</span>
             </button>
           </div>
         </div>

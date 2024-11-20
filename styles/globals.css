@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.scrollbar {
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 0.2em;
+  height: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 50px;
+}
+
 .blog p a {
   color: #3d7aed;
 }
@@ -322,6 +336,10 @@ path:hover {
 }
 .blue-button-gradient {
   background: #245cfb;
+  /* background-image: linear-gradient( to left, #12bbff, #0232b9 ); */
+}
+.yellow-button-gradient {
+  background: #fba524;
   /* background-image: linear-gradient( to left, #12bbff, #0232b9 ); */
 }
 .lime-gradient {
