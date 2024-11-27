@@ -134,7 +134,7 @@ function CoffeeAndContracts() {
         <div className="flex flex-col md:flex-row w-full bg-zinc-100 p-4 md:h-[300px] justify-center items-center gap-2 rounded-md">
           <div className="flex flex-col items-center">
             <div className="text-[3rem] md:text-[5rem] mb-4">
-              {getIcon("scale")}
+              {getIcon("binoculars")}
             </div>
             <div className="font-bold text-2xl">Identify</div>
             <div className="p-2 w-3/4 text-center">
@@ -143,7 +143,7 @@ function CoffeeAndContracts() {
           </div>
           <div className="flex flex-col items-center">
             <div className="text-[3rem] md:text-[5rem] mb-4">
-              {getIcon("binoculars")}
+              {getIcon("scale")}
             </div>
             <div className="font-bold text-2xl">Evaluate</div>
             <div className="p-2 w-3/4 text-center">
