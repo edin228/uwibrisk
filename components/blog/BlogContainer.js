@@ -7,14 +7,14 @@ function BlogContainer( {posts}) {
       <div className="flex items-center justify-center w-full mb-4 font-semibold tracking-widest text-center uppercase">
         News & Insights
       </div>
-      <ul className="flex flex-wrap items-start">
+      <div className="flex flex-wrap items-start">
         {posts.map((card) => (
           <BlogCard
             key={card.id}
             {...card}
           />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

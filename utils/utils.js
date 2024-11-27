@@ -17,7 +17,7 @@ import {
   BsSearch,
   BsHeartPulseFill
 } from "react-icons/bs";
-import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse, FaDog, FaPlane } from "react-icons/fa";
+import { FaRegPaperPlane, FaBriefcaseMedical, FaHorse, FaDog, FaPlane, FaBalanceScale, FaBinoculars, FaHandsHelping } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { RiLinksLine } from "react-icons/ri";
 import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight, HiOutlineOfficeBuilding } from "react-icons/hi";
@@ -292,6 +292,12 @@ export const getIcon = (item) => {
     <HiOutlineArrowNarrowLeft />
   )  : item == "arrowRight" ? (
     <HiOutlineArrowNarrowRight />
+  ) : item == "scale" ? (
+    <FaBalanceScale />
+  ) : item == "binoculars" ? (
+    <FaBinoculars />
+  ) : item == "handshake" ? (
+    <FaHandsHelping />
   ) : null;
 };
 
