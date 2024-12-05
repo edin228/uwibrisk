@@ -84,14 +84,14 @@ export default function Home({
             </div> */}
             <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
             <video
-              className="z-30 flex justify-center w-full"
+              className="z-30 flex justify-center w-full mt-[-50px]"
               autoPlay
               muted
               loop
               playsInline
               poster
             >
-              <source src="/stock-video.mp4" type="video/mp4" />
+              <source src="/UWIBR-StockVideo2.mp4" type="video/mp4" />
             </video>
           </div>
         ) : null}

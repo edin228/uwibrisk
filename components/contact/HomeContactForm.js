@@ -79,7 +79,7 @@ function HomeContactForm() {
 
   const producers = [
     jesseObj,
-    danaObj,
+    // danaObj,
     ericObj,
     joshObj,
     nickObj,
@@ -106,23 +106,6 @@ function HomeContactForm() {
           valid = false;
         }
         break;
-      case "Dana Coates":
-        if (
-          projectedSales < 50000000 ||
-          projectedSales < 1000000 ||
-          selectedIndustry === "Municipal Insurance" ||
-          selectedIndustry === "Agriculture" ||
-          selectedIndustry === "Transportation/Automotive" ||
-          selectedIndustry === "Contracting Trades" ||
-          selectedIndustry === "Entertainment" ||
-          selectedIndustry === "Retail" ||
-          (selectedIndustry === "Restaurant/Coffee Bar" &&
-            projectedSales < 10000000) ||
-          employeeCount < 60
-        ) {
-          valid = false;
-        }
-        break;
       case "Eric Schirding":
         if (
           projectedSales < 1000000 ||
@@ -142,6 +125,36 @@ function HomeContactForm() {
           valid = false;
         }
         break;
+      case "Shane Shoemaker":
+        if (
+          projectedSales < 1000000 ||
+          selectedIndustry === "Municipal Insurance" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Security" ||
+          (selectedIndustry === "Restaurant/Coffee Bar" && projectedSales >= 10000000 && projectedSales <= 4000000) ||
+          (employeeCount < 10 && selectedIndustry === "Restaurant/Coffee Bar") ||
+          employeeCount < 20
+        ) {
+          valid = false;
+        }
+        break;
+      // case "Dana Coates":
+      //   if (
+      //     projectedSales < 50000000 ||
+      //     projectedSales < 1000000 ||
+      //     selectedIndustry === "Municipal Insurance" ||
+      //     selectedIndustry === "Agriculture" ||
+      //     selectedIndustry === "Transportation/Automotive" ||
+      //     selectedIndustry === "Contracting Trades" ||
+      //     selectedIndustry === "Entertainment" ||
+      //     selectedIndustry === "Retail" ||
+      //     (selectedIndustry === "Restaurant/Coffee Bar" &&
+      //       projectedSales < 10000000) ||
+      //     employeeCount < 60
+      //   ) {
+      //     valid = false;
+      //   }
+      //   break;
       case "Josh Acosta":
         if (
           projectedSales >= 50000000 ||
@@ -178,6 +191,9 @@ function HomeContactForm() {
 
     return valid ? true : false;
   };
+
+  // NEXT -  ANY SALES < $2,000,000
+
 
   const validAgentOption = (agent) => {
     let valid = true;
@@ -419,7 +435,7 @@ function HomeContactForm() {
                   initial={false}
                 />
               </div>
-              <div
+              {/* <div
                 className={`${
                   validAgent(danaObj) ? "visible" : "opacity-30"
                 } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
@@ -430,7 +446,7 @@ function HomeContactForm() {
                   alt=""
                   initial={false}
                 />
-              </div>
+              </div> */}
               <div
                 className={`${
                   validAgent(ericObj) ? "visible" : "opacity-30"
