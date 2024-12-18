@@ -24,7 +24,7 @@ function Footer() {
   }
 
   return (
-    <div className="flex flex-col w-full rounded-t-md bg-zinc-100">
+    <div className="flex flex-col w-full">
       {/* <div className="p-4 text-3xl font-bold tracking-widest uppercase">
         Contact Us
       </div> */}
@@ -35,8 +35,8 @@ function Footer() {
           ))
         }
       </div> */}
-      <div className="flex flex-col w-full px-4 lg:flex-row lg:items-center lg:justify-between bg-zinc-200">
-        <div className="font-bold">
+      <div className="flex flex-col w-full px-4 py-4 md:py-1 gap-2 lg:flex-row lg:items-center lg:justify-between bg-zinc-900 text-white">
+        <div className="font-semibold">
           © 2024 UWIBRisk All rights reserved.
         </div>
         <div className="flex flex-col gap-2 lg:flex-row">

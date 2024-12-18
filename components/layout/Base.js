@@ -12,9 +12,9 @@ function Base({ children, template = null, data = null, title=null }) {
       <div className="absolute top-[20%] right-[0%] z-[-10] w-[600px] h-[100px] bg-yellow-500 skew-y-[-12deg] opacity-30"></div>
       <div className="absolute top-[8%] right-[0%] z-[-10] w-[300px] h-[60px] bg-yellow-500 skew-y-[-12deg] opacity-30"></div>
       <div className="absolute top-[16%] right-[0%] z-[-10] w-[400px] h-[20px] bg-black skew-y-[-12deg] opacity-30"></div>
-      <div className="relative flex flex-col w-full h-full overflow-hidden rounded-b-lg">
+      <div className="relative flex flex-col w-full h-full overflow-hidden">
         <Header />
-        <div className="relative flex flex-col h-full overflow-x-hidden overflow-y-auto lg:pt-20">
+        <div className="relative flex flex-col h-full overflow-x-hidden overflow-y-auto lg:pt-20 pb-10">
           <ContentBase title={title} data={data} template={template}>{children}</ContentBase>
           
         </div>
