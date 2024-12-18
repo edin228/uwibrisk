@@ -36,6 +36,7 @@ class MyDocument extends Document {
           />
           <script src="https://leadbooster-chat.pipedrive.com/assets/loader.js" async />          
           <script src="https://cdn.userway.org/widget.js" data-account="YFNZVyXaJ6" async />
+          <script src="https://player.vimeo.com/api/player.js" async />
         </Head>
         <body>
           <Main />
