@@ -180,11 +180,12 @@ function CommercialQuoteOptions({ data }) {
                     Large Business
                   </div>
                   <div className="flex flex-col gap-2 items-center justify-center p-2 text-xl  text-center text-white rounded-b-xl text-shadow">
-                    <div className="border-t-[3px] border-b-[3px] h-[60px] flex items-center justify-center text-center border-yellow-500 rounded-sm">
-                      Over $2M in revenue and 50+ employees
+                    <div className="flex-col w-full border-t-[3px] border-b-[3px] h-[80px] flex justify-center border-yellow-500 rounded-sm">
+                      <div>• Over $2M in revenue</div>
+                      <div>• &gt;50+ Employees</div>
                     </div>
                     <div>
-                      Let us tailor insurance solutions to meet your large-scale
+                      Tailored insurance solutions to meet your large-scale
                       business needs and coverage
                     </div>
                   </div>
@@ -213,12 +214,13 @@ function CommercialQuoteOptions({ data }) {
                     Small Business
                   </div>
                   <div className="flex flex-col gap-2 items-center justify-center p-2 text-xl  text-center text-white rounded-b-xl text-shadow">
-                    <div className="border-t-[3px] border-b-[3px] h-[60px] flex items-center justify-center text-center border-yellow-500 rounded-sm">
-                      Under $2M in revenue or less than 50 employees
+                    <div className="flex-col w-full border-t-[3px] border-b-[3px] h-[80px] flex justify-center border-yellow-500 rounded-sm">
+                      <div>• Under $2M in revenue</div>
+                      <div>• &lt;50 Employees</div>
                     </div>
                     <div>
-                      Let us tailor insurance solutions to protect your business
-                      and support your growth
+                      Insurance solutions to protect your business and support
+                      your growth
                     </div>
                   </div>
                 </div>
