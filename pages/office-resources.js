@@ -190,7 +190,7 @@ function OfficeResources({ data = null }) {
 
   const OfficeResourceCard = ({ data }) => {
     return (
-      <div className="flex flex-col w-full lg:h-[180px] lg:w-[160px] m-1 p-4 h-full rounded-lg shadow-lg border-2 border-zinc-500/20">
+      <div className="flex flex-col w-full lg:h-[180px] lg:w-[160px] m-1 p-4 h-full rounded-lg shadow-lg bg-white border-2 border-zinc-500/20">
         <div className="relative flex items-center overflow-hidden rounded-lg">
           <a
             href={data.link}
@@ -222,7 +222,7 @@ function OfficeResources({ data = null }) {
   return (
     <Base data={data} title={"Office Resources"} template={"GridWithSearch"}>
       <div className="flex flex-col w-full h-full">
-        {passWordInput != pagePassword ? (
+        {false ? (
           <div className="flex items-center justify-center mt-[-10%] flex-col w-full h-[80vh] ">
             <div className="flex items-center justify-center p-6 text-6xl text-center">
               {getIcon("lock")}
