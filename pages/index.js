@@ -82,9 +82,9 @@ export default function Home({
                 objectFit="contain"
               />
             </div> */}
-            <div className="absolute top-0 z-30 w-full h-full bg-zinc-900/70"></div>
+            <div className="absolute top-0 z-30 w-full h-full bg-gradient-to-t from-slate-900/80 to-zinc-500/20"></div>
             <video
-              className="z-30 flex justify-center w-full mt-[-50px]"
+              className="z-30 flex justify-center w-full mt-[-120px]"
               autoPlay
               muted
               loop
@@ -97,9 +97,9 @@ export default function Home({
         ) : null}
         <div className="relative flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
           <CarriersContainer carriers={carriers} />
-          <div className="py-4">
-            <div className="flex flex-col items-center justify-center w-full gap-2 mb-2 font-semibold text-center">
-              <div className="tracking-widest uppercase ">
+          <div className="py-4 my-12">
+            <div className="flex flex-col items-center justify-center w-full gap-2 mb-8 font-semibold text-center">
+              <div className="tracking-widest uppercase">
                 See what our clients are saying
               </div>
               <a
