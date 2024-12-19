@@ -16,11 +16,11 @@ import ActionBanner from "../components/ActionBanner";
 
 function DefaultContent({ data }) {
   return (
-    <>
+    <div className="flex flex-col w-full items-center p-4">
       {data?.headerImage?.url ? (
-        <div className="relative rounded-lg">
+        <div className="relative rounded-lg w-full md:w-1/2 max-h-[300px] overflow-hidden mb-2">
           <motion.img
-            className="object-cover w-full h-full max-h-[240px] shadow-lg z-[10]"
+            className="object-cover w-full h-full shadow-lg z-[10]"
             src={data?.headerImage?.url}
             alt=""
             initial={false}
@@ -32,15 +32,15 @@ function DefaultContent({ data }) {
         </div>
       ) : null}
       <div
-        className={`flex items-center flex-col w-full h-full ${
-          data?.template != "WebForm" ? "px-8" : ""
+        className={`flex items-center flex-col w-full md:w-1/2 h-full ${
+          data?.template != "WebForm" ? "" : ""
         }`}
       >
         {data?.content.map((c, i) => (
           <div
             key={Date()}
             strategy="afterInteractive"
-            className="w-full xl:w-3/4 page-content"
+            className="w-full page-content bg-white p-2 rounded-md"
             dangerouslySetInnerHTML={{ __html: c.html }}
           ></div>
         ))}
@@ -53,7 +53,7 @@ function DefaultContent({ data }) {
           ></div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

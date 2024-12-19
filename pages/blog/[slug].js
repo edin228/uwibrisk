@@ -86,7 +86,7 @@ function BlogPost({ data, recentBlogs }) {
               </div>
             </div>
           </div>
-          <div className="flex w-full px-4 lg:w-1/4">
+          <div className="flex w-full px-4 md:w-4/12">
             <RecentBlogColumn posts={recentBlogs} />
           </div>
         </div>

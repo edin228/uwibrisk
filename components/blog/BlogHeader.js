@@ -13,7 +13,7 @@ export const BlogHeader = ({ id, image, title }) => {
           alt="header-pic"
           className="rounded-lg"
           width={1920}
-          height={800}
+          height={600}
           objectFit="cover"
           priority
         />

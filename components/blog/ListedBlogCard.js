@@ -8,7 +8,7 @@ import { truncateString } from "../../utils/utils";
 
 function ListedBlogCard({ post, large = false }) {
   return (
-    <li className="w-full py-1 listed-blog-card lg:p-2">
+    <li className="w-full py-1 listed-blog-card lg:p-2 shadow-md rounded-md bg-white">
       <div className={`listed-blog-card-content-container`}>
         <motion.div className="flex flex-col cursor-pointer" layout={true}>
           <div className="flex items-center w-full">
@@ -23,7 +23,7 @@ function ListedBlogCard({ post, large = false }) {
             )}
             <div className={`${large ? "px-4" : ""}`}>
               <Link href={`/blog/${post.slug}`}>
-                <a className="flex w-full font-bold tracking-widest uppercase transition duration-100 text-md hover:text-yellow-500">
+                <a className="flex w-full font-bold transition duration-100 text-sm hover:text-indigo-500">
                   <div className="flex font-bold">{post.title}</div>
                 </a>
               </Link>
@@ -44,7 +44,7 @@ function ListedBlogCard({ post, large = false }) {
               {large && <div className="py-2">{truncateString(post.excerpt, 400)}</div>}
               {large && (
                 <Link href={`/blog/${post.slug}`}>
-                  <a className="flex w-full font-bold tracking-widest uppercase transition duration-100 text-md hover:text-yellow-500">
+                  <a className="flex w-full font-bold tracking-widest uppercase transition duration-100 text-md hover:text-indigo-500">
                     <div className="flex font-bold">Read More</div>
                   </a>
                 </Link>
