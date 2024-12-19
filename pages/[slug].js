@@ -10,6 +10,9 @@ import TestemonialPageCard from "../components/home/testemonials/TestemonialPage
 import Link from "next/link";
 import WideCard from "../components/WideCard";
 import PageHeader from "../components/PageHeader";
+import IconBanner from "../components/IconBanner";
+import ImageLinkGrid from "../components/ImageLinkGrid";
+import ActionBanner from "../components/ActionBanner";
 
 function DefaultContent({ data }) {
   return (
@@ -145,7 +148,13 @@ function CustomPageContent({ data }) {
           <PageHeader key={c.id} data={c} />
         ) : c.__typename === "WideCard" ? (
           <WideCard key={c.id} data={c} />
-        ) : null
+        ) : c.__typename === "IconBanner" ? (
+          <IconBanner key={c.id} data={c} />
+        ) : c.__typename === "ImageLinkGrid" ? (
+          <ImageLinkGrid key={c.id} data={c} />
+        ) : c.__typename === "ActionBanner" ? (
+          <ActionBanner key={c.id} data={c} />
+        ) :null
       )}
     </div>
   );

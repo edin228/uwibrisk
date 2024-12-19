@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import ActionButton from "./ActionButton";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
 
 
 const VimeoPlayer = ({data}) => {
@@ -44,7 +43,7 @@ function WideCard({ data }) {
       } ${data.textOnLeft ? `md:flex-row` : `md:flex-row-reverse`}`}
     >
       <div className="flex flex-col gap-2 w-full md:w-1/2">
-        <div className="font-bold uppercase text-2xl mb-4">{data.header}</div>
+        <div className="font-bold uppercase text-2xl mb-2">{data.header}</div>
         {data ? (
           <div
             key={Date()}

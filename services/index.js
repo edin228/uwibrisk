@@ -479,6 +479,36 @@ export const getPage = async (slug) => {
               url
             }
           }
+          ... on ActionBanner {
+            id
+            descriptive
+            title
+            buttons {
+              id
+              buttonUrl
+              label
+            }
+          }
+          ... on IconBanner {
+            id
+            labels
+            icons
+            descriptions
+            bannerTitle
+          }
+          ... on ImageLinkGrid {
+            id
+            title
+            gridItems {
+              id
+              label
+              url
+              gridImage {
+                id
+                url
+              }
+            }
+          }
         }
         forms {
           id
