@@ -451,6 +451,34 @@ export const getPage = async (slug) => {
             stage
             title
           }
+          ... on WideCard {
+            id
+            buttons {
+              ... on ActionButton {
+                id
+                buttonUrl
+                label
+              }
+            }
+            header
+            showBackgroundColor
+            text
+            textOnLeft
+            useVideo
+            videoUrl
+            image {
+              id
+              url
+            }
+          }
+          ... on PageHeader {
+            id
+            header
+            headerImage {
+              id
+              url
+            }
+          }
         }
         forms {
           id

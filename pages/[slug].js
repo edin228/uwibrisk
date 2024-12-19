@@ -8,6 +8,8 @@ import { getIcon } from "../utils/utils";
 import TestemonialCard from "../components/home/testemonials/TestemonialCard";
 import TestemonialPageCard from "../components/home/testemonials/TestemonialPageCard";
 import Link from "next/link";
+import WideCard from "../components/WideCard";
+import PageHeader from "../components/PageHeader";
 
 function DefaultContent({ data }) {
   return (
@@ -82,7 +84,11 @@ function LandingPageContent({ data }) {
           className="hidden lg:flex absolute blur-[4px] w-full top-[-70%] right-0 z-[-1] bg-cover scale-150"
         ></motion.img>
         <div className="flex items-center py-4 absolute top-[30%] right-[15%] hover:scale-110 transition duration-100">
-          <Link href={"https://outlook.office.com/bookwithme/user/64af5564721d47918b0c4061dff559e0@uwib.com/meetingtype/zPlzuawutkij0GZ1BCf8KA2?anonymous&ep=mlink"}>
+          <Link
+            href={
+              "https://outlook.office.com/bookwithme/user/64af5564721d47918b0c4061dff559e0@uwib.com/meetingtype/zPlzuawutkij0GZ1BCf8KA2?anonymous&ep=mlink"
+            }
+          >
             <button
               className={`bg-[#eab308] text-shadow-sm text-white p-2 rounded-md bg-shadow-lg text-2xl font-bold border-[2px] border-[#eab308]  transition duration-200 `}
             >
@@ -131,10 +137,27 @@ function LandingPageContent({ data }) {
   );
 }
 
+function CustomPageContent({ data }) {
+  return (
+    <div className="flex flex-col p-2 gap-2 items-center">
+      {data?.components.map((c, i) =>
+        c.__typename === "PageHeader" ? (
+          <PageHeader key={c.id} data={c} />
+        ) : c.__typename === "WideCard" ? (
+          <WideCard key={c.id} data={c} />
+        ) : null
+      )}
+    </div>
+  );
+}
+
 function Page({ data }) {
   const Content = () => {
     if (data?.template == "LandingPage") {
       return <LandingPageContent data={data} />;
+    }
+    if (data?.template == "customLandingPage") {
+      return <CustomPageContent data={data} />;
     }
     return <DefaultContent data={data} />;
   };
