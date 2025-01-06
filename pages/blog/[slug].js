@@ -78,15 +78,15 @@ function BlogPost({ data, recentBlogs }) {
                     </div>
                   </div>
                 ) : null}
-                <div className="flex w-full h-full bg-white rounded-md p-2">
-                  <div
+                <div className="flex w-full h-full bg-white rounded-md p-2 shadow-md">
+                  <div className="blog-post-container"
                     dangerouslySetInnerHTML={{ __html: data?.content.html }}
                   ></div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex w-full px-4 md:w-4/12">
+          <div className="flex w-full md:w-4/12">
             <RecentBlogColumn posts={recentBlogs} />
           </div>
         </div>

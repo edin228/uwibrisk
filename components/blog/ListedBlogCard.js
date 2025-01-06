@@ -8,7 +8,7 @@ import { truncateString } from "../../utils/utils";
 
 function ListedBlogCard({ post, large = false }) {
   return (
-    <li className="w-full py-1 listed-blog-card lg:p-2 shadow-md rounded-md bg-white">
+    <li className="w-full py-1 listed-blog-card lg:p-2 ">
       <div className={`listed-blog-card-content-container`}>
         <motion.div className="flex flex-col cursor-pointer" layout={true}>
           <div className="flex items-center w-full">

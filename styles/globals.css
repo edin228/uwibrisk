@@ -20,6 +20,15 @@
   color: #3d7aed;
 }
 
+.blog-post-container > h1,
+.blog-post-container > h2,
+.blog-post-container > h3,
+.blog-post-container > h4,
+.blog-post-container > h5 {
+  font-size: revert;
+  font-weight: revert;
+}
+
 path {
   pointer-events: all;
 }
