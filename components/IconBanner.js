@@ -10,7 +10,7 @@ function IconBanner({ data }) {
     <div className="flex flex-col w-full bg-zinc-100 p-4 rounded-md">
       <div className="flex flex-col md:flex-row justify-center items-center gap-8">
         {icons.map((icon, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div key={index} className="flex flex-col items-center md:w-[360px]">
             <div className="text-[3rem] md:text-[5rem] mb-4">
               {getIcon(icon)}
             </div>

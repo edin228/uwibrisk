@@ -496,6 +496,9 @@ export const getPage = async (slug) => {
             descriptions
             bannerTitle
           }
+          ... on TestimonialsSection {
+            id
+          }
           ... on ImageLinkGrid {
             id
             title

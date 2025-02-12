@@ -13,6 +13,7 @@ import PageHeader from "../components/PageHeader";
 import IconBanner from "../components/IconBanner";
 import ImageLinkGrid from "../components/ImageLinkGrid";
 import ActionBanner from "../components/ActionBanner";
+import TestemonialsSection from "../components/TestemonialsSection";
 
 function DefaultContent({ data }) {
   return (
@@ -154,6 +155,8 @@ function CustomPageContent({ data }) {
           <ImageLinkGrid key={c.id} data={c} />
         ) : c.__typename === "ActionBanner" ? (
           <ActionBanner key={c.id} data={c} />
+        ) : c.__typename === "TestimonialsSection" ? (
+          <TestemonialsSection key={c.id} data={c} />
         ) :null
       )}
     </div>
