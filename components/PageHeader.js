@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 function PageHeader({ data }) {
   return (
-    <div className="flex flex-col items-center rounded-md  p-2 mb-10 bg-white">
+    <div className="flex flex-col items-center rounded-md w-full md:w-1/2 p-2 bg-zinc-100">
       <motion.img
         className="object-contain rounded-lg h-[200px] w-[400px]"
         src={data.headerImage.url}
