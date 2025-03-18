@@ -46,12 +46,13 @@ function DefaultContent({ data }) {
           ></div>
         ))}
         {data?.rawHtml.map((card, i) => (
-          <div
-            key={Date()}
-            strategy="afterInteractive"
-            className="flex w-full h-full page-content"
-            dangerouslySetInnerHTML={{ __html: data?.rawHtml[i] }}
-          ></div>
+          <div key={Date()} className="h-full w-full rounded-md overflow-hidden shadow-md">
+            <div
+              strategy="afterInteractive"
+              className="flex w-full h-full page-content"
+              dangerouslySetInnerHTML={{ __html: data?.rawHtml[i] }}
+            ></div>
+          </div>
         ))}
       </div>
     </div>
@@ -157,7 +158,7 @@ function CustomPageContent({ data }) {
           <ActionBanner key={c.id} data={c} />
         ) : c.__typename === "TestimonialsSection" ? (
           <TestemonialsSection key={c.id} data={c} />
-        ) :null
+        ) : null
       )}
     </div>
   );
