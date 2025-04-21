@@ -52,7 +52,7 @@ export default function Home({
       </Head>
       <div className="relative flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         {testemonials ? (
-          <div className="relative overflow-hidden max-h-[480px]">
+          <div className="relative overflow-hidden max-h-[480px] h-[262px] md:h-auto">
             <div className=" w-[400px] 2xl:w-[760px] flex flex-col absolute top-[20%] left-[15%] z-40 text-white font-bold text-2xl lg:text-5xl text-shadow">
               <TypingText />
               <div className="pt-2">
@@ -74,6 +74,14 @@ export default function Home({
                 </Link>
               </div>
             </div>
+            <div className="hidden absolute text-white md:flex items-center flex-col justify-center right-[10%] top-[23%] z-40  text-shadow">
+              <div className="text-5xl font-bold">Insurance Solutions</div>
+              <div className="text-5xl">How You Want Them</div>
+              <div className="flex gap-1">
+                <div className="text-5xl font-bold">When You Need Them</div>
+                <div className="text-2xl">®</div>
+              </div>
+            </div>
             {/* <div className="absolute top-[-50px] right-[14px] z-40 h-[200px] w-[400px]">
               <Image
                 src="/UWIBRIS-White.png"
@@ -84,7 +92,7 @@ export default function Home({
             </div> */}
             <div className="absolute top-0 z-30 w-full h-full bg-gradient-to-t from-slate-900/80 to-zinc-500/20"></div>
             <video
-              className="z-30 flex justify-center w-full mt-[-120px]"
+              className="z-30 flex justify-center w-full mt-[-120px] h-[480px] md:h-auto"
               autoPlay
               muted
               loop
