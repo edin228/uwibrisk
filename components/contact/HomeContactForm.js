@@ -84,15 +84,15 @@ function HomeContactForm() {
     joshObj,
     nickObj,
     shaneObj,
-    michaelObj,
   ];
 
   const validAgent = (agent) => {
+    console.log(agent)
     let valid = true;
     const employeeCount = parseInt(numberOfEmployees, 10);
     const projectedSales = parseInt(estimatedRevenue, 10);
 
-    switch (agent.name) {
+    switch (agent?.name) {
       case "Jesse Nielsen":
         if (
           projectedSales > 5000000 ||
@@ -491,18 +491,6 @@ function HomeContactForm() {
                 <motion.img
                   className="object-cover w-full h-full"
                   src={shaneObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
-              <div
-                className={`${
-                  validAgent(michaelObj) ? "visible" : "opacity-30"
-                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={michaelObj.photo.url}
                   alt=""
                   initial={false}
                 />
