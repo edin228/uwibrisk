@@ -74,8 +74,6 @@ function HomeContactForm() {
   const ericObj = team?.filter((x) => x.name == "Eric Schirding")[0];
   const joshObj = team?.filter((x) => x.name == "Josh Acosta")[0];
   const nickObj = team?.filter((x) => x.name == "Nick Latshaw")[0];
-  const shaneObj = team?.filter((x) => x.name == "Shane Shoemaker")[0];
-  const michaelObj = team?.filter((x) => x.name == "Michael Kenneth")[0];
 
   const producers = [
     jesseObj,
@@ -83,7 +81,6 @@ function HomeContactForm() {
     ericObj,
     joshObj,
     nickObj,
-    shaneObj,
   ];
 
   const validAgent = (agent) => {
@@ -120,19 +117,6 @@ function HomeContactForm() {
             projectedSales >= 2000000) ||
           (employeeCount < 10 &&
             selectedIndustry === "Restaurant/Coffee Bar") ||
-          employeeCount < 20
-        ) {
-          valid = false;
-        }
-        break;
-      case "Shane Shoemaker":
-        if (
-          projectedSales < 1000000 ||
-          selectedIndustry === "Municipal Insurance" ||
-          selectedIndustry === "Entertainment" ||
-          selectedIndustry === "Security" ||
-          (selectedIndustry === "Restaurant/Coffee Bar" && projectedSales >= 10000000 && projectedSales <= 4000000) ||
-          (employeeCount < 10 && selectedIndustry === "Restaurant/Coffee Bar") ||
           employeeCount < 20
         ) {
           valid = false;
@@ -479,18 +463,6 @@ function HomeContactForm() {
                 <motion.img
                   className="object-cover w-full h-full"
                   src={nickObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
-              <div
-                className={`${
-                  validAgent(shaneObj) ? "visible" : "opacity-30"
-                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={shaneObj.photo.url}
                   alt=""
                   initial={false}
                 />
