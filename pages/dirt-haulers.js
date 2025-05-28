@@ -1,11 +1,8 @@
 import Head from "next/head";
 import React from "react";
 import Base from "../components/layout/Base";
-import { useRouter } from "next/router";
 
 function DirtHaulers() {
-  const router = useRouter();
-
   return (
     <Base template="DualColumn">
       <Head>
@@ -22,11 +19,11 @@ function DirtHaulers() {
             src="https://media.graphassets.com/I5lQ9O1nTv2SBBitaDMw"
             controls
             className="w-full max-w-2xl"
-            onEnded={() =>
-              router.push(
-                "https://uwibrisk.com/southern-states-dirt-hauling-and-excavation-contractors"
-              )
-            }
+            onEnded={() => {
+              // full reload to the new page
+              window.location.href =
+                "https://uwibrisk.com/southern-states-dirt-hauling-and-excavation-contractors";
+            }}
           />
         </div>
       </div>
