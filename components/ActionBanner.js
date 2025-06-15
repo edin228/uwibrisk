@@ -25,7 +25,7 @@ function ActionBanner({ data }) {
               href={button.buttonUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex w-full md:w-auto"
+              className="flex md:w-auto"
             >
               <button
                 className={`w-[160px] md:w-[200px] p-2 rounded-md font-bold border-[2px] border-[#eab308] hover:bg-[#eab308] transition duration-200`}

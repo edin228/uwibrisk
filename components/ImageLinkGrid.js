@@ -23,7 +23,7 @@ function ImageLinkGrid({ data }) {
             className="flex"
           >
             <motion.img
-              className="object-contain rounded-lg h-[200px] w-[150px] rounded-md"
+              className="object-contain rounded-lg h-[85px] md:h-[120px] w-[150px] rounded-md"
               src={item.gridImage?.url || ""}
               alt={item.label || "Image"}
               initial={false}
