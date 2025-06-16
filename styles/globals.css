@@ -22,11 +22,14 @@
 
 .blog-post-container > h1,
 .blog-post-container > h2,
-.blog-post-container > h3,
 .blog-post-container > h4,
 .blog-post-container > h5 {
   font-size: revert;
   font-weight: revert;
+}
+
+.blog-post-container > h3 {
+  font-size:1.8rem;
 }
 
 path {
