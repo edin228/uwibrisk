@@ -30,6 +30,7 @@
 
 .blog-post-container > h3 {
   font-size:1.8rem;
+  font-weight: revert;
 }
 
 path {
