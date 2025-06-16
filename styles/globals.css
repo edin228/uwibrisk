@@ -16,6 +16,10 @@
   border-radius: 50px;
 }
 
+.bg-accent-blur {
+  filter:blur(20px);
+}
+
 .blog p a {
   color: #3d7aed;
 }
