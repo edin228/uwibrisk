@@ -25,7 +25,7 @@ function BlogPost({ data, recentBlogs }) {
         <meta property="article:published_time" content={data?.publishedAt} />
       </Head>
       <Base template={"Blog"}>
-        <div className="flex flex-col w-full p-4 xl:flex-row xl:w-3/4 xl:mx-auto">
+        <div className="flex flex-col w-full p-4 md:flex-row md:w-[60%] md:mx-auto">
           <div className="flex flex-col w-full">
             <div className="block mb-4">
               <BlogHeader
@@ -34,7 +34,7 @@ function BlogPost({ data, recentBlogs }) {
                 image={data?.featuredImage.url}
               />
             </div>
-            <div className="z-30 flex py-2 text-xl font-bold xl:hidden lg:text-4xl">
+            <div className="z-30 flex py-2 text-xl font-bold md:hidden lg:text-4xl">
               {data?.title}
             </div>
             <div className="flex flex-col w-full lg:flex-row">
