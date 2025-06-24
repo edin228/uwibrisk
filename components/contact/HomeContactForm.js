@@ -74,6 +74,7 @@ function HomeContactForm() {
   const ericObj = team?.filter((x) => x.name == "Eric Schirding")[0];
   const joshObj = team?.filter((x) => x.name == "Josh Acosta")[0];
   const nickObj = team?.filter((x) => x.name == "Nick Latshaw")[0];
+  const davidObj = team?.filter((x) => x.name == "David Murphy")[0];
 
   const producers = [
     jesseObj,
@@ -81,6 +82,7 @@ function HomeContactForm() {
     ericObj,
     joshObj,
     nickObj,
+    davidObj
   ];
 
   const validAgent = (agent) => {
@@ -93,7 +95,20 @@ function HomeContactForm() {
       case "Jesse Nielsen":
         if (
           projectedSales > 5000000 ||
-          projectedSales < 1000000 ||
+          projectedSales < 2000000 ||
+          selectedIndustry === "Mfg/Wholesale/Import/Export" ||
+          selectedIndustry === "Real Estate Investment" ||
+          selectedIndustry === "Entertainment" ||
+          selectedIndustry === "Security" ||
+          employeeCount > 100
+        ) {
+          valid = false;
+        }
+        break;
+      case "David Murphy":
+        if (
+          projectedSales > 2000000 ||
+          projectedSales < 2000000 ||
           selectedIndustry === "Mfg/Wholesale/Import/Export" ||
           selectedIndustry === "Real Estate Investment" ||
           selectedIndustry === "Entertainment" ||
@@ -415,6 +430,18 @@ function HomeContactForm() {
                 <motion.img
                   className="object-cover w-full h-full"
                   src={jesseObj.photo.url}
+                  alt=""
+                  initial={false}
+                />
+              </div>
+              <div
+                className={`${
+                  validAgent(davidObj) ? "visible" : "opacity-30"
+                }  relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+              >
+                <motion.img
+                  className="object-cover w-full h-full"
+                  src={davidObj.photo.url}
                   alt=""
                   initial={false}
                 />
