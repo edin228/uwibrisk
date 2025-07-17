@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import HeaderNavButton from "./HeaderNavButton";
 import Image from "next/image";
@@ -112,6 +113,8 @@ export default function DesktopHeader({ navItems }) {
                               <a
                                 href={`/${pg?.slug}`}
                                 className="w-full h-full"
+                                target={pg.openInNewTab ? "_blank" : undefined}
+                                rel={pg.openInNewTab ? "noopener noreferrer" : undefined}
                               >
                                 <div className="w-full h-full px-2 font-semibold transition duration-100 border-2 rounded-lg cursor-pointer border-zinc-100/0 hover:border-zinc-200">
                                   {pg.title}

@@ -629,6 +629,7 @@ export const getNavMenuItems = async () => {
         externalUrl
         text
         order
+        openInNewTab
         pages(where: { isActive: true }) {
           isActive
           id

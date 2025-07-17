@@ -14,8 +14,52 @@ import IconBanner from "../components/IconBanner";
 import ImageLinkGrid from "../components/ImageLinkGrid";
 import ActionBanner from "../components/ActionBanner";
 import TestemonialsSection from "../components/TestemonialsSection";
+import Script from "next/script";
+
+function DynamicForm({ rawHtml }) {
+  const [htmlContent, setHtmlContent] = useState("");
+
+  useEffect(() => {
+    // 1. Build a temporary container and stitch together all your rawHtml blobs
+    const container = document.createElement("div");
+    rawHtml.forEach((blob) => {
+      container.innerHTML += blob;
+    });
+
+    // 2. Find and remove <script src="..."> tags, but re‑append them to the document
+    container
+      .querySelectorAll("script[src]")
+      .forEach((oldScript) => {
+        const src = oldScript.getAttribute("src");
+        if (src) {
+          const newScript = document.createElement("script");
+          newScript.src = src;
+          newScript.async = true;
+          document.body.appendChild(newScript);
+        }
+        oldScript.remove();
+      });
+
+    // 3. Whatever’s left is pure HTML; stash it in state for rendering
+    setHtmlContent(container.innerHTML);
+  }, [rawHtml]);
+
+  return (
+    <div
+      className="page-content w-full md:w-1/2 bg-white p-2 rounded-md"
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    />
+  );
+}
 
 function DefaultContent({ data }) {
+  // if (data.template === "WebForm") {
+  //   return (
+  //     <div className="flex flex-col w-full items-center p-4">
+  //       <DynamicForm rawHtml={data.rawHtml} />
+  //     </div>
+  //   );
+  // }
   return (
     <div className="flex flex-col w-full items-center p-4">
       {data?.headerImage?.url ? (
@@ -46,7 +90,10 @@ function DefaultContent({ data }) {
           ></div>
         ))}
         {data?.rawHtml.map((card, i) => (
-          <div key={Date()} className="h-full w-full rounded-md overflow-hidden shadow-md">
+          <div
+            key={Date()}
+            className="h-full w-full rounded-md overflow-hidden shadow-md"
+          >
             <div
               strategy="afterInteractive"
               className="flex w-full h-full page-content"

@@ -22,6 +22,8 @@ function HeaderNavButton({ navItem = null, selectedID = null }) {
       p-2 text-white ${
         navItem?.highlight ? "bg-yellow-500 border-0 rounded text-white" : ""
       } ${selectedID == navItem.id ? "text-white" : ""}`}
+        target={navItem?.openInNewTab ? "_blank" : undefined}
+        rel={navItem?.openInNewTab ? "noopener noreferrer" : undefined}
       >
         <div className="text-xs transition duration-200 ease-in-out">
           {navItem?.text}
