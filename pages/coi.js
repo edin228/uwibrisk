@@ -31,6 +31,7 @@ function COI() {
                     ©
                   </span>
                 </div>
+                <div className="opacity-80">Certificates of Insurance</div>
               </div>
             </a>
             <div className="flex items-center justify-center w-full h-[100px]">
