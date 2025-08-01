@@ -14,9 +14,8 @@ function Base({ children, template = null, data = null, title=null }) {
       <div className="absolute top-[16%] right-[0%] z-[-10] w-[400px] h-[20px] bg-black skew-y-[-12deg] opacity-30 bg-accent-blur"></div>
       <div className="relative flex flex-col w-full h-full overflow-hidden">
         <Header />
-        <div className="relative flex flex-col h-full overflow-x-hidden overflow-y-auto lg:pt-20 pb-10">
+        <div className="relative flex flex-col h-full overflow-x-hidden lg:pt-20 pb-10">
           <ContentBase title={title} data={data} template={template}>{children}</ContentBase>
-          
         </div>
         <Footer />
       </div>

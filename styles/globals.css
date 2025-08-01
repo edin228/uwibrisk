@@ -37,6 +37,263 @@
   font-weight: revert;
 }
 
+.blog-post-container > p:first-of-type,
+.blog-post-container > p:last-of-type {
+  background: #f7f6f2;
+  border-left: 6px solid #b88f2f;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  position: relative;
+  border-radius: 4px;
+}
+
+
+
+/* 2. Pull quote styling */
+.blog-post-container blockquote {
+  position: relative;
+  margin: 2rem 0;
+  padding: 1rem 1.25rem 1rem 1.75rem;
+  background: #f0efed;
+  border-left: 6px solid #b78900;
+  font-style: italic;
+  line-height: 1.4;
+  border-radius: 4px;
+}
+
+.blog-post-container blockquote:before {
+  content: "“";
+  position: absolute;
+  top: -4px;
+  left: 8px;
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(184, 143, 47, 0.2);
+  font-family: serif;
+}
+
+/* 3. Heading styles with your updated sizes and underline */
+.blog-post-container h2,
+.blog-post-container h3 {
+  position: relative;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1f1f1f;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.blog-post-container h2 {
+  font-size: 1.4rem;
+}
+
+.blog-post-container h3 {
+  font-size: 1.4rem;
+}
+
+.blog-post-container h2::after,
+.blog-post-container h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  height: 4px;
+  background: #b78900;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 220px;
+}
+
+/* Anchor link reveal on hover (if headings have IDs and you inject anchors) */
+.blog-post-container h2 a.anchor,
+.blog-post-container h3 a.anchor {
+  opacity: 0;
+  margin-left: 8px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: #555;
+  transition: opacity 0.2s;
+}
+
+.blog-post-container h2:hover a.anchor,
+.blog-post-container h3:hover a.anchor {
+  opacity: 1;
+}
+
+/* 4. Label/chip utility (if you can mark "What’s happening:" etc. with classes) */
+.label-chip {
+  display: inline-block;
+  background: #222;
+  color: white;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  margin-right: 6px;
+}
+
+/* 5. Section spacing and dividers */
+.blog-post-container section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.blog-post-container hr {
+  border: none;
+  border-top: 1px solid #e2e2e2;
+  margin: 2rem 0;
+}
+
+/* 6. CTA panel (can be injected via CMS or appended) */
+.blog-post-container .cta-box {
+  background: #f7f6f2;
+  border: 1px solid #d8d6d2;
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  margin: 2.5rem 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.cta-box .cta-text {
+  flex: 1 1 200px;
+}
+.cta-box .cta-action {
+  flex: 0 0 auto;
+}
+
+/* 7. Reveal-on-scroll helper (requires JS to toggle .visible) */
+.blog-post-container .reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.blog-post-container .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .blog-post-container h2 {
+    font-size: 1.75rem;
+  }
+  .blog-post-container h3 {
+    font-size: 1.25rem;
+  }
+  .blog-post-container h2::after {
+    width: 120px;
+  }
+  .blog-post-container h3::after {
+    width: 90px;
+  }
+}
+
+
+/* Base readablity container */
+.blog-post-container {
+  max-width: 85ch;
+  font-size: 1rem;
+  line-height: 1.55;
+  letter-spacing: 0.005em;
+  word-wrap: break-word;
+}
+
+/* Paragraph spacing */
+.blog-post-container p {
+  margin-bottom: 1.25rem;
+}
+
+/* Key phrase highlight */
+.blog-post-container .highlight {
+  background: rgba(184, 143, 47, 0.1);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* List improvements */
+.blog-post-container ul {
+  padding-left: 1.25rem;
+  list-style: none;
+  margin: 0 0 1rem;
+}
+.blog-post-container ul li {
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 0.6rem;
+}
+.blog-post-container ul li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background: #b78900;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+/* Ordered list with custom numbers */
+.blog-post-container ol {
+  padding-left: 1.25rem;
+  counter-reset: section;
+  margin: 0 0 1rem;
+}
+.blog-post-container ol li {
+  position: relative;
+  padding-left: 2em;
+  margin-bottom: 0.6rem;
+}
+.blog-post-container ol li:before {
+  counter-increment: section;
+  content: counter(section) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  color: #b78900;
+}
+
+/* Links */
+.blog-post-container a {
+  color: #0056b3;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  transition: color .2s;
+}
+.blog-post-container a:hover {
+  color: #003a80;
+}
+
+/* Slightly soften long headings on mobile for wrap */
+@media (max-width: 768px) {
+  .blog-post-container {
+    font-size: 1.05rem;
+  }
+}
+
+/* Optional subtle drop shadow for callout boxes (excerpt already) */
+.blog-post-container > p:first-of-type {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+}
+
+/* Small reading progress bar (requires JS to set width) */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #b78900, #ffd966);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
 path {
   pointer-events: all;
 }

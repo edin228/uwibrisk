@@ -25,8 +25,8 @@ function BlogPost({ data, recentBlogs }) {
         <meta property="article:published_time" content={data?.publishedAt} />
       </Head>
       <Base template={"Blog"}>
-        <div className="flex flex-col w-full p-4 md:flex-row md:w-[60%] md:mx-auto">
-          <div className="flex flex-col w-full">
+        <div className="w-full p-4 md:mx-auto md:w-[60%] md:grid md:grid-cols-[1fr_300px] md:gap-8">
+          <div className="flex-1 pr-0 lg:pr-8">
             <div className="block mb-4">
               <BlogHeader
                 title={data?.title}
@@ -61,13 +61,8 @@ function BlogPost({ data, recentBlogs }) {
                         alt="author-pic"
                         width={50}
                         height={50}
-                        className="rounded-full"
+                        className="rounded-full h-[50px] w-[50px]"
                         objectFit="cover"
-                      />
-                      <img
-                        src={data?.teamMember?.blogPhoto?.url}
-                        alt="featured image"
-                        className="hidden"
                       />
                     </div>
                     <div className="flex flex-col">
@@ -79,16 +74,19 @@ function BlogPost({ data, recentBlogs }) {
                   </div>
                 ) : null}
                 <div className="flex w-full h-full bg-white rounded-md p-2 shadow-md">
-                  <div className="blog-post-container"
+                  <div
+                    className="blog-post-container"
                     dangerouslySetInnerHTML={{ __html: data?.content.html }}
                   ></div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex w-full md:w-4/12">
-            <RecentBlogColumn posts={recentBlogs} />
-          </div>
+          <aside className="hidden md:block">
+            <div className="sticky top-24">
+              <RecentBlogColumn posts={recentBlogs} />
+            </div>
+          </aside>
         </div>
       </Base>
     </>
