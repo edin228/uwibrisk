@@ -37,13 +37,12 @@
   font-weight: revert;
 }
 
-.blog-post-container > p:first-of-type,
-.blog-post-container > p:last-of-type {
+.blog-post-container > p:first-of-type {
   background: #f7f6f2;
   border-left: 6px solid #b88f2f;
   padding: 1rem 1.25rem;
   margin-bottom: 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.5;
   position: relative;
   border-radius: 4px;
@@ -56,11 +55,12 @@
   position: relative;
   margin: 2rem 0;
   padding: 1rem 1.25rem 1rem 1.75rem;
-  background: #f0efed;
+  background: #f7f6f2;
   border-left: 6px solid #b78900;
   font-style: italic;
   line-height: 1.4;
   border-radius: 4px;
+  font-weight: 600;
 }
 
 .blog-post-container blockquote:before {
@@ -86,11 +86,11 @@
 }
 
 .blog-post-container h2 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .blog-post-container h3 {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 }
 
 .blog-post-container h2::after,
@@ -125,12 +125,11 @@
 /* 4. Label/chip utility (if you can mark "What’s happening:" etc. with classes) */
 .label-chip {
   display: inline-block;
-  background: #222;
-  color: white;
+  background: #f7f6f2;
   padding: 2px 8px;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  border-radius: 999px;
+  border-radius: 12px;
   letter-spacing: 0.5px;
   margin-right: 6px;
 }
@@ -157,6 +156,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  text-align: center;
+  width:100%;
+  display:flex;
+  justify-content: center;
 }
 .cta-box .cta-text {
   flex: 1 1 200px;
@@ -230,7 +233,7 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 0.6em;
+  top: 0.8em;
   width: 6px;
   height: 6px;
   background: #b78900;
@@ -277,10 +280,7 @@
   }
 }
 
-/* Optional subtle drop shadow for callout boxes (excerpt already) */
-.blog-post-container > p:first-of-type {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
-}
+
 
 /* Small reading progress bar (requires JS to set width) */
 .read-progress {
