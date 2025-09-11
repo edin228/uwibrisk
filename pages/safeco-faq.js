@@ -9,8 +9,8 @@ import Image from "next/image";
 function SafecoFAQ() {
   return (
     <Base title={"Safeco FAQ"} template={"SingleColumn"}>
-      <div className="flex flex-col w-full items-center justify-center">
-        <div className="flex flex-col w-1/2 bg-red h-full p-8">
+      <div className="flex flex-col w-full items-center justify-center p-2">
+        <div className="flex flex-col w-full md:w-1/2 bg-red h-full p-8 bg-white rounded-lg shadow-md">
           <div className="w-[300px] h-[200px] ml-[-40px]">
             <Image
               src="https://cdn.brinq.io/UWIBR/safeco4157.jpg"
@@ -21,7 +21,7 @@ function SafecoFAQ() {
             />
           </div>
           <div className="px-4 text-[2.2rem] font-bold">Safeco FAQ</div>
-          <div className="p-4 text-[1.2rem]">
+          <div className="p-4 text-md md:text-[1.2rem]">
             We know you may have questions about Safeco’s recent decision, so
             we’ve put together this quick FAQ to give you clarity and peace of
             mind. If you don’t see your question here, please reach out - our
