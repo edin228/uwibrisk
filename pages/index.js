@@ -104,6 +104,29 @@ export default function Home({
           </div>
         ) : null}
         <div className="relative flex flex-col w-full h-full p-4 xl:w-3/4 xl:mx-auto">
+          <a
+            href={`/safeco-faq`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex w-full items-center justify-center mt-[-70px] z-[999] mb-[40px] text-sm md:text-md"
+          >
+            <div className="flex flex-col justify-center items-center text-center rounded-lg shadow-lg border-rose-600 border-[2px] p-4 bg-white  cursor-pointer transition duration-100 ease-out">
+              <div className="flex items-center justify-center w-[200px] h-[80px] mt-[-10px]">
+                <Image
+                  src="https://cdn.brinq.io/UWIBR/safeco4157.jpg"
+                  alt="safecologo"
+                  objectFit="contain"
+                  height={80}
+                  width={200}
+                />
+              </div>
+              <div>
+                <strong>SAFECO</strong><span className="text-[0.75rem]">, a Liberty Mutual Company</span>
+              </div>
+              <div>moves to reduce market share in Western States.</div>
+              <div className="font-bold">Click here to learn more</div>
+            </div>
+          </a>
           <CarriersContainer carriers={carriers} />
           <div className="py-4 my-12">
             <div className="flex flex-col items-center justify-center w-full gap-2 mb-8 font-semibold text-center">

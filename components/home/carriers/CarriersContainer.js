@@ -41,7 +41,7 @@ function CarriersContainer({ carriers }) {
       <div className="flex items-center justify-center w-full mb-2 font-semibold tracking-widest text-center uppercase">
         we only partner with the best
       </div>
-      <div className="w-full py-2 bg-white">
+      <div className="w-full py-2 bg-white rounded-lg shadow-lg">
         {loaded ? (
           <AliceCarousel
             items={items}
