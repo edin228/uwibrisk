@@ -916,6 +916,44 @@ p {
 .half-clip {
   clip-path: polygon(0 0, 0% 100%, 100% 0);
 }
+
+
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+}
+.faq-button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+.faq-button:focus {
+  outline: 3px solid #eab308;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.faq-icon {
+  transition: transform 200ms ease;
+}
+.faq-icon.open {
+  transform: rotate(180deg);
+}
+.faq-panel {
+  overflow: hidden;
+  transition: height 250ms ease;
+}
+.faq-content {
+  padding: 0 16px 16px 16px;
+  color: #374151;
+}
+
 @media (min-width: 1024px) {
   .blog-card {
     position: relative;
