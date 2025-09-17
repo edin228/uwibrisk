@@ -75,7 +75,6 @@
 }
 
 /* 3. Heading styles with your updated sizes and underline */
-.blog-post-container h2,
 .blog-post-container h3 {
   position: relative;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -86,7 +85,7 @@
 }
 
 .blog-post-container h2 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .blog-post-container h3 {
