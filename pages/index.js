@@ -108,7 +108,7 @@ export default function Home({
             href={`/safeco-faq`}
             target="_blank"
             rel="noreferrer"
-            className="flex w-full items-center justify-center mt-[-70px] z-[999] mb-[40px] text-sm md:text-md"
+            className="flex w-full items-center justify-center mt-[-70px] z-[49] mb-[40px] text-sm md:text-md"
           >
             <div className="flex flex-col justify-center items-center text-center rounded-lg shadow-lg border-rose-600 border-[2px] p-4 bg-white  cursor-pointer transition duration-100 ease-out">
               <div className="flex items-center justify-center w-[200px] h-[80px] mt-[-10px]">
