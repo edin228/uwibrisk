@@ -139,7 +139,7 @@ export default function Home({
                 href="http://UWIBRiskInsuranceSolutions.rocketresponses.com/review_us/rs74UQg5yobEwrSfv1KJAQ"
               >
                 <div className="px-2 text-white bg-yellow-500 rounded-md shadow-md">
-                  Leave us a Review
+                  Leave us a Google Review
                 </div>
               </a>
             </div>

@@ -681,6 +681,37 @@ export const getTeam = async () => {
   return result;
 };
 
+export const getSalesTeam = async () => {
+  const query = gql`
+    query GetTeam {
+      teamMembers(where: { isActive: true, isProducer: true }, first: 500) {
+        id
+        isActive
+        name
+        phone
+        email
+        employeeCategory
+        position
+        slug
+        hasTeamPage
+        meetingLink
+        miniBio
+        photo {
+          id
+          url
+        }
+        motionProfilePhoto {
+          id
+          url
+        }
+      }
+    }
+  `;
+  const result = await request(graphqlAPI, query);
+
+  return result;
+};
+
 export const getTeamMember = async (slug) => {
   const query = gql`
     query GetTeamMember($slug: String!) {
