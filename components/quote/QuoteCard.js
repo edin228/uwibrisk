@@ -7,7 +7,7 @@ function QuoteCard({ data }) {
     <>
       <a
         href={data.slug}
-        className="relative transition duration-100  cursor-pointer flex flex-col shadow-lg border-2 border-zinc-100 rounded-xl h-[380px] w-full xl:w-[237px] 2xl:w-[300px]"
+        className="relative transition duration-100  cursor-pointer flex flex-col shadow-lg border-2 border-zinc-100 rounded-xl h-[380px] w-full xl:w-[237px] 2xl:w-[255px]"
       >
         <Image
           src={data?.image?.url}
