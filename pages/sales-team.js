@@ -83,8 +83,10 @@ function SalesTeam({ data, programs, quoteCards }) {
                 your questions.
               </p>
               <p className="text-center mt-[-7px] text-sm text-gray-600 text-[1.4rem] max-w-4xl mx-auto px-2">
-                InsureTax delivers revolutionary coverage to provide complex
-                businesses and successful families with Peace of Mind.
+                UWIB Risk has team members standing by to answer your questions.
+                Our specialized programs, including InsureTax, deliver
+                revolutionary coverage to provide complex businesses and
+                successful families with Peace of Mind.
               </p>
             </div>
             <div className="flex flex-col w-full h-full">
