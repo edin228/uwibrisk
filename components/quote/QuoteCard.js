@@ -7,7 +7,7 @@ function QuoteCard({ data }) {
     <>
       <a
         href={data.slug}
-        className="relative transition duration-100  cursor-pointer flex flex-col shadow-lg border-2 border-zinc-100 rounded-xl h-[380px] w-full xl:w-[237px] 2xl:w-[255px]"
+        className="relative transition duration-100  cursor-pointer flex flex-col shadow-lg border-2 border-zinc-100 rounded-xl h-[380px] w-full md:w-[168px]"
       >
         <Image
           src={data?.image?.url}
@@ -22,7 +22,7 @@ function QuoteCard({ data }) {
               {getIcon(data.icon)}
             </div>
           </div>
-          <div className="flex items-center justify-center p-2 text-3xl font-bold text-center text-white rounded-b-xl text-shadow">
+          <div className="flex items-center justify-center p-2 text-xl font-bold text-center text-white rounded-b-xl text-shadow">
             {data.label}
           </div>
         </div>
