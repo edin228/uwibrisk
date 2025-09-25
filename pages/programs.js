@@ -55,9 +55,28 @@ function Programs({ programs = null, quoteCards }) {
             className={`flex flex-wrap w-full gap-2 justify-center items-center`}
           >
             <div className="flex flex-wrap w-full justify-center">
-              {gridData?.map((c, i) => (
-                <ProgramCard key={c.id} data={c} />
-              ))}
+              {(gridData ?? [])
+                .slice() // keep original array intact
+                .sort((a, b) => {
+                  const ao = a?.order ?? Infinity;
+                  const bo = b?.order ?? Infinity;
+
+                  if (ao !== bo) return ao - bo; // smaller 'order' first
+
+                  // tie-breaker: by id (handles numeric or string ids)
+                  const aId = a?.id;
+                  const bId = b?.id;
+                  const aNum = Number(aId);
+                  const bNum = Number(bId);
+
+                  if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+                    return aNum - bNum;
+                  }
+                  return String(aId).localeCompare(String(bId));
+                })
+                .map((c) => (
+                  <ProgramCard key={c.id} data={c} />
+                ))}
             </div>
           </div>
         </div>

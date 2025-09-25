@@ -145,6 +145,7 @@ export const getProgramInfo = async () => {
         id
         title
         url
+        order
         description
         image {
           url

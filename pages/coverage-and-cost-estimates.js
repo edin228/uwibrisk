@@ -30,9 +30,28 @@ function GetQuotes({ data, programs }) {
         <div
           className={`flex flex-wrap w-full h-full gap-2  xl:px-80 px-4 pb-4 lg:justify-center`}
         >
-          {programs?.map((c, i) => (
-            <ProgramCard key={c.id} data={c} />
-          ))}
+          {(programs ?? [])
+            .slice() // keep original array intact
+            .sort((a, b) => {
+              const ao = a?.order ?? Infinity;
+              const bo = b?.order ?? Infinity;
+
+              if (ao !== bo) return ao - bo; // smaller 'order' first
+
+              // tie-breaker: by id (handles numeric or string ids)
+              const aId = a?.id;
+              const bId = b?.id;
+              const aNum = Number(aId);
+              const bNum = Number(bId);
+
+              if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+                return aNum - bNum;
+              }
+              return String(aId).localeCompare(String(bId));
+            })
+            .map((c) => (
+              <ProgramCard key={c.id} data={c} />
+            ))}
         </div>
       </div>
     </Base>

@@ -55,7 +55,7 @@ function SalesTeam({ data, programs, quoteCards }) {
                           stiffness: 300,
                           damping: 20,
                         }}
-                        className="rounded-xl border border-gray-300 overflow-hidden border-accent-uwib  bg-white"
+                        className="rounded-xl border-[2px] border-white overflow-hidden border-accent-uwib  bg-white"
                       >
                         <MotionPhoto
                           photos={m?.motionProfilePhoto}
@@ -101,12 +101,29 @@ function SalesTeam({ data, programs, quoteCards }) {
               <h1 className="w-full py-4 text-3xl font-bold text-center">
                 Niche Programs
               </h1>
-              <div
-                className={`flex flex-wrap w-full h-full gap-2  xl:px-50 px-4 pb-4 lg:justify-center`}
-              >
-                {programs?.map((c, i) => (
-                  <ProgramCard key={c.id} data={c} />
-                ))}
+              <div className="flex flex-wrap w-full h-full gap-2 xl:px-50 px-4 pb-4 lg:justify-center">
+                {(programs ?? [])
+                  .slice() // keep original array intact
+                  .sort((a, b) => {
+                    const ao = a?.order ?? Infinity;
+                    const bo = b?.order ?? Infinity;
+
+                    if (ao !== bo) return ao - bo; // smaller 'order' first
+
+                    // tie-breaker: by id (handles numeric or string ids)
+                    const aId = a?.id;
+                    const bId = b?.id;
+                    const aNum = Number(aId);
+                    const bNum = Number(bId);
+
+                    if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+                      return aNum - bNum;
+                    }
+                    return String(aId).localeCompare(String(bId));
+                  })
+                  .map((c) => (
+                    <ProgramCard key={c.id} data={c} />
+                  ))}
               </div>
             </div>
           </div>
