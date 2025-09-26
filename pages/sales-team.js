@@ -83,7 +83,7 @@ function SalesTeam({ data, programs, quoteCards }) {
                         staggerIndex={i} // <— phase per card
                         staggerStepSec={0.25} // <— 250ms apart
                         intervalMs={5500}
-                        jitterSec={0.1} // <— optional small desync
+                        jitterSec={0} // <— optional small desync
                       />
                     </motion.div>
                     <div className="mt-2 text-center">

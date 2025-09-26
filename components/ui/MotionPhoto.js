@@ -1,15 +1,21 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+function useStablePhase({ staggerIndex = 0, staggerStepSec = 0.25, jitterSec = 0 }) {
+  // Compute once per instance
+  const jitterMsRef = React.useRef(jitterSec ? Math.random() * jitterSec * 1000 : 0);
+  const phaseMsRef = React.useRef(Math.max(0, staggerIndex) * staggerStepSec * 1000 + jitterMsRef.current);
+  return phaseMsRef.current;
+}
+
 const MotionPhoto = ({
   photos = [],
   fallback,
   alt = "Team member",
-  // new props:
-  staggerIndex = 0,      // usually the map index
-  staggerStepSec = 0.25, // delay per index (seconds)
-  intervalMs = 5500,     // time each image stays on screen
-  jitterSec = 0          // optional tiny randomness to avoid perfect sync
+  staggerIndex = 0,
+  staggerStepSec = 0.25,
+  intervalMs = 5500,
+  jitterSec = 0,
 }) => {
   const imgs = React.useMemo(
     () => (photos || []).map((p) => p?.url).filter(Boolean),
@@ -20,7 +26,14 @@ const MotionPhoto = ({
   const [idx, setIdx] = React.useState(0);
   const [paused, setPaused] = React.useState(false);
 
-  // Preload images once
+  // Stable timing refs
+  const phaseMs = useStablePhase({ staggerIndex, staggerStepSec, jitterSec });
+  const startedRef = React.useRef(false);
+  const startAtRef = React.useRef(null);        // epoch ms when cycle would have started (with phase)
+  const intervalIdRef = React.useRef(null);
+  const timeoutIdRef = React.useRef(null);
+
+  // Preload images
   React.useEffect(() => {
     imgs.forEach((src) => {
       const i = new Image();
@@ -28,31 +41,47 @@ const MotionPhoto = ({
     });
   }, [imgs]);
 
-  // Phase-shifted cycle timer
-  React.useEffect(() => {
-    if (!hasCycle || paused) return;
+  const clearTimers = React.useCallback(() => {
+    if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+    if (intervalIdRef.current) clearInterval(intervalIdRef.current);
+    timeoutIdRef.current = null;
+    intervalIdRef.current = null;
+  }, []);
 
-    // per-card start delay = index * step + tiny jitter (optional)
-    const startDelayMs =
-      (Math.max(0, staggerIndex) * staggerStepSec +
-        (jitterSec ? Math.random() * jitterSec : 0)) * 1000;
+  // Start cycle aligned to original phase and interval
+  const startAlignedCycle = React.useCallback(() => {
+    if (!hasCycle) return;
 
-    let intervalId;
-    const timeoutId = setTimeout(() => {
-      // advance once at start to trigger first fade with delay
-      setIdx((i) => (i + 1) % imgs.length);
+    if (!startedRef.current) {
+      startedRef.current = true;
+      startAtRef.current = Date.now() + phaseMs;
+    }
 
-      // then keep cycling with a stable interval (keeps the phase offset)
-      intervalId = setInterval(() => {
-        setIdx((i) => (i + 1) % imgs.length);
+    const now = Date.now();
+    const base = startAtRef.current;
+    const elapsed = Math.max(0, now - base);
+    const untilNext = elapsed <= 0 ? -elapsed : intervalMs - (elapsed % intervalMs);
+
+    timeoutIdRef.current = setTimeout(() => {
+      setIdx((i) => (i + 1) % Math.max(1, imgs.length));
+
+      intervalIdRef.current = setInterval(() => {
+        setIdx((i) => (i + 1) % Math.max(1, imgs.length));
       }, intervalMs);
-    }, startDelayMs);
+    }, untilNext);
+  }, [hasCycle, imgs.length, intervalMs, phaseMs]);
 
-    return () => {
-      clearTimeout(timeoutId);
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [imgs.length, hasCycle, paused, staggerIndex, staggerStepSec, intervalMs, jitterSec]);
+  // Pause/resume without changing phase
+  React.useEffect(() => {
+    clearTimers();
+    if (hasCycle && !paused) startAlignedCycle();
+    return clearTimers;
+  }, [hasCycle, paused, startAlignedCycle, clearTimers]);
+
+  // Keep idx in range if list changes
+  React.useEffect(() => {
+    setIdx((i) => (imgs.length ? i % imgs.length : 0));
+  }, [imgs.length]);
 
   const fallbackSrc = imgs[0] || fallback || "/placeholder.png";
 
@@ -64,7 +93,7 @@ const MotionPhoto = ({
     >
       <AnimatePresence mode="wait">
         <motion.img
-          key={imgs[idx] || fallbackSrc} // new key -> smooth crossfade
+          key={imgs[idx] || fallbackSrc}
           src={imgs[idx] || fallbackSrc}
           alt={alt}
           className="absolute inset-0 h-full w-full object-cover will-change-[opacity]"
