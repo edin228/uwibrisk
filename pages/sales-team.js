@@ -52,7 +52,7 @@ function SalesTeam({ data, programs, quoteCards }) {
             </div>
             {/* Team grid */}
             <div className="flex flex-wrap md:flex-nowrap justify-center gap-6 w-full overflow-visible">
-              {members.map((m) => {
+              {members.map((m, i) => {
                 const img =
                   m?.photo?.url ||
                   m?.motionProfilePhoto?.[0]?.url ||
@@ -65,11 +65,14 @@ function SalesTeam({ data, programs, quoteCards }) {
                     className="group block w-[210px] shrink-0"
                   >
                     <motion.div
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
                       whileHover={{ y: -4, scale: 1.02 }}
                       transition={{
                         type: "spring",
                         stiffness: 300,
                         damping: 20,
+                        delay: i * 0.3,
                       }}
                       className="rounded-xl border-[2px] border-white overflow-hidden border-accent-uwib bg-white"
                     >
@@ -77,6 +80,10 @@ function SalesTeam({ data, programs, quoteCards }) {
                         photos={m?.motionProfilePhoto}
                         fallback={img}
                         alt={m?.name || "Team member"}
+                        staggerIndex={i} // <— phase per card
+                        staggerStepSec={0.25} // <— 250ms apart
+                        intervalMs={5500}
+                        jitterSec={0.1} // <— optional small desync
                       />
                     </motion.div>
                     <div className="mt-2 text-center">
