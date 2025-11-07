@@ -99,10 +99,10 @@ function BlogPost({ data, recentBlogs }) {
                   >
                     <h2 className="text-2xl font-bold mb-2">About the author</h2>
                     <div className="flex flex-col md:flex-row gap-4">
-                      {data?.teamMember?.blogPhoto ? (
+                      {data?.teamMember?.photo ? (
                         <div className="flex-shrink-0">
                           <motion.img
-                            src={data?.teamMember?.blogPhoto?.url}
+                            src={data?.teamMember?.photo?.url}
                             alt={`${data?.teamMember?.name} - Author`}
                             className="w-[150px] h-[150px] rounded-lg shadow-lg object-cover"
                             initial={false}
