@@ -398,6 +398,8 @@ export const getBlogPost = async (slug) => {
           isActive
           name
           position
+          slug
+          miniBio
           photo {
             url
           }

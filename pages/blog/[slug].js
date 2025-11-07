@@ -55,13 +55,13 @@ function BlogPost({ data, recentBlogs }) {
                 </div>
                 {data?.teamMember?.blogPhoto ? (
                   <div className="flex w-full mt-4">
-                    <div className="flex items-center justify-center mr-4 rounded-lg shadow-lg">
+                    <div className="flex items-center justify-center mr-4">
                       <Image
                         src={data?.teamMember?.blogPhoto?.url}
                         alt="author-pic"
-                        width={50}
-                        height={50}
-                        className="rounded-full h-[50px] w-[50px]"
+                        width={70}
+                        height={70}
+                        className="rounded-full h-[70px] w-[70px] rounded-lg shadow-lg"
                         objectFit="cover"
                       />
                     </div>
@@ -70,6 +70,16 @@ function BlogPost({ data, recentBlogs }) {
                         {data?.teamMember?.name}
                       </div>
                       <div>{data?.teamMember?.position}</div>
+                      {data?.teamMember?.slug ? (
+                        <a
+                          href={`/team/${data?.teamMember?.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex justify-center w-full mt-2 text-sm py-1 bg-white hover:text-white hover:bg-yellow-500 transition ease-out duration-200 border-[1px] border-yellow-500 rounded-md font-bold uppercase tracking-widest"
+                        >
+                          View Bio
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 ) : null}
@@ -79,6 +89,54 @@ function BlogPost({ data, recentBlogs }) {
                     dangerouslySetInnerHTML={{ __html: data?.content.html }}
                   ></div>
                 </div>
+                {data?.teamMember?.miniBio ? (
+                  <div 
+                    className="flex flex-col w-full mt-8 rounded"
+                    style={{
+                      background: '#f7f6f2',
+                      borderLeft: '6px solid #b88f2f',
+                      padding: '1rem 1.25rem',
+                      borderRadius: '4px'
+                    }}
+                  >
+                    <h2 className="text-2xl font-bold mb-4">About the author</h2>
+                    <div className="flex flex-col md:flex-row gap-4">
+                      {data?.teamMember?.blogPhoto ? (
+                        <div className="flex-shrink-0">
+                          <Image
+                            src={data?.teamMember?.blogPhoto?.url}
+                            alt={`${data?.teamMember?.name} - Author`}
+                            width={150}
+                            height={150}
+                            className="rounded-lg shadow-lg"
+                            objectFit="cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="flex flex-col flex-1">
+                        <div className="text-lg font-bold mb-1">
+                          {data?.teamMember?.name}
+                        </div>
+                        <div className="text-sm text-gray-600 mb-3">
+                          {data?.teamMember?.position}
+                        </div>
+                        <div className="text-base mb-4">
+                          {data?.teamMember?.miniBio}
+                        </div>
+                        {data?.teamMember?.slug ? (
+                          <a
+                            href={`/team/${data?.teamMember?.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block w-fit text-sm py-2 px-4 bg-white hover:text-white hover:bg-yellow-500 transition ease-out duration-200 border-[1px] border-yellow-500 rounded-md font-bold uppercase tracking-widest"
+                          >
+                            View Full Bio
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
