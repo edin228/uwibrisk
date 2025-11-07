@@ -4,7 +4,7 @@ import Base from "../../components/layout/Base";
 import { getBlogPost, getRecentBlogPosts } from "../../services";
 import RecentBlogColumn from "../../components/blog/RecentBlogColumn";
 import { BlogHeader } from "../../components/blog/BlogHeader";
-import Image from "next/image";
+import { motion } from "framer-motion";
 
 function BlogPost({ data, recentBlogs }) {
   return (
@@ -56,13 +56,11 @@ function BlogPost({ data, recentBlogs }) {
                 {data?.teamMember?.blogPhoto ? (
                   <div className="flex w-full mt-4">
                     <div className="flex items-center justify-center mr-4">
-                      <Image
+                      <motion.img
                         src={data?.teamMember?.blogPhoto?.url}
                         alt="author-pic"
-                        width={70}
-                        height={70}
-                        className="rounded-full h-[70px] w-[70px] rounded-lg shadow-lg"
-                        objectFit="cover"
+                        className="h-[70px] w-[70px] rounded-full shadow-lg object-cover"
+                        initial={false}
                       />
                     </div>
                     <div className="flex flex-col">
@@ -103,13 +101,11 @@ function BlogPost({ data, recentBlogs }) {
                     <div className="flex flex-col md:flex-row gap-4">
                       {data?.teamMember?.blogPhoto ? (
                         <div className="flex-shrink-0">
-                          <Image
+                          <motion.img
                             src={data?.teamMember?.blogPhoto?.url}
                             alt={`${data?.teamMember?.name} - Author`}
-                            width={150}
-                            height={150}
-                            className="rounded-lg shadow-lg"
-                            objectFit="cover"
+                            className="w-[150px] h-[150px] rounded-lg shadow-lg object-cover"
+                            initial={false}
                           />
                         </div>
                       ) : null}
