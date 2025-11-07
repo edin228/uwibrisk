@@ -70,7 +70,7 @@ function BlogPost({ data, recentBlogs }) {
                       <div>{data?.teamMember?.position}</div>
                       {data?.teamMember?.slug ? (
                         <a
-                          href={`/team/${data?.teamMember?.slug}`}
+                          href={`/${data?.teamMember?.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex justify-center w-full mt-2 text-sm py-1 bg-white hover:text-white hover:bg-yellow-500 transition ease-out duration-200 border-[1px] border-yellow-500 rounded-md font-bold uppercase tracking-widest"
@@ -121,7 +121,7 @@ function BlogPost({ data, recentBlogs }) {
                         </div>
                         {data?.teamMember?.slug ? (
                           <a
-                            href={`/team/${data?.teamMember?.slug}`}
+                            href={`/${data?.teamMember?.slug}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-block w-fit text-sm py-2 px-4 bg-white hover:text-white hover:bg-yellow-500 transition ease-out duration-200 border-[1px] border-yellow-500 rounded-md font-bold uppercase tracking-widest"
