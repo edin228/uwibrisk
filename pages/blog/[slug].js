@@ -89,7 +89,7 @@ function BlogPost({ data, recentBlogs }) {
                 </div>
                 {data?.teamMember?.miniBio ? (
                   <div 
-                    className="flex flex-col w-full mt-8 rounded"
+                    className="flex flex-col w-full mt-2 rounded"
                     style={{
                       background: '#f7f6f2',
                       borderLeft: '6px solid #b88f2f',
@@ -97,7 +97,7 @@ function BlogPost({ data, recentBlogs }) {
                       borderRadius: '4px'
                     }}
                   >
-                    <h2 className="text-2xl font-bold mb-4">About the author</h2>
+                    <h2 className="text-2xl font-bold mb-2">About the author</h2>
                     <div className="flex flex-col md:flex-row gap-4">
                       {data?.teamMember?.blogPhoto ? (
                         <div className="flex-shrink-0">
