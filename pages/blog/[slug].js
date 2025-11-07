@@ -137,7 +137,7 @@ function BlogPost({ data, recentBlogs }) {
             </div>
           </div>
           <aside className="hidden md:block">
-            <div className="sticky top-24">
+            <div className="sticky top-0">
               <RecentBlogColumn posts={recentBlogs} />
             </div>
           </aside>
