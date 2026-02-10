@@ -26,7 +26,7 @@ const TypingText = () => {
         3000, // Waits 2s
         "Employee Benefits", // Deletes 'One' and types 'Two'
         3000, // Waits 2s
-        () => {},
+        () => { },
       ]}
       wrapper="div"
       cursor={true}
@@ -75,13 +75,26 @@ export default function Home({
               </div>
             </div>
             <div className="hidden absolute text-white md:flex items-center flex-col justify-center right-[10%] top-[23%] z-40  text-shadow">
+              <div className=" font-bold text-5xl font-bold border-b-[5px] border-amber-500 pb-4">Serving Clients Nationwide</div>
+              <div className="flex flex-col items-center justify-center">
+                <div className="flex items-center gap-2 text-2xl uppercase">
+                  <div className="font-bold">Insurance Solutions</div>
+                  <div className="opacity-80">How You Want Them</div>
+                </div>
+                <div className="flex items-center text-2xl uppercase">
+                  <div className="font-bold">When You Need Them</div>
+                  <div className="text-2xl">®</div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="hidden absolute text-white md:flex items-center flex-col justify-center right-[10%] top-[23%] z-40  text-shadow">
               <div className="text-5xl font-bold">Insurance Solutions</div>
               <div className="text-5xl">How You Want Them</div>
               <div className="flex gap-1">
                 <div className="text-5xl font-bold">When You Need Them</div>
                 <div className="text-2xl">®</div>
               </div>
-            </div>
+            </div> */}
             {/* <div className="absolute top-[-50px] right-[14px] z-40 h-[200px] w-[400px]">
               <Image
                 src="/UWIBRIS-White.png"

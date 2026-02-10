@@ -661,6 +661,7 @@ export const getTeam = async () => {
         slug
         hasTeamPage
         meetingLink
+        order
         miniBio
         photo {
           id
