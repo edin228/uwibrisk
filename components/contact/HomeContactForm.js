@@ -290,16 +290,9 @@ function HomeContactForm() {
             <div
               className={`${
                 selectedStates.length == 0 ? `` : `text-[#eab308]`
-              } font-bold  text-xl uppercase tracking-tight`}
+              } font-bold text-center w-full items-center justify-center text-xl  uppercase`}
             >
-              We can help
-            </div>
-            <div
-              className={`${
-                selectedStates.length == 0 ? `` : `text-[#eab308]`
-              } font-bold  text-xl  uppercase`}
-            >
-              What state are you in
+              What state are you in?
             </div>
           </div>
         )}
