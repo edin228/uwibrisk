@@ -4,15 +4,23 @@ import Base from "../components/layout/Base";
 import { getIcon } from "../utils/utils";
 import QuoteCard from "../components/quote/QuoteCard";
 import { getQuoteCards } from "../services";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
+import companyInfo from "../utils/companyInfo";
 
 function GetQuotes({ data }) {
   return (
     <Base template={"Grid"}>
       <Head>
-        <title>UWIB Risk</title>
-        <meta name="description" content="United Western Insurance Brokers" />
+        <title>Get Quotes - UWIB Risk</title>
+        <meta name="description" content="Get insurance quotes from United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: "Get Quotes", url: `${companyInfo.url}/get-quotes` },
+        ]}
+      />
       <div className="flex flex-col w-full h-full">
         <h1 className="w-full py-4 text-3xl font-bold text-center">
           Coverage and Cost Estimates

@@ -5,22 +5,33 @@ import { motion } from "framer-motion";
 import { getRecentBlogPosts, getTeamMember } from "../../services";
 import { getIcon } from "../../utils/utils";
 import BlogContainer from "../../components/blog/BlogContainer";
+import PersonSchema from "../../components/schema/PersonSchema";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema";
+import companyInfo from "../../utils/companyInfo";
 
 function TeamMember({ data, posts }) {
   return (
     <Base template={"Member"}>
       <Head>
-        <title>UWIBRISK</title>
-        <meta name="description" content="United Western Insurance Brokers" />
+        <title>{data?.name ? `${data.name} - UWIB Risk` : "UWIBRISK"}</title>
+        <meta name="description" content={data?.position ? `${data.name} - ${data.position} at United Western Insurance Brokers` : "United Western Insurance Brokers"} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <PersonSchema data={data} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: "Team", url: `${companyInfo.url}/team` },
+          { name: data?.name, url: `${companyInfo.url}/${data?.slug}` },
+        ]}
+      />
       <div className="flex items-center justify-center w-full">
         <div className="flex flex-col h-full px-12 2xl:w-3/4">
           <div className="flex flex-col items-center justify-center h-full md:flex-row md:justify-start md:items-start">
             <div className="flex relative min-w-[350px] h-[350px] md:my-8 overflow-hidden rounded-lg shadow-lg">
               <motion.img
                 className="object-cover w-full h-full"
-                src={data.photo.url}
+                src={data?.photo?.url}
                 alt=""
                 initial={false}
               />

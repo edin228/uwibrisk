@@ -15,6 +15,9 @@ import ImageLinkGrid from "../components/ImageLinkGrid";
 import ActionBanner from "../components/ActionBanner";
 import TestemonialsSection from "../components/TestemonialsSection";
 import Script from "next/script";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
+import JsonLd from "../components/schema/JsonLd";
+import companyInfo from "../utils/companyInfo";
 
 function DynamicForm({ rawHtml }) {
   const [htmlContent, setHtmlContent] = useState("");
@@ -225,10 +228,33 @@ function Page({ data }) {
   return (
     <Base template={data?.template}>
       <Head>
-        <title>UWIBRISK</title>
-        <meta name="description" content="United Western Insurance Brokers" />
+        <title>{data?.title ? `${data.title} - UWIB Risk` : "UWIBRISK"}</title>
+        <meta name="description" content={data?.wordingUnderTitle || "United Western Insurance Brokers"} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: data?.title,
+          url: `${companyInfo.url}/${data?.slug}`,
+          ...(data?.wordingUnderTitle && { description: data.wordingUnderTitle }),
+          ...(data?.headerImage?.url && {
+            primaryImageOfPage: {
+              "@type": "ImageObject",
+              url: data.headerImage.url,
+            },
+          }),
+          ...(data?.createdAt && { datePublished: data.createdAt }),
+          isPartOf: { "@id": `${companyInfo.url}/#website` },
+        }}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: data?.title, url: `${companyInfo.url}/${data?.slug}` },
+        ]}
+      />
       <div className="flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4">
         <div className="flex flex-col w-full h-full">
           <Content />

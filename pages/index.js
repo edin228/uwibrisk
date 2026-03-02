@@ -13,6 +13,7 @@ import Link from "next/link";
 import TestemonialPageCard from "../components/home/testemonials/TestemonialPageCard";
 import Head from "next/head";
 import Image from "next/image";
+import WebSiteSchema from "../components/schema/WebSiteSchema";
 
 const TypingText = () => {
   return (
@@ -50,6 +51,7 @@ export default function Home({
         <meta name="description" content="United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <WebSiteSchema />
       <div className="relative flex flex-col w-full space-y-4 lg:space-y-0 lg:gap-4 lg:pt-0 lg:pb-4">
         {testemonials ? (
           <div className="relative overflow-hidden max-h-[480px] h-[262px] md:h-auto">

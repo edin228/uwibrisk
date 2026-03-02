@@ -4,15 +4,23 @@ import Base from "../../components/layout/Base";
 import PetCard from "../../components/team/PetCard";
 import TeamCard from "../../components/team/TeamCard";
 import { getTeam } from "../../services";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema";
+import companyInfo from "../../utils/companyInfo";
 
 function Team({ data }) {
   return (
     <Base template={"Team"}>
       <Head>
-        <title>UWIBRisk Team</title>
-        <meta name="description" content="United Western Insurance Brokers" />
+        <title>Our Team - UWIB Risk</title>
+        <meta name="description" content="Meet the team at United Western Insurance Brokers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: "Team", url: `${companyInfo.url}/team` },
+        ]}
+      />
       <div className="flex flex-col w-full p-2 mx-auto space-y-4 lg:w-3/4 lg:space-y-0 lg:gap-4 lg:py-4">
         <div className="flex flex-col items-center justify-center w-full text-2xl font-bold tracking-widest uppercase lg:text-3xl">
           <div>Meet Our Team</div>

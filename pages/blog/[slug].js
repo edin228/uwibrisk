@@ -5,6 +5,9 @@ import { getBlogPost, getRecentBlogPosts } from "../../services";
 import RecentBlogColumn from "../../components/blog/RecentBlogColumn";
 import { BlogHeader } from "../../components/blog/BlogHeader";
 import { motion } from "framer-motion";
+import ArticleSchema from "../../components/schema/ArticleSchema";
+import BreadcrumbSchema from "../../components/schema/BreadcrumbSchema";
+import companyInfo from "../../utils/companyInfo";
 
 function BlogPost({ data, recentBlogs }) {
   return (
@@ -12,26 +15,34 @@ function BlogPost({ data, recentBlogs }) {
       <Head>
         <title>{data?.title}</title>
         <meta property="og:description" content={data?.excerpt} />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
         <meta property="og:title" content={data?.title} />
-        <meta property="og:image" content={data?.featuredImage.url} />
+        <meta property="og:image" content={data?.featuredImage?.url} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta
           property="og:url"
-          content={`https://uwibrisk.com/${data?.slug}`}
+          content={`${companyInfo.url}/blog/${data?.slug}`}
         />
         <link rel="icon" href="/favicon.ico" />
         <meta property="article:published_time" content={data?.publishedAt} />
       </Head>
+      <ArticleSchema data={data} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: "Blog", url: `${companyInfo.url}/blog` },
+          { name: data?.title, url: `${companyInfo.url}/blog/${data?.slug}` },
+        ]}
+      />
       <Base template={"Blog"}>
         <div className="w-full p-4 md:mx-auto md:w-[60%] md:grid md:grid-cols-[1fr_300px] md:gap-8">
           <div className="flex-1 pr-0 lg:pr-8">
             <div className="block mb-4">
               <BlogHeader
                 title={data?.title}
-                id={data?.featuredImage.id}
-                image={data?.featuredImage.url}
+                id={data?.featuredImage?.id}
+                image={data?.featuredImage?.url}
               />
             </div>
             <div className="z-30 flex py-2 text-xl font-bold md:hidden lg:text-4xl">

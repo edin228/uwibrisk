@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import Base from "../components/layout/Base";
 import { getCarrierInfo } from "../services";
 import { getIcon, searchText } from "../utils/utils";
 import { motion } from "framer-motion";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
+import companyInfo from "../utils/companyInfo";
 
 function Carriers({ carriers = null }) {
   const [gridData, setGridData] = useState([]);
@@ -229,6 +232,17 @@ function Carriers({ carriers = null }) {
 
   return (
     <Base data={carriers} title={"Carriers"} template={"GridWithSearch"}>
+      <Head>
+        <title>Carriers - UWIB Risk</title>
+        <meta name="description" content="Insurance carrier partners at United Western Insurance Brokers" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: "Carriers", url: `${companyInfo.url}/carriers` },
+        ]}
+      />
       <div className="flex flex-col w-full  min-h-[89vh] h-full">
         <h1 className="w-full py-4 text-3xl font-bold text-center">Carriers</h1>
         <div className="flex items-center justify-center w-full px-4">

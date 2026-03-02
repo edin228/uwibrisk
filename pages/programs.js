@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import Base from "../components/layout/Base";
 import { getProgramInfo, getQuoteCards } from "../services";
 import { getIcon, searchText } from "../utils/utils";
 import { motion } from "framer-motion";
 import ProgramCard from "../components/programs/ProgramCard";
 import QuoteCard from "../components/quote/QuoteCard";
+import BreadcrumbSchema from "../components/schema/BreadcrumbSchema";
+import companyInfo from "../utils/companyInfo";
 
 function Programs({ programs = null, quoteCards }) {
   const [gridData, setGridData] = useState([]);
@@ -28,6 +31,17 @@ function Programs({ programs = null, quoteCards }) {
 
   return (
     <Base data={programs} title={"Programs"} template={"GridWithSearch"}>
+      <Head>
+        <title>Programs - UWIB Risk</title>
+        <meta name="description" content="Insurance programs and coverage options from United Western Insurance Brokers" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: companyInfo.url },
+          { name: "Programs", url: `${companyInfo.url}/programs` },
+        ]}
+      />
       <div className="flex flex-col lg:flex-row w-full h-full  min-h-[92vh]">
         <div>
           <h1 className="w-full py-4 text-3xl font-bold text-center">
