@@ -16,7 +16,7 @@ function HomeContactForm() {
   const [selectedLineofBusiness, setSelectedLineofBusiness] = useState(null);
   const [numberOfEmployees, setNumberOfEmployees] = useState("");
   const [selectedIndustry, setSelectedIndustry] = useState("");
-  const [estimatedRevenue, setEstimatedRevenue] = useState("");
+  const [estimatedRevenue, setEstimatedRevenue] = useState("1000000");
   const [contactData, setContactData] = useState(null);
   const [team, setTeam] = useState(null);
 
@@ -532,7 +532,7 @@ function HomeContactForm() {
                   value={numberOfEmployees}
                 />
               </div>
-              <div className="flex flex-col w-full gap-2">
+              <div className="relative z-10 flex flex-col w-full gap-2">
                 <div className="font-semibold 2xl:text-2xl">
                   Projected sales for the next 12 months?
                 </div>
@@ -541,7 +541,7 @@ function HomeContactForm() {
                   prefix="$"
                   name="input-name"
                   placeholder=""
-                  defaultValue={1000000}
+                  value={estimatedRevenue}
                   decimalsLimit={2}
                   className="w-6/12 p-2 rounded-lg form-input bg-zinc-400/20"
                   onValueChange={(value, name) => setEstimatedRevenue(value)}
@@ -571,7 +571,7 @@ function HomeContactForm() {
                           initial={false}
                         />
                       </div>
-                      <div className="flex px-4 text-center">
+                      <div className="flex px-4 text-center hidden">
                         {prod.miniBio ? prod.miniBio : ""}
                       </div>
                       <div className="flex justify-center mt-4">
