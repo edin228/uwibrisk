@@ -3,14 +3,20 @@ import React from "react";
 import { motion } from "framer-motion";
 import { getIcon } from "../../utils/utils";
 
+const FALLBACK_PHOTO_URL = "/logo-full.png";
+
 function TeamCard({ member }) {
+  const photoUrl = member.photo?.url;
+
   return (
     <div className="flex items-center">
       <div className="relative w-[150px] h-[150px] overflow-hidden rounded-lg shadow-lg">
         <motion.img
-          className="w-full h-full object-cover"
-          src={member.photo.url}
-          alt=""
+          className={`w-full h-full ${
+            photoUrl ? "object-cover" : "object-contain p-4 bg-white"
+          }`}
+          src={photoUrl || FALLBACK_PHOTO_URL}
+          alt={member.name}
           initial={false}
         />
       </div>
