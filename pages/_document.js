@@ -2,9 +2,26 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
   render() {
+    const isTrustedAdvisorPage =
+      this.props.__NEXT_DATA__?.page === "/trusted-advisor";
+
     return (
       <Html>
         <Head>
+          {isTrustedAdvisorPage ? (
+            <>
+              <link rel="preconnect" href="https://fonts.googleapis.com" />
+              <link
+                rel="preconnect"
+                href="https://fonts.gstatic.com"
+                crossOrigin="anonymous"
+              />
+              <link
+                href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;display=swap"
+                rel="stylesheet"
+              />
+            </>
+          ) : null}
           {/* Pipedrive LeadBooster script */}
           <script
             dangerouslySetInnerHTML={{

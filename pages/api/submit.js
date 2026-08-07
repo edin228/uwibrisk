@@ -3,12 +3,14 @@ import { GraphQLClient } from "graphql-request";
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export default async function handler({ body }, res){
-  const { id, ...data } = JSON.parse(body);
+  const { id, ...data } = typeof body === "string" ? JSON.parse(body) : body;
+  const graphcmsToken =
+    process.env.GRAPHCMS_TOKEN || process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN;
 
   const graphcms = new GraphQLClient(graphqlAPI, {
-    headers: {
-      authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-    },
+    headers: graphcmsToken
+      ? { authorization: `Bearer ${graphcmsToken}` }
+      : undefined,
   });
 
   try {
