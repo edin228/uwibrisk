@@ -84,8 +84,8 @@ export default function HotelsLanding({ formId, initialEmail }) {
 
       <section className={styles.credibilityStrip} aria-label="California hospitality focus">
         <div>Focused on California hospitality</div>
-        <div>CHLA vendor-member community</div>
-        <div>Boutique Hotels of California access</div>
+        <div>Built for independent properties</div>
+        <div>Responsive, human service</div>
       </section>
 
       <section className={styles.riskSection}>
@@ -166,7 +166,7 @@ export default function HotelsLanding({ formId, initialEmail }) {
             <Link href="/team/eric-schirding"><a>Meet Eric →</a></Link>
           </article>
           <div className={styles.serviceTeam}>
-            <div><Eyebrow light>Your day-to-day team</Eyebrow><h3>Hospitality service, with familiar names and direct access.</h3></div>
+            <div><Eyebrow light>Your day-to-day team</Eyebrow><h3>Hospitality service, with a team you know and direct access.</h3></div>
             <div className={styles.teamGrid}>
               {TEAM.map((member) => (
                 <article key={member.name}>
