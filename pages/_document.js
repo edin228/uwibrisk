@@ -4,11 +4,13 @@ class MyDocument extends Document {
   render() {
     const isTrustedAdvisorPage =
       this.props.__NEXT_DATA__?.page === "/trusted-advisor";
+    const isHotelsPage =
+      this.props.__NEXT_DATA__?.page?.startsWith("/hotels");
 
     return (
       <Html>
         <Head>
-          {isTrustedAdvisorPage ? (
+          {isTrustedAdvisorPage || isHotelsPage ? (
             <>
               <link rel="preconnect" href="https://fonts.googleapis.com" />
               <link
