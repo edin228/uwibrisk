@@ -185,7 +185,12 @@ export default function HotelsLanding({ formId, initialEmail }) {
           <Eyebrow>Start with a conversation</Eyebrow>
           <h2>Let’s look at the risk behind the reservation.</h2>
           <p>Tell us a little about your property. We’ll follow up with a focused conversation: no generic pitch, no pressure.</p>
-          <div><strong>Prefer email?</strong><a href="mailto:helpdesk@uwib.com">helpdesk@uwib.com</a><span>California service team</span></div>
+          <div>
+            <strong>Prefer email?</strong>
+            <span>Eric Schirding</span>
+            <span>Hospitality Practice Leader</span>
+            <a href="mailto:eschirding@uwib.com">eschirding@uwib.com</a>
+          </div>
         </div>
         <HotelsContactForm formId={formId} initialEmail={initialEmail} />
       </section>
