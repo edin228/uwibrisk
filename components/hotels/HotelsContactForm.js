@@ -30,7 +30,7 @@ export default function HotelsContactForm({ formId, initialEmail = "" }) {
     if (values.website) return;
     if (!formId) {
       setStatus("error");
-      setMessage("The form is temporarily unavailable. Please email helpdesk@uwib.com.");
+      setMessage("The form is temporarily unavailable. Please email eschirding@uwib.com.");
       return;
     }
 
@@ -60,7 +60,7 @@ export default function HotelsContactForm({ formId, initialEmail = "" }) {
       setMessage("Thank you. A member of our hospitality team will be in touch soon.");
     } catch (error) {
       setStatus("error");
-      setMessage("Something went wrong. Please try again or email helpdesk@uwib.com.");
+      setMessage("Something went wrong. Please try again or email eschirding@uwib.com.");
     }
   };
 

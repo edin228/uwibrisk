@@ -53,7 +53,7 @@
 .footer { min-height: 280px; padding: 62px 72px 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--hotel-black); color: #aaa; }
 .footerTop,
 .footerBottom { width: 100%; max-width: 1296px; margin: 0 auto; display: flex; justify-content: space-between; }
-.footerBrand p { width: 360px; max-width: 100%; padding-top: 14px; font-size: 12px; line-height: 19px; }
+.footerBrand p { width: 360px; max-width: 100%; padding-top: 14px; color: #aaa; font-size: 12px; line-height: 19px; }
 .footerNav { display: flex; gap: 62px; font-size: 12px; line-height: 26px; }
 .footerNav > div { display: flex; flex-direction: column; }
 .footerCta { color: var(--hotel-yellow) !important; font-weight: 800; }
