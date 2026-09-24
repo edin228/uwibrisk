@@ -240,7 +240,7 @@ export default function CoffeeLanding({ formId, initialEmail }) {
             </dl>
           </article>
           <div className={styles.serviceTeam}>
-            <div><Eyebrow light>Your day-to-day team</Eyebrow><h3>Behind Josh, a service team with familiar names and direct access.</h3></div>
+            <div><Eyebrow light>Your day-to-day team</Eyebrow><h3>Coffee service, with a team you know and direct access.</h3></div>
             <div className={styles.teamGrid}>
               {TEAM.map((member) => (
                 <article key={member.name}>
