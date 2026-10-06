@@ -21,6 +21,8 @@ pnpm-debug.log*
 /docs/*
 !/docs/.gitkeep
 !/docs/migration-report.md
+!/docs/alt-text-review.md
+!/docs/copy-guidelines.md
 
 # exports that may contain PII (never commit)
 *submissions*.csv
