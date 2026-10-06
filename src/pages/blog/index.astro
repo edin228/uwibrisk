@@ -1,51 +1,496 @@
 ---
+/** Insights index. Design: Paper "Blog index — Desktop". Topic chips and "Load more" are client-side; every card is in the HTML. */
 import { Image } from 'astro:assets';
+import BlogSearch from '../../components/blog/BlogSearch.astro';
+import PostCard from '../../components/blog/PostCard.astro';
+import { getAuthorMap } from '../../components/blog/authors';
 import FormattedDate from '../../components/FormattedDate.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getPosts } from '../../lib/content';
+import { TOPICS, topicInfo } from '../../lib/topics';
 
-const posts = await getPosts();
+/** Grid cards revealed per "Load more" click. */
+const PAGE_SIZE = 6;
+
+const [posts, authors] = await Promise.all([getPosts(), getAuthorMap()]);
+const [featured, ...rest] = posts;
+if (!featured) throw new Error('No blog posts found');
+
+const authorOf = (post: (typeof posts)[number]) => (post.data.author ? authors.get(post.data.author.id) : undefined);
+const featuredAuthor = authorOf(featured);
+const featuredTopic = topicInfo(featured);
+const initiallyShown = Math.min(posts.length, 1 + PAGE_SIZE);
 ---
 
-<BaseLayout title="Blog" description="Insurance and risk management insights from UWIB Risk.">
-  <section class="container">
-    <h1>Blog</h1>
-    <ul class="posts">
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}`}>
-              <Image src={post.data.heroImage} alt={post.data.heroAlt} width={480} />
-              <h2>{post.data.title}</h2>
-            </a>
-            <p class="label">
-              <FormattedDate date={post.data.pubDate} />
+<SiteLayout title="Insights" description="Insurance and risk management insights from UWIB Risk.">
+  <div class="blog" data-blog data-page-size={PAGE_SIZE}>
+    <header class="head container">
+      <div class="intro">
+        <p class="eyebrow">Insights · {posts.length} articles</p>
+        <h1>Insights</h1>
+        <p class="lead">Plain English on risk, coverage and what’s changing, from the people who place it.</p>
+      </div>
+      <BlogSearch id="blog-search" />
+    </header>
+
+    <div class="container">
+      <div class="chips" role="group" aria-label="Filter articles by topic">
+        <button type="button" class="chip" data-topic-filter="all" aria-pressed="true">All topics</button>
+        {
+          TOPICS.map((t) => (
+            <button type="button" class="chip" data-topic-filter={t.slug} aria-pressed="false">
+              {t.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <section class="featured container" data-topic={featuredTopic.slug} data-featured aria-label="Latest article">
+      <Image
+        src={featured.data.heroImage}
+        alt=""
+        widths={[640, 780, 1200, 1560]}
+        sizes="(max-width: 900px) calc(100vw - 40px), 780px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="featured-text">
+        <p class="featured-meta">
+          <span class="badge">Latest</span>
+          <span class="topic">{featuredTopic.name}</span>
+          <FormattedDate date={featured.data.pubDate} format="short" class="date" />
+        </p>
+        <h2><a href={`/blog/${featured.id}`}>{featured.data.title}</a></h2>
+        <p class="featured-desc">{featured.data.description}</p>
+        {
+          featuredAuthor && (
+            <p class="featured-author">
+              <Image
+                src={featuredAuthor.data.photo}
+                alt=""
+                widths={[36, 72]}
+                sizes="36px"
+                class="avatar"
+                data-color
+              />
+              {featuredAuthor.data.name}
             </p>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-</BaseLayout>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="all" aria-label="More articles">
+      <div class="container">
+        <ul class="grid" data-post-grid>
+          {
+            rest.map((post) => (
+              <li data-topic={topicInfo(post).slug}>
+                <PostCard post={post} author={authorOf(post)?.data.name} />
+              </li>
+            ))
+          }
+        </ul>
+        <script is:inline>
+          // Collapse to the first page before paint (no JS: every card stays visible).
+          (function () {
+            var root = document.querySelector('[data-blog]');
+            var size = Number(root.dataset.pageSize);
+            var items = root.querySelectorAll('[data-post-grid] > li');
+            for (var i = size; i < items.length; i++) items[i].hidden = true;
+            root.classList.add('is-paged');
+          })();
+        </script>
+        <div class="more">
+          <button type="button" class="more-btn" data-load-more>Load more articles</button>
+          <p class="more-status" data-status aria-live="polite">
+            Showing <span data-shown>{initiallyShown}</span> of <span data-total>{posts.length}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</SiteLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-blog]');
+  if (root) {
+    const pageSize = Number(root.dataset.pageSize) || 6;
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('[data-topic-filter]')];
+    const featured = root.querySelector<HTMLElement>('[data-featured]');
+    const items = [...root.querySelectorAll<HTMLLIElement>('[data-post-grid] > li')];
+    const loadMore = root.querySelector<HTMLButtonElement>('[data-load-more]');
+    const shownEl = root.querySelector('[data-shown]');
+    const totalEl = root.querySelector('[data-total]');
+    const validTopics = new Set(chips.map((c) => c.dataset.topicFilter));
+
+    let topic = new URLSearchParams(location.search).get('topic') ?? 'all';
+    if (!validTopics.has(topic)) topic = 'all';
+    let limit = pageSize;
+
+    const matches = (el: HTMLElement) => topic === 'all' || el.dataset.topic === topic;
+
+    const render = () => {
+      const featuredMatch = featured ? matches(featured) : false;
+      if (featured) featured.hidden = !featuredMatch;
+      const matching = items.filter(matches);
+      for (const li of items) li.hidden = true;
+      for (const li of matching.slice(0, limit)) li.hidden = false;
+
+      const extra = featuredMatch ? 1 : 0;
+      const total = matching.length + extra;
+      const shown = Math.min(limit, matching.length) + extra;
+      if (shownEl) shownEl.textContent = String(shown);
+      if (totalEl) totalEl.textContent = String(total);
+      if (loadMore) loadMore.hidden = shown >= total;
+      for (const chip of chips) chip.setAttribute('aria-pressed', String(chip.dataset.topicFilter === topic));
+    };
+
+    for (const chip of chips) {
+      chip.addEventListener('click', () => {
+        topic = chip.dataset.topicFilter ?? 'all';
+        limit = pageSize;
+        render();
+        const url = new URL(location.href);
+        if (topic === 'all') url.searchParams.delete('topic');
+        else url.searchParams.set('topic', topic);
+        history.replaceState(null, '', url);
+      });
+    }
+
+    loadMore?.addEventListener('click', () => {
+      const before = items.filter((li) => !li.hidden).length;
+      limit += pageSize;
+      render();
+      // Move focus to the first newly revealed article.
+      const next = items.filter((li) => !li.hidden)[before];
+      next?.querySelector<HTMLAnchorElement>('a')?.focus();
+    });
+
+    render();
+  }
+</script>
 
 <style>
-  .posts {
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+    padding-top: clamp(56px, 7vw, 100px);
+    padding-bottom: 48px;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 760px;
+  }
+
+  h1 {
+    font-size: clamp(64px, 2rem + 6vw, 120px);
+    letter-spacing: -0.055em;
+    line-height: 0.94;
+  }
+
+  .lead {
+    max-width: 600px;
+    color: var(--color-body);
+    font-size: var(--text-lead);
+    line-height: 29px;
+  }
+
+  .head :global(.search) {
+    flex-shrink: 0;
+  }
+
+  /* Topic chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 56px;
+  }
+
+  .chip {
+    padding: 9px 16px;
+    border: 1px solid #d6d6d6;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .chip:hover {
+    border-color: var(--color-ink);
+  }
+
+  .chip[aria-pressed='true'] {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 700;
+  }
+
+  /* Featured (latest) article */
+  .featured {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 40px;
+    grid-template-columns: minmax(0, 780fr) minmax(0, 476fr);
+    align-items: center;
+    gap: 56px;
+    padding-bottom: 96px;
+  }
+
+  .featured[hidden] {
+    display: none;
+  }
+
+  .featured > :global(img) {
+    width: 100%;
+    aspect-ratio: 780 / 500;
+    object-fit: cover;
+  }
+
+  .featured-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+  }
+
+  .badge {
+    padding: 5px 9px;
+    background: var(--color-mustard);
+    color: var(--color-ink);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 12px;
+    text-transform: uppercase;
+  }
+
+  .topic {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  .featured-meta :global(.date) {
+    color: var(--color-faint);
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .featured h2 {
+    font-size: clamp(32px, 1rem + 2.2vw, 44px);
+    letter-spacing: -0.035em;
+    line-height: 1.14;
+    text-wrap: pretty;
+  }
+
+  .featured h2 a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .featured h2 a::after {
+    content: '';
+    position: absolute;
+    inset: 0 var(--gutter) 96px;
+  }
+
+  .featured:hover h2 a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
+
+  .featured h2 a:focus-visible {
+    outline: none;
+  }
+
+  .featured h2 a:focus-visible::after {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 6px;
+  }
+
+  .featured-desc {
+    color: var(--color-body);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .featured-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 4px;
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+  }
+
+  .featured-author :global(.avatar) {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-rule);
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  /* Grid */
+  .all {
+    padding-top: 64px;
+    padding-bottom: clamp(88px, 8.3vw, 120px);
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 64px 32px;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
-  .posts a {
-    color: inherit;
-    text-decoration: none;
+
+  .grid li[hidden] {
+    display: none;
   }
-  .posts img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
+
+  .more {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    margin-top: 64px;
   }
-  .posts h2 {
-    font-size: var(--text-h4);
+
+  .is-paged .more {
+    display: flex;
+  }
+
+  .more-btn {
+    padding: 16px 28px;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    cursor: pointer;
+  }
+
+  .more-btn:hover {
+    background: rgb(17 17 17 / 0.06);
+  }
+
+  .more-btn[hidden] {
+    display: none;
+  }
+
+  .more-status {
+    color: var(--color-faint);
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  @media (max-width: 1100px) {
+    .head {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 32px;
+    }
+
+    .featured {
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .featured {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-bottom: 72px;
+    }
+
+    .featured h2 a::after {
+      bottom: 72px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 48px 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .head {
+      padding-bottom: 32px;
+    }
+
+    .head :global(.search) {
+      width: 100%;
+    }
+
+    .lead {
+      font-size: 17px;
+      line-height: 27px;
+    }
+
+    .chips {
+      padding-bottom: 40px;
+    }
+
+    .featured {
+      padding-bottom: 56px;
+    }
+
+    .featured h2 a::after {
+      bottom: 56px;
+    }
+
+    .all {
+      padding-top: 48px;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .more {
+      flex-direction: column;
+    }
+
+    .more-btn {
+      width: 100%;
+      padding-block: 17px;
+      font-size: 15px;
+    }
   }
 </style>

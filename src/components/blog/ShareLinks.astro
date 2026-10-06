@@ -1,0 +1,81 @@
+---
+/** LinkedIn / Email / Copy link. "Copy link" only appears when the Clipboard API is available. */
+interface Props {
+  url: string;
+  title: string;
+}
+const { url, title } = Astro.props;
+const linkedIn = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+const email = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+---
+
+<div class="share" data-share>
+  <a href={linkedIn} target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+  <a href={email}>Email</a>
+  <button type="button" data-copy-link={url} hidden>Copy link</button>
+  <span class="status" role="status" data-copy-status></span>
+</div>
+
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy-link]')) {
+    if (!navigator.clipboard) continue;
+    btn.hidden = false;
+    const status = btn.parentElement?.querySelector('[data-copy-status]');
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copyLink ?? location.href);
+        if (status) status.textContent = 'Link copied';
+      } catch {
+        if (status) status.textContent = 'Couldn’t copy the link';
+      }
+      setTimeout(() => {
+        if (status) status.textContent = '';
+      }, 3000);
+    });
+  }
+</script>
+
+<style>
+  .share {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+  }
+
+  a,
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover,
+  button:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
+  }
+
+  button[hidden] {
+    display: none;
+  }
+
+  .status {
+    color: var(--color-gold);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .status:empty {
+    display: none;
+  }
+</style>

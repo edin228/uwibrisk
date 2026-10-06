@@ -1,10 +1,17 @@
 ---
+/** <time> element. `short` = "Sep 2, 2026" (cards, bylines); `long` = "September 2, 2026". */
+import { shortDate } from '../lib/topics';
+
 interface Props {
   date: Date;
+  format?: 'short' | 'long';
+  class?: string;
 }
-const { date } = Astro.props;
+const { date, format = 'long', class: className } = Astro.props;
+const text =
+  format === 'short'
+    ? shortDate(date)
+    : date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 
-<time datetime={date.toISOString()}>
-  {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
-</time>
+<time datetime={date.toISOString()} class={className}>{text}</time>

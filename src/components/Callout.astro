@@ -1,8 +1,9 @@
 ---
 /**
- * Stub for highlighted blocks migrated from Hygraph rich-text `class` nodes
- * (`cta-box` in blog posts, `button-link` on partner-with-uwib).
- * Styling is intentionally minimal until the final design lands.
+ * Highlighted blocks migrated from Hygraph rich-text `class` nodes.
+ *   cta-box      pale mustard note with a mustard rule (blog posts)
+ *   button-link  a single link rendered as an ink button (partner-with-uwib)
+ * Design: Paper "Blog post — Desktop" ("Heads up" note).
  */
 interface Props {
   variant?: 'cta-box' | 'button-link';
@@ -17,21 +18,63 @@ const { variant = 'cta-box' } = Astro.props;
 
 <style>
   .callout {
-    margin-block: 2rem;
+    margin-block: 8px;
   }
+
   .callout--cta-box {
-    padding: 1.5rem;
-    background: var(--color-surface);
-    border-left: 4px solid var(--color-mustard);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px 26px 24px;
+    border-left: 3px solid var(--color-mustard);
+    background: #fff8e1;
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 26px;
   }
+
+  .callout--cta-box > :global(*) {
+    margin: 0;
+  }
+
+  .callout.callout--cta-box :global(a) {
+    color: var(--color-ink);
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: var(--color-ink);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .callout.callout--cta-box :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  .callout--cta-box :global(strong) {
+    color: var(--color-ink);
+    font-weight: 650;
+  }
+
+  .callout--button-link :global(p) {
+    margin: 0;
+  }
+
   .callout--button-link :global(a) {
-    display: inline-block;
-    padding: 0.75rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 17px 24px;
     background: var(--color-ink);
     color: var(--color-paper);
-    font-size: var(--text-sm);
-    letter-spacing: var(--tracking-label);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
     text-decoration: none;
-    text-transform: uppercase;
+    transition: background-color 0.15s ease;
+  }
+
+  .callout--button-link :global(a:hover) {
+    background: #2b2b2b;
   }
 </style>

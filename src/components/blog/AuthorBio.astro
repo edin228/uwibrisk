@@ -1,0 +1,136 @@
+---
+/** "Written by" block under an article: portrait, name, mini bio, booking + team page links. */
+import { Image } from 'astro:assets';
+import { authorHref, type Author } from './authors';
+
+interface Props {
+  author: Author;
+}
+const { author } = Astro.props;
+const { name, role, miniBio, meetingLink, photo, photoAlt } = author.data;
+const href = authorHref(author);
+const firstName = name.split(' ')[0];
+---
+
+<aside class="author-bio" aria-labelledby="author-bio-name" data-pagefind-ignore>
+  <Image src={photo} alt={photoAlt} widths={[120, 240]} sizes="120px" class="portrait" data-color />
+  <div class="text">
+    <p class="eyebrow">Written by</p>
+    <h2 id="author-bio-name">{href ? <a href={href}>{name}</a> : name}</h2>
+    <p class="bio">{miniBio ?? role}</p>
+    {
+      (meetingLink || href) && (
+        <p class="links">
+          {meetingLink && (
+            <a href={meetingLink} target="_blank" rel="noopener" class="primary">
+              Book a call with {firstName}
+              <span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          )}
+          {href && <a href={href}>More from {firstName}</a>}
+        </p>
+      )
+    }
+  </div>
+</aside>
+
+<style>
+  .author-bio {
+    display: flex;
+    gap: 28px;
+    padding-top: 36px;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .author-bio :global(.portrait) {
+    flex-shrink: 0;
+    width: 120px;
+    height: 150px;
+    background: var(--color-rule);
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  .text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    line-height: 14px;
+  }
+
+  h2 {
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    line-height: 32px;
+  }
+
+  h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .bio {
+    color: var(--color-body);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding-top: 4px;
+  }
+
+  .links a {
+    padding-block: 4px;
+    border-bottom: 1px solid #d6d6d6;
+    color: var(--color-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    text-decoration: none;
+  }
+
+  .links a.primary {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+    font-weight: 650;
+  }
+
+  .links a:hover {
+    padding-bottom: 3px;
+    border-bottom-width: 2px;
+    border-color: var(--color-ink);
+  }
+
+  @media (max-width: 600px) {
+    .author-bio {
+      gap: 20px;
+    }
+
+    .author-bio :global(.portrait) {
+      width: 88px;
+      height: 110px;
+    }
+
+    h2 {
+      font-size: 23px;
+      line-height: 29px;
+    }
+  }
+</style>

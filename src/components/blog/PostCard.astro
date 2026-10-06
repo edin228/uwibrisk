@@ -1,0 +1,121 @@
+---
+/**
+ * Article card: photo, topic + date, title, optional author name.
+ * The title link is stretched over the whole card. Design: Paper "Blog index — Desktop".
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../FormattedDate.astro';
+import { topicFor } from '../../lib/topics';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  /** Author name to show under the title (omit to hide the line). */
+  author?: string | undefined;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { post, author, headingLevel: Heading = 'h2' } = Astro.props;
+---
+
+<article class="card">
+  <Image
+    src={post.data.heroImage}
+    alt=""
+    widths={[420, 640, 840]}
+    sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) calc(50vw - 40px), 416px"
+  />
+  <p class="meta">
+    <span class="topic">{topicFor(post)}</span>
+    <FormattedDate date={post.data.pubDate} format="short" class="date" />
+  </p>
+  <Heading class="title"><a href={`/blog/${post.id}`}>{post.data.title}</a></Heading>
+  {author && <p class="author">{author}</p>}
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 416 / 280;
+    object-fit: cover;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    margin: 0;
+  }
+
+  .topic {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  .meta :global(.date) {
+    color: var(--color-faint);
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .title {
+    font-size: 23px;
+    letter-spacing: -0.015em;
+    line-height: 29px;
+    text-wrap: pretty;
+  }
+
+  .title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  /* Stretch the link over the whole card. */
+  .title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card:hover .title a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .title a:focus-visible {
+    outline: none;
+  }
+
+  .title a:focus-visible::after {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 4px;
+  }
+
+  .author {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      font-size: 21px;
+      line-height: 27px;
+    }
+  }
+</style>
