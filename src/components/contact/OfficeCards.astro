@@ -1,0 +1,185 @@
+---
+/** "Three offices, one team." Office cards from siteOffices (src/data/site.ts). */
+import { capitalize, curly, numberWord } from '../team/team';
+import { siteOffices } from '../../data/site';
+
+const offices = siteOffices.map((o) => {
+  const cityLine = `${o.city}, ${o.stateCode} ${o.zip}`;
+  return {
+    ...o,
+    cityLine: curly(cityLine),
+    directions: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${o.address}, ${cityLine}`)}`,
+  };
+});
+const heading = `${capitalize(numberWord(offices.length))} offices, one team.`;
+---
+
+<section class="offices" aria-labelledby="offices-heading">
+  <div class="inner">
+    <h2 id="offices-heading">{heading}</h2>
+    <ul>
+      {
+        offices.map((o) => (
+          <li>
+            <div class="top">
+              <h3>{curly(o.label)}</h3>
+              {o.established && <span class="est">Est. {o.established}</span>}
+            </div>
+            <address>
+              {o.address}
+              <br />
+              {o.cityLine}
+            </address>
+            <p class="lines">
+              <a class="phone" href={o.phoneHref}>
+                {o.phone}
+              </a>
+              <a class="email" href={`mailto:${o.email}`}>
+                {o.email}
+              </a>
+            </p>
+            <a class="directions" href={o.directions} target="_blank" rel="noopener">
+              Get directions <span aria-hidden="true">↗</span>
+              <span class="visually-hidden">to the {curly(o.label)} office (opens Google Maps)</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .offices {
+    padding: clamp(80px, 7vw, 100px) var(--gutter) clamp(80px, 8.3vw, 120px);
+    background: var(--color-surface);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  h2 {
+    font-size: clamp(34px, 1rem + 2vw, 44px);
+    letter-spacing: -0.035em;
+    line-height: 1.14;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
+    border-top: 3px solid var(--color-mustard);
+    background: var(--color-paper);
+  }
+
+  .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  h3 {
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    line-height: 36px;
+  }
+
+  .est {
+    flex-shrink: 0;
+    color: var(--color-faint);
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  address {
+    font-size: 15px;
+    font-style: normal;
+    line-height: 24px;
+  }
+
+  .lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .lines a {
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .phone {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .lines a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .directions {
+    align-self: flex-start;
+    padding-block: 3px;
+    border-bottom: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 16px;
+    text-decoration: none;
+  }
+
+  .directions:hover {
+    border-bottom-color: var(--color-mustard);
+  }
+
+  @media (max-width: 1100px) {
+    ul {
+      gap: 16px;
+    }
+
+    li {
+      padding: 26px;
+    }
+
+    h3 {
+      font-size: 26px;
+      line-height: 32px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    ul {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .inner {
+      gap: 28px;
+    }
+
+    li {
+      padding: 24px 20px;
+    }
+  }
+</style>

@@ -1,48 +1,107 @@
 ---
-import { Image } from 'astro:assets';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+import TeamGroup from '../../components/team/TeamGroup.astro';
+import TeamIntro from '../../components/team/TeamIntro.astro';
+import { capitalize, curly, groupTeam, listJoin, numberWord } from '../../components/team/team';
+import { team as teamCopy } from '../../data/home';
+import { siteOffices } from '../../data/site';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getTeam } from '../../lib/content';
 
-const team = await getTeam();
+const members = await getTeam();
+const groups = groupTeam(members);
+const page = await getEntry('pages', 'team');
+
+const offices = listJoin(siteOffices.map((o) => curly(o.label)));
+const lead = `${capitalize(numberWord(members.length))} people across ${offices}. Every client has an advisor and a service team they can reach by name.`;
 ---
 
-<BaseLayout title="Our Team" description="Meet the team at UWIB Risk & Insurance Solutions.">
-  <section class="container">
-    <h1>Our Team</h1>
-    <ul class="team">
+<SiteLayout title={page?.data.title ?? 'Our Team'} description={lead}>
+  <TeamIntro eyebrow="Our team" heading={teamCopy.heading}>
+    <p>{lead}</p>
+    <nav slot="after" class="filters" aria-label="Filter the team by group">
+      <a href="#main" class="chip" aria-current="true" data-filter="all">Everyone</a>
       {
-        team.map((member) => (
-          <li>
-            <Image src={member.data.photo} alt={member.data.photoAlt} width={320} data-color />
-            <h2>
-              {member.data.hasTeamPage ? <a href={`/team/${member.id}`}>{member.data.name}</a> : member.data.name}
-            </h2>
-            <p class="label">{member.data.role}</p>
-          </li>
+        groups.map((g) => (
+          <a href={`#group-${g.id}`} class="chip" data-filter={g.id}>
+            {g.label}
+          </a>
         ))
       }
-    </ul>
-  </section>
-</BaseLayout>
+    </nav>
+  </TeamIntro>
+
+  <div class="groups" data-groups>
+    {groups.map((g, i) => <TeamGroup id={g.id} label={g.label} members={g.members} last={i === groups.length - 1} />)}
+  </div>
+  <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+</SiteLayout>
+
+<script>
+  // Progressive enhancement: the chips are anchor links; with JS they filter the groups.
+  const chips = document.querySelectorAll<HTMLAnchorElement>('.filters [data-filter]');
+  const groups = document.querySelectorAll<HTMLElement>('[data-groups] [data-group]');
+  const status = document.querySelector<HTMLElement>('[data-filter-status]');
+  for (const chip of chips) {
+    chip.addEventListener('click', (event) => {
+      event.preventDefault();
+      const filter = chip.dataset.filter ?? 'all';
+      for (const c of chips) {
+        if (c === chip) c.setAttribute('aria-current', 'true');
+        else c.removeAttribute('aria-current');
+      }
+      let shown = 0;
+      for (const g of groups) {
+        const visible = filter === 'all' || g.dataset.group === filter;
+        g.hidden = !visible;
+        if (visible) shown += g.querySelectorAll('li').length;
+      }
+      if (status) status.textContent = `Showing ${shown} ${shown === 1 ? 'person' : 'people'}`;
+    });
+  }
+</script>
 
 <style>
-  .team {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 32px;
-    padding: 0;
-    list-style: none;
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 12px;
   }
-  .team img {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
+
+  .chip {
+    padding: 9px 16px;
+    border: 1px solid #d6d6d6;
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    text-decoration: none;
+    white-space: nowrap;
   }
-  .team h2 {
-    margin-bottom: 0;
-    font-size: var(--text-h4);
+
+  .chip:hover {
+    border-color: var(--color-ink);
   }
-  .team a {
-    color: inherit;
+
+  .chip[aria-current] {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .filters {
+      flex-wrap: nowrap;
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
   }
 </style>

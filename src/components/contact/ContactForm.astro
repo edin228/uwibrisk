@@ -1,0 +1,665 @@
+---
+/**
+ * "Send us a note": the native contact form on /contact. Field definitions
+ * (State and Industry options, required flags) come from the Hygraph "Contact Form"
+ * in src/data/hygraph-forms.json; labels follow the approved mockup.
+ *
+ * Submits JSON to /api/submit: { id, website (honeypot), Source, ...fields }.
+ * The Source decides the email subject ("New UWIB website inquiry: Contact page")
+ * and, if listed in SOURCE_RECIPIENTS, the recipient; otherwise FORM_NOTIFICATION_TO.
+ */
+import { getCollection } from 'astro:content';
+import { company } from '../../data/site';
+
+const FORM_ID = 'contact';
+const SOURCE = 'Contact page';
+
+/** Interest chips from the mockup. "Business" reveals the industry/revenue row. */
+const INTERESTS = ['Business', 'Home & auto', 'Employee benefits', 'Life', 'Something else'];
+const BUSINESS = 'Business';
+
+const forms = await getCollection('hygraphForms');
+const contactForm = forms.find((f) => f.data.pages.includes('contact'));
+if (!contactForm) throw new Error('Contact form definition missing from src/data/hygraph-forms.json');
+const fields = contactForm.data.fields;
+const select = (name: string) => {
+  const f = fields.find((x) => x.name === name);
+  if (!f || f.kind !== 'select') throw new Error(`Contact form select "${name}" missing`);
+  return f;
+};
+const input = (name: string) => {
+  const f = fields.find((x) => x.name === name);
+  if (!f || f.kind !== 'input') throw new Error(`Contact form input "${name}" missing`);
+  return f;
+};
+const name = input('Name');
+const email = input('Email');
+const phone = input('Phone');
+const states = select('US States');
+const industry = select('Industry');
+const revenue = input('Estimated Revenue');
+const interestRequired = select('InsuranceType').required;
+
+const errorText = `We couldn’t send your note just now. Please call us at ${company.phone} or email ${company.email}.`;
+const errorLinks = JSON.stringify([
+  [company.phone, company.phoneHref],
+  [company.email, `mailto:${company.email}`],
+]);
+---
+
+<form
+  class="note"
+  novalidate
+  aria-labelledby="note-heading"
+  data-contact-form
+  data-form-id={FORM_ID}
+  data-source={SOURCE}
+  data-business={BUSINESS}
+>
+  <h2 id="note-heading">Send us a note</h2>
+
+  <div class="fields" data-fields>
+    <div class="row">
+      <div class="field">
+        <label for="cf-name">Name</label>
+        <input
+          id="cf-name"
+          name="Name"
+          type="text"
+          autocomplete="name"
+          required={name.required}
+          aria-describedby="cf-name-error"
+          data-message="Please enter your name."
+        />
+        <p class="error" id="cf-name-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="cf-email">Email</label>
+        <input
+          id="cf-email"
+          name="Email"
+          type="email"
+          autocomplete="email"
+          required={email.required}
+          aria-describedby="cf-email-error"
+          data-message="Please enter a valid email address."
+        />
+        <p class="error" id="cf-email-error" hidden></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="cf-phone">Phone{!phone.required && <span class="opt"> (optional)</span>}</label>
+        <input
+          id="cf-phone"
+          name="Phone"
+          type="tel"
+          autocomplete="tel"
+          required={phone.required}
+          aria-describedby="cf-phone-error"
+          data-message="Please enter a phone number."
+        />
+        <p class="error" id="cf-phone-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="cf-state">State</label>
+        <div class="select">
+          <select
+            id="cf-state"
+            name="State"
+            autocomplete="address-level1"
+            required={states.required}
+            aria-describedby="cf-state-error"
+            data-message="Please choose your state."
+          >
+            <option value="">Select</option>
+            {states.options.map((o) => <option value={o.value}>{o.label}</option>)}
+          </select>
+        </div>
+        <p class="error" id="cf-state-error" hidden></p>
+      </div>
+    </div>
+
+    <fieldset class="field interests" aria-describedby="cf-interest-error" data-interests data-required={interestRequired ? '' : undefined}>
+      <legend>What insurance are you interested in?</legend>
+      <div class="chips">
+        {
+          INTERESTS.map((label) => (
+            <label class="chip">
+              <input type="checkbox" name="interest" value={label} />
+              <span>{label}</span>
+            </label>
+          ))
+        }
+      </div>
+      <p class="error" id="cf-interest-error" hidden></p>
+    </fieldset>
+
+    <div class="row" data-business-fields>
+      <div class="field">
+        <label for="cf-industry">Industry</label>
+        <div class="select">
+          <select
+            id="cf-industry"
+            name="Industry"
+            aria-describedby="cf-industry-error"
+            data-required-for-business={industry.required ? '' : undefined}
+            data-message="Please choose your industry."
+          >
+            <option value="">Select</option>
+            {industry.options.map((o) => <option value={o.value}>{o.label}</option>)}
+          </select>
+        </div>
+        <p class="error" id="cf-industry-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="cf-revenue">Estimated annual revenue</label>
+        <input
+          id="cf-revenue"
+          name="Estimated annual revenue"
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          aria-describedby="cf-revenue-error"
+          data-required-for-business={revenue.required ? '' : undefined}
+          data-message="Please enter your estimated annual revenue."
+        />
+        <p class="error" id="cf-revenue-error" hidden></p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="cf-message">Anything else we should know?<span class="opt"> (optional)</span></label>
+      <textarea id="cf-message" name="Message" rows="3" maxlength="5000"></textarea>
+    </div>
+
+    <div class="hp" aria-hidden="true">
+      <label for="cf-website">Website</label>
+      <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="submit-row">
+      <p class="privacy">See our <a href="/privacy-policy">privacy policy</a> for how we handle your information.</p>
+      <button type="submit" class="send">
+        <span data-label>Send →</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="done" tabindex="-1" hidden data-done>
+    <p class="done-title">Thanks, your note is on its way.</p>
+    <p>An advisor will reach out. If it’s urgent, call us at <a href={company.phoneHref}>{company.phone}</a>.</p>
+  </div>
+
+  <p class="status" role="status" aria-live="polite" data-status data-error-text={errorText} data-error-links={errorLinks}></p>
+
+  <noscript>
+    <p class="status is-error">
+      This form needs JavaScript. Please call us at <a href={company.phoneHref}>{company.phone}</a> or email <a
+        href={`mailto:${company.email}`}>{company.email}</a
+      >.
+    </p>
+  </noscript>
+</form>
+
+<script>
+  type Control = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-contact-form]')) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const fieldsWrap = form.querySelector<HTMLElement>('[data-fields]')!;
+    const done = form.querySelector<HTMLElement>('[data-done]')!;
+    const businessRow = form.querySelector<HTMLElement>('[data-business-fields]')!;
+    const interests = form.querySelector<HTMLFieldSetElement>('[data-interests]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const label = button.querySelector<HTMLElement>('[data-label]')!;
+    const idleLabel = label.textContent ?? '';
+    const business = form.dataset.business ?? 'Business';
+
+    const checkedInterests = () =>
+      [...form.querySelectorAll<HTMLInputElement>('input[name="interest"]:checked')].map((i) => i.value);
+    const isBusiness = () => checkedInterests().includes(business);
+
+    const syncBusiness = () => {
+      businessRow.hidden = !isBusiness();
+    };
+    syncBusiness();
+
+    const setError = (el: HTMLElement, errorId: string, message: string) => {
+      const error = form.querySelector<HTMLElement>(`#${errorId}`);
+      if (error) {
+        error.textContent = message;
+        error.hidden = !message;
+      }
+      if (message) el.setAttribute('aria-invalid', 'true');
+      else el.removeAttribute('aria-invalid');
+    };
+
+    const validateControl = (el: Control): boolean => {
+      const errorId = el.getAttribute('aria-describedby');
+      if (!errorId) return true;
+      const value = el.value.trim();
+      const required = el.required || (el.dataset.requiredForBusiness !== undefined && isBusiness());
+      let ok = !(required && !value);
+      if (ok && el instanceof HTMLInputElement && el.type === 'email' && value) {
+        ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+      setError(el, errorId, ok ? '' : (el.dataset.message ?? 'Please fill in this field.'));
+      return ok;
+    };
+
+    const validateInterests = (): boolean => {
+      const ok = interests.dataset.required === undefined || checkedInterests().length > 0;
+      setError(interests, 'cf-interest-error', ok ? '' : 'Please choose at least one type of insurance.');
+      return ok;
+    };
+
+    const controls = () =>
+      [...form.querySelectorAll<Control>('[data-fields] input:not([type="checkbox"]):not([name="website"]), [data-fields] select')].filter(
+        (el) => !el.closest('[hidden]'),
+      );
+
+    // Re-check a field once it has been flagged, so errors clear as the visitor fixes them.
+    form.addEventListener('input', (event) => {
+      const el = event.target as Control;
+      if (el.name === 'interest') {
+        syncBusiness();
+        if (interests.hasAttribute('aria-invalid')) validateInterests();
+        return;
+      }
+      if (el.getAttribute('aria-invalid')) validateControl(el);
+    });
+    form.addEventListener('change', (event) => {
+      const el = event.target as Control;
+      if (el.name === 'interest') syncBusiness();
+    });
+
+    const showStatus = (kind: 'idle' | 'error', message = '') => {
+      status.textContent = message;
+      status.classList.toggle('is-error', kind === 'error');
+    };
+
+    /** Delivery error with the phone number and email as links. */
+    const showDeliveryError = () => {
+      const text = status.dataset.errorText ?? 'We couldn’t send your note just now.';
+      const links = JSON.parse(status.dataset.errorLinks ?? '[]') as [string, string][];
+      const nodes: (string | Node)[] = [text];
+      for (const [label, href] of links) {
+        const i = nodes.findIndex((n) => typeof n === 'string' && n.includes(label));
+        const target = nodes[i];
+        if (typeof target !== 'string') continue;
+        const [before, after] = [target.slice(0, target.indexOf(label)), target.slice(target.indexOf(label) + label.length)];
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = label;
+        nodes.splice(i, 1, before, a, after);
+      }
+      status.replaceChildren(...nodes);
+      status.classList.add('is-error');
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showStatus('idle');
+
+      const results = controls().map((el) => ({ el, ok: validateControl(el) }));
+      const interestsOk = validateInterests();
+      const firstInvalid = results.find((r) => !r.ok)?.el ?? (interestsOk ? null : interests.querySelector('input'));
+      if (firstInvalid) {
+        showStatus('error', 'Please check the highlighted fields.');
+        firstInvalid.focus();
+        return;
+      }
+
+      const data = new FormData(form);
+      if (String(data.get('website') ?? '')) return;
+
+      const payload: Record<string, string> = {
+        id: form.dataset.formId ?? 'contact',
+        website: '',
+        Source: form.dataset.source ?? 'Contact page',
+        Name: String(data.get('Name') ?? '').trim(),
+        Email: String(data.get('Email') ?? '').trim(),
+        Phone: String(data.get('Phone') ?? '').trim(),
+        State: String(data.get('State') ?? ''),
+        'Interested in': checkedInterests().join(', '),
+      };
+      if (isBusiness()) {
+        payload.Industry = String(data.get('Industry') ?? '');
+        payload['Estimated annual revenue'] = String(data.get('Estimated annual revenue') ?? '').trim();
+      }
+      payload.Message = String(data.get('Message') ?? '').trim();
+
+      button.disabled = true;
+      label.textContent = 'Sending…';
+      try {
+        const response = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        // 201 = emailed. 502 = the notification email failed (nothing else stores it).
+        if (!response.ok) throw new Error(`Submission failed (${response.status})`);
+        form.reset();
+        fieldsWrap.hidden = true;
+        done.hidden = false;
+        showStatus('idle', 'Thanks, your note is on its way.');
+        done.focus();
+      } catch {
+        showDeliveryError();
+      } finally {
+        button.disabled = false;
+        label.textContent = idleLabel;
+      }
+    });
+  }
+</script>
+
+<style>
+  .note {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 40px;
+    background: var(--color-night);
+    color: var(--color-ink-body);
+  }
+
+  h2 {
+    color: var(--color-paper);
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    line-height: 34px;
+  }
+
+  .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .fields[hidden],
+  .done[hidden],
+  [data-business-fields][hidden] {
+    display: none;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 16px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  label,
+  legend {
+    padding: 0;
+    color: #bdbdbd;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+  }
+
+  .opt {
+    color: #7a7a7a;
+    font-weight: 500;
+  }
+
+  legend {
+    margin-bottom: 10px;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid #4b4b4b;
+    background: transparent;
+    color: var(--color-paper);
+    font: inherit;
+    font-size: 16px;
+    line-height: 22px;
+    outline: none;
+  }
+
+  textarea {
+    height: 88px;
+    padding-top: 12px;
+    resize: vertical;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    border-bottom-color: var(--color-mustard);
+    box-shadow: 0 1px 0 var(--color-mustard);
+  }
+
+  [aria-invalid='true'] {
+    border-bottom-color: #ff8a7a;
+  }
+
+  .select {
+    position: relative;
+  }
+
+  .select::after {
+    content: '▾';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: #7a7a7a;
+    font-size: 12px;
+    line-height: 16px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  select {
+    padding-right: 24px;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  select:has(option[value='']:checked) {
+    color: #7a7a7a;
+    font-size: 14px;
+  }
+
+  option {
+    background: var(--color-night);
+    color: var(--color-paper);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    position: relative;
+    color: var(--color-paper);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .chip input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .chip span {
+    display: block;
+    padding: 9px 14px;
+    border: 1px solid #4b4b4b;
+    line-height: 16px;
+  }
+
+  .chip:hover span {
+    border-color: #8c8c8c;
+  }
+
+  .chip input:checked + span {
+    border-color: var(--color-mustard);
+    background: var(--color-mustard);
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .chip input:focus-visible + span {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 3px;
+  }
+
+  .error,
+  .status.is-error {
+    color: #ff8a7a;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .error {
+    margin-top: 2px;
+  }
+
+  .interests .error {
+    margin-top: 10px;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .submit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    padding-top: 8px;
+  }
+
+  .privacy {
+    max-width: 340px;
+    color: var(--color-faint);
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .privacy a {
+    color: var(--color-ink-body);
+  }
+
+  .send {
+    flex-shrink: 0;
+    padding: 17px 26px;
+    border: 0;
+    background: var(--color-mustard);
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    cursor: pointer;
+  }
+
+  .send:hover {
+    background: #ffd54f;
+  }
+
+  .send:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .status {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .status:empty {
+    display: none;
+  }
+
+  .status a,
+  .done a {
+    color: inherit;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .done {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px 0 8px;
+    border-top: 2px solid var(--color-mustard);
+    outline: none;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .done-title {
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    line-height: 32px;
+  }
+
+  /* The success message is shown in .done; keep the live region for screen readers only. */
+  .done:not([hidden]) ~ .status:not(.is-error) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  @media (max-width: 760px) {
+    .note {
+      padding: 28px 20px;
+    }
+
+    h2 {
+      font-size: 26px;
+    }
+
+    .row {
+      grid-template-columns: 1fr;
+    }
+
+    .submit-row {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+
+    .send {
+      width: 100%;
+      font-size: 15px;
+    }
+  }
+</style>

@@ -1,0 +1,457 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import LabelSection from '../components/site/LabelSection.astro';
+import PageHero from '../components/site/PageHero.astro';
+import TeamStrip from '../components/site/TeamStrip.astro';
+import { curly } from '../components/team/team';
+import Button from '../components/ui/Button.astro';
+import { ROOTS_YEAR, hero, history, more, values } from '../data/about';
+import { team as teamCopy } from '../data/home';
+import { company, siteOffices } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { getTeam } from '../lib/content';
+
+// Vision + values (src/data/landing/core-values.json).
+const coreValues = await getEntry('landing', 'core-values');
+const blocks = coreValues?.data.components ?? [];
+const vision = blocks.find((b) => b.type === 'ActionBanner');
+const valueItems = blocks.find((b) => b.type === 'IconBanner')?.items ?? [];
+if (!vision || vision.type !== 'ActionBanner' || !vision.description || valueItems.length === 0) {
+  throw new Error('core-values.json is missing the vision or the values');
+}
+
+// Timeline: roots, founding, then each office by the year it opened.
+const timeline = [
+  { year: ROOTS_YEAR, label: history.rootsLabel },
+  ...siteOffices
+    .filter((o): o is typeof o & { established: number } => typeof o.established === 'number')
+    .sort((a, b) => a.established - b.established)
+    .map((o) => ({ year: o.established, label: curly(o.label) })),
+];
+if (!timeline.some((t) => t.year === company.founded)) {
+  throw new Error(`No office established in ${company.founded}; check src/data/offices.json`);
+}
+
+// Same strip as the homepage: featured people first, then everyone else.
+const members = await getTeam();
+const featured = teamCopy.featured.flatMap((slug) => members.filter((m) => m.id === slug));
+const strip = [...featured, ...members.filter((m) => !teamCopy.featured.includes(m.id))];
+
+const carrierCount = (await getCollection('carriers')).length;
+const cards = more.cards.map((c) => ({ ...c, text: c.text.replace('{carriers}', String(carrierCount)) }));
+---
+
+<SiteLayout title="About" description={hero.lead} image={hero.photo.src} header="overlay" closing={false}>
+  <div class="about-hero">
+    <PageHero
+      title={hero.title.join('\n')}
+      lead={hero.lead}
+      image={hero.photo.src}
+      imagePosition="50% 45%"
+      height={680}
+      crumbs={[{ label: 'Home', href: '/' }, { label: 'About' }]}
+    >
+      <Fragment slot="actions">
+        <Button href={hero.primary.href} variant="mustard" block>{hero.primary.label}</Button>
+        <Button href={hero.secondary.href} variant="outline-light" block>{hero.secondary.label}</Button>
+      </Fragment>
+    </PageHero>
+  </div>
+
+  <LabelSection eyebrow={history.eyebrow} class="history">
+    <p class="statement">{history.statement}</p>
+    <div class="history-cols">
+      <ol class="timeline" aria-label="Timeline">
+        {
+          timeline.map((t) => (
+            <li>
+              <span class="year">{t.year}</span>
+              <span class="what">{t.label}</span>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="history-text">
+        {history.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </LabelSection>
+
+  <section class="vision" aria-labelledby="vision-heading">
+    <h2 id="vision-heading" class="eyebrow on-dark">{vision.title}</h2>
+    <blockquote>
+      <p>“{vision.description}”</p>
+    </blockquote>
+  </section>
+
+  <section class="values" aria-labelledby="values-heading">
+    <div class="values-inner">
+      <div class="values-head">
+        <div class="values-title">
+          <p class="eyebrow">{values.eyebrow}</p>
+          <h2 id="values-heading">{values.heading}</h2>
+        </div>
+        <p class="values-text">{values.text}</p>
+      </div>
+      <ul class="value-list">
+        {
+          valueItems.map((v) => (
+            <li>
+              <h3>{v.label}</h3>
+              {v.description && <p>{v.description}</p>}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <TeamStrip members={strip} eyebrow={teamCopy.eyebrow} heading={teamCopy.heading} text={teamCopy.text} link={teamCopy.link} />
+
+  <section class="more" aria-labelledby="more-heading">
+    <div class="more-inner">
+      <h2 id="more-heading">{more.heading}</h2>
+      <ul>
+        {
+          cards.map((c) => (
+            <li>
+              <a href={c.href}>
+                <span class="card-text">
+                  <span class="card-title">{c.title}</span>
+                  <span class="card-desc">{c.text}</span>
+                </span>
+                <span class="arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  /* Hero: two fixed lines ("Independent since 1995." / "In insurance since 1918.") */
+  .about-hero :global(.page-hero h1) {
+    font-size: clamp(44px, 1rem + 4.7vw, 84px);
+    line-height: 1;
+    white-space: pre-line;
+  }
+
+  .about-hero :global(.page-hero .text) {
+    max-width: 900px;
+  }
+
+  /* History */
+  .statement {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: clamp(30px, 1rem + 2.2vw, 46px);
+    letter-spacing: -0.035em;
+    line-height: 1.22;
+    text-wrap: balance;
+  }
+
+  .history-cols {
+    display: flex;
+    gap: 56px;
+    margin-top: 48px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-shrink: 0;
+    width: 300px;
+    margin: 0;
+    padding: 18px 0 0;
+    border-top: 2px solid var(--color-ink);
+    list-style: none;
+  }
+
+  .timeline li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding-block: 10px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .year {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    line-height: 34px;
+  }
+
+  .what {
+    color: var(--color-muted);
+    font-size: 13px;
+    line-height: 34px;
+  }
+
+  .history-text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+    min-width: 0;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  /* Vision */
+  .vision {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: clamp(88px, 9.7vw, 140px) var(--gutter);
+    background: var(--color-night);
+    text-align: center;
+  }
+
+  .vision h2 {
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    line-height: 16px;
+  }
+
+  blockquote {
+    max-width: 1040px;
+    margin: 0;
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: clamp(30px, 1rem + 2.6vw, 52px);
+    letter-spacing: -0.04em;
+    line-height: 1.19;
+    text-wrap: balance;
+  }
+
+  /* Core values */
+  .values {
+    padding: clamp(88px, 8.3vw, 120px) var(--gutter) clamp(88px, 9vw, 130px);
+    background: var(--color-mustard);
+    color: var(--color-ink);
+  }
+
+  .values-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  .values-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 64px;
+  }
+
+  .values-title {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .values .eyebrow {
+    color: var(--color-ink);
+  }
+
+  .values h2 {
+    font-size: clamp(32px, 1rem + 2vw, 44px);
+    letter-spacing: -0.035em;
+    line-height: 1.14;
+  }
+
+  .values-text {
+    flex-shrink: 0;
+    width: 420px;
+    padding-bottom: 6px;
+    color: #3a2f00;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .value-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(17 17 17 / 0.25);
+    list-style: none;
+  }
+
+  .value-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 40px 0;
+  }
+
+  .value-list li:first-child {
+    padding-left: 0;
+  }
+
+  .value-list li:last-child {
+    padding-right: 0;
+  }
+
+  .value-list li + li {
+    border-left: 1px solid rgb(17 17 17 / 0.25);
+  }
+
+  .value-list h3 {
+    font-size: clamp(52px, 1.5rem + 3.4vw, 72px);
+    font-style: italic;
+    letter-spacing: -0.05em;
+    line-height: 1.05;
+  }
+
+  .value-list p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  /* More about UWIB */
+  .more {
+    padding: clamp(80px, 7.6vw, 110px) var(--gutter) clamp(80px, 8.3vw, 120px);
+    background: var(--color-surface);
+  }
+
+  .more-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  .more h2 {
+    font-size: clamp(32px, 1rem + 1.7vw, 40px);
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .more ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .more a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 36px;
+    height: 100%;
+    padding: 26px;
+    background: var(--color-paper);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .more a:hover .card-title {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-title {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 30px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .arrow {
+    color: var(--color-gold);
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  @media (max-width: 1100px) {
+    .more ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 960px) {
+    .history-cols,
+    .values-head {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .history-cols {
+      gap: 32px;
+    }
+
+    .timeline,
+    .values-text {
+      width: auto;
+    }
+
+    .value-list {
+      grid-template-columns: 1fr;
+    }
+
+    .value-list li,
+    .value-list li:first-child,
+    .value-list li:last-child {
+      padding: 28px 0;
+    }
+
+    .value-list li + li {
+      border-left: 0;
+      border-top: 1px solid rgb(17 17 17 / 0.25);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .history-text {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .values-inner {
+      gap: 36px;
+    }
+
+    .more ul {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .more a {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 20px;
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+/** Page intro for /team and /sales-team: eyebrow in the label column, big heading + lead beside it. */
+interface Props {
+  eyebrow: string;
+  heading: string;
+}
+const { eyebrow, heading } = Astro.props;
+---
+
+<section class="intro">
+  <div class="label-col">
+    <p class="eyebrow">{eyebrow}</p>
+    <span class="bar" aria-hidden="true"></span>
+  </div>
+  <div class="content">
+    <h1>{heading}</h1>
+    <div class="lead"><slot /></div>
+    <slot name="after" />
+  </div>
+</section>
+
+<style>
+  .intro {
+    display: flex;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding: clamp(64px, 7.6vw, 110px) var(--gutter) clamp(56px, 5.6vw, 80px);
+  }
+
+  .label-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex-shrink: 0;
+    width: var(--label-col);
+    padding-top: 16px;
+  }
+
+  .bar {
+    width: 36px;
+    height: 2px;
+    background: var(--color-mustard);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;
+    min-width: 0;
+    max-width: 948px;
+  }
+
+  h1 {
+    font-size: clamp(44px, 1rem + 4.2vw, 76px);
+    letter-spacing: -0.05em;
+    line-height: 1.03;
+  }
+
+  .lead {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+    color: var(--color-body);
+    font-size: 18px;
+    line-height: 29px;
+  }
+
+  .lead :global(a) {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 1100px) {
+    .intro {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .label-col {
+      width: auto;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .content {
+      gap: 18px;
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+/** Blog post card (photo, topic + date, title) for "Articles by <name>". */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { shortDate, topicFor } from '../../lib/topics';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
+---
+
+<a class="card" href={`/blog/${post.id}`}>
+  <Image src={post.data.heroImage} alt="" widths={[420, 840]} sizes="(max-width: 760px) 100vw, 416px" />
+  <span class="meta">
+    <span class="topic">{topicFor(post)}</span>
+    <time datetime={post.data.pubDate.toISOString()}>{shortDate(post.data.pubDate)}</time>
+  </span>
+  <span class="title">{post.data.title}</span>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 416 / 280;
+    object-fit: cover;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .topic {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  time {
+    color: var(--color-faint);
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .title {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 23px;
+    letter-spacing: -0.015em;
+    line-height: 29px;
+    text-wrap: pretty;
+  }
+
+  .card:hover .title {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 760px) {
+    .title {
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+</style>

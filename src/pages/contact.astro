@@ -1,51 +1,216 @@
 ---
-import { getCollection, getEntry, render } from 'astro:content';
-import { heading, isProducerMatch, meta, producers, steps } from '../data/legacy/contact';
-import BaseLayout from '../layouts/BaseLayout.astro';
+/**
+ * /contact: direct lines + the native "Send us a note" form, then the office cards.
+ * The old advisor-matching wizard (src/data/legacy/contact.ts) is no longer shown.
+ */
+import { getEntry } from 'astro:content';
+import ContactForm from '../components/contact/ContactForm.astro';
+import OfficeCards from '../components/contact/OfficeCards.astro';
+import { numberWord } from '../components/team/team';
+import { clientLinks, company, siteOffices } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
 
 const page = await getEntry('pages', 'contact');
-const Content = page ? (await render(page)).Content : null;
-const forms = await getCollection('hygraphForms');
-const industries =
-  forms.flatMap((f) => f.data.fields).find((f) => f.kind === 'select' && f.name === 'Industry');
-const team = await getCollection('team');
-const activeProducers = producers.map((p) => ({ ...p, member: team.find((t) => t.id === p.slug) }));
-void isProducerMatch; // routing rules for the redesigned wizard (src/data/legacy/contact.ts)
+const eyebrow = page?.data.title ?? 'Contact an advisor';
+// Mockup shows the three everyday client actions; the portal stays in the header/footer.
+const clientActions = clientLinks.filter((l) => l.href !== company.clientPortalUrl);
+const intro = `Tell us a little about what you need and an advisor will reach out. Prefer to call? You can reach any of our ${numberWord(siteOffices.length)} offices directly.`;
 ---
 
-<BaseLayout title={meta.title} description={meta.description} searchable>
-  <div class="container">
-    <h1>{page?.data.title ?? 'Contact'}</h1>
-    <div class="prose">{Content && <Content />}</div>
-    <h2>{heading}</h2>
-    <ol>
-      <li>{steps.state.question}</li>
-      <li>{steps.lineOfBusiness.question} ({steps.lineOfBusiness.options.map((o) => o.label).join(' / ')})</li>
-      <li>
-        Personal: {steps.personalAssets.question} Yes: {steps.personalHighNetWorth.text} No:
-        <a href={steps.personalStandard.cta.href}>{steps.personalStandard.cta.label}</a>
-      </li>
-      <li>
-        Business: {steps.business.heading}. {steps.business.industry}
-        {industries?.kind === 'select' && <>({industries.options.map((o) => o.label).join(', ')})</>},
-        {steps.business.employees} {steps.business.revenue}
-      </li>
-    </ol>
-    <h3>Account executives</h3>
-    <ul>
-      {
-        activeProducers.map((p) => (
-          <li>
-            <a href={`/team/${p.slug}`}>{p.name}</a>
-            {p.member?.data.meetingLink && (
-              <>
-                {' '}
-                &middot; <a href={p.member.data.meetingLink}>{steps.business.cta}</a>
-              </>
-            )}
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</BaseLayout>
+<SiteLayout title="Contact" description={intro} closing={false}>
+  <section class="main">
+    <div class="side">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>Talk to a person.</h1>
+      <p class="intro">{intro}</p>
+
+      <dl class="lines">
+        <div>
+          <dt>Call</dt>
+          <dd><a href={company.phoneHref}>{company.phone}</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href={`mailto:${company.email}`}>{company.email}</a></dd>
+        </div>
+      </dl>
+
+      <nav class="clients" aria-labelledby="clients-heading">
+        <h2 id="clients-heading">Already a client?</h2>
+        <ul>
+          {
+            clientActions.map((l) => (
+              <li>
+                <a href={l.href} {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}>
+                  {l.label}
+                  {l.external && <span aria-hidden="true"> ↗</span>}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div class="form-col">
+      <ContactForm />
+    </div>
+  </section>
+
+  <OfficeCards />
+</SiteLayout>
+
+<style>
+  .main {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(48px, 6.7vw, 96px);
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding: clamp(56px, 7vw, 100px) var(--gutter) clamp(72px, 7.6vw, 110px);
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    flex: 0 0 464px;
+    min-width: 0;
+  }
+
+  .form-col {
+    flex: 1 1 752px;
+    min-width: 0;
+    max-width: 752px;
+    margin-left: auto;
+  }
+
+  h1 {
+    font-size: clamp(56px, 1.5rem + 4.4vw, 84px);
+    text-wrap: wrap;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .intro {
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .lines {
+    margin: 0;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .lines div {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  dt {
+    flex-shrink: 0;
+    width: 80px;
+    color: var(--color-faint);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  dd a {
+    color: var(--color-ink);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    text-decoration: none;
+  }
+
+  dd a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .clients {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    background: var(--color-surface);
+  }
+
+  .clients h2 {
+    color: var(--color-gold);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  .clients ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .clients a {
+    border-bottom: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+  .clients a:hover {
+    border-bottom-color: var(--color-mustard);
+  }
+
+  @media (max-width: 1100px) {
+    .main {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .side {
+      flex-basis: auto;
+      max-width: 640px;
+    }
+
+    .form-col {
+      flex-basis: auto;
+      max-width: none;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .side {
+      gap: 22px;
+    }
+
+    .intro {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    dd a {
+      font-size: 17px;
+    }
+  }
+</style>

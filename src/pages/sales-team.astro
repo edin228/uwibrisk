@@ -1,43 +1,57 @@
 ---
-import { Image } from 'astro:assets';
-import CardGrid from '../components/CardGrid.astro';
-import { heading, intro, meta, programsHeading, quoteCardsHeading } from '../data/legacy/sales-team';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { programCards, quoteCards } from '../lib/cards';
+/** /sales-team: producers only (isProducer), styled like the /team listing. */
+import { getEntry } from 'astro:content';
+import TeamGroup from '../components/team/TeamGroup.astro';
+import TeamIntro from '../components/team/TeamIntro.astro';
+import TextLink from '../components/ui/TextLink.astro';
+import { heading, intro, meta, moreLinks } from '../data/legacy/sales-team';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import { getTeam } from '../lib/content';
+
+const page = await getEntry('pages', 'sales-team');
 const producers = (await getTeam()).filter((m) => m.data.isProducer);
+const links = [...moreLinks, { label: 'Meet the team', href: '/team' }];
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h2>{heading}</h2>
-    <ul class="producers">
+<SiteLayout title={meta.title} description={meta.description}>
+  <TeamIntro eyebrow="Our team" heading={page?.data.title ?? heading}>
+    {
+      intro.map((p) => {
+        const [before, after] = p.link ? p.text.split(p.link.label) : [p.text];
+        return (
+          <p>
+            {before}
+            {p.link && (
+              <a href={p.link.href} target="_blank" rel="noopener">
+                {p.link.label}
+              </a>
+            )}
+            {after}
+          </p>
+        );
+      })
+    }
+    <ul slot="after" class="links">
       {
-        producers.map((m) => (
+        links.map((l) => (
           <li>
-            <a href={`/team/${m.id}`}>
-              <Image src={m.data.motionPhotos[0]?.src ?? m.data.photo} alt={m.data.motionPhotos[0]?.alt ?? m.data.photoAlt} width={240} data-color />
-              <strong>{m.data.name}</strong>
-            </a>
-            <p class="label">{m.data.role}</p>
+            <TextLink href={l.href}>{l.label} →</TextLink>
           </li>
         ))
       }
     </ul>
-    {intro.map((p) => <p>{p.link ? <>{p.text.split(p.link.label)[0]}<a href={p.link.href}>{p.link.label}</a>{p.text.split(p.link.label)[1]}</> : p.text}</p>)}
-    <h1>{programsHeading}</h1>
-    <CardGrid cards={await programCards()} />
-    <h1>{quoteCardsHeading}</h1>
-    <CardGrid cards={await quoteCards()} />
-  </div>
-</BaseLayout>
+  </TeamIntro>
+
+  <TeamGroup id="sales" label={meta.title} members={producers} last />
+</SiteLayout>
 
 <style>
-  .producers {
+  .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
-    padding: 0;
+    gap: 12px 28px;
+    margin: 0;
+    padding: 4px 0 0;
     list-style: none;
   }
 </style>

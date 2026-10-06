@@ -1,11 +1,20 @@
 ---
 import { Image } from 'astro:assets';
 import { type CollectionEntry, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/site/Breadcrumbs.astro';
+import ArticleCard from '../../components/team/ArticleCard.astro';
+import { firstName, firstSentence, formatPhone, phoneHref } from '../../components/team/team';
+import Button from '../../components/ui/Button.astro';
+import TextLink from '../../components/ui/TextLink.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getPosts, getTeam } from '../../lib/content';
+
+/** Articles shown on a bio page; the rest are on /blog. */
+const MAX_ARTICLES = 6;
 
 export async function getStaticPaths() {
   const [team, posts] = await Promise.all([getTeam(), getPosts()]);
+  // Members with hasTeamPage: false get no page (and no link from the listing).
   return team
     .filter((member) => member.data.hasTeamPage)
     .map((member) => ({
@@ -16,95 +25,465 @@ export async function getStaticPaths() {
 
 interface Props {
   member: CollectionEntry<'team'>;
+  /** Published posts by this member, newest first (getPosts order). */
   posts: CollectionEntry<'blog'>[];
 }
 
 const { member, posts } = Astro.props;
 const { Content } = await render(member);
 const { data } = member;
+const first = firstName(data.name);
+const lead = data.miniBio ? firstSentence(data.miniBio) : null;
+const hasBio = Boolean(member.body?.trim());
+const hasCard = Boolean(data.email || data.phone);
+const articles = posts.slice(0, MAX_ARTICLES);
 ---
 
-<BaseLayout
+<SiteLayout
   title={data.name}
   description={data.miniBio ?? `${data.name}, ${data.role} at UWIB Risk & Insurance Solutions.`}
   image={data.photo}
   searchable
 >
-  <article class="container member">
-    <Image src={data.photo} alt={data.photoAlt} width={480} data-color loading="eager" />
-    <div>
-      <p class="label"><a href="/team">Team</a></p>
-      <h1>{data.name}</h1>
-      <p class="role">{data.role}</p>
-      <ul class="contact">
-        {data.email && <li><a href={`mailto:${data.email}`}>{data.email}</a></li>}
-        {data.phone && <li><a href={`tel:${data.phone.replace(/[^\d+]/g, '')}`}>{data.phone}</a></li>}
-        {data.meetingLink && <li><a href={data.meetingLink} rel="noopener">Book a meeting</a></li>}
-      </ul>
-      <div class="prose"><Content /></div>
+  <section class="hero">
+    <div class="portrait">
+      <Image
+        src={data.photo}
+        alt={data.photoAlt}
+        widths={[400, 520, 1040]}
+        sizes="(max-width: 760px) 100vw, (max-width: 1100px) 40vw, 520px"
+        loading="eager"
+        fetchpriority="high"
+        data-color
+      />
+    </div>
+    <div class="intro">
+      <Breadcrumbs tone="light" items={[{ label: 'Team', href: '/team' }, { label: data.name }]} />
+      <div class="title">
+        <h1>{data.name}</h1>
+        <p class="role">{data.role}</p>
+      </div>
+      {lead && <p class="lead">{lead}</p>}
       {
-        data.pets.length > 0 && (
-          <section>
-            <h2>Pets</h2>
-            <ul class="pets">
-              {data.pets.map((pet) => (
-                <li>
-                  <Image src={pet.photo} alt={pet.photoAlt} width={240} data-color />
-                  <p>{pet.name}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
+        hasCard && (
+          <dl class="lines">
+            {data.email && (
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href={`mailto:${data.email}`}>{data.email}</a>
+                </dd>
+              </div>
+            )}
+            {data.phone && (
+              <div>
+                <dt>Phone</dt>
+                <dd>
+                  <a href={phoneHref(data.phone)}>{formatPhone(data.phone)}</a>
+                </dd>
+              </div>
+            )}
+          </dl>
         )
       }
       {
-        posts.length > 0 && (
-          <section>
-            <h2>Articles</h2>
-            <ul>
-              {posts.slice(0, 10).map((post) => (
-                <li>
-                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                </li>
-              ))}
-            </ul>
-          </section>
+        (data.meetingLink || hasCard) && (
+          <div class="actions">
+            {data.meetingLink && (
+              <Button href={data.meetingLink} variant="ink" size="lg" block>
+                Book a call with {first} →
+              </Button>
+            )}
+            {hasCard && (
+              <Button href={`/team/${member.id}.vcf`} variant="outline-dark" size="lg" block download={`${member.id}.vcf`}>
+                Download contact card
+              </Button>
+            )}
+          </div>
         )
       }
     </div>
-  </article>
-</BaseLayout>
+  </section>
+
+  {
+    (hasBio || data.pets.length > 0) && (
+      <section class="body" aria-labelledby="about-heading">
+        <div class="label-col">
+          <h2 id="about-heading" class="eyebrow">
+            About {first}
+          </h2>
+        </div>
+        <div class="content-col">
+          {hasBio && (
+            <div class="bio">
+              <Content />
+            </div>
+          )}
+          {data.pets.length > 0 && (
+            <div class="pets">
+              <h3 class="pets-label">Pets</h3>
+              <ul>
+                {data.pets.map((pet) => (
+                  <li>
+                    <Image src={pet.photo} alt={pet.photoAlt} widths={[200, 400]} sizes="200px" />
+                    <span class="pet-name">{pet.name}</span>
+                    {pet.bio && <span class="pet-bio">{pet.bio}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    articles.length > 0 && (
+      <section class="articles" aria-labelledby="articles-heading">
+        <div class="articles-inner">
+          <div class="articles-head">
+            <h2 id="articles-heading">Articles by {first}</h2>
+            {posts.length > articles.length && (
+              <TextLink href="/blog" rule="ink">
+                All articles →
+              </TextLink>
+            )}
+          </div>
+          <ul>
+            {articles.map((post) => (
+              <li>
+                <ArticleCard post={post} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+</SiteLayout>
 
 <style>
-  .member {
-    display: grid;
-    grid-template-columns: minmax(200px, 400px) 1fr;
-    gap: var(--gutter);
-    padding-block: 48px;
+  .hero,
+  .body,
+  .articles-inner {
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
-  .member > img {
+
+  /* Hero: portrait + name, contact lines and actions */
+  .hero {
+    display: flex;
+    gap: clamp(40px, 6.7vw, 96px);
+    padding-top: clamp(40px, 6.7vw, 96px);
+    padding-bottom: clamp(64px, 7.6vw, 110px);
+  }
+
+  .portrait {
+    flex: 0 1 520px;
+    min-width: 0;
+  }
+
+  .portrait img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 520 / 660;
+    object-fit: cover;
+    object-position: 50% 25%;
+    background: var(--color-rule);
   }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    flex: 1 1 696px;
+    min-width: 0;
+    max-width: 696px;
+    padding-top: 12px;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  h1 {
+    font-size: clamp(48px, 1.4rem + 4.4vw, 84px);
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
   .role {
-    font-size: var(--text-lead);
+    color: var(--color-gold);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 18px;
+    text-transform: uppercase;
   }
-  .contact,
-  .pets {
+
+  .lead {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: clamp(20px, 1rem + 0.5vw, 24px);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .lines {
+    margin: 0;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .lines div {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  dt {
+    flex-shrink: 0;
+    width: 80px;
+    color: var(--color-faint);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  dd a {
+    color: var(--color-ink);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    text-decoration: none;
+  }
+
+  dd a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  /* About: label column + Lora body copy */
+  .body {
+    display: flex;
+    gap: 64px;
+    padding-bottom: clamp(80px, 8.3vw, 120px);
+  }
+
+  .label-col,
+  .content-col {
+    border-top: 1px solid var(--color-ink);
+    padding-top: 24px;
+  }
+
+  .label-col {
+    flex-shrink: 0;
+    width: var(--label-col);
+  }
+
+  .label-col h2 {
+    font-family: var(--font-sans);
+    letter-spacing: var(--tracking-eyebrow);
+  }
+
+  .content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    flex: 0 1 700px;
+    min-width: 0;
+  }
+
+  .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    color: #222;
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1rem + 0.2vw, 20px);
+    line-height: 1.7;
+  }
+
+  .bio :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .bio :global(a) {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .bio :global(ul),
+  .bio :global(ol) {
+    margin: 0;
+    padding-left: 1.25em;
+  }
+
+  .pets-label {
+    margin-bottom: 18px;
+    color: var(--color-gold);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: var(--tracking-eyebrow);
+    line-height: 16px;
+    text-transform: uppercase;
+  }
+
+  .pets ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
+
+  .pets li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 200px;
+  }
+
   .pets img {
-    width: 160px;
+    width: 200px;
     aspect-ratio: 1;
     object-fit: cover;
   }
-  @media (max-width: 800px) {
-    .member {
+
+  .pet-name {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .pet-bio {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  /* Articles by <first name> */
+  .articles {
+    padding-block: clamp(80px, 7.6vw, 110px) clamp(80px, 8.3vw, 120px);
+    background: var(--color-surface);
+  }
+
+  .articles-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 32px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .articles h2 {
+    font-size: clamp(32px, 1rem + 1.7vw, 40px);
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .articles ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 1100px) {
+    .body {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .label-col {
+      width: auto;
+      padding-bottom: 20px;
+    }
+
+    .content-col {
+      flex-basis: auto;
+      max-width: 700px;
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .articles ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero {
+      flex-direction: column;
+      gap: 32px;
+      padding-top: 24px;
+    }
+
+    .portrait {
+      flex-basis: auto;
+    }
+
+    .portrait img {
+      aspect-ratio: 4 / 5;
+    }
+
+    .intro {
+      flex-basis: auto;
+      gap: 22px;
+      padding-top: 0;
+    }
+
+    .role {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    .actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .articles ul {
       grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .pets li {
+      width: calc(50% - 12px);
+    }
+
+    .pets img {
+      width: 100%;
     }
   }
 </style>
