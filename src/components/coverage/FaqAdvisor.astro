@@ -1,28 +1,33 @@
 ---
 /**
  * "Questions": label column, FAQ accordion (native <details>, first one open)
- * and a sticky advisor card with a color portrait and a booking link.
+ * and a sticky advisor card with a color portrait and a booking link. Without an
+ * advisor the card is generic: company phone and a link to /contact, no photo.
  */
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { company } from '../../data/site';
 import Button from '../ui/Button.astro';
 
 interface Props {
   eyebrow?: string;
   heading: string;
   faqs: { question: string; answer: string; link?: { label: string; href: string } | undefined }[];
-  advisor: CollectionEntry<'team'>;
+  /** Named advisor; omit for the generic card. */
+  advisor?: CollectionEntry<'team'> | undefined;
 }
 const { eyebrow = 'Questions', heading, faqs, advisor } = Astro.props;
-const a = advisor.data;
-const firstName = a.name.split(' ')[0];
-const profile = a.hasTeamPage ? `/team/${advisor.id}` : undefined;
+const a = advisor?.data;
+const firstName = a?.name.split(' ')[0];
+const profile = advisor && a?.hasTeamPage ? `/team/${advisor.id}` : undefined;
 // Booking link when the advisor has one; otherwise their email, then the contact page.
-const action = a.meetingLink
-  ? { label: `Book a call with ${firstName}`, href: a.meetingLink }
-  : a.email
-    ? { label: `Email ${firstName}`, href: `mailto:${a.email}` }
-    : { label: `Contact ${firstName}`, href: '/contact' };
+const action = !a
+  ? { label: 'Contact us', href: '/contact' }
+  : a.meetingLink
+    ? { label: `Book a call with ${firstName}`, href: a.meetingLink }
+    : a.email
+      ? { label: `Email ${firstName}`, href: `mailto:${a.email}` }
+      : { label: `Contact ${firstName}`, href: '/contact' };
 ---
 
 <section class="faq-advisor" aria-labelledby="faq-heading">
@@ -53,17 +58,35 @@ const action = a.meetingLink
       }
     </div>
 
-    <aside class="advisor" aria-label={`Talk it through with ${a.name}`}>
-      <a class="portrait" href={profile}>
-        <Image src={a.photo} alt={a.photoAlt} width={536} widths={[268, 536]} sizes="268px" data-color />
-      </a>
-      <div class="who">
-        <p class="kicker">Talk it through</p>
-        <p class="name">{profile ? <a href={profile}>{a.name}</a> : a.name}</p>
-        <p class="role">{a.role}</p>
-      </div>
-      <Button href={action.href} block class="book">{action.label}</Button>
-    </aside>
+    {
+      a ? (
+        <aside class="advisor" aria-label={`Talk it through with ${a.name}`}>
+          <a class="portrait" href={profile}>
+            <Image src={a.photo} alt={a.photoAlt} width={536} widths={[268, 536]} sizes="268px" data-color />
+          </a>
+          <div class="who">
+            <p class="kicker">Talk it through</p>
+            <p class="name">{profile ? <a href={profile}>{a.name}</a> : a.name}</p>
+            <p class="role">{a.role}</p>
+          </div>
+          <Button href={action.href} block class="book">
+            {action.label}
+          </Button>
+        </aside>
+      ) : (
+        <aside class="advisor generic" aria-label="Talk it through with an advisor">
+          <div class="who">
+            <p class="name">Talk it through with an advisor</p>
+            <p class="phone">
+              <a href={company.phoneHref}>{company.phone}</a>
+            </p>
+          </div>
+          <Button href={action.href} block class="book">
+            {action.label}
+          </Button>
+        </aside>
+      )
+    }
   </div>
 </section>
 
@@ -230,6 +253,16 @@ const action = a.meetingLink
     color: var(--color-ink-muted);
     font-size: 13px;
     line-height: 20px;
+  }
+
+  .phone a {
+    color: var(--color-paper);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 24px;
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
   }
 
   .advisor :global(.book) {

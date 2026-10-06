@@ -1,5 +1,6 @@
-/** Coverage pages: published entries, group labels and link resolution. */
+/** Coverage pages: visible entries, group labels and link resolution. */
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { isVisible } from '../../lib/coverage';
 
 export type CoverageGroup = CollectionEntry<'coverage'>['data']['group'];
 
@@ -10,23 +11,27 @@ export const coverageGroups: Record<CoverageGroup, { label: string; anchor: stri
   benefits: { label: 'Employee benefits', anchor: 'benefits' },
 };
 
-/** Coverage entries that get a page: everything but drafts (drafts are previewable in dev). */
-export function getPublishedCoverage(): Promise<CollectionEntry<'coverage'>[]> {
-  return getCollection('coverage', ({ data }) => import.meta.env.DEV || !data.draft);
+/**
+ * Coverage entries that get a page in this build: published entries, plus drafts
+ * when drafts are shown (dev or SHOW_DRAFTS=true; see src/lib/coverage.ts).
+ * Everything that links to a coverage page resolves against this list.
+ */
+export function getVisibleCoverage(): Promise<CollectionEntry<'coverage'>[]> {
+  return getCollection('coverage', isVisible);
 }
 
 export const coverageHref = (id: string) => `/coverage/${id}`;
 
 export interface CoverageLink {
-  /** Coverage entry id; links there when it is published. */
+  /** Coverage entry id; links there when that entry is visible in this build. */
   coverage?: string | undefined;
-  /** Existing page used until that coverage page is published. */
+  /** Existing page used while that coverage page is missing or a hidden draft. */
   fallbackHref: string;
 }
 
-/** Link to the coverage page when it is published, otherwise to the fallback page. */
-export function resolveCoverageLink(link: CoverageLink, published: ReadonlySet<string>): string {
-  return link.coverage && published.has(link.coverage) ? coverageHref(link.coverage) : link.fallbackHref;
+/** Link to the coverage page when it is visible (see getVisibleCoverage), otherwise to the fallback page. */
+export function resolveCoverageLink(link: CoverageLink, visible: ReadonlySet<string>): string {
+  return link.coverage && visible.has(link.coverage) ? coverageHref(link.coverage) : link.fallbackHref;
 }
 
 export const isExternal = (href: string) => /^https?:\/\//.test(href);

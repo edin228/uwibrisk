@@ -327,7 +327,9 @@ const coverage = defineCollection({
         })
         .refine((f) => Boolean(f.answer) !== Boolean(f.glossary), 'Give either `answer` or `glossary`'),
     ),
-    advisor: reference('team'),
+    /** Advisor card beside the FAQs. Omit for a generic "Talk it through with an advisor" card. */
+    advisor: reference('team').optional(),
+    /** Drafts only build in dev or with SHOW_DRAFTS=true (src/lib/coverage.ts). */
     draft: z.boolean().default(false),
   }),
 });

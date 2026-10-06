@@ -1,7 +1,11 @@
 ---
-/** Coverage line page (/coverage/general-liability). Design: Paper "Coverage page — Desktop (General liability)". */
+/**
+ * Coverage line page (/coverage/general-liability). Design: Paper "Coverage page — Desktop (General liability)".
+ * Drafts only get a route in dev or with SHOW_DRAFTS=true (src/lib/coverage.ts); a shown
+ * draft carries a "Draft, not published" ribbon and is noindex / left out of search.
+ */
 import { type CollectionEntry, getEntry } from 'astro:content';
-import { coverageGroups, getPublishedCoverage, resolveCoverageLink } from '../../components/coverage/coverage';
+import { coverageGroups, getVisibleCoverage, resolveCoverageLink } from '../../components/coverage/coverage';
 import FaqAdvisor from '../../components/coverage/FaqAdvisor.astro';
 import GapCards from '../../components/coverage/GapCards.astro';
 import DefinitionRows from '../../components/industry/DefinitionRows.astro';
@@ -12,25 +16,28 @@ import { photos } from '../../data/photos';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = await getPublishedCoverage();
-  const published = entries.map((e) => e.id);
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry, published } }));
+  const entries = await getVisibleCoverage();
+  const visible = entries.map((e) => e.id);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry, visible } }));
 }
 
 interface Props {
   entry: CollectionEntry<'coverage'>;
-  published: string[];
+  visible: string[];
 }
-const { entry, published } = Astro.props;
+const { entry, visible } = Astro.props;
 const d = entry.data;
-const publishedSet = new Set(published);
+const visibleSet = new Set(visible);
 const group = coverageGroups[d.group];
 const photo = photos[d.heroPhoto];
 
-const advisor = await getEntry(d.advisor);
-if (!advisor) throw new Error(`Coverage ${entry.id}: advisor ${d.advisor.id} not found`);
+let advisor: CollectionEntry<'team'> | undefined;
+if (d.advisor) {
+  advisor = await getEntry(d.advisor);
+  if (!advisor) throw new Error(`Coverage ${entry.id}: advisor ${d.advisor.id} not found`);
+}
 
-const gaps = d.gaps.items.map((g) => ({ ...g, href: resolveCoverageLink(g, publishedSet) }));
+const gaps = d.gaps.items.map((g) => ({ ...g, href: resolveCoverageLink(g, visibleSet) }));
 
 const faqs = await Promise.all(
   d.faqs.map(async (f) => {
@@ -53,7 +60,14 @@ const faqs = await Promise.all(
 const actions = [d.quote, ...(d.secondaryAction ? [d.secondaryAction] : [])];
 ---
 
-<SiteLayout title={d.title} description={d.lead} image={photo.src} header="overlay" searchable>
+<SiteLayout title={d.title} description={d.lead} image={photo.src} header="overlay" searchable={!d.draft} noindex={d.draft}>
+  {
+    d.draft && (
+      <p class="draft-ribbon">
+        Draft, not published
+      </p>
+    )
+  }
   <ProgramHero
     title={d.title}
     lead={d.lead}
@@ -87,6 +101,23 @@ const actions = [d.quote, ...(d.secondaryAction ? [d.secondaryAction] : [])];
     display: flex;
     flex-direction: column;
     gap: 48px;
+  }
+
+  .draft-ribbon {
+    position: fixed;
+    z-index: 100;
+    right: 16px;
+    bottom: 16px;
+    margin: 0;
+    padding: 8px 14px;
+    background: var(--color-mustard);
+    color: var(--color-ink);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 16px;
+    text-transform: uppercase;
+    pointer-events: none;
   }
 
   .statement {

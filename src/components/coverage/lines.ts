@@ -1,7 +1,8 @@
 /**
  * Coverage lines listed on /coverage, by group. Each line links to its coverage
- * page once that entry is published (src/content/coverage/<coverage>.md) and to
- * `fallbackHref`, an existing quote form or program page, until then.
+ * page (src/content/coverage/<coverage>.md) when that entry is visible in the
+ * build (published, or a draft in dev / SHOW_DRAFTS=true; see src/lib/coverage.ts)
+ * and to `fallbackHref`, an existing quote form or program page, otherwise.
  * Business lines follow the homepage "What we cover" list (src/data/home.ts).
  */
 import type { CoverageGroup, CoverageLink } from './coverage';
@@ -26,8 +27,8 @@ export const coverageLines: Record<CoverageGroup, CoverageLine[]> = {
     { label: 'Surety bonds', coverage: 'surety-bonds', fallbackHref: 'https://bxsurety.com/bx-pro-landing/92507' },
   ],
   home: [
-    { label: 'Home', coverage: 'home', fallbackHref: '/personal-quote' },
-    { label: 'Auto', coverage: 'auto', fallbackHref: '/personal-quote' },
+    { label: 'Home', coverage: 'homeowners', fallbackHref: '/personal-quote' },
+    { label: 'Auto', coverage: 'personal-auto', fallbackHref: '/personal-quote' },
     { label: 'Flood', coverage: 'flood', fallbackHref: '/flood-quote' },
     { label: 'Earthquake', coverage: 'earthquake', fallbackHref: '/earthquake-quote' },
     { label: 'Life', coverage: 'life', fallbackHref: '/life-insurance-needs' },

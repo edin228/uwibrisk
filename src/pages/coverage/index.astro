@@ -6,14 +6,14 @@
  * #home and #benefits are linked from the footer and the coverage breadcrumbs.
  */
 import { Image } from 'astro:assets';
-import { coverageGroups, coverageHref, getPublishedCoverage, isExternal, resolveCoverageLink, type CoverageGroup } from '../../components/coverage/coverage';
+import { coverageGroups, coverageHref, getVisibleCoverage, isExternal, resolveCoverageLink, type CoverageGroup } from '../../components/coverage/coverage';
 import { coverageLines } from '../../components/coverage/lines';
 import TextLink from '../../components/ui/TextLink.astro';
 import { coverage as homeCoverage, industries } from '../../data/home';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
-const entries = await getPublishedCoverage();
-const published = new Set(entries.map((e) => e.id));
+const entries = await getVisibleCoverage();
+const visible = new Set(entries.map((e) => e.id));
 
 /** Homepage panel for each group (heading + photo). */
 const PANEL: Record<CoverageGroup, string> = { business: 'business', home: 'home', benefits: 'employees' };
@@ -24,11 +24,11 @@ const groups = ORDER.map((id, i) => {
   if (!panel) throw new Error(`No homepage coverage panel for ${id}`);
   const listed = coverageLines[id];
   const referenced = new Set(listed.map((l) => l.coverage));
-  // Published pages that aren't in the curated list still show up in their group.
+  // Visible pages that aren't in the curated list still show up in their group.
   const extra = entries
     .filter((e) => e.data.group === id && !referenced.has(e.id))
     .map((e) => ({ label: e.data.title, href: coverageHref(e.id) }));
-  const lines = [...listed.map((l) => ({ label: l.label, href: resolveCoverageLink(l, published) })), ...extra];
+  const lines = [...listed.map((l) => ({ label: l.label, href: resolveCoverageLink(l, visible) })), ...extra];
   return { id, num: String(i + 1).padStart(2, '0'), ...coverageGroups[id], panel, lines };
 });
 ---
