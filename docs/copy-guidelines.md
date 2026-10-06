@@ -29,4 +29,4 @@ A review list of existing copy that may break this rule is generated in
 ## 4. Photography
 
 - Use black-and-white photography everywhere.
-- Exception: employee portraits stay in color.
+- Exception: employee portraits (and their pets on bio pages) stay in color.

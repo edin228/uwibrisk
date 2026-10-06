@@ -125,7 +125,7 @@ const articles = posts.slice(0, MAX_ARTICLES);
               <ul>
                 {data.pets.map((pet) => (
                   <li>
-                    <Image src={pet.photo} alt={pet.photoAlt} widths={[200, 400]} sizes="200px" />
+                    <Image src={pet.photo} alt={pet.photoAlt} widths={[200, 400]} sizes="200px" data-color />
                     <span class="pet-name">{pet.name}</span>
                     {pet.bio && <span class="pet-bio">{pet.bio}</span>}
                   </li>

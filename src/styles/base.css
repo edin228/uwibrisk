@@ -54,7 +54,7 @@ a {
   outline-offset: 3px;
 }
 
-/* Photography is black and white site-wide; only team photos (data-color) stay in color. */
+/* Photography is black and white site-wide; only team portraits and their pets (data-color) stay in color. */
 img:not([data-color]) {
   filter: grayscale(1);
 }

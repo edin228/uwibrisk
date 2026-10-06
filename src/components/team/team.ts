@@ -5,8 +5,9 @@ type Member = CollectionEntry<'team'>;
 type Category = Member['data']['category'];
 
 /** Listing groups in display order (as in the "Team — Desktop" mockup). */
-export const TEAM_GROUPS: { id: string; label: string; categories: Category[] }[] = [
-  { id: 'leadership', label: 'Leadership', categories: ['Management'] },
+export const TEAM_GROUPS: { id: string; label: string; categories: Category[]; order?: string[] }[] = [
+  // Owner's order for leadership; anyone not listed follows.
+  { id: 'leadership', label: 'Leadership', categories: ['Management'], order: ['eric-schirding', 'josh-acosta', 'gina-coates'] },
   { id: 'account-executives', label: 'Account executives', categories: ['Sales'] },
   { id: 'client-service', label: 'Client service', categories: ['Service'] },
   { id: 'operations', label: 'Operations', categories: ['AccountingOperationsManagement', 'Operations'] },
@@ -18,10 +19,14 @@ export const TEAM_GROUPS: { id: string; label: string; categories: Category[] }[
  * before the rest), then team order. Empty groups are dropped.
  */
 export function groupTeam(members: Member[]) {
-  return TEAM_GROUPS.map((group) => ({
-    ...group,
-    members: group.categories.flatMap((c) => members.filter((m) => m.data.category === c)),
-  })).filter((g) => g.members.length > 0);
+  return TEAM_GROUPS.map((group) => {
+    const inGroup = group.categories.flatMap((c) => members.filter((m) => m.data.category === c));
+    const rank = (m: Member) => {
+      const i = group.order?.indexOf(m.id) ?? -1;
+      return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+    };
+    return { ...group, members: inGroup.toSorted((a, b) => rank(a) - rank(b)) };
+  }).filter((g) => g.members.length > 0);
 }
 
 export const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? name;
