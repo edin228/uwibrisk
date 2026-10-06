@@ -1,0 +1,101 @@
+---
+/** Inline call to action (Hygraph ActionBanner mid-page): heading + text beside stacked buttons. */
+import Button from '../ui/Button.astro';
+
+interface Props {
+  heading?: string | null | undefined;
+  text?: string | null | undefined;
+  buttons: { label: string; href: string }[];
+}
+const { heading, text, buttons } = Astro.props;
+---
+
+<section class="cta-row">
+  <div class="inner">
+    <div class="row">
+      <div class="text">
+        {heading && <h2>{heading}</h2>}
+        {text && <p>{text}</p>}
+      </div>
+      {
+        buttons.length > 0 && (
+          <div class="actions">
+            {buttons.map((b, i) => (
+              <Button href={b.href} variant={i === 0 ? 'mustard' : 'outline-dark'} size="lg" block>
+                {b.label}
+              </Button>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .cta-row {
+    padding-block: clamp(56px, 6vw, 88px);
+  }
+
+  .inner {
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 760px;
+  }
+
+  h2 {
+    font-size: clamp(30px, 1rem + 2vw, 40px);
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  p {
+    max-width: 600px;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+    width: 300px;
+  }
+
+  .actions :global(.btn) {
+    width: 100%;
+  }
+
+  @media (max-width: 860px) {
+    .row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .actions {
+      width: 100%;
+    }
+  }
+</style>

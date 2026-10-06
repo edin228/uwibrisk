@@ -1,0 +1,192 @@
+---
+/**
+ * Photo (or video) beside a text column ("Why oversight matters", Hygraph
+ * WideCard). `crop` fills a fixed 520×640 frame; `natural` keeps the image's own
+ * aspect ratio (used for CMS images, which may contain text or charts).
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  image?: { src: ImageMetadata; alt: string } | undefined;
+  imagePosition?: string;
+  fit?: 'crop' | 'natural';
+  videoUrl?: string | null | undefined;
+  videoTitle?: string;
+  /** Media on the left (default) or right on desktop. */
+  mediaSide?: 'left' | 'right';
+  surface?: 'paper' | 'surface';
+  eyebrow?: string | undefined;
+  heading?: string | null | undefined;
+  id?: string;
+}
+const {
+  image,
+  imagePosition = '50% 40%',
+  fit = 'crop',
+  videoUrl,
+  videoTitle = 'Video',
+  mediaSide = 'left',
+  surface = 'paper',
+  eyebrow,
+  heading,
+  id,
+} = Astro.props;
+const hasMedia = Boolean(image || videoUrl);
+---
+
+<section class:list={['split', `media-${mediaSide}`, `surface-${surface}`, `fit-${fit}`, { 'no-media': !hasMedia }]} id={id}>
+  <div class="inner">
+    {
+      hasMedia && (
+        <div class="media">
+          {videoUrl ? (
+            <div class="video">
+              <iframe src={videoUrl} title={videoTitle} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen />
+            </div>
+          ) : (
+            image && (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                widths={[400, 520, 800, 1040]}
+                sizes="(max-width: 960px) calc(100vw - 40px), 520px"
+                style={`object-position: ${imagePosition}`}
+              />
+            )
+          )}
+        </div>
+      )
+    }
+    <div class="body">
+      {
+        (eyebrow || heading) && (
+          <div class="head">
+            {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+            {heading && <h2>{heading}</h2>}
+          </div>
+        )
+      }
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .split {
+    padding-block: clamp(80px, 9.7vw, 140px);
+  }
+
+  .surface-surface {
+    background: var(--color-surface);
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 96px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .media-right .inner {
+    flex-direction: row-reverse;
+  }
+
+  .media {
+    flex-shrink: 0;
+    width: 520px;
+  }
+
+  .fit-crop .media img {
+    width: 100%;
+    height: 640px;
+    object-fit: cover;
+  }
+
+  .fit-natural .media img {
+    width: 100%;
+    height: auto;
+  }
+
+  .video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-night);
+  }
+
+  .video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+    min-width: 0;
+    max-width: 696px;
+  }
+
+  .no-media .body {
+    max-width: 948px;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  h2 {
+    font-size: clamp(32px, 1.1rem + 2.2vw, 46px);
+    letter-spacing: -0.035em;
+    line-height: 1.17;
+  }
+
+  @media (max-width: 1100px) {
+    .inner {
+      gap: 56px;
+    }
+
+    .media {
+      width: 400px;
+    }
+
+    .fit-crop .media img {
+      height: 520px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .inner,
+    .media-right .inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 40px;
+    }
+
+    .media {
+      width: 100%;
+    }
+
+    .fit-crop .media img {
+      height: auto;
+      aspect-ratio: 4 / 3;
+    }
+
+    .body {
+      gap: 28px;
+    }
+  }
+</style>

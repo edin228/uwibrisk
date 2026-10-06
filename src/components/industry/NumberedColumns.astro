@@ -1,0 +1,239 @@
+---
+/**
+ * Dark section with an optional eyebrow/heading/aside row above numbered
+ * columns ("When you'll be asked for it", "Our core services", Hygraph IconBanner).
+ */
+interface Props {
+  eyebrow?: string | undefined;
+  heading?: string | null | undefined;
+  text?: string | null | undefined;
+  items: { title: string; text?: string | null | undefined }[];
+  /** md: 4-up coverage triggers; lg: 3-up program services. */
+  size?: 'md' | 'lg';
+  id?: string;
+}
+const { eyebrow, heading, text, items, size = 'md', id } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+const hasHead = Boolean(eyebrow || heading || text);
+const headingId = heading ? `${id ?? 'columns'}-heading` : undefined;
+---
+
+<section
+  class:list={['numbered', `size-${size}`, { 'no-head': !hasHead }]}
+  id={id}
+  aria-labelledby={headingId}
+  style={`--cols: ${Math.min(items.length, 4)}; --cols-md: ${Math.min(items.length, 2)}`}
+>
+  <div class="inner">
+    {
+      hasHead && (
+        <div class="head">
+          <div class="title">
+            {eyebrow && <p class="eyebrow on-dark">{eyebrow}</p>}
+            {heading && <h2 id={headingId}>{heading}</h2>}
+          </div>
+          {text && <p class="aside">{text}</p>}
+        </div>
+      )
+    }
+    <ol class="cols">
+      {
+        items.map((item, i) => (
+          <li>
+            <span class="num">{pad(i + 1)}</span>
+            <h3>{item.title}</h3>
+            {item.text && <p>{item.text}</p>}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .numbered {
+    padding-block: clamp(80px, 9vw, 130px);
+    background: var(--color-night);
+    color: var(--color-ink-body);
+  }
+
+  .no-head {
+    padding-block: clamp(64px, 7vw, 100px);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .size-lg .inner {
+    gap: 60px;
+  }
+
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 64px;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 760px;
+  }
+
+  h2 {
+    color: var(--color-paper);
+    font-size: clamp(36px, 1.2rem + 2.6vw, 52px);
+    letter-spacing: -0.04em;
+    line-height: 1.12;
+  }
+
+  .aside {
+    flex-shrink: 0;
+    width: 360px;
+    padding-bottom: 8px;
+    color: var(--color-ink-muted);
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-ink-rule);
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 32px 32px 0;
+    border-left: 1px solid var(--color-ink-rule);
+  }
+
+  li:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  li:last-child {
+    padding-right: 0;
+  }
+
+  .size-lg li {
+    padding-inline: 40px;
+  }
+
+  .size-lg li:first-child {
+    padding-left: 0;
+  }
+
+  .size-lg li:last-child {
+    padding-right: 0;
+  }
+
+  .num {
+    color: var(--color-mustard);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 14px;
+  }
+
+  h3 {
+    color: var(--color-paper);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 30px;
+  }
+
+  li p {
+    color: var(--color-ink-muted);
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .size-lg h3 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .size-lg li p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  @media (max-width: 1100px) {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .aside {
+      width: auto;
+      max-width: 560px;
+    }
+
+    .cols {
+      grid-template-columns: repeat(var(--cols-md), 1fr);
+    }
+
+    li,
+    .size-lg li {
+      padding: 32px 32px 32px 0;
+      border-left: 0;
+      border-bottom: 1px solid var(--color-ink-rule);
+    }
+
+    li:nth-child(2n),
+    .size-lg li:nth-child(2n) {
+      padding-left: 32px;
+      padding-right: 0;
+      border-left: 1px solid var(--color-ink-rule);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .inner {
+      gap: 40px;
+    }
+
+    .cols {
+      grid-template-columns: 1fr;
+    }
+
+    li,
+    .size-lg li,
+    li:nth-child(2n),
+    .size-lg li:nth-child(2n) {
+      gap: 10px;
+      padding: 24px 0;
+      border-left: 0;
+    }
+
+    li:last-child {
+      border-bottom: 0;
+    }
+
+    h3,
+    .size-lg h3 {
+      font-size: 22px;
+      line-height: 28px;
+    }
+  }
+</style>

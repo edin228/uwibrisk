@@ -1,0 +1,116 @@
+---
+/**
+ * "The program": label column, large statement, then a ruled list of who the
+ * program is for beside explanatory paragraphs.
+ */
+import LabelSection from '../site/LabelSection.astro';
+
+interface Props {
+  eyebrow: string;
+  statement: string;
+  listLabel: string;
+  list: string[];
+  paragraphs: string[];
+}
+const { eyebrow, statement, listLabel, list, paragraphs } = Astro.props;
+---
+
+<LabelSection eyebrow={eyebrow} class="program-intro">
+  <div class="content">
+    <h2>{statement}</h2>
+    <div class="detail">
+      <div class="who">
+        <p class="label">{listLabel}</p>
+        <ul>{list.map((item) => <li>{item}</li>)}</ul>
+      </div>
+      <div class="paras">{paragraphs.map((p) => <p>{p}</p>)}</div>
+    </div>
+  </div>
+</LabelSection>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  h2 {
+    font-size: clamp(32px, 1.1rem + 2.4vw, 48px);
+    letter-spacing: -0.035em;
+    line-height: 1.21;
+  }
+
+  .detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 56px;
+  }
+
+  .who {
+    flex-shrink: 0;
+    width: 300px;
+    padding-top: 38px;
+    border-top: 2px solid var(--color-ink);
+  }
+
+  .label {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  ul {
+    margin: 0;
+    padding: 8px 0 0;
+    list-style: none;
+  }
+
+  li {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: clamp(34px, 1.2rem + 1.6vw, 44px);
+    letter-spacing: -0.035em;
+    line-height: 1.18;
+  }
+
+  .paras {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+    padding-top: 20px;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  @media (max-width: 860px) {
+    .content {
+      gap: 40px;
+    }
+
+    .detail {
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .who {
+      width: 100%;
+      padding-top: 24px;
+    }
+
+    .paras {
+      padding-top: 0;
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

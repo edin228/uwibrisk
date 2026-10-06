@@ -1,0 +1,41 @@
+---
+/**
+ * PageHero with stacked action buttons. `compact` uses the industry mockup's
+ * smaller 80px title (longer headlines) instead of PageHero's 96px.
+ */
+import type { ComponentProps } from 'astro/types';
+import PageHero from '../site/PageHero.astro';
+import Button from '../ui/Button.astro';
+
+type HeroProps = ComponentProps<typeof PageHero>;
+interface Props extends HeroProps {
+  actions?: { label: string; href: string }[];
+  compact?: boolean;
+}
+const { actions = [], compact = false, ...hero } = Astro.props;
+---
+
+<div class:list={['program-hero', { compact }]}>
+  <PageHero {...hero}>
+    {
+      actions.length > 0 && (
+        <Fragment slot="actions">
+          {actions.map((a, i) => (
+            <Button href={a.href} variant={i === 0 ? 'mustard' : 'outline-light'} block>
+              {a.label}
+            </Button>
+          ))}
+        </Fragment>
+      )
+    }
+  </PageHero>
+</div>
+
+<style>
+  .compact :global(h1) {
+    max-width: 760px;
+    font-size: clamp(44px, 1.4rem + 4vw, 80px);
+    line-height: 1;
+    text-wrap: pretty;
+  }
+</style>

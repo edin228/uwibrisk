@@ -1,0 +1,112 @@
+---
+/**
+ * Ruled rows of "name / explanation" (coverage "What it covers", program
+ * "Why oversight matters"). Optional gold row numbers.
+ */
+interface Props {
+  items: { title: string; text: string }[];
+  numbered?: boolean;
+  /** md: 26px names in a 300px column; sm: 24px names in a 260px column. */
+  size?: 'md' | 'sm';
+}
+const { items, numbered = false, size = 'md' } = Astro.props;
+---
+
+<dl class:list={['rows', `size-${size}`]}>
+  {
+    items.map((item, i) => (
+      <div class="row">
+        {numbered && (
+          <span class="num" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+        )}
+        <dt>{item.title}</dt>
+        <dd>{item.text}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .rows {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+    padding-block: 26px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .size-sm .row {
+    padding-block: 24px;
+  }
+
+  .num {
+    flex-shrink: 0;
+    width: 32px;
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 14px;
+  }
+
+  dt {
+    flex-shrink: 0;
+    width: 300px;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    line-height: 32px;
+  }
+
+  .size-sm dt {
+    width: 260px;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  dd {
+    flex: 1;
+    margin: 0;
+    color: var(--color-body);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  @media (max-width: 760px) {
+    .row {
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding-block: 20px;
+    }
+
+    .num {
+      width: 24px;
+    }
+
+    dt,
+    .size-sm dt {
+      flex: 1;
+      width: auto;
+      font-size: 22px;
+      line-height: 28px;
+    }
+
+    dd {
+      flex-basis: 100%;
+    }
+
+    .num + dt + dd {
+      padding-left: 40px;
+    }
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+/**
+ * Renders the small markdown subset used in Hygraph landing components:
+ * paragraphs (blank-line separated), single line breaks, `- ` bullet lists and **bold**.
+ * Everything else is escaped.
+ */
+interface Props {
+  text: string | null | undefined;
+  tone?: 'light' | 'dark';
+}
+const { text, tone = 'light' } = Astro.props;
+
+const escape = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const inline = (s: string) => escape(s.trim()).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+type Block = { kind: 'p'; lines: string[] } | { kind: 'ul'; items: string[] };
+const blocks: Block[] = (text ?? '')
+  .replace(/\r\n/g, '\n')
+  .split(/\n{2,}/)
+  .map((chunk) => chunk.split('\n').map((l) => l.trim()).filter(Boolean))
+  .filter((lines) => lines.length > 0)
+  .map((lines): Block =>
+    lines.every((l) => /^[-*] /.test(l))
+      ? { kind: 'ul', items: lines.map((l) => l.replace(/^[-*] /, '')) }
+      : { kind: 'p', lines },
+  );
+---
+
+<div class:list={['rich', `tone-${tone}`]}>
+  {
+    blocks.map((b) =>
+      b.kind === 'ul' ? (
+        <ul>
+          {b.items.map((item) => (
+            <li set:html={inline(item)} />
+          ))}
+        </ul>
+      ) : (
+        <p set:html={b.lines.map(inline).join('<br />')} />
+      ),
+    )
+  }
+</div>
+
+<style>
+  .rich {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    color: var(--color-body);
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .rich :global(strong) {
+    color: var(--color-ink);
+    font-weight: 650;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding-left: 1.2em;
+  }
+
+  li::marker {
+    color: var(--color-gold);
+  }
+
+  .tone-dark {
+    color: var(--color-ink-body);
+  }
+
+  .tone-dark :global(strong) {
+    color: var(--color-paper);
+  }
+
+  @media (max-width: 640px) {
+    .rich {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

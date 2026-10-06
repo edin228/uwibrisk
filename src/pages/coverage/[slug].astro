@@ -1,0 +1,97 @@
+---
+/** Coverage line page (/coverage/general-liability). Design: Paper "Coverage page — Desktop (General liability)". */
+import { type CollectionEntry, getEntry } from 'astro:content';
+import { coverageGroups, getPublishedCoverage, resolveCoverageLink } from '../../components/coverage/coverage';
+import FaqAdvisor from '../../components/coverage/FaqAdvisor.astro';
+import GapCards from '../../components/coverage/GapCards.astro';
+import DefinitionRows from '../../components/industry/DefinitionRows.astro';
+import NumberedColumns from '../../components/industry/NumberedColumns.astro';
+import ProgramHero from '../../components/industry/ProgramHero.astro';
+import LabelSection from '../../components/site/LabelSection.astro';
+import { photos } from '../../data/photos';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedCoverage();
+  const published = entries.map((e) => e.id);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry, published } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'coverage'>;
+  published: string[];
+}
+const { entry, published } = Astro.props;
+const d = entry.data;
+const publishedSet = new Set(published);
+const group = coverageGroups[d.group];
+const photo = photos[d.heroPhoto];
+
+const advisor = await getEntry(d.advisor);
+if (!advisor) throw new Error(`Coverage ${entry.id}: advisor ${d.advisor.id} not found`);
+
+const gaps = d.gaps.items.map((g) => ({ ...g, href: resolveCoverageLink(g, publishedSet) }));
+
+const faqs = await Promise.all(
+  d.faqs.map(async (f) => {
+    let answer = f.answer;
+    if (f.glossary) {
+      const term = await getEntry(f.glossary);
+      if (!term) throw new Error(`Coverage ${entry.id}: glossary term ${f.glossary.id} not found`);
+      answer = term.data.definition;
+    }
+    let link: { label: string; href: string } | undefined;
+    if (f.post) {
+      const post = await getEntry(f.post);
+      if (!post || post.data.draft) throw new Error(`Coverage ${entry.id}: post ${f.post.id} not found or draft`);
+      link = { label: `${post.data.title} →`, href: `/blog/${post.id}` };
+    }
+    return { question: f.question, answer: answer ?? '', link };
+  }),
+);
+
+const actions = [d.quote, ...(d.secondaryAction ? [d.secondaryAction] : [])];
+---
+
+<SiteLayout title={d.title} description={d.lead} image={photo.src} header="overlay" searchable>
+  <ProgramHero
+    title={d.title}
+    lead={d.lead}
+    image={photo.src}
+    imagePosition={d.heroPosition ?? '50% 55%'}
+    crumbs={[{ label: 'Coverage', href: '/coverage' }, { label: group.label, href: `/coverage#${group.anchor}` }, { label: d.title }]}
+    actions={actions}
+  />
+
+  <LabelSection eyebrow={d.covers.eyebrow}>
+    <div class="covers">
+      <h2 class="statement">{d.covers.statement}</h2>
+      <DefinitionRows items={d.covers.items} numbered />
+    </div>
+  </LabelSection>
+
+  {gaps.length > 0 && <GapCards eyebrow={d.gaps.eyebrow} heading={d.gaps.heading} intro={d.gaps.intro} items={gaps} />}
+
+  <NumberedColumns id="asked-for" eyebrow={d.askedFor.eyebrow} heading={d.askedFor.heading} text={d.askedFor.text} items={d.askedFor.items} />
+
+  <FaqAdvisor heading={d.faqHeading} faqs={faqs} advisor={advisor} />
+</SiteLayout>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .covers {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .statement {
+    font-size: clamp(30px, 1rem + 2.3vw, 44px);
+    letter-spacing: -0.035em;
+    line-height: 1.23;
+  }
+</style>

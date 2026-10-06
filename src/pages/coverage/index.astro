@@ -1,0 +1,347 @@
+---
+/**
+ * Coverage hub (/coverage): Business, Home & family and Employee benefits, each
+ * listing its coverage lines. No mockup; follows the homepage "What we cover"
+ * design (src/components/home/CoverageAccordion.astro). Section ids #business,
+ * #home and #benefits are linked from the footer and the coverage breadcrumbs.
+ */
+import { Image } from 'astro:assets';
+import { coverageGroups, coverageHref, getPublishedCoverage, isExternal, resolveCoverageLink, type CoverageGroup } from '../../components/coverage/coverage';
+import { coverageLines } from '../../components/coverage/lines';
+import TextLink from '../../components/ui/TextLink.astro';
+import { coverage as homeCoverage, industries } from '../../data/home';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const entries = await getPublishedCoverage();
+const published = new Set(entries.map((e) => e.id));
+
+/** Homepage panel for each group (heading + photo). */
+const PANEL: Record<CoverageGroup, string> = { business: 'business', home: 'home', benefits: 'employees' };
+const ORDER: CoverageGroup[] = ['business', 'home', 'benefits'];
+
+const groups = ORDER.map((id, i) => {
+  const panel = homeCoverage.panels.find((p) => p.id === PANEL[id]);
+  if (!panel) throw new Error(`No homepage coverage panel for ${id}`);
+  const listed = coverageLines[id];
+  const referenced = new Set(listed.map((l) => l.coverage));
+  // Published pages that aren't in the curated list still show up in their group.
+  const extra = entries
+    .filter((e) => e.data.group === id && !referenced.has(e.id))
+    .map((e) => ({ label: e.data.title, href: coverageHref(e.id) }));
+  const lines = [...listed.map((l) => ({ label: l.label, href: resolveCoverageLink(l, published) })), ...extra];
+  return { id, num: String(i + 1).padStart(2, '0'), ...coverageGroups[id], panel, lines };
+});
+---
+
+<SiteLayout title="Coverage" description={homeCoverage.text} searchable>
+  <header class="intro">
+    <div class="intro-inner">
+      <div class="title">
+        <p class="eyebrow">Coverage</p>
+        <h1>{homeCoverage.heading}</h1>
+      </div>
+      <div class="aside">
+        <p>{homeCoverage.text}</p>
+        <nav aria-label="Coverage groups">
+          <ul class="jump">
+            {
+              groups.map((g) => (
+                <li>
+                  <a href={`#${g.anchor}`}>{g.label}</a>
+                </li>
+              ))
+            }
+            <li>
+              <a href={industries.allLink.href}>{industries.eyebrow}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  {
+    groups.map((g) => (
+      <section class="group" id={g.anchor} aria-labelledby={`${g.anchor}-heading`}>
+        <div class="group-inner">
+          <div class="panel">
+            <Image class="photo" src={g.panel.photo.src} alt="" widths={[420, 640, 1040]} sizes="(max-width: 860px) 100vw, 520px" />
+            <div class="shade" aria-hidden="true" />
+            <div class="panel-body">
+              <p class="eyebrow on-dark">
+                {g.num} · {g.label}
+              </p>
+              <h2 id={`${g.anchor}-heading`}>
+                {g.panel.heading[0]}
+                <br />
+                {g.panel.heading[1]}
+              </h2>
+            </div>
+          </div>
+
+          <div class="list-col">
+            <ol class="lines">
+              {g.lines.map((line, i) => {
+                const external = isExternal(line.href);
+                return (
+                  <li>
+                    <a href={line.href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}>
+                      <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                      <span class="name">{line.label}</span>
+                      <span class="rule" aria-hidden="true" />
+                      <span class="arrow" aria-hidden="true">
+                        {external ? '↗' : '→'}
+                      </span>
+                      {external && <span class="visually-hidden">(opens in a new tab)</span>}
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+            {g.id === 'business' && (
+              <div class="more">
+                <TextLink href={industries.allLink.href}>{industries.allLink.label} →</TextLink>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</SiteLayout>
+
+<style>
+  .intro {
+    padding-block: clamp(64px, 8vw, 120px) clamp(48px, 5.5vw, 80px);
+  }
+
+  .intro-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 820px;
+  }
+
+  h1 {
+    font-size: clamp(44px, 1.4rem + 4vw, 80px);
+    letter-spacing: -0.05em;
+    line-height: 1.02;
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex-shrink: 0;
+    width: 340px;
+    padding-bottom: 8px;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .jump a {
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 5px;
+  }
+
+  .group {
+    padding-block: clamp(48px, 5.5vw, 80px);
+  }
+
+  .group:last-of-type {
+    padding-bottom: clamp(88px, 10vw, 150px);
+  }
+
+  .group-inner {
+    display: flex;
+    gap: 96px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .panel {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+    width: 520px;
+    min-height: 560px;
+    background: var(--color-night-raised);
+    overflow: hidden;
+  }
+
+  .photo,
+  .shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo {
+    object-fit: cover;
+  }
+
+  .shade {
+    background: linear-gradient(0deg, rgb(20 20 20 / 0.92) 0%, rgb(20 20 20 / 0.2) 60%, rgb(20 20 20 / 0) 100%);
+  }
+
+  .panel-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 40px;
+  }
+
+  .panel-body .eyebrow {
+    letter-spacing: 0.14em;
+  }
+
+  h2 {
+    color: var(--color-paper);
+    font-size: clamp(34px, 1rem + 2.2vw, 48px);
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .list-col {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    flex: 1;
+    min-width: 0;
+    padding-top: 4px;
+  }
+
+  .lines {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-ink);
+    list-style: none;
+  }
+
+  .lines li {
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .lines a {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-block: 20px;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .num {
+    flex-shrink: 0;
+    width: 32px;
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 1rem + 0.8vw, 28px);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-mustard);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .arrow {
+    flex-shrink: 0;
+    color: var(--color-gold);
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .lines a:hover .rule,
+  .lines a:focus-visible .rule {
+    transform: scaleX(1);
+  }
+
+  .lines a:hover .name {
+    font-style: italic;
+  }
+
+  @media (max-width: 1100px) {
+    .intro-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .aside {
+      width: auto;
+      max-width: 560px;
+    }
+
+    .group-inner {
+      gap: 48px;
+    }
+
+    .panel {
+      width: 380px;
+      min-height: 480px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .group-inner {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .panel {
+      width: 100%;
+      min-height: 300px;
+    }
+
+    .panel-body {
+      padding: 24px 20px;
+    }
+
+    .lines a {
+      gap: 16px;
+      padding-block: 16px;
+    }
+
+    .num {
+      width: 24px;
+    }
+  }
+</style>

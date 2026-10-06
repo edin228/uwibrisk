@@ -1,0 +1,290 @@
+---
+/**
+ * "Questions": label column, FAQ accordion (native <details>, first one open)
+ * and a sticky advisor card with a color portrait and a booking link.
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  faqs: { question: string; answer: string; link?: { label: string; href: string } | undefined }[];
+  advisor: CollectionEntry<'team'>;
+}
+const { eyebrow = 'Questions', heading, faqs, advisor } = Astro.props;
+const a = advisor.data;
+const firstName = a.name.split(' ')[0];
+const profile = a.hasTeamPage ? `/team/${advisor.id}` : undefined;
+// Booking link when the advisor has one; otherwise their email, then the contact page.
+const action = a.meetingLink
+  ? { label: `Book a call with ${firstName}`, href: a.meetingLink }
+  : a.email
+    ? { label: `Email ${firstName}`, href: `mailto:${a.email}` }
+    : { label: `Contact ${firstName}`, href: '/contact' };
+---
+
+<section class="faq-advisor" aria-labelledby="faq-heading">
+  <div class="inner">
+    <div class="label-col">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id="faq-heading">{heading}</h2>
+    </div>
+
+    <div class="faqs">
+      {
+        faqs.map((f, i) => (
+          <details name="coverage-faq" open={i === 0}>
+            <summary>
+              <span class="q">{f.question}</span>
+              <span class="icon" aria-hidden="true" />
+            </summary>
+            <div class="a">
+              <p>{f.answer}</p>
+              {f.link && (
+                <a class="more" href={f.link.href}>
+                  {f.link.label}
+                </a>
+              )}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <aside class="advisor" aria-label={`Talk it through with ${a.name}`}>
+      <a class="portrait" href={profile}>
+        <Image src={a.photo} alt={a.photoAlt} width={536} widths={[268, 536]} sizes="268px" data-color />
+      </a>
+      <div class="who">
+        <p class="kicker">Talk it through</p>
+        <p class="name">{profile ? <a href={profile}>{a.name}</a> : a.name}</p>
+        <p class="role">{a.role}</p>
+      </div>
+      <Button href={action.href} block class="book">{action.label}</Button>
+    </aside>
+  </div>
+</section>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .faq-advisor {
+    padding-block: clamp(80px, 9vw, 130px) clamp(88px, 9.7vw, 140px);
+  }
+
+  .inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .label-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex-shrink: 0;
+    width: var(--label-col);
+  }
+
+  h2 {
+    font-size: clamp(30px, 1rem + 1.4vw, 36px);
+    letter-spacing: -0.03em;
+    line-height: 1.17;
+  }
+
+  .faqs {
+    flex: 1;
+    min-width: 0;
+    max-width: 560px;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  details {
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 24px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .q {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    line-height: 28px;
+  }
+
+  summary:hover .q {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
+  }
+
+  .icon::before {
+    content: '+';
+    color: var(--color-ink);
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  details[open] .icon::before {
+    content: '–';
+    color: var(--color-gold);
+  }
+
+  details[open] summary {
+    padding-bottom: 12px;
+  }
+
+  .a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 24px;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .more {
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .advisor {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+    width: 324px;
+    margin-left: auto;
+    padding: 28px;
+    background: var(--color-night);
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .who {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .kicker {
+    color: var(--color-mustard);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  .name {
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .name a {
+    text-decoration: none;
+  }
+
+  .name a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
+  }
+
+  .role {
+    color: var(--color-ink-muted);
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .advisor :global(.book) {
+    width: 100%;
+    padding-block: 15px;
+  }
+
+  @media (max-width: 1100px) {
+    .inner {
+      flex-wrap: wrap;
+      gap: 32px 48px;
+    }
+
+    .label-col {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .faqs {
+      max-width: none;
+    }
+
+    .advisor {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 100%;
+      margin-left: 0;
+      padding: 20px;
+    }
+
+    .portrait img {
+      width: 96px;
+      height: 112px;
+    }
+
+    .who {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .advisor :global(.book) {
+      flex-basis: 100%;
+    }
+
+    .q {
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+</style>

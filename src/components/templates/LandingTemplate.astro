@@ -1,10 +1,35 @@
 ---
-/** Component landing page (HVAC, benefits, private client, ...). Design: Paper "Industry program — Desktop". */
-import { Image } from 'astro:assets';
+/**
+ * Component landing pages (src/data/landing/*.json). Design: Paper "Industry
+ * program — Desktop (Trade contractors)".
+ *
+ * Pages listed in src/data/industry (industryPrograms) render the designed
+ * program page with its approved copy. Every other landing page renders its
+ * Hygraph components verbatim in the same visual language:
+ *   PageHeader   -> photo hero (photo + breadcrumbs from landingSettings)
+ *   ActionBanner -> hero actions + opening statement (when it follows the header),
+ *                   closing band (when it ends the page and adds no new text),
+ *                   otherwise an inline CTA row
+ *   WideCard     -> image/video + text split
+ *   IconBanner   -> dark numbered columns
+ *   InfoCard     -> card grid (consecutive cards are grouped)
+ */
+import type { ComponentProps } from 'astro/types';
 import type { CollectionEntry } from 'astro:content';
 import FormEmbed from '../FormEmbed.astro';
-import Prose from '../Prose.astro';
+import CardGrid from '../industry/CardGrid.astro';
+import CtaRow from '../industry/CtaRow.astro';
+import MediaSplit from '../industry/MediaSplit.astro';
+import NumberedColumns from '../industry/NumberedColumns.astro';
+import ProgramHero from '../industry/ProgramHero.astro';
+import ProgramPage from '../industry/ProgramPage.astro';
+import RichText from '../industry/RichText.astro';
+import ClosingCta from '../site/ClosingCta.astro';
+import LabelSection from '../site/LabelSection.astro';
+import Button from '../ui/Button.astro';
 import type { FormPage } from '../../data/forms';
+import { industryPrograms, landingSettings, type LandingSettings } from '../../data/industry';
+import { photos } from '../../data/photos';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 interface Props {
@@ -12,78 +37,175 @@ interface Props {
   form: FormPage | undefined;
 }
 const { landing, form } = Astro.props;
+const { slug, title, description, components } = landing.data;
+
+type Component = (typeof components)[number];
+type Of<T extends Component['type']> = Extract<Component, { type: T }>;
+type Link = { label: string; href: string };
+
+const program = industryPrograms[slug];
+
+const settings: LandingSettings = landingSettings[slug] ?? { photo: 'building', crumbs: [{ label: title }] };
+const links = (buttons: { label: string; href: string | null }[]): Link[] =>
+  buttons.flatMap((b) => (b.href ? [{ label: b.label, href: b.href }] : []));
+
+const header = components.find((c): c is Of<'PageHeader'> => c.type === 'PageHeader');
+let rest = components.filter((c) => c.type !== 'PageHeader');
+
+// An ActionBanner right after the header supplies the hero actions and the opening statement.
+let heroActions: Link[] = [];
+let opening: Of<'ActionBanner'> | undefined;
+const first = rest[0];
+if (first?.type === 'ActionBanner') {
+  opening = first;
+  heroActions = links(first.buttons);
+  rest = rest.slice(1);
+}
+
+// A final ActionBanner becomes the closing band unless it carries text that would be lost.
+let closing: ComponentProps<typeof ClosingCta> = {};
+const last = rest.at(-1);
+if (last?.type === 'ActionBanner' && last.title) {
+  const buttons = links(last.buttons);
+  const textShownElsewhere = !last.description || last.description === opening?.description;
+  if (textShownElsewhere && buttons[0]) {
+    closing = { heading: last.title, primary: buttons[0], ...(buttons[1] ? { secondary: buttons[1] } : {}) };
+    rest = rest.slice(0, -1);
+  }
+}
+
+// Group consecutive InfoCards into one grid.
+type Section = Exclude<Component, Of<'InfoCard'> | Of<'PageHeader'>> | { type: 'Cards'; items: Of<'InfoCard'>[] };
+const sections: Section[] = [];
+for (const c of rest) {
+  if (c.type === 'InfoCard') {
+    const prev = sections.at(-1);
+    if (prev?.type === 'Cards') prev.items.push(c);
+    else sections.push({ type: 'Cards', items: [c] });
+  } else {
+    sections.push(c);
+  }
+}
+
+const hidden = new Set(settings.hiddenTitles ?? []);
+const visible = (t: string | null) => (t && !hidden.has(t) ? t : undefined);
+const photo = photos[settings.photo];
 ---
 
-<SiteLayout title={landing.data.title} description={landing.data.description ?? undefined} searchable>
-  <article class="container page">
-    <h1>{landing.data.title}</h1>
-    {landing.data.headerImage && (
-      <Image src={landing.data.headerImage} alt={landing.data.headerImageAlt} width={640} />
-    )}
-    {landing.data.components.map((c) => (
-      <section class="block">
-        {c.type === 'PageHeader' && (
-          <>
-            {c.header && <h2>{c.header}</h2>}
-            {c.image && <Image src={c.image} alt={c.imageAlt} width={960} />}
-          </>
-        )}
-        {c.type === 'InfoCard' && (
-          <>
-            <h3>{c.title}</h3>
-            <p>{c.description}</p>
-          </>
-        )}
-        {c.type === 'WideCard' && (
-          <>
-            {c.header && <h2>{c.header}</h2>}
-            <Prose text={c.text} />
-            {c.images.map((img) => (
-              <Image src={img.src} alt={img.alt} width={960} />
-            ))}
-            {c.useVideo && c.videoUrl && (
-              <p>
-                <a href={c.videoUrl}>Watch the video</a>
-              </p>
+{
+  program ? (
+    <ProgramPage program={program} />
+  ) : (
+    <SiteLayout title={title} description={description ?? undefined} image={photo.src} header="overlay" closing={closing} searchable>
+      <ProgramHero
+        title={header?.header ?? title}
+        lead={description ?? undefined}
+        image={photo.src}
+        imagePosition={settings.photoPosition ?? '50% 55%'}
+        crumbs={settings.crumbs}
+        actions={heroActions}
+      />
+
+      {opening && (opening.title || opening.description) && (
+        <LabelSection eyebrow={title} space="compact" class="landing-opening">
+          <div class="opening">
+            {opening.title && <h2>{opening.title}</h2>}
+            {opening.description && <p>{opening.description}</p>}
+          </div>
+        </LabelSection>
+      )}
+
+      {sections.map((s) => {
+        if (s.type === 'Cards') {
+          return <CardGrid items={s.items.map((c) => ({ title: c.title, text: c.description }))} />;
+        }
+        if (s.type === 'IconBanner') {
+          return (
+            <NumberedColumns
+              heading={visible(s.title)}
+              items={s.items.map((i) => ({ title: i.label, text: i.description }))}
+              size={s.items.length <= 3 ? 'lg' : 'md'}
+            />
+          );
+        }
+        if (s.type === 'ActionBanner') {
+          return <CtaRow heading={s.title} text={s.description} buttons={links(s.buttons)} />;
+        }
+        // WideCard
+        const buttons = links(s.buttons);
+        return (
+          <MediaSplit
+            image={s.images[0]}
+            fit="natural"
+            videoUrl={s.useVideo ? s.videoUrl : null}
+            videoTitle={s.header ?? title}
+            mediaSide={s.textOnLeft ? 'right' : 'left'}
+            surface={s.showBackgroundColor ? 'surface' : 'paper'}
+            heading={s.header}
+          >
+            <RichText text={s.text} />
+            {buttons.length > 0 && (
+              <div class="buttons">
+                {buttons.map((b, i) => (
+                  <Button href={b.href} variant={i === 0 ? 'mustard' : 'outline-dark'} block>
+                    {b.label}
+                  </Button>
+                ))}
+              </div>
             )}
-            {c.buttons.map((b) => b.href && <a class="button" href={b.href}>{b.label}</a>)}
-          </>
-        )}
-        {c.type === 'ActionBanner' && (
-          <>
-            {c.title && <h2>{c.title}</h2>}
-            {c.description && <p>{c.description}</p>}
-            {c.buttons.map((b) => b.href && <a class="button" href={b.href}>{b.label}</a>)}
-          </>
-        )}
-        {c.type === 'IconBanner' && (
-          <>
-            {c.title && <h2>{c.title}</h2>}
-            <ul>
-              {c.items.map((item) => (
-                <li>
-                  <strong>{item.label}</strong>
-                  {item.description && <> &mdash; {item.description}</>}
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </section>
-    ))}
-    {form && <FormEmbed embed={form.embed} />}
-  </article>
-</SiteLayout>
+          </MediaSplit>
+        );
+      })}
+
+      {form && (
+        <section class="form-section" id="form">
+          <div class="form-inner">
+            <FormEmbed embed={form.embed} />
+          </div>
+        </section>
+      )}
+    </SiteLayout>
+  )
+}
 
 <style>
-  .page {
-    padding-block: 96px;
+  h2,
+  h3 {
+    text-wrap: pretty;
   }
-  .block {
-    margin-block: 40px;
+
+  .opening {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 860px;
   }
-  .button {
-    display: inline-block;
-    margin-right: 16px;
+
+  .opening h2 {
+    font-size: clamp(32px, 1.1rem + 2.4vw, 48px);
+    letter-spacing: -0.035em;
+    line-height: 1.21;
+  }
+
+  .opening p {
+    max-width: 640px;
+    font-size: 17px;
+    line-height: 28px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .form-section {
+    padding-block: clamp(64px, 7vw, 110px);
+  }
+
+  .form-inner {
+    max-width: calc(948px + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
 </style>

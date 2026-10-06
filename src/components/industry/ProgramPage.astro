@@ -1,0 +1,41 @@
+---
+/** Designed industry program page. Design: Paper "Industry program — Desktop (Trade contractors)". */
+import type { IndustryProgram } from '../../data/industry';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CardGrid from './CardGrid.astro';
+import DefinitionRows from './DefinitionRows.astro';
+import MediaSplit from './MediaSplit.astro';
+import NumberedColumns from './NumberedColumns.astro';
+import ProgramHero from './ProgramHero.astro';
+import ProgramIntro from './ProgramIntro.astro';
+
+interface Props {
+  program: IndustryProgram;
+}
+const { program: p } = Astro.props;
+---
+
+<SiteLayout title={p.title} description={p.description} image={p.hero.photo.src} header="overlay" closing={p.closing} searchable>
+  <ProgramHero
+    title={p.hero.title}
+    lead={p.hero.lead}
+    image={p.hero.photo.src}
+    imagePosition={p.hero.position}
+    height={p.hero.height}
+    crumbs={p.hero.crumbs}
+    actions={p.hero.actions}
+    compact
+  />
+  <ProgramIntro {...p.program} />
+  <NumberedColumns id="services" eyebrow={p.services.eyebrow} heading={p.services.heading} text={p.services.text} items={p.services.items} size="lg" />
+  <MediaSplit
+    id="oversight"
+    image={p.oversight.photo}
+    imagePosition={p.oversight.position}
+    eyebrow={p.oversight.eyebrow}
+    heading={p.oversight.heading}
+  >
+    <DefinitionRows items={p.oversight.items} size="sm" />
+  </MediaSplit>
+  <CardGrid id="expect" eyebrow={p.benefits.eyebrow} heading={p.benefits.heading} items={p.benefits.items} columns={4} />
+</SiteLayout>

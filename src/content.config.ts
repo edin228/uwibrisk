@@ -5,6 +5,7 @@
 import { defineCollection, reference, type SchemaContext } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { photos, type PhotoKey } from './data/photos';
 
 /** Alt text is required for every image; it comes from src/data/alt-text.json. */
 const alt = z.string().min(1, 'Missing alt text: add the image path to src/data/alt-text.json and re-run npm run export:hygraph');
@@ -272,6 +273,65 @@ const landing = defineCollection({
     }),
 });
 
+/**
+ * Coverage line pages (/coverage/<id>). Structured frontmatter only; the body is unused.
+ * Links to other coverage pages use the entry id plus a `fallbackHref` that is used
+ * while that page is missing or still a draft.
+ */
+const coverageLink = z.object({
+  /** Id of another coverage entry (file name without extension). */
+  coverage: z.string().optional(),
+  /** Used when `coverage` is not a published entry (or as the link when `coverage` is omitted). */
+  fallbackHref: href,
+});
+
+const coverage = defineCollection({
+  loader: glob({ base: './src/content/coverage', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    group: z.enum(['business', 'home', 'benefits']),
+    /** Hero lead; also the meta description. */
+    lead: z.string(),
+    /** Key in src/data/photos.ts. */
+    heroPhoto: z.enum(Object.keys(photos) as [PhotoKey, ...PhotoKey[]]),
+    heroPosition: z.string().optional(),
+    quote: z.object({ label: z.string(), href }),
+    secondaryAction: z.object({ label: z.string(), href }).optional(),
+    covers: z.object({
+      eyebrow: z.string().default('What it covers'),
+      statement: z.string(),
+      items: z.array(z.object({ title: z.string(), text: z.string() })).min(1),
+    }),
+    gaps: z.object({
+      eyebrow: z.string().default('What it doesn’t cover'),
+      heading: z.string().default('And what does.'),
+      intro: z.string().optional(),
+      items: z.array(coverageLink.extend({ eyebrow: z.string(), title: z.string(), text: z.string() })),
+    }),
+    askedFor: z.object({
+      eyebrow: z.string().default('When you’ll be asked for it'),
+      heading: z.string(),
+      text: z.string().optional(),
+      items: z.array(z.object({ title: z.string(), text: z.string() })),
+    }),
+    faqHeading: z.string().default('The ones we hear most.'),
+    faqs: z.array(
+      z
+        .object({
+          question: z.string(),
+          answer: z.string().optional(),
+          /** Use a glossary definition (src/data/glossary.json) as the answer. */
+          glossary: reference('glossary').optional(),
+          /** Optional related article shown under the answer. */
+          post: reference('blog').optional(),
+        })
+        .refine((f) => Boolean(f.answer) !== Boolean(f.glossary), 'Give either `answer` or `glossary`'),
+    ),
+    advisor: reference('team'),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   blog,
   team,
@@ -287,4 +347,5 @@ export const collections = {
   navigation,
   hygraphForms,
   landing,
+  coverage,
 };

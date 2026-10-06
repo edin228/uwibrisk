@@ -1,0 +1,130 @@
+---
+/**
+ * Warm-gray section with white cards topped by a mustard rule ("What you can
+ * expect", Hygraph InfoCard grids). Heading row is optional.
+ */
+interface Props {
+  eyebrow?: string | undefined;
+  heading?: string | undefined;
+  items: { title: string; text?: string | null | undefined }[];
+  /** Columns on desktop (defaults to 4, or 3 when the count divides by 3). */
+  columns?: number;
+  id?: string;
+}
+const { eyebrow, heading, items, id } = Astro.props;
+const columns = Astro.props.columns ?? (items.length % 4 === 0 || items.length < 3 ? Math.min(items.length, 4) : 3);
+const headingId = heading ? `${id ?? 'cards'}-heading` : undefined;
+---
+
+<section class="cards" id={id} aria-labelledby={headingId} style={`--cols: ${columns}`}>
+  <div class="inner">
+    {
+      (eyebrow || heading) && (
+        <div class="head">
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          {heading && <h2 id={headingId}>{heading}</h2>}
+        </div>
+      )
+    }
+    <ul class="grid">
+      {
+        items.map((item) => (
+          <li>
+            <h3>{item.title}</h3>
+            {item.text && <p>{item.text}</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
+
+  .cards {
+    padding-block: clamp(80px, 8.3vw, 120px);
+    background: var(--color-surface);
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 760px;
+  }
+
+  h2 {
+    font-size: clamp(34px, 1.2rem + 2vw, 44px);
+    letter-spacing: -0.035em;
+    line-height: 1.18;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border-top: 3px solid var(--color-mustard);
+    background: var(--color-paper);
+  }
+
+  h3 {
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 30px;
+  }
+
+  li p {
+    color: var(--color-body);
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  @media (max-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .inner {
+      gap: 32px;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    li {
+      padding: 24px;
+    }
+
+    h3 {
+      font-size: 22px;
+      line-height: 28px;
+    }
+  }
+</style>
