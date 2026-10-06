@@ -9,9 +9,7 @@ const forms = await getCollection('hygraphForms');
 const industries =
   forms.flatMap((f) => f.data.fields).find((f) => f.kind === 'select' && f.name === 'Industry');
 const team = await getCollection('team');
-const activeProducers = producers
-  .filter((p) => !p.inactive)
-  .map((p) => ({ ...p, member: team.find((t) => t.id === p.slug) }));
+const activeProducers = producers.map((p) => ({ ...p, member: team.find((t) => t.id === p.slug) }));
 void isProducerMatch; // routing rules for the redesigned wizard (src/data/legacy/contact.ts)
 ---
 

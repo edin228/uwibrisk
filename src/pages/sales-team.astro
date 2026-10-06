@@ -16,7 +16,7 @@ const producers = (await getTeam()).filter((m) => m.data.isProducer);
         producers.map((m) => (
           <li>
             <a href={`/team/${m.id}`}>
-              <Image src={m.data.motionPhotos[0]?.src ?? m.data.photo} alt={m.data.motionPhotos[0]?.alt ?? m.data.photoAlt} width={240} />
+              <Image src={m.data.motionPhotos[0]?.src ?? m.data.photo} alt={m.data.motionPhotos[0]?.alt ?? m.data.photoAlt} width={240} data-color />
               <strong>{m.data.name}</strong>
             </a>
             <p class="label">{m.data.role}</p>

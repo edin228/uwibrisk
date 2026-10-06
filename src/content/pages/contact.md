@@ -20,5 +20,5 @@ If you have any questions or would like to schedule a consultation, don't hesita
 
 Take the first step in protecting what's important to you. Contact us today to learn more about our insurance options and schedule a consultation with one of our advisors.
 
-Phone: (626) 397 -4700  
+Phone: (800) 378-5554  
 Email: helpdesk@uwib.com

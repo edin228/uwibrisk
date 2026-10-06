@@ -38,6 +38,11 @@ a {
   color: var(--color-gold);
 }
 
+/* Photography is black and white site-wide; only team photos (data-color) stay in color. */
+img:not([data-color]) {
+  filter: grayscale(1);
+}
+
 img {
   max-width: 100%;
   height: auto;

@@ -37,10 +37,6 @@ So, what’s an HR pro to do? Here are some strategies to consider:
 
 At UWIB Risk, we understand the challenges you’re facing. As a thoughtful employee benefits coordinator, we harness [the latest digital tools to simplify HR management](/benefits-solutions). Our solutions seamlessly integrate with payroll systems and employee assistance programs, ensuring a smooth experience for both HR teams and employees.
 
-**Meet Michael Kenneth, Our Benefits Expert**
-
-To guide you through these evolving times, we’d like to introduce you to Michael Kenneth, one of our seasoned Account Executives. Michael brings a wealth of experience in crafting tailored benefits solutions that resonate with today’s workforce. Feel free to reach out to him at [michael@uwib.com](mailto:michael@uwib.com) or 626-376-9672.
-
 Navigating the future of work can be complex, but with the right strategies and partners, you’re well-equipped to lead your organization to success. Remember, in the world of HR, adaptability isn’t just a buzzword—it’s your superpower.
 
 Stay proactive, stay informed, and let’s tackle the future together!

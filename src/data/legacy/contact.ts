@@ -7,8 +7,8 @@
  * and the Hygraph "Contact Form" field definitions (Industry options etc.) are in
  * src/data/hygraph-forms.json.
  *
- * NOTE: the old routing referenced David Murphy, who is no longer active; he is kept
- * here (inactive: true) only so the original rules are preserved verbatim.
+ * The old routing also referenced David Murphy; he is no longer active and his rule
+ * was removed (owner decision).
  */
 
 export const meta = { title: 'Contact', description: 'Contact an advisor at United Western Insurance Brokers' };
@@ -48,7 +48,6 @@ export const steps = {
 /** Producers shown in the business step, in the old order (team collection slugs). */
 export const producers = [
   { slug: 'jesse-nielsen', name: 'Jesse Nielsen' },
-  { slug: 'david-murphy', name: 'David Murphy', inactive: true },
   { slug: 'eric-schirding', name: 'Eric Schirding' },
   { slug: 'josh-acosta', name: 'Josh Acosta' },
   { slug: 'nick-latshaw', name: 'Nick Latshaw' },
@@ -68,16 +67,6 @@ export function isProducerMatch(
     case 'Jesse Nielsen':
       return !(
         projectedSales > 5_000_000 ||
-        projectedSales < 2_000_000 ||
-        industry === 'Mfg/Wholesale/Import/Export' ||
-        industry === 'Real Estate Investment' ||
-        industry === 'Entertainment' ||
-        industry === 'Security' ||
-        employeeCount > 100
-      );
-    case 'David Murphy':
-      return !(
-        projectedSales > 2_000_000 ||
         projectedSales < 2_000_000 ||
         industry === 'Mfg/Wholesale/Import/Export' ||
         industry === 'Real Estate Investment' ||

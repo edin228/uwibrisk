@@ -60,6 +60,36 @@ export const LINK_OVERRIDES = {
 };
 
 /**
+ * Field overrides for office locations, keyed by office id (slug of the Hygraph city).
+ */
+export const OFFICE_OVERRIDES = {
+  // Owner: 228 Pearl St is correct (Hygraph had 859 Novalis St, Nashville 37135).
+  nashville: { address: '228 Pearl Street, Floor 2', city: 'Franklin', zip: '37064' },
+};
+
+/**
+ * Exact-text corrections applied to generated files, keyed by output path.
+ * The export fails if a `find` string is no longer present, so stale rules surface.
+ */
+export const TEXT_FIXES = {
+  'src/content/pages/contact.md': [
+    // Owner: the main number is (800) 378-5554.
+    { find: 'Phone: (626) 397 -4700', replace: 'Phone: (800) 378-5554' },
+  ],
+  'src/content/blog/navigating-the-looming-labor-shortage-a-guide-for-hr-professionals.md': [
+    // Owner: Michael Kenneth is no longer with UWIB; drop his introduction and contact details.
+    {
+      find: '**Meet Michael Kenneth, Our Benefits Expert**\n\nTo guide you through these evolving times, we’d like to introduce you to Michael Kenneth, one of our seasoned Account Executives. Michael brings a wealth of experience in crafting tailored benefits solutions that resonate with today’s workforce. Feel free to reach out to him at [michael@uwib.com](mailto:michael@uwib.com) or 626-376-9672.\n\n',
+      replace: '',
+    },
+  ],
+  'src/content/blog/towing-insurance-what-you-need-to-know.md': [
+    // Owner: David Murphy is inactive; drop the link to his (non-existent) profile.
+    { find: '\n\n**Learn More About**[**David Murphy**](/team)', replace: '' },
+  ],
+};
+
+/**
  * Links that are knowingly left unresolved (reported, not changed).
  */
 export const KNOWN_UNRESOLVED_LINKS = {

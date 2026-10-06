@@ -46,6 +46,8 @@ const LEGACY_SKIPPED = config.LEGACY_SKIPPED;
 const OLD_STATIC_ROUTES = config.OLD_STATIC_ROUTES;
 const LINK_OVERRIDES = new Map(Object.entries(config.LINK_OVERRIDES));
 const URL_FIXES = new Map(Object.entries(config.URL_FIXES));
+const OFFICE_OVERRIDES = config.OFFICE_OVERRIDES;
+const TEXT_FIXES = config.TEXT_FIXES;
 const ALT_TEXT_PATH = 'src/data/alt-text.json';
 /** Page templates built from components (exported as JSON for redesign). */
 const LANDING_TEMPLATES = new Set(['LandingPage', 'customLandingPage']);
@@ -297,7 +299,18 @@ const Q = {
 const outputs = new Map();
 function emit(rel, content) {
   if (outputs.has(rel)) throw new Error(`Duplicate output path ${rel}`);
-  outputs.set(rel, content);
+  outputs.set(rel, applyTextFixes(rel, content));
+}
+/** Apply owner text corrections (export-config TEXT_FIXES); a missing `find` is fatal. */
+function applyTextFixes(rel, content) {
+  const fixes = TEXT_FIXES[rel];
+  if (!fixes) return content;
+  let text = content;
+  for (const { find, replace } of fixes) {
+    if (!text.includes(find)) throw new Error(`TEXT_FIXES rule for ${rel} no longer matches: ${JSON.stringify(find.slice(0, 60))}`);
+    text = text.replace(find, replace);
+  }
+  return text;
 }
 const writeJson = (rel, data) => emit(rel, `${JSON.stringify(data, null, 2)}\n`);
 
@@ -1262,6 +1275,7 @@ async function main() {
           order: o.order ?? null,
           image: image ? relFrom(file, image) : null,
           imageAlt: altToken(image),
+          ...OFFICE_OVERRIDES[id],
         };
       });
     writeJson(file, rows);

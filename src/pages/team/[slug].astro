@@ -31,7 +31,7 @@ const { data } = member;
   searchable
 >
   <article class="container member">
-    <Image src={data.photo} alt={data.photoAlt} width={480} loading="eager" />
+    <Image src={data.photo} alt={data.photoAlt} width={480} data-color loading="eager" />
     <div>
       <p class="label"><a href="/team">Team</a></p>
       <h1>{data.name}</h1>
@@ -49,7 +49,7 @@ const { data } = member;
             <ul class="pets">
               {data.pets.map((pet) => (
                 <li>
-                  <Image src={pet.photo} alt={pet.photoAlt} width={240} />
+                  <Image src={pet.photo} alt={pet.photoAlt} width={240} data-color />
                   <p>{pet.name}</p>
                 </li>
               ))}

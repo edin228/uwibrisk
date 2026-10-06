@@ -72,5 +72,3 @@ Managing risk is a critical part of running a successful business. We work diffe
 If your business assets or exposures require specialized coverage, consider a complimentary Commercial Insurance Review. This thorough assessment can identify gaps in your current policies and provide tailored solutions to help protect your business.
 
 Take the first step towards comprehensive protection. [**Schedule your cost-free Commercial Insurance Review today!**](/contact)
-
-**Learn More About**[**David Murphy**](/team)
