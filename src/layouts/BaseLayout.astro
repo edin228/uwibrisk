@@ -35,6 +35,8 @@ const {
   searchable = false,
 } = Astro.props;
 
+// Preview deployments (PREVIEW=true at build time) are never indexed; see src/pages/robots.txt.ts.
+const isPreview = process.env.PREVIEW === 'true';
 const fullTitle = title === SITE_NAME ? title : `${title} | UWIB Risk`;
 // Old site URLs had no trailing slash; keep canonicals in that form.
 const canonicalPath = canonical ?? (Astro.url.pathname.replace(/\/+$/, '') || '/');
@@ -54,7 +56,7 @@ const ogImage = image
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {noindex && <meta name="robots" content="noindex" />}
+    {(noindex || isPreview) && <meta name="robots" content="noindex" />}
 
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:type" content={type} />
