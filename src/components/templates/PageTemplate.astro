@@ -1,0 +1,33 @@
+---
+/** Rich-text CMS page (privacy, terms, licenses, careers, ...). Design: Paper "Simple page — Desktop (Licenses)". */
+import { Image } from 'astro:assets';
+import { type CollectionEntry, render } from 'astro:content';
+import Callout from '../Callout.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+interface Props {
+  page: CollectionEntry<'pages'>;
+}
+const { page } = Astro.props;
+const { Content } = await render(page);
+const { title, description, headerImage, headerAlt } = page.data;
+---
+
+<SiteLayout title={title} description={description ?? undefined} searchable>
+  <article class="container page">
+    <h1>{title}</h1>
+    {description && <p class="lead">{description}</p>}
+    {headerImage && <Image src={headerImage} alt={headerAlt} width={1312} loading="eager" />}
+    <div class="prose"><Content components={{ Callout }} /></div>
+  </article>
+</SiteLayout>
+
+<style>
+  .page {
+    padding-block: 96px;
+  }
+  .lead {
+    margin-block: 24px;
+    font-size: var(--text-lead);
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+/** Breadcrumb trail; the last item is the current page. `tone` matches the background. */
+interface Props {
+  items: { label: string; href?: string }[];
+  tone?: 'light' | 'dark';
+}
+const { items, tone = 'dark' } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class:list={['crumbs', `tone-${tone}`]}>
+  <ol>
+    {
+      items.map((item, i) => (
+        <li>
+          {i === items.length - 1 ? (
+            <span aria-current="page">{item.label}</span>
+          ) : item.href ? (
+            <a href={item.href}>{item.label}</a>
+          ) : (
+            <span>{item.label}</span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    list-style: none;
+  }
+
+  li + li::before {
+    content: '/';
+    margin-right: 10px;
+    font-weight: 400;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .tone-dark li,
+  .tone-dark a {
+    color: #bdbdbd;
+  }
+
+  .tone-dark li + li::before {
+    color: #7a7a7a;
+  }
+
+  .tone-dark [aria-current] {
+    color: var(--color-mustard);
+    font-weight: 700;
+  }
+
+  .tone-light li,
+  .tone-light a {
+    color: var(--color-muted);
+  }
+
+  .tone-light li + li::before {
+    color: #b0b0b0;
+  }
+
+  .tone-light [aria-current] {
+    color: var(--color-gold);
+    font-weight: 700;
+  }
+</style>

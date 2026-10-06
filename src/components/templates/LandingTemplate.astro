@@ -1,0 +1,89 @@
+---
+/** Component landing page (HVAC, benefits, private client, ...). Design: Paper "Industry program — Desktop". */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormEmbed from '../FormEmbed.astro';
+import Prose from '../Prose.astro';
+import type { FormPage } from '../../data/forms';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+interface Props {
+  landing: CollectionEntry<'landing'>;
+  form: FormPage | undefined;
+}
+const { landing, form } = Astro.props;
+---
+
+<SiteLayout title={landing.data.title} description={landing.data.description ?? undefined} searchable>
+  <article class="container page">
+    <h1>{landing.data.title}</h1>
+    {landing.data.headerImage && (
+      <Image src={landing.data.headerImage} alt={landing.data.headerImageAlt} width={640} />
+    )}
+    {landing.data.components.map((c) => (
+      <section class="block">
+        {c.type === 'PageHeader' && (
+          <>
+            {c.header && <h2>{c.header}</h2>}
+            {c.image && <Image src={c.image} alt={c.imageAlt} width={960} />}
+          </>
+        )}
+        {c.type === 'InfoCard' && (
+          <>
+            <h3>{c.title}</h3>
+            <p>{c.description}</p>
+          </>
+        )}
+        {c.type === 'WideCard' && (
+          <>
+            {c.header && <h2>{c.header}</h2>}
+            <Prose text={c.text} />
+            {c.images.map((img) => (
+              <Image src={img.src} alt={img.alt} width={960} />
+            ))}
+            {c.useVideo && c.videoUrl && (
+              <p>
+                <a href={c.videoUrl}>Watch the video</a>
+              </p>
+            )}
+            {c.buttons.map((b) => b.href && <a class="button" href={b.href}>{b.label}</a>)}
+          </>
+        )}
+        {c.type === 'ActionBanner' && (
+          <>
+            {c.title && <h2>{c.title}</h2>}
+            {c.description && <p>{c.description}</p>}
+            {c.buttons.map((b) => b.href && <a class="button" href={b.href}>{b.label}</a>)}
+          </>
+        )}
+        {c.type === 'IconBanner' && (
+          <>
+            {c.title && <h2>{c.title}</h2>}
+            <ul>
+              {c.items.map((item) => (
+                <li>
+                  <strong>{item.label}</strong>
+                  {item.description && <> &mdash; {item.description}</>}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </section>
+    ))}
+    {form && <FormEmbed embed={form.embed} />}
+  </article>
+</SiteLayout>
+
+<style>
+  .page {
+    padding-block: 96px;
+  }
+  .block {
+    margin-block: 40px;
+  }
+  .button {
+    display: inline-block;
+    margin-right: 16px;
+  }
+</style>

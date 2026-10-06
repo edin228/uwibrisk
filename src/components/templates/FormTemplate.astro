@@ -1,0 +1,31 @@
+---
+/** Jotform / vendor embed page. Design: Paper "Form page — Desktop (Request a certificate)". */
+import { Image } from 'astro:assets';
+import FormEmbed from '../FormEmbed.astro';
+import type { FormPage } from '../../data/forms';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+interface Props {
+  form: FormPage;
+}
+const { form } = Astro.props;
+---
+
+<SiteLayout title={form.title} description={form.wordingUnderTitle ?? undefined} closing={false}>
+  <article class="container page">
+    <h1>{form.title}</h1>
+    {form.wordingUnderTitle && <p class="lead">{form.wordingUnderTitle}</p>}
+    {form.headerImage && <Image src={form.headerImage} alt={form.headerImageAlt} width={1312} loading="eager" />}
+    <FormEmbed embed={form.embed} />
+  </article>
+</SiteLayout>
+
+<style>
+  .page {
+    padding-block: 96px;
+  }
+  .lead {
+    margin-block: 24px;
+    font-size: var(--text-lead);
+  }
+</style>
