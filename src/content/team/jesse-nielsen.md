@@ -27,6 +27,6 @@ pets: []
 hygraphId: "cl76nrk7y6wp50ck49tyx7fsl"
 ---
 
-Jesse, originally from Coeur d’Alene Idaho, graduated from University of Northern Colorado with a bachelors' degree in Nutrition. While attending on a wrestling scholarship, Jesse became a 2x collegiate All- American and a 2011 NJCAA National Champion. Throughout college, he assisted his father's business, North Country Water Features, gaining experience in designing and constructing water features and landscaping projects.
+Jesse, originally from Coeur d’Alene Idaho, graduated from University of Northern Colorado with a bachelor’s degree in Nutrition. While attending on a wrestling scholarship, Jesse became a 2x collegiate All-American and a 2011 NJCAA National Champion. Throughout college, he assisted his father's business, North Country Water Features, gaining experience in designing and constructing water features and landscaping projects.
 
 Jesse embarked on his insurance career with Allstate after graduation, gaining expertise in small business insurance, personal lines, and life insurance, eventually earning the Certified Insurance Counselor designation in 2019. His success at Allstate, including achieving Top Commercial Producer status and winning trips, led him to UWIB Risk & Insurance Solutions as an independent agent, where he honed his skills further. With a passion for the outdoors and family time, Jesse’s diverse background in both captive and independent agency roles makes him a valuable addition to UWIB Risk & Insurance Solutions.

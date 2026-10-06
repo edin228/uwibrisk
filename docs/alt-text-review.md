@@ -4,7 +4,27 @@
 >
 > **AI-drafted:** every description below was written by an AI assistant after looking at the image. Please skim and correct anything inaccurate (names, places, text in images).
 
-251 images, 251 with alt text.
+268 images, 251 with alt text, 17 missing.
+
+Missing:
+
+- `src/assets/brand/uwib-wide-light.webp`
+- `src/assets/photos/breakfast.jpg`
+- `src/assets/photos/building.jpg`
+- `src/assets/photos/coffee-cup.jpg`
+- `src/assets/photos/coffee-shop.jpg`
+- `src/assets/photos/construction-truck.jpg`
+- `src/assets/photos/corridor.jpg`
+- `src/assets/photos/coworkers.jpg`
+- `src/assets/photos/dump-truck.jpg`
+- `src/assets/photos/hands.jpg`
+- `src/assets/photos/hotel-exterior.jpg`
+- `src/assets/photos/house.jpg`
+- `src/assets/photos/hvac-technician.jpg`
+- `src/assets/photos/man-reviewing.jpg`
+- `src/assets/photos/porch.jpg`
+- `src/assets/photos/road.jpg`
+- `src/assets/photos/tow-truck.jpg`
 
 | Image | Alt text |
 | --- | --- |
@@ -117,6 +137,7 @@
 | `src/assets/blog/your-house-burns-down-do-you-actually-have-to-rebuild.jpg` | Burned-out house beside a model home, an insurance policy and a pen at sunset |
 | `src/assets/blog/your-insurancesimplified-discover-the-power-of-our-client-portal.jpg` | Person typing on a laptop while sitting on a gray sofa |
 | `src/assets/blog/youre-not-alone-navigating-natural-disasters-together.webp` | Satellite view of wildfires burning across mountains and a city at night |
+| `src/assets/brand/uwib-wide-light.webp` | (missing) |
 | `src/assets/brand/uwib-wide-white.png` | UWIB Risk & Insurance Solutions logo |
 | `src/assets/carriers/all-risks.png` | All Risks logo |
 | `src/assets/carriers/allstate.png` | Allstate logo |
@@ -211,6 +232,22 @@
 | `src/assets/pets/penny-mae.jpg` | Penny Mae, a red retriever in a hunting vest, sitting by a marsh |
 | `src/assets/pets/ruger.png` | Ruger, a white Great Dane with gray patches, curled up on a dog bed |
 | `src/assets/pets/zoe.jpg` | Zoe, a Boston terrier in a plaid bandana, sitting on a couch |
+| `src/assets/photos/breakfast.jpg` | (missing) |
+| `src/assets/photos/building.jpg` | (missing) |
+| `src/assets/photos/coffee-cup.jpg` | (missing) |
+| `src/assets/photos/coffee-shop.jpg` | (missing) |
+| `src/assets/photos/construction-truck.jpg` | (missing) |
+| `src/assets/photos/corridor.jpg` | (missing) |
+| `src/assets/photos/coworkers.jpg` | (missing) |
+| `src/assets/photos/dump-truck.jpg` | (missing) |
+| `src/assets/photos/hands.jpg` | (missing) |
+| `src/assets/photos/hotel-exterior.jpg` | (missing) |
+| `src/assets/photos/house.jpg` | (missing) |
+| `src/assets/photos/hvac-technician.jpg` | (missing) |
+| `src/assets/photos/man-reviewing.jpg` | (missing) |
+| `src/assets/photos/porch.jpg` | (missing) |
+| `src/assets/photos/road.jpg` | (missing) |
+| `src/assets/photos/tow-truck.jpg` | (missing) |
 | `src/assets/programs/commercial-and-industrial-businesses.jpg` | Worker driving a yellow forklift through a warehouse |
 | `src/assets/programs/drone-insurance.jpg` | Drone flying against an orange sunset |
 | `src/assets/programs/epli.png` | Cartoon businessman holding cash while sitting on top of an hourglass |

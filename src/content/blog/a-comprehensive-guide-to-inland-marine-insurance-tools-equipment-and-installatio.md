@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmihg5mk67tvp07lugzab3i36"
 ---
 
-# A Comprehensive Guide to Inland Marine Insurance: Tools, Equipment, and Installation Floaters
-
 In an industry marked by mobility and dynamic work environments, contractors face unique challenges in safeguarding their equipment and materials. Inland marine insurance plays a crucial role in providing protection against various risks associated with tools, equipment, and installation projects. Understanding the intricacies of this specialized insurance can mitigate financial losses and enhance operational effectiveness. This article will delve into the essentials of inland marine insurance, focusing on tools and equipment coverage, as well as installation floaters.
 
 ## What is Inland Marine Insurance?

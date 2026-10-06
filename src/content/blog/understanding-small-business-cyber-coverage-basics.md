@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmh7nw7y3x96607ln8d7ygbo9"
 ---
 
-# Understanding Small Business Cyber Coverage Basics
-
 In today’s digital landscape, small businesses are increasingly vulnerable to cyber attacks. As online threats grow in sophistication and frequency, understanding the basics of cyber insurance becomes essential for safeguarding your business. Cyber coverage is not just a luxury; it has become a necessity for organizations of every size.
 
 ## Why Small Businesses Need Cyber Coverage

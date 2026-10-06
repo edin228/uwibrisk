@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmk611405fww507n2pkive1qk"
 ---
 
-# Drone Operations: Aviation Liability and Compliance
-
 In the rapidly evolving world of technology, drone operations stand out as innovative tools transforming industries such as construction, real estate, agriculture, and beyond. However, with their extensive use, specifically in commercial applications, come significant legal considerations, primarily concerning aviation liability and compliance. Understanding these elements is crucial, especially for those new to insurance and business operations involving these unmanned aerial systems (UAS).
 
 ## The Importance of Aviation Liability

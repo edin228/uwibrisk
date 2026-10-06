@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmntosxrrlumd07mxamf8jq09"
 ---
 
-# Cyber Incident Tabletop Exercise: A Comprehensive Outline
-
 In today's digital landscape, organizations face an increasing number of cyber threats. Cyber incidents, ranging from data breaches to ransomware attacks, can disrupt operations, damage reputations, and lead to significant financial losses. To prepare effectively, businesses must engage in proactive measures such as cyber incident tabletop exercises. These simulations not only help improve response strategies but also foster collaboration among stakeholders. This article provides a detailed outline for conducting a successful cyber incident tabletop exercise.
 
 ## What is a Cyber Incident Tabletop Exercise?

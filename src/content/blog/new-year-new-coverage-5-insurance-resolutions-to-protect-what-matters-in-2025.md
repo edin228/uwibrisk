@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cm5l795r83td707mzju4hjlyj"
 ---
 
-# New Year, New Coverage: 5 Insurance Resolutions to Protect What Matters in 2025
-
 The New Year brings a sense of renewal and opportunity—and that applies to your insurance coverage too! As life evolves, so do your needs and risks. Starting 2025 with a comprehensive review of your insurance policies can save you from unexpected expenses and ensure you’re adequately protected. Here are five key insurance resolutions to help safeguard what matters most this year:
 
 ### 1. **Reassess Home Values and Your Homeowners Insurance**

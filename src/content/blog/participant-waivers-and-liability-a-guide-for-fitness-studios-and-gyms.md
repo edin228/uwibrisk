@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmgb97yh4lnhy07mxstc0gex6"
 ---
 
-# Participant Waivers and Liability: A Guide for Fitness Studios and Gyms
-
 Fitness studios and gyms have become increasingly popular venues for health enthusiasts, but with great benefits come inherent risks. Every time a client steps into a fitness facility, there's a chance of potential injury. That's where participant waivers come into play. Understanding waivers and their implications is crucial for both fitness facilities and their clients. This article will guide you through the essentials of waivers and liability, shedding light on their importance and best practices.
 
 ## What is a Participant Waiver?

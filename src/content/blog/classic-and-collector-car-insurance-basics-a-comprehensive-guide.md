@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmj1vj7xkd06s07n3345w4k66"
 ---
 
-# Classic and Collector Car Insurance Basics: A Comprehensive Guide
-
 For car enthusiasts and collectors, classic and collector cars represent not just a mode of transportation but also a passion and investment that embodies history and craftsmanship. As the value of these vehicles often appreciates, ensuring they are adequately protected becomes a top priority for owners. Understanding the fundamentals of classic and collector car insurance is crucial for safeguarding this cherished asset against potential risks.
 
 ## What is Classic and Collector Car Insurance?

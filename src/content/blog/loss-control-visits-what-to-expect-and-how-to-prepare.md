@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmgqin3rvepmf07n19s9gneyz"
 ---
 
-# Loss Control Visits: What to Expect and How to Prepare
-
 Navigating the world of insurance can often feel daunting, especially for those new to the process. One essential component of risk management that every insurance novice should be aware of is the loss control visit. This process is a cornerstone of proactive risk reduction strategies employed by many insurance companies. Understanding what to expect during a loss control visit and how to prepare can greatly enhance the experience and outcomes for your business.
 
 ## What is a Loss Control Visit?

@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmfjnez51untb07my8kirztn9"
 ---
 
-# Scheduling Jewelry, Watches, and Fine Art on Your Insurance Policy
-
 As a potential client navigating the world of insurance, you may find the specifics of scheduling valuable items like jewelry, watches, and fine art a bit overwhelming. However, understanding how to properly insure these significant assets is crucial not only for your peace of mind but also for protecting your investments. This article aims to demystify the process of scheduling personal property on your insurance policy, providing you with essential knowledge to make informed decisions.
 
 ## What is Scheduled Personal Property Coverage?

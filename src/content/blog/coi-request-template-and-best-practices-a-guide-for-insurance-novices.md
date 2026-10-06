@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmgc889g1d5q207mx8jrb96uj"
 ---
 
-# COI Request Template and Best Practices: A Guide for Insurance Novices
-
 In today's business climate, understanding insurance requirements is more critical than ever. One vital aspect is the Certificate of Insurance (COI), a document proving that a party carries adequate insurance coverage. COIs can protect your business from unforeseen claims and liabilities. As a potential client or someone new to insurance, knowing how to request and manage COIs is essential for safeguarding your interests. This article provides an easy-to-follow COI request template, along with best practices for obtaining and managing these crucial documents.
 
 ## What is a Certificate of Insurance (COI)?

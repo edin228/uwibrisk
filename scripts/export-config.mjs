@@ -83,6 +83,20 @@ export const TEXT_FIXES = {
       replace: '',
     },
   ],
+  'src/content/pages/terms-of-use.md': [{ find: 'title: "terms of use"', replace: 'title: "Terms of Use"' }],
+  'src/content/pages/our-core-values.md': [{ find: 'title: "Our Values-OLD"', replace: 'title: "Our Values"' }],
+  'src/data/forms.ts': [{ find: 'title: "flood-quote",', replace: 'title: "Flood Quote",' }],
+  'src/data/carriers.json': [{ find: '"name": "All RIsks"', replace: '"name": "All Risks"' }],
+  'src/content/team/eric-schirding.md': [
+    // Paragraph breaks lost in Hygraph.
+    { find: 'employees.A native', replace: 'employees.\n\nA native' },
+    { find: 'client advocacy.Eric joined', replace: 'client advocacy.\n\nEric joined' },
+    { find: 'principles.Known for', replace: 'principles.\n\nKnown for' },
+  ],
+  'src/content/team/jesse-nielsen.md': [
+    { find: "bachelors' degree", replace: 'bachelor’s degree' },
+    { find: 'All- American', replace: 'All-American' },
+  ],
   'src/content/blog/towing-insurance-what-you-need-to-know.md': [
     // Owner: David Murphy is inactive; drop the link to his (non-existent) profile.
     { find: '\n\n**Learn More About**[**David Murphy**](/team)', replace: '' },

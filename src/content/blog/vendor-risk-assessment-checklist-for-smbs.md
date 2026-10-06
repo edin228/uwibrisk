@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmgf33p490yh907n8aaw92npx"
 ---
 
-# Vendor Risk Assessment Checklist for SMBs
-
 In today’s interconnected business environment, small and medium-sized businesses (SMBs) increasingly rely on third-party vendors to enhance their operations. While outsourcing can lead to greater efficiency and competitiveness, it also introduces potential risks that could jeopardize a company’s security and reputation. Implementing a robust vendor risk assessment process is essential for safeguarding assets, ensuring compliance, and maintaining trust with customers.
 
 ## Understanding Vendor Risk

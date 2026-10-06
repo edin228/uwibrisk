@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmgw8df4ht9zh08lqgoeqe4sj"
 ---
 
-# Understanding Per-Project Aggregate vs. Per-Location Aggregate in Insurance
-
 When navigating the insurance landscape, particularly for businesses in the construction and contracting industries, understanding the differences between per-project aggregate and per-location aggregate coverage is crucial. Both options are designed to limit the liability exposure for different projects or physical locations, but they operate in fundamentally different ways.
 
 ## The Basics of Aggregate Limits

@@ -281,7 +281,7 @@ export const forms: FormPage[] = [
   },
   {
     slug: "flood-quote",
-    title: "flood-quote",
+    title: "Flood Quote",
     wordingUnderTitle: null,
     template: "SingleColumn",
     headerImage: null,

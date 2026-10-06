@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmh4t16714dmr07lnsiiy2hw4"
 ---
 
-# Certificates of Insurance (COIs): What Clients Actually Need
-
 In today's dynamic business landscape, ensuring that you are adequately protected while engaging with contractors or service providers is paramount. One essential tool that clients, particularly those who may be newcomers to the insurance landscape, should familiarize themselves with is the Certificate of Insurance (COI). This document not only serves as proof of insurance coverage but also plays a crucial role in risk management for businesses and individuals alike. In this article, we’ll delve into what COIs are, why clients need them, and the key elements to look for in this important document.
 
 ## Understanding Certificates of Insurance (COIs)

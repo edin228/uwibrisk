@@ -301,6 +301,22 @@ function emit(rel, content) {
   if (outputs.has(rel)) throw new Error(`Duplicate output path ${rel}`);
   outputs.set(rel, applyTextFixes(rel, content));
 }
+/**
+ * Many posts open with their own title as a heading (# Title, ### Title or **Title**);
+ * the page template already renders the title, so drop that first line.
+ */
+function stripLeadingTitle(md, title) {
+  const norm = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const lines = md.split('\n');
+  const i = lines.findIndex((l) => l.trim() !== '');
+  if (i === -1) return md;
+  const m = lines[i].trim().match(/^(?:#{1,6}\s+(.+?)|\*\*(.+?)\*\*)$/);
+  const text = m && (m[1] ?? m[2]);
+  if (!text || norm(text) !== norm(title)) return md;
+  report.notes.push(`blog: removed leading title heading from "${title.trim()}"`);
+  return lines.slice(i + 1).join('\n').replace(/^\n+/, '');
+}
+
 /** Apply owner text corrections (export-config TEXT_FIXES); a missing `find` is fatal. */
 function applyTextFixes(rel, content) {
   const fixes = TEXT_FIXES[rel];
@@ -948,6 +964,7 @@ async function main() {
     });
     const file = `src/content/blog/${slug}.${hasClass ? 'mdx' : 'md'}`;
     const body = processMarkdown(p.content?.markdown, { file, source: `blog:${slug}`, assetDir: 'blog', assetBase: slug, json });
+    body.md = stripLeadingTitle(body.md, p.title);
     const hero = planImage(p.featuredImage, 'blog', slug, `blog:${slug}`);
     if (!hero) report.failures.push(`blog:${slug} has no usable featured image`);
     let author = teamSlugOf(p.teamMember);

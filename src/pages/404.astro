@@ -1,0 +1,110 @@
+---
+import Button from '../components/ui/Button.astro';
+import { company } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const links = [
+  { label: 'Coverage', href: '/coverage' },
+  { label: 'Get a quote', href: '/get-quotes' },
+  { label: 'Insights', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<SiteLayout title="Page not found" noindex closing={false}>
+  <section class="not-found container">
+    <p class="eyebrow">Error 404</p>
+    <h1>We couldn’t find that page.</h1>
+    <p class="lead">
+      It may have moved when we redesigned the site. Try searching, or call us at
+      <a href={company.phoneHref}>{company.phone}</a>.
+    </p>
+    <form class="search" action="/search" role="search">
+      <label class="visually-hidden" for="nf-q">Search the site</label>
+      <input id="nf-q" name="q" type="search" placeholder="Search the site" />
+      <button type="submit">Search</button>
+    </form>
+    <ul class="links">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href}>{l.label} →</a>
+          </li>
+        ))
+      }
+    </ul>
+    <Button href="/" variant="ink" size="lg">Back to the homepage</Button>
+  </section>
+</SiteLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding-block: clamp(96px, 10vw, 160px);
+  }
+
+  h1 {
+    max-width: 900px;
+    font-size: var(--text-h1);
+  }
+
+  .lead {
+    max-width: 600px;
+    font-size: var(--text-lead);
+    line-height: 1.6;
+  }
+
+  .lead a {
+    color: var(--color-ink);
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 3px;
+  }
+
+  .search {
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    border: 1px solid var(--color-ink);
+  }
+
+  .search input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 0;
+    font: inherit;
+    font-size: 15px;
+  }
+
+  .search button {
+    padding: 0 20px;
+    border: 0;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    margin: 8px 0 16px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    color: var(--color-ink);
+    font-size: 15px;
+    font-weight: 650;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-mustard);
+    padding-bottom: 3px;
+  }
+</style>

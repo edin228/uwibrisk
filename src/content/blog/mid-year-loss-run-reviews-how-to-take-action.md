@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmj762gur763907lubnbn6x4m"
 ---
 
-# Mid-Year Loss Run Reviews: How to Take Action
-
 As we reach the midpoint of the year, you might find yourself reflecting on various aspects of your business, including your insurance coverage. One essential practice that should not be overlooked is the mid-year loss run review. Understanding and analyzing your loss run reports can significantly influence your risk management strategy and overall insurance costs, ultimately helping to safeguard your business's financial health.
 
 ## Understanding Loss Run Reports

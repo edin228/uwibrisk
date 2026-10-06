@@ -39,7 +39,7 @@ const topic = topicInfo(post);
 const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
 const minutes = Math.max(1, Math.round(words / 230));
 
-// "In this article": the top heading level used in the body (many posts repeat the title as an h1; skip it).
+// "In this article": the top heading level used in the body (h1s in post bodies are skipped).
 const bodyHeadings = headings.filter((h) => h.depth > 1);
 const tocDepth = Math.min(...bodyHeadings.map((h) => h.depth));
 const toc = bodyHeadings.filter((h) => h.depth === tocDepth);
@@ -393,11 +393,6 @@ const url = new URL(`/blog/${post.id}`, Astro.site).toString();
 
   .article-body > :global(*) {
     margin: 0;
-  }
-
-  /* Many migrated posts repeat the title as a leading h1. */
-  .article-body > :global(h1:first-child) {
-    display: none;
   }
 
   .article-body :global(h1),

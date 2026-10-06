@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cm5px6htilpas07mz1q7m2ba7"
 ---
 
-### What to Do If You Lose Your Home: Practical Tips for Navigating Insurance and Recovery
-
 The loss of a home is a devastating event, but with the right steps, you can navigate the recovery process more smoothly. Having worked through this process with friends, family, and clients, I can confidently share these practical tips to help guide you during this challenging time.
 
 One important note: Be cautious about hiring companies that claim to “represent you” when dealing with your insurance company. These companies, known as Public Adjusters, often take a significant portion of your claim payout as their fee. While there can be a time and place for their services, they’re not always necessary. In most cases, your insurance carrier will act in good faith, especially if you’ve got a trusted Independent Insurance Broker, like [UWIB Risk](/contact), in your corner.

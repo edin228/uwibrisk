@@ -15,8 +15,6 @@ draft: false
 hygraphId: "cmhgi8uvvbmss07n161jdfvli"
 ---
 
-# Cyber Insurance for SMBs: Requirements and Underwriting
-
 In an increasingly digital world, small and medium-sized businesses (SMBs) face unprecedented risks associated with cyber threats. Cyber attacks can happen to companies of any size, leading to significant financial losses and long-term reputational damage. As a result, cyber insurance has emerged as a critical tool for protecting SMBs against these risks. Understanding the requirements and underwriting process for cyber insurance is essential for SMBs looking to safeguard their operations effectively.
 
 ## The Importance of Cyber Insurance for SMBs
