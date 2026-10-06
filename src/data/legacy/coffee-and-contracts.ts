@@ -2,6 +2,8 @@
  * Coffee & Contracts landing page (/coffee-and-contracts). Content extracted from
  * the old Next.js app: pages/coffee-and-contracts.js, components/coffee/*.
  * It reused the hotels microsite shell and the hotels day-to-day service team.
+ * Single source of the copy for src/pages/coffee-and-contracts.astro. A "\n" in a
+ * string is a forced line break (<br>) from the old markup.
  */
 import coffeeAndNotebook from '../../assets/coffee-and-contracts/coffee-and-notebook.jpg';
 import coffeeMug from '../../assets/coffee-and-contracts/coffee-mug.jpg';
@@ -9,7 +11,7 @@ import coffeeShop from '../../assets/coffee-and-contracts/coffee-shop.jpg';
 import heroCoffeeCup from '../../assets/coffee-and-contracts/hero-coffee-cup.jpg';
 import joshAcosta from '../../assets/coffee-and-contracts/josh-acosta.jpg';
 import { altFor } from '../../lib/alt';
-import { type LegacyImage, serviceTeam } from './hotels';
+import { type LegacyImage, type MicrositeBrand, serviceTeam } from './hotels';
 
 const HOME = '/coffee-and-contracts';
 
@@ -19,9 +21,11 @@ export const meta = {
     'Insurance, labor and risk guidance for specialty coffee importers, roasters, wholesalers and cafés from Coffee & Contracts, a division of UWIB.',
 };
 
-export const brand = {
+export const brand: MicrositeBrand = {
+  home: HOME,
   label: 'Coffee & Contracts',
-  descriptor: 'Coffee & contracts',
+  descriptor: 'Coffee &\ncontracts',
+  navLabel: 'Coffee & Contracts',
   nav: [
     { label: 'About', href: `${HOME}#about` },
     { label: 'Who we serve', href: `${HOME}#who-we-serve` },
@@ -30,19 +34,28 @@ export const brand = {
   ],
   cta: { label: 'Get a quick quote', href: `${HOME}#contact` },
   tagline: 'Coffee & Contracts, a division of UWIB. Insurance and risk guidance for the specialty coffee community.',
-  footerLinks: [
-    { label: 'About', href: `${HOME}#about` },
-    { label: 'Who we serve', href: `${HOME}#who-we-serve` },
-    { label: 'Our approach', href: `${HOME}#approach` },
-    { label: 'Team', href: `${HOME}#team` },
-    { label: 'Privacy', href: '/privacy-policy' },
-    { label: 'Licensing', href: '/licenses' },
+  footerColumns: [
+    [
+      { label: 'About', href: `${HOME}#about` },
+      { label: 'Who we serve', href: `${HOME}#who-we-serve` },
+      { label: 'Our approach', href: `${HOME}#approach` },
+    ],
+    [
+      { label: 'Team', href: `${HOME}#team` },
+      { label: 'Privacy', href: '/privacy-policy' },
+      { label: 'Licensing', href: '/licenses' },
+    ],
   ],
+  legalLinks: [
+    { label: 'State licenses', href: '/licenses' },
+    { label: 'Privacy policy', href: '/privacy-policy' },
+  ],
+  copyright: '© 2026 UWIB Risk & Insurance Solutions',
 };
 
 export const hero = {
   eyebrow: 'Specialty coffee insurance · Since 2012',
-  heading: 'Insurance advice, brewed for coffee.',
+  heading: 'Insurance advice,\nbrewed for coffee.',
   text: 'Insurance, labor and risk guidance for the coffee businesses we know best: importers, roasters, wholesalers and cafés.',
   primaryCta: { label: 'Get a quick quote →', href: '#contact' },
   secondaryCta: { label: 'Meet the coffee team', href: '#team' },
@@ -50,6 +63,8 @@ export const hero = {
   image: { src: heroCoffeeCup, alt: altFor('src/assets/coffee-and-contracts/hero-coffee-cup.jpg') } satisfies LegacyImage,
   imageCaption: 'From green coffee to the last pour',
 };
+
+export const credibilityLabel = 'Specialty coffee focus';
 
 export const credibility = [
   'Specialty coffee, since 2012',
@@ -95,7 +110,7 @@ export const differentiators = {
 
 export const whoWeServe = {
   eyebrow: 'Who we serve',
-  heading: 'From origin to the espresso bar.',
+  heading: 'From origin to\nthe espresso bar.',
   text: 'We work with small and mid-sized coffee businesses at every step of the supply chain, and we understand how their risks connect.',
   items: [
     { number: '01', icon: 'importer', title: 'Green coffee importers', text: 'Cargo and stock throughput, warehouse exposures, contract terms with growers and buyers.' },
@@ -124,7 +139,9 @@ export const team = {
     role: 'Account Executive',
     bio: 'Josh leads Coffee & Contracts and is your first call for coverage, renewals and new locations. A Specialty Coffee Association member based in Tennessee, he takes his espresso single-origin.',
     email: 'josh@uwib.com',
+    emailLabel: 'Email',
     phone: '(615) 234-0347',
+    phoneLabel: 'Phone',
     phoneHref: 'tel:+16152340347',
     image: { src: joshAcosta, alt: altFor('src/assets/coffee-and-contracts/josh-acosta.jpg') } satisfies LegacyImage,
   },

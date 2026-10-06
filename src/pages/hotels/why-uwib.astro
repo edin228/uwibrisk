@@ -1,25 +1,71 @@
 ---
-import MicrositeShell from '../../components/legacy/MicrositeShell.astro';
-import { brand, HOTEL_PATHS, meta, whyPage } from '../../data/legacy/hotels';
+import MicrositeFooter from '../../components/legacy/MicrositeFooter.astro';
+import MicrositeHeader from '../../components/legacy/MicrositeHeader.astro';
+import { brand, meta, whyPage } from '../../data/legacy/hotels';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/microsites/hotels.css';
+
 const { hero, pointOfView, intro, points, stages, cta } = whyPage;
 ---
 
 <BaseLayout title={meta.why.title} description={meta.why.description} searchable>
-  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
-    <div class="container">
-      <p class="label">{hero.eyebrow}</p>
-      <h1>{hero.heading}</h1>
-      <p>{hero.text}</p>
-      <aside><p class="label">{pointOfView.eyebrow}</p><h2>{pointOfView.heading}</h2><p>{pointOfView.text}</p></aside>
-      <h2>{intro.heading}</h2>
-      <p>{intro.text}</p>
-      {points.map((p) => <article><h3>{p.number} {p.title}</h3><p>{p.text}</p></article>)}
-      <p class="label">{stages.eyebrow}</p>
-      <h2>{stages.heading}</h2>
-      {stages.items.map((s) => <article><h3>{s.number} {s.title}</h3><p>{s.text}</p></article>)}
+  <MicrositeHeader slot="header" brand={brand} />
+  <div class="hm-site">
+    <section class="hm-whyHero">
+      <div>
+        <div class="hm-eyebrow">{hero.eyebrow}</div>
+        <h1>{hero.heading}</h1>
+        <p>{hero.text}</p>
+      </div>
+      <aside>
+        <div class="hm-eyebrow hm-eyebrowLight">{pointOfView.eyebrow}</div>
+        <h2>{pointOfView.heading}</h2>
+        <p>{pointOfView.text}</p>
+      </aside>
+    </section>
+
+    <section class="hm-whyPointsSection">
+      <div class="hm-sectionIntroSplit">
+        <h2>{intro.heading}</h2>
+        <p>{intro.text}</p>
+      </div>
+      <div class="hm-whyPoints">
+        {
+          points.map((point) => (
+            <article>
+              <span>{point.number}</span>
+              <div>
+                <h3>{point.title}</h3>
+                <p>{point.text}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="hm-advisorStages">
+      <div>
+        <div class="hm-eyebrow hm-eyebrowLight">{stages.eyebrow}</div>
+        <h2>{stages.heading}</h2>
+      </div>
+      <div class="hm-stageGrid">
+        {
+          stages.items.map((stage) => (
+            <article>
+              <span>{stage.number}</span>
+              <h3>{stage.title}</h3>
+              <p>{stage.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="hm-supportingCta">
       <h2>{cta.heading}</h2>
-      <a href={cta.href}>{cta.label}</a>
-    </div>
-  </MicrositeShell>
+      <a href={cta.href} class="hm-button">{cta.label}</a>
+    </section>
+  </div>
+  <MicrositeFooter slot="footer" brand={brand} />
 </BaseLayout>

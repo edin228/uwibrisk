@@ -1,7 +1,8 @@
 /**
  * Trusted Advisor landing page (/trusted-advisor). Content extracted from the old
  * Next.js app: pages/trusted-advisor.js (InsureTax Ambassador Program, a note from
- * Dana Coates). The page had its own header/footer.
+ * Dana Coates). The page had its own header/footer. Single source of the copy for
+ * src/pages/trusted-advisor.astro (styles in src/styles/microsites/trusted-advisor.css).
  */
 import danaPhoto from '../../assets/legacy/trusted-advisor-dana-coates.jpg';
 import { altFor } from '../../lib/alt';
@@ -12,6 +13,10 @@ export const meta = {
   description:
     'Thoughts on trust, risk, and serving clients well. Learn how the InsureTax Ambassador Program helps trusted advisors educate clients about IRS audit risk and available protection.',
 };
+
+export const home = { href: '/', label: 'UWIB Risk home' };
+
+export const navLabel = 'Trusted Advisor sections';
 
 export const nav = [
   { label: 'What I’ve Learned', href: '#learned' },
@@ -118,7 +123,6 @@ export const personalNote = {
   name: 'Dana Coates',
   role: 'Director of Strategic Partnerships',
   company: 'UWIB Risk & Insurance Solutions',
-  teamPage: '/team/dana-coates',
   image: { src: danaPhoto, alt: altFor('src/assets/legacy/trusted-advisor-dana-coates.jpg') } satisfies LegacyImage,
   intro:
     'After nearly fifty years in underwriting, agency operations, software development, and risk management, one lesson stands above all others.',
@@ -154,13 +158,27 @@ export const library = {
 
 export const footer = {
   tagline: 'Insurance solutions how you want them, when you need them.',
-  links: [
-    { label: 'What I’ve learned', href: '#learned' },
-    { label: 'Why audit risk matters', href: '#audit-risk' },
-    { label: 'Ambassador Program', href: '#ambassador' },
-    { label: 'About', href: '/team' },
-    { label: 'Insights', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
+  navLabel: 'Footer navigation',
+  columns: [
+    {
+      heading: 'Trusted Advisor',
+      links: [
+        { label: 'What I’ve learned', href: '#learned' },
+        { label: 'Why audit risk matters', href: '#audit-risk' },
+        { label: 'Ambassador Program', href: '#ambassador' },
+      ],
+    },
+    {
+      heading: 'UWIB Risk',
+      links: [
+        { label: 'About', href: '/team' },
+        { label: 'Insights', href: '/blog' },
+        { label: 'Contact', href: '/contact' },
+      ],
+    },
+  ],
+  copyright: '© 2026 UWIB Risk & Insurance Solutions',
+  legalLinks: [
     { label: 'Privacy', href: '/privacy-policy' },
     { label: 'Terms', href: '/terms-of-use' },
     { label: 'State licenses', href: '/licenses' },

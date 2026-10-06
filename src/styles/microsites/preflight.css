@@ -4,6 +4,10 @@
  * microsite roots (.hm-site, .ta-page) and kept at low specificity so the page CSS wins,
  * while neutralising the new site's global heading/link styles from base.css.
  */
+:where(.hm-site, .ta-page) {
+  font-synthesis: initial;
+}
+
 :where(.hm-site, .ta-page) *,
 :where(.hm-site, .ta-page) *::before,
 :where(.hm-site, .ta-page) *::after {
@@ -21,6 +25,7 @@
   font-weight: inherit;
   letter-spacing: normal;
   line-height: inherit;
+  text-wrap: wrap;
 }
 
 .hm-site h2,
@@ -85,4 +90,9 @@
 
 :where(.hm-site, .ta-page) summary {
   display: list-item;
+}
+
+/* The old pages had no scroll padding (the hotels sections set their own scroll-margin-top). */
+html:has(.hm-site) {
+  scroll-padding-top: 0;
 }

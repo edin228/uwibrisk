@@ -1,73 +1,279 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/uwib-wide-white.png';
 import LegacyForm from '../components/legacy/LegacyForm.astro';
 import LegacyImg from '../components/legacy/LegacyImg.astro';
 import { trustedAdvisorForm } from '../data/legacy/forms';
 import * as t from '../data/legacy/trusted-advisor';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { altFor } from '../lib/alt';
+import '../styles/microsites/trusted-advisor.css';
+
 const { hero, learned, responsibility, awareness, auditRisk, insureTax, ambassador, personalNote, conversationCta, conversation, library, footer } = t;
+const logoAlt = altFor('src/assets/brand/uwib-wide-white.png');
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+// "InsureTax": the second half of the wordmark is set in ink.
+const wordmarkSplit = t.insureTax.wordmark.indexOf('Tax');
 ---
 
 <BaseLayout title={t.meta.title} description={t.meta.description} image={personalNote.image.src} searchable>
-  <div class="container">
-    <nav aria-label="Trusted Advisor sections">{t.nav.map((n) => <a href={n.href}>{n.label} </a>)} <a href={t.cta.href}>{t.cta.label}</a></nav>
-    <p class="label">{hero.label}</p>
-    <h1>{hero.heading}</h1>
-    <p>{hero.text}</p>
-    <p class="label">{hero.byline}</p>
-    <blockquote>{hero.quote.map((q) => <p>{q}</p>)}</blockquote>
-    <section id="learned">
-      <h2>{learned.number} {learned.heading}</h2>
-      <p><strong>{learned.lead}</strong></p>
-      {learned.paragraphs.map((p) => <p>{p}</p>)}
-      <blockquote>{learned.quote}</blockquote>
+  <header slot="header" class="ta-page ta-chrome ta-siteHeader">
+    <div class="ta-headerInner">
+      <a class="ta-headerBrand" href={t.home.href} aria-label={t.home.label}>
+        <span class="ta-brand"><Image src={logo} alt={logoAlt} widths={[240, 480]} sizes="240px" class="ta-fill-contain" loading="eager" data-color /></span>
+      </a>
+      <nav class="ta-desktopNav" aria-label={t.navLabel}>
+        {t.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <a class="ta-headerCta" href={t.cta.href}>{t.cta.label} <span aria-hidden="true">→</span></a>
+      <details class="ta-mobileMenu" data-microsite-menu>
+        <summary aria-label="Open page navigation"><span></span><span></span></summary>
+        <nav aria-label={`Mobile ${t.navLabel}`}>
+          {t.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          <a href={t.cta.href}>{t.cta.label}</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <div class="ta-page">
+    <section class="ta-hero">
+      <div class="ta-heroInner">
+        <div class="ta-heroLead">
+          <div class="ta-heroCopy">
+            <div class="ta-heroLabel"><span aria-hidden="true"></span> {hero.label}</div>
+            <h1>{hero.heading}</h1>
+            <p>{hero.text}</p>
+          </div>
+          <div class="ta-heroAction">
+            <a class="ta-darkButton ta-darkButtonCompact" href={t.cta.href}>
+              <span>{t.cta.label}</span><span class="ta-buttonArrow" aria-hidden="true">↓</span>
+            </a>
+            <span>{hero.byline}</span>
+          </div>
+        </div>
+        <aside class="ta-heroQuote">
+          <span class="ta-quoteMark" aria-hidden="true">“</span>
+          {hero.quote.map((line) => <p>{line}</p>)}
+        </aside>
+      </div>
     </section>
-    <section id="responsibility">
-      <h2>{responsibility.number} {responsibility.heading}</h2>
-      <p>{responsibility.text}</p>
-      {responsibility.comparison.map((x) => <article><h3>{x.title}</h3><p>{x.text}</p></article>)}
-      <ol>{responsibility.list.map((x) => <li>{x}</li>)}</ol>
+
+    <section class="ta-learned" id="learned">
+      <div class="ta-sectionTitle">
+        <span>{learned.number}</span>
+        <h2>{learned.heading}</h2>
+      </div>
+      <div class="ta-articleCopy">
+        <p class="ta-articleLead">{learned.lead}</p>
+        {learned.paragraphs.map((p) => <p>{p}</p>)}
+        <blockquote>{learned.quote}</blockquote>
+      </div>
     </section>
-    <section>
-      <p class="label">{awareness.eyebrow}</p><h2>{awareness.heading}</h2><p>{awareness.text}</p>
+
+    <section class="ta-responsibility" id="responsibility">
+      <div class="ta-responsibilityHeading">
+        <div>
+          <span>{responsibility.number}</span>
+          <h2>{responsibility.heading}</h2>
+        </div>
+        <p>{responsibility.text}</p>
+      </div>
+      <div class="ta-advisorComparison">
+        {
+          responsibility.comparison.map((item) => (
+            <article>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="ta-responsibilityList">
+        {
+          responsibility.list.map((item, i) => (
+            <div>
+              <span>{pad(i)}</span>
+              <p>{item}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="ta-awareness">
+      <div class="ta-eyebrow">{awareness.eyebrow}</div>
+      <h2>{awareness.heading}</h2>
+      <p>{awareness.text}</p>
+      <span class="ta-awarenessRule" aria-hidden="true"></span>
       <blockquote>{awareness.quote}</blockquote>
     </section>
-    <section id="audit-risk">
-      <p class="label">{auditRisk.eyebrow}</p><h2>{auditRisk.heading}</h2><p>{auditRisk.text}</p><p>{auditRisk.conclusion}</p>
-      <ol>{auditRisk.impacts.map((x) => <li><strong>{x.title}</strong>: {x.text}</li>)}</ol>
+
+    <section class="ta-auditRisk" id="audit-risk">
+      <div class="ta-auditIntro">
+        <div class="ta-eyebrow">{auditRisk.eyebrow}</div>
+        <h2>{auditRisk.heading}</h2>
+        <p>{auditRisk.text}</p>
+        <p class="ta-auditConclusion">{auditRisk.conclusion}</p>
+      </div>
+      <div class="ta-auditList">
+        {
+          auditRisk.impacts.map((item, i) => (
+            <div>
+              <span>{pad(i)}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
     </section>
-    <section id="insuretax">
-      <p class="label">{insureTax.eyebrow}</p><p>{insureTax.wordmark}</p><h2>{insureTax.heading}</h2>
-      {insureTax.paragraphs.map((p) => <p>{p}</p>)}
-      <ul>{insureTax.notes.map((n) => <li><strong>{n.label}</strong>: {n.text}</li>)}</ul>
+
+    <section class="ta-insureTax" id="insuretax">
+      <div class="ta-insureTaxHeading">
+        <div class="ta-eyebrow">{insureTax.eyebrow}</div>
+        <div>
+          <div class="ta-insureTaxWordmark">{insureTax.wordmark.slice(0, wordmarkSplit)}<span>{insureTax.wordmark.slice(wordmarkSplit)}</span></div>
+          <h2>{insureTax.heading}</h2>
+        </div>
+      </div>
+      <div class="ta-insureTaxCopy">
+        {insureTax.paragraphs.map((p) => <p>{p}</p>)}
+        <div class="ta-insureTaxNotes">
+          {
+            insureTax.notes.map((note) => (
+              <div>
+                <span>{note.label}</span>
+                <p>{note.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </section>
-    <section id="ambassador">
-      <p class="label">{ambassador.eyebrow}</p><h2>{ambassador.heading}</h2><p>{ambassador.text}</p>
-      {ambassador.steps.map((s) => <article><p class="label">{s.label}</p><h3>{s.title}</h3><p>{s.text}</p></article>)}
+
+    <section class="ta-ambassador" id="ambassador">
+      <div class="ta-ambassadorHeading">
+        <div>
+          <div class="ta-eyebrow">{ambassador.eyebrow}</div>
+          <h2>{ambassador.heading}</h2>
+        </div>
+        <p>{ambassador.text}</p>
+      </div>
+      <div class="ta-ambassadorSteps">
+        {
+          ambassador.steps.map((step) => (
+            <div class={step.featured ? 'ta-featuredStep' : undefined}>
+              <span>{step.label}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </section>
-    <section>
-      <LegacyImg image={personalNote.image} width={420} />
-      <p><strong><a href={personalNote.teamPage}>{personalNote.name}</a></strong>, {personalNote.role}, {personalNote.company}</p>
-      <p class="label">{personalNote.eyebrow}</p><h2>{personalNote.heading}</h2>
-      <p>{personalNote.intro}</p>
-      {personalNote.lesson.map((l) => <p><strong>{l}</strong></p>)}
-      <p>{personalNote.closing}</p>
-      <blockquote>{personalNote.quote}</blockquote>
+
+    <section class="ta-danaMessage">
+      <div class="ta-danaPortraitColumn">
+        <div class="ta-danaPortrait">
+          <LegacyImg image={personalNote.image} widths={[342, 420, 600]} sizes="(max-width: 767px) 342px, 420px" class="ta-fill" color />
+        </div>
+        <div class="ta-danaIdentity">
+          <strong>{personalNote.name}</strong>
+          <span>{personalNote.role}</span>
+          <span>{personalNote.company}</span>
+        </div>
+      </div>
+      <div class="ta-danaCopy">
+        <div class="ta-eyebrow">{personalNote.eyebrow}</div>
+        <h2>{personalNote.heading}</h2>
+        <p>{personalNote.intro}</p>
+        <div class="ta-danaLesson">{personalNote.lesson.map((line) => <span>{line}</span>)}</div>
+        <p class="ta-danaSmallCopy">{personalNote.closing}</p>
+        <blockquote>{personalNote.quote}</blockquote>
+      </div>
     </section>
-    <section>
-      <p class="label">{conversationCta.eyebrow}</p><h2>{conversationCta.heading}</h2><p>{conversationCta.text}</p>
-      <p>{conversationCta.noPressure.join(' · ')}</p>
+
+    <section class="ta-conversationCta">
+      <div>
+        <div class="ta-eyebrow">{conversationCta.eyebrow}</div>
+        <h2>{conversationCta.heading}</h2>
+        <p>{conversationCta.text}</p>
+        <div class="ta-noPressure">
+          {conversationCta.noPressure.map((item, i) => <Fragment>{i > 0 && <b>·</b>}<span>{item}</span></Fragment>)}
+        </div>
+      </div>
+      <a class="ta-darkButton" href={t.cta.href}>
+        <span>{t.cta.label}</span><span class="ta-buttonArrow" aria-hidden="true">↓</span>
+      </a>
     </section>
-    <section id="conversation">
-      <p class="label">{conversation.eyebrow}</p><h2>{conversation.heading}</h2><p>{conversation.text}</p>
-      <LegacyForm form={trustedAdvisorForm} />
+
+    <section class="ta-conversation" id="conversation">
+      <div class="ta-conversationIntro">
+        <div>
+          <div class="ta-eyebrow">{conversation.eyebrow}</div>
+          <h2>{conversation.heading}</h2>
+          <p>{conversation.text}</p>
+        </div>
+        <span>{conversation.privacy}</span>
+      </div>
+      <LegacyForm form={trustedAdvisorForm} variant="advisor" />
     </section>
-    <section>
-      <p class="label">{library.eyebrow}</p><h2>{library.heading}</h2><p>{library.text}</p>
-      {library.items.map((i) => <article><h3>{i.title}</h3><p>{i.text}</p><em>{i.status}</em></article>)}
+
+    <section class="ta-library">
+      <div class="ta-libraryHeading">
+        <div>
+          <div class="ta-eyebrow">{library.eyebrow}</div>
+          <h2>{library.heading}</h2>
+        </div>
+        <p>{library.text}</p>
+      </div>
+      <div class="ta-resourceList">
+        {
+          library.items.map((item, i) => (
+            <div>
+              <span>{pad(i)}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <em>{item.status}</em>
+            </div>
+          ))
+        }
+      </div>
     </section>
-    <footer>
-      <p>{footer.tagline}</p>
-      <nav aria-label="Footer">{footer.links.map((l) => <a href={l.href}>{l.label} </a>)}</nav>
-    </footer>
   </div>
+
+  <footer slot="footer" class="ta-page ta-chrome ta-footer">
+    <div class="ta-footerMain">
+      <div>
+        <span class="ta-brand"><Image src={logo} alt={logoAlt} widths={[220, 440]} sizes="220px" class="ta-fill-contain" data-color /></span>
+        <p>{footer.tagline}</p>
+      </div>
+      <nav aria-label={footer.navLabel}>
+        {
+          footer.columns.map((column) => (
+            <div>
+              <strong>{column.heading}</strong>
+              {column.links.map((link) => <a href={link.href}>{link.label}</a>)}
+            </div>
+          ))
+        }
+      </nav>
+    </div>
+    <div class="ta-footerLegal">
+      <span>{footer.copyright}</span>
+      <div>{footer.legalLinks.map((link) => <a href={link.href}>{link.label}</a>)}</div>
+    </div>
+  </footer>
 </BaseLayout>
+
+<script>
+  // Close the mobile menu after choosing an in-page link.
+  for (const menu of document.querySelectorAll<HTMLDetailsElement>('details[data-microsite-menu]')) {
+    menu.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a')) menu.open = false;
+    });
+  }
+</script>

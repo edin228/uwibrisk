@@ -1,59 +1,191 @@
 ---
 import LegacyForm from '../components/legacy/LegacyForm.astro';
 import LegacyImg from '../components/legacy/LegacyImg.astro';
-import MicrositeShell from '../components/legacy/MicrositeShell.astro';
+import Lines from '../components/legacy/Lines.astro';
+import MicrositeFooter from '../components/legacy/MicrositeFooter.astro';
+import MicrositeHeader from '../components/legacy/MicrositeHeader.astro';
+import MicrositeIcon from '../components/legacy/MicrositeIcon.astro';
 import * as c from '../data/legacy/coffee-and-contracts';
 import { coffeeContactForm } from '../data/legacy/forms';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/microsites/hotels.css';
+import '../styles/microsites/coffee.css';
+
 const { hero, about, differentiators, whoWeServe, approach, team, contact } = c;
 ---
 
 <BaseLayout title={c.meta.title} description={c.meta.description} image={hero.image.src} searchable>
-  <MicrositeShell brand={c.brand} home="/coffee-and-contracts">
-    <div class="container">
-      <p class="label">{hero.eyebrow}</p>
-      <h1>{hero.heading}</h1>
-      <p>{hero.text}</p>
-      <p><a href={hero.primaryCta.href}>{hero.primaryCta.label}</a> · <a href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a></p>
-      <p class="label">{hero.trust}</p>
-      <LegacyImg image={hero.image} />
-      <p class="label">{hero.imageCaption}</p>
-      <ul>{c.credibility.map((x) => <li>{x}</li>)}</ul>
-      <section id="about">
-        <p class="label">{about.eyebrow}</p><h2>{about.heading}</h2><p>{about.text}</p>
-        <LegacyImg image={about.image} />
-        {about.points.map((p) => <article><h3>{p.number} {p.title}</h3><p>{p.text}</p></article>)}
-      </section>
-      <section>
-        <LegacyImg image={differentiators.image} />
-        <p class="label">{differentiators.eyebrow}</p><h2>{differentiators.heading}</h2><p>{differentiators.text}</p>
-        {differentiators.items.map((p) => <article><h3>{p.number} {p.title}</h3><p>{p.text}</p></article>)}
-      </section>
-      <section id="who-we-serve">
-        <p class="label">{whoWeServe.eyebrow}</p><h2>{whoWeServe.heading}</h2><p>{whoWeServe.text}</p>
-        {whoWeServe.items.map((p) => <article><h3>{p.number} {p.title}</h3><p>{p.text}</p></article>)}
-      </section>
-      <section id="approach">
-        <p class="label">{approach.eyebrow}</p><h2>{approach.heading}</h2>
-        {approach.steps.map((s) => <article><p class="label">{s.label}</p><h3>{s.title}</h3><p>{s.text}</p></article>)}
-      </section>
-      <section id="team">
-        <p class="label">{team.eyebrow}</p><h2>{team.heading}</h2><p>{team.text}</p>
-        <article>
-          <LegacyImg image={team.lead.image} width={320} />
-          <h3>{team.lead.name}</h3><p class="label">{team.lead.role}</p><p>{team.lead.bio}</p>
-          <p><a href={`mailto:${team.lead.email}`}>{team.lead.email}</a> · <a href={team.lead.phoneHref}>{team.lead.phone}</a></p>
+  <MicrositeHeader slot="header" brand={c.brand} />
+  <div class="hm-site">
+    <section class="hm-landingHero">
+      <div class="hm-heroCopy">
+        <div class="hm-eyebrow">{hero.eyebrow}</div>
+        <h1><Lines text={hero.heading} /></h1>
+        <p>{hero.text}</p>
+        <div class="hm-heroActions">
+          <a href={hero.primaryCta.href} class="hm-button">{hero.primaryCta.label}</a>
+          <a href={hero.secondaryCta.href} class="hm-textLink">{hero.secondaryCta.label}</a>
+        </div>
+        <div class="hm-heroTrust"><span></span>{hero.trust}</div>
+      </div>
+      <div class="hm-heroImage">
+        <LegacyImg image={hero.image} widths={[650, 1300]} sizes="(max-width: 820px) 100vw, 650px" class="hm-fill" position="right center" priority />
+        <span>{hero.imageCaption}</span>
+      </div>
+    </section>
+
+    <section class="hm-credibilityStrip" aria-label={c.credibilityLabel}>
+      {c.credibility.map((item) => <div>{item}</div>)}
+    </section>
+
+    <section class="cf-aboutSection" id="about">
+      <div class="cf-aboutIntro">
+        <div>
+          <div class="hm-eyebrow">{about.eyebrow}</div>
+          <h2>{about.heading}</h2>
+        </div>
+        <p>{about.text}</p>
+      </div>
+      <div class="cf-aboutImage">
+        <LegacyImg image={about.image} widths={[800, 1216, 1600]} sizes="(max-width: 1440px) 100vw, 1216px" class="hm-fill" position="center 55%" />
+      </div>
+      <div class="cf-aboutPoints">
+        {
+          about.points.map((point) => (
+            <article>
+              <span class="hm-itemNumber">{point.number}</span>
+              <h3>{point.title}</h3>
+              <p>{point.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="hm-briefFeature">
+      <div class="cf-featurePhoto">
+        <LegacyImg image={differentiators.image} widths={[488, 976]} sizes="(max-width: 820px) 100vw, 488px" class="hm-fill" position="right center" />
+      </div>
+      <div class="hm-briefFeatureCopy">
+        <div class="hm-eyebrow hm-eyebrowLight">{differentiators.eyebrow}</div>
+        <h2>{differentiators.heading}</h2>
+        <p>{differentiators.text}</p>
+        <div class="cf-differentiators">
+          {
+            differentiators.items.map((item) => (
+              <article>
+                <span>{item.number}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-riskSection" id="who-we-serve">
+      <div class="hm-sectionIntroSplit">
+        <div>
+          <div class="hm-eyebrow">{whoWeServe.eyebrow}</div>
+          <h2><Lines text={whoWeServe.heading} /></h2>
+        </div>
+        <p>{whoWeServe.text}</p>
+      </div>
+      <div class="hm-riskGrid">
+        {
+          whoWeServe.items.map((item) => (
+            <article>
+              <span class="hm-riskIcon"><MicrositeIcon type={item.icon} /></span>
+              <span class="hm-itemNumber">{item.number}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="hm-processSection" id="approach">
+      <div class="hm-processIntro cf-processIntroStacked">
+        <div class="hm-eyebrow">{approach.eyebrow}</div>
+        <h2>{approach.heading}</h2>
+      </div>
+      <div class="hm-processGrid">
+        {
+          approach.steps.map((step) => (
+            <article>
+              <span>{step.label}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="hm-teamSection" id="team">
+      <div class="hm-teamIntro">
+        <div>
+          <div class="hm-eyebrow hm-eyebrowLight">{team.eyebrow}</div>
+          <h2>{team.heading}</h2>
+        </div>
+        <p>{team.text}</p>
+      </div>
+      <div class="hm-teamRoster">
+        <article class="hm-ericCard">
+          <div class="cf-leadPhoto">
+            <LegacyImg image={team.lead.image} widths={[216, 432]} sizes="216px" class="hm-fill" position="center 30%" color />
+          </div>
+          <div>
+            <h3>{team.lead.name}</h3>
+            <span>{team.lead.role}</span>
+          </div>
+          <p>{team.lead.bio}</p>
+          <dl class="cf-leadContact">
+            <div><dt>{team.lead.emailLabel}</dt><dd><a href={`mailto:${team.lead.email}`}>{team.lead.email}</a></dd></div>
+            <div><dt>{team.lead.phoneLabel}</dt><dd><a href={team.lead.phoneHref}>{team.lead.phone}</a></dd></div>
+          </dl>
         </article>
-        <p class="label">{team.serviceEyebrow}</p><h3>{team.serviceHeading}</h3>
-        {team.serviceTeam.map((m) => <article><LegacyImg image={m} width={240} /><h4>{m.name}</h4><p class="label">{m.role}</p></article>)}
-        <p>{team.serviceText}</p>
-      </section>
-      <section id="contact">
-        <p class="label">{contact.eyebrow}</p><h2>{contact.heading}</h2><p>{contact.text}</p>
-        <p><strong>{contact.direct.label}</strong> <a href={`mailto:${contact.direct.email}`}>{contact.direct.email}</a> · <a href={contact.direct.phoneHref}>{contact.direct.phone}</a></p>
-        <LegacyImg image={contact.image} width={480} />
-        <LegacyForm form={coffeeContactForm} />
-      </section>
-    </div>
-  </MicrositeShell>
+        <div class="hm-serviceTeam">
+          <div>
+            <div class="hm-eyebrow hm-eyebrowLight">{team.serviceEyebrow}</div>
+            <h3>{team.serviceHeading}</h3>
+          </div>
+          <div class="hm-teamGrid">
+            {
+              team.serviceTeam.map((member) => (
+                <article>
+                  <div class="hm-teamPhoto">
+                    <LegacyImg image={member} widths={[264, 400, 528, 800]} sizes="(max-width: 820px) 100vw, 264px" class="hm-fill" color />
+                  </div>
+                  <h4>{member.name}</h4>
+                  <span>{member.role}</span>
+                </article>
+              ))
+            }
+          </div>
+          <p class="hm-teamSupport">{team.serviceText}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="hm-contactSection" id="contact">
+      <div class="hm-contactIntro">
+        <div class="hm-eyebrow">{contact.eyebrow}</div>
+        <h2>{contact.heading}</h2>
+        <p>{contact.text}</p>
+        <div class="cf-directContact">
+          <strong>{contact.direct.label}</strong>
+          <a href={`mailto:${contact.direct.email}`}>{contact.direct.email}</a>
+          <a href={contact.direct.phoneHref}>{contact.direct.phone}</a>
+        </div>
+        <figure class="cf-contactPhoto">
+          <LegacyImg image={contact.image} widths={[390, 780]} sizes="390px" class="hm-fill" position="70% 60%" />
+        </figure>
+      </div>
+      <LegacyForm form={coffeeContactForm} variant="landing" />
+    </section>
+  </div>
+  <MicrositeFooter slot="footer" brand={c.brand} />
 </BaseLayout>

@@ -1,30 +1,53 @@
 ---
-import MicrositeShell from '../../components/legacy/MicrositeShell.astro';
-import { brand, coverageAreas, coveragePage, HOTEL_PATHS, meta } from '../../data/legacy/hotels';
+import MicrositeFooter from '../../components/legacy/MicrositeFooter.astro';
+import MicrositeHeader from '../../components/legacy/MicrositeHeader.astro';
+import { brand, coverageAreas, coveragePage, meta } from '../../data/legacy/hotels';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const { hero, includesLabel, cta } = coveragePage;
+import '../../styles/microsites/hotels.css';
+
+const { hero, jumpLabel, includesLabel, cta } = coveragePage;
 ---
 
 <BaseLayout title={meta.coverage.title} description={meta.coverage.description} searchable>
-  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
-    <div class="container">
-      <p class="label">{hero.eyebrow}</p>
-      <h1>{hero.heading}</h1>
+  <MicrositeHeader slot="header" brand={brand} />
+  <div class="hm-site">
+    <section class="hm-coverageHero">
+      <div>
+        <div class="hm-eyebrow">{hero.eyebrow}</div>
+        <h1>{hero.heading}</h1>
+      </div>
       <p>{hero.text}</p>
-      <nav aria-label="Jump to coverage section"><strong>Jump to</strong> {coverageAreas.map((a) => <a href={`#${a.id}`}>{a.shortTitle} </a>)}</nav>
+    </section>
+    <nav class="hm-coverageJump" aria-label="Jump to coverage section">
+      <strong>{jumpLabel}</strong>
+      {coverageAreas.map((area) => <a href={`#${area.id}`}>{area.shortTitle}</a>)}
+    </nav>
+    <div class="hm-coverageRows">
       {
-        coverageAreas.map((a) => (
-          <section id={a.id}>
-            <h2>{a.number} {a.title}</h2>
-            <p>{a.summary}</p>
-            <p class="label">{includesLabel}</p>
-            <ul>{a.includes.map((i) => <li>{i}</li>)}</ul>
+        coverageAreas.map((area, index) => (
+          <section class:list={['hm-coverageRow', area.dark && 'hm-coverageRowDark', index % 2 && 'hm-coverageRowTint']} id={area.id}>
+            <div class="hm-coverageRowTitle">
+              <span>{area.number}</span>
+              <h2>{area.title}</h2>
+            </div>
+            <p>{area.summary}</p>
+            <div>
+              <div class:list={['hm-eyebrow', area.dark && 'hm-eyebrowLight']}>{includesLabel}</div>
+              <ul>
+                {area.includes.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
           </section>
         ))
       }
-      <p class="label">{cta.eyebrow}</p>
-      <h2>{cta.heading}</h2>
-      <a href={cta.href}>{cta.label}</a>
     </div>
-  </MicrositeShell>
+    <section class="hm-coverageCta">
+      <div>
+        <div class="hm-eyebrow">{cta.eyebrow}</div>
+        <h2>{cta.heading}</h2>
+      </div>
+      <a href={cta.href} class="hm-button">{cta.label}</a>
+    </section>
+  </div>
+  <MicrositeFooter slot="footer" brand={brand} />
 </BaseLayout>

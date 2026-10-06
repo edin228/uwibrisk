@@ -1,47 +1,90 @@
 ---
-import MicrositeShell from '../../../components/legacy/MicrositeShell.astro';
-import { brand, briefCover, briefs, HOTEL_PATHS, libraryPage, meta } from '../../../data/legacy/hotels';
+import MicrositeFooter from '../../../components/legacy/MicrositeFooter.astro';
+import MicrositeHeader from '../../../components/legacy/MicrositeHeader.astro';
+import RiskBriefCover from '../../../components/legacy/RiskBriefCover.astro';
+import { brand, briefs, HOTEL_PATHS, libraryPage, meta } from '../../../data/legacy/hotels';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-const { hero, newsletter, featured, topics, moreHeading, cta } = libraryPage;
-const featuredBrief = briefs.find((b) => b.slug === featured.slug);
+import '../../../styles/microsites/hotels.css';
+
+const { hero, newsletter, featured, topicsLabel, topics, moreHeading, viewAll, cardLinkLabel, cta } = libraryPage;
+const featuredBrief = briefs.find((b) => b.slug === featured.slug)!;
+const briefPath = (slug: string) => `${HOTEL_PATHS.briefs}/${slug}`;
 ---
 
 <BaseLayout title={meta.briefs.title} description={meta.briefs.description} searchable>
-  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
-    <div class="container">
-      <p class="label">{hero.eyebrow}</p>
-      <h1>{hero.heading}</h1>
-      <p>{hero.text}</p>
-      <form action={HOTEL_PATHS.home} method="get">
-        <p class="label">{newsletter.eyebrow}</p>
+  <MicrositeHeader slot="header" brand={brand} />
+  <div class="hm-site">
+    <section class="hm-libraryHero">
+      <div>
+        <div class="hm-eyebrow hm-eyebrowLight">{hero.eyebrow}</div>
+        <h1>{hero.heading}</h1>
+        <p>{hero.text}</p>
+      </div>
+      <!-- Old behaviour: submitting goes to /hotels?email=<email>#contact, which pre-fills the contact form. -->
+      <form class="hm-newsletterCard" action={HOTEL_PATHS.home} method="get" data-newsletter>
+        <div class="hm-eyebrow">{newsletter.eyebrow}</div>
         <h2>{newsletter.heading}</h2>
-        <label>Work email <input type="email" name="email" placeholder={newsletter.placeholder} required /></label>
+        <label>
+          <span class="hm-srOnly">{newsletter.label}</span>
+          <input type="email" name="email" placeholder={newsletter.placeholder} autocomplete="email" required />
+        </label>
         <button type="submit">{newsletter.button}</button>
       </form>
-      <section>
-        <p class="label">{briefCover.title} · {briefCover.issue}</p>
-        <p class="label">{featured.eyebrow}</p>
-        <h2>{featuredBrief?.title}</h2>
+    </section>
+
+    <section class="hm-featuredBrief">
+      <RiskBriefCover compact />
+      <div>
+        <div class="hm-eyebrow">{featured.eyebrow}</div>
+        <h2>{featuredBrief.title}</h2>
         <p>{featured.text}</p>
-        <a href={`${HOTEL_PATHS.briefs}/${featured.slug}`}>{featured.linkLabel}</a>
-      </section>
-      <p><strong>All topics</strong> {topics.join(' · ')}</p>
-      <h2 id="briefs">{moreHeading}</h2>
-      {
-        briefs
-          .filter((b) => b.slug !== featured.slug)
-          .map((b) => (
-            <article>
-              <p class="label">{b.category}</p>
-              <h3>{b.title}</h3>
-              <p>{b.description}</p>
-              <a href={`${HOTEL_PATHS.briefs}/${b.slug}`}>Read brief →</a>
-            </article>
-          ))
-      }
-      <p class="label">{cta.eyebrow}</p>
-      <h2>{cta.heading}</h2>
-      <a href={cta.href}>{cta.label}</a>
+        <a href={briefPath(featured.slug)}>{featured.linkLabel}</a>
+      </div>
+    </section>
+
+    <div class="hm-topicBar">
+      <strong>{topicsLabel}</strong>
+      {topics.map((topic) => <span>{topic}</span>)}
     </div>
-  </MicrositeShell>
+
+    <section class="hm-moreBriefs" id="briefs">
+      <div class="hm-moreBriefsHeader">
+        <h2>{moreHeading}</h2>
+        <a href={viewAll.href}>{viewAll.label}</a>
+      </div>
+      <div class="hm-briefCards">
+        {
+          briefs
+            .filter((b) => b.slug !== featured.slug)
+            .map((b) => (
+              <article class="hm-briefCard">
+                <div class="hm-eyebrow">{b.category}</div>
+                <h3>{b.title}</h3>
+                <p>{b.description}</p>
+                <a href={briefPath(b.slug)}>{cardLinkLabel}</a>
+              </article>
+            ))
+        }
+      </div>
+    </section>
+
+    <section class="hm-darkCta">
+      <div>
+        <div class="hm-eyebrow hm-eyebrowLight">{cta.eyebrow}</div>
+        <h2>{cta.heading}</h2>
+      </div>
+      <a href={cta.href} class="hm-button hm-buttonLight">{cta.label}</a>
+    </section>
+  </div>
+  <MicrositeFooter slot="footer" brand={brand} />
 </BaseLayout>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-newsletter]')) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = new FormData(form).get('email')?.toString() ?? '';
+      location.assign(`${form.getAttribute('action')}?email=${encodeURIComponent(email)}#contact`);
+    });
+  }
+</script>

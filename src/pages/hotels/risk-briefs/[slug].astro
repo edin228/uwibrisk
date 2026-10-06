@@ -1,7 +1,9 @@
 ---
-import MicrositeShell from '../../../components/legacy/MicrositeShell.astro';
-import { brand, briefDisclaimer, briefs, HOTEL_PATHS, type RiskBrief } from '../../../data/legacy/hotels';
+import MicrositeFooter from '../../../components/legacy/MicrositeFooter.astro';
+import MicrositeHeader from '../../../components/legacy/MicrositeHeader.astro';
+import { brand, briefArticle, briefDisclaimer, briefs, HOTEL_PATHS, type RiskBrief } from '../../../data/legacy/hotels';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/microsites/hotels.css';
 
 export function getStaticPaths() {
   return briefs.map((brief) => ({ params: { slug: brief.slug }, props: { brief } }));
@@ -10,47 +12,73 @@ interface Props {
   brief: RiskBrief;
 }
 const { brief } = Astro.props;
+const a = briefArticle;
 ---
 
 <BaseLayout title={`${brief.title} | UWIB Risk`} description={brief.description} type="article" searchable>
-  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
-    <article class="container">
-      <p class="label"><a href={HOTEL_PATHS.briefs}>Risk Brief</a> / {brief.category} / Issue {brief.issue}</p>
-      <p class="label">{brief.label}</p>
-      <h1>{brief.title}</h1>
-      <p>{brief.description}</p>
-      <p class="label">{brief.date} · {brief.readTime} · California Hospitality Risk Brief</p>
-      <p><strong>{brief.introduction}</strong></p>
-      <p>{brief.lead}</p>
-      {
-        brief.sections.map((s, i) => (
-          <section>
-            <h2>{s.title}</h2>
-            {s.paragraphs.map((p) => <p>{p}</p>)}
-            {i === 0 && (
-              <aside>
-                <p class="label">Questions to ask</p>
-                <ul>{brief.questions.map((q) => <li>{q}</li>)}</ul>
-              </aside>
-            )}
-          </section>
-        ))
-      }
-      <aside>
-        <p class="label">Question to consider</p>
-        <p>{brief.consider}</p>
-        <p class="label">In this brief</p>
-        <ul>{brief.outline.map((o) => <li>{o}</li>)}</ul>
-        <p>{briefDisclaimer}</p>
-      </aside>
-      <section>
-        <p class="label">Manager checklist</p>
-        <h2>{brief.checklistTitle}</h2>
-        <ol>{brief.checklist.map((c) => <li>{c}</li>)}</ol>
+  <MicrositeHeader slot="header" brand={brand} />
+  <div class="hm-site">
+    <article>
+      <header class="hm-articleHero">
+        <div class="hm-breadcrumb"><a href={HOTEL_PATHS.briefs}>{a.breadcrumbRoot}</a> / {brief.category} / {a.issuePrefix} {brief.issue}</div>
+        <div class="hm-eyebrow">{brief.label}</div>
+        <h1>{brief.title}</h1>
+        <p>{brief.description}</p>
+        <div class="hm-articleMeta"><span>{brief.date}</span><span>{brief.readTime}</span><span>{a.publication}</span></div>
+      </header>
+
+      <div class="hm-articleBody">
+        <div class="hm-articleMain">
+          <p class="hm-articleLead">{brief.introduction}</p>
+          <p>{brief.lead}</p>
+          <span class="hm-yellowRule"></span>
+          {
+            brief.sections.map((section, index) => (
+              <div class="hm-articleSection">
+                <h2>{section.title}</h2>
+                {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+                {index === 0 && (
+                  <div class="hm-questionBox">
+                    <div class="hm-eyebrow">{a.questionsLabel}</div>
+                    <ul>{brief.questions.map((question) => <li>{question}</li>)}</ul>
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+        <aside class="hm-articleAside">
+          <div class="hm-considerBox">
+            <div class="hm-eyebrow">{a.considerLabel}</div>
+            <p>{brief.consider}</p>
+          </div>
+          <div class="hm-outlineBox">
+            <div class="hm-eyebrow">{a.outlineLabel}</div>
+            <ul>{brief.outline.map((item) => <li>{item}</li>)}</ul>
+          </div>
+          <p>{briefDisclaimer}</p>
+        </aside>
+      </div>
+
+      <section class="hm-checklistSection">
+        <div>
+          <div class="hm-eyebrow hm-eyebrowLight">{a.checklistLabel}</div>
+          <h2>{brief.checklistTitle}</h2>
+        </div>
+        <ol>{brief.checklist.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>)}</ol>
       </section>
-      <p class="label">Keep the conversation going</p>
-      <h2>{brief.cta}</h2>
-      <p><a href={`${HOTEL_PATHS.home}#contact`}>Request a review →</a> · <a href={HOTEL_PATHS.briefs}>Back to all briefs</a></p>
+
+      <section class="hm-articleCta">
+        <div>
+          <div class="hm-eyebrow">{a.ctaEyebrow}</div>
+          <h2>{brief.cta}</h2>
+        </div>
+        <div>
+          <a href={a.primaryCta.href} class="hm-button">{a.primaryCta.label}</a>
+          <a href={a.secondaryCta.href} class="hm-button hm-buttonOutline">{a.secondaryCta.label}</a>
+        </div>
+      </section>
     </article>
-  </MicrositeShell>
+  </div>
+  <MicrositeFooter slot="footer" brand={brand} />
 </BaseLayout>

@@ -1,0 +1,31 @@
+---
+import type { LegacyFormField } from '../../data/legacy/forms';
+
+interface Props {
+  field: LegacyFormField;
+  class?: string;
+}
+const { field, class: className } = Astro.props;
+---
+
+<label class={className}>
+  <span>{field.label}{field.labelNote && <Fragment> <em>{field.labelNote}</em></Fragment>}</span>
+  {
+    field.type === 'textarea' ? (
+      <textarea name={field.name} rows={field.rows ?? 3} placeholder={field.placeholder} required={field.required} />
+    ) : field.type === 'select' ? (
+      <select name={field.name} required={field.required}>
+        <option value="" disabled selected>{field.selectPlaceholder}</option>
+        {field.options?.map((option) => <option>{option}</option>)}
+      </select>
+    ) : (
+      <input
+        name={field.name}
+        type={field.type}
+        placeholder={field.placeholder}
+        autocomplete={field.autocomplete as never}
+        required={field.required}
+      />
+    )
+  }
+</label>

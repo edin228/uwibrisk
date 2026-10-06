@@ -1,0 +1,9 @@
+---
+/** Renders copy that contains "\n" forced line breaks (the old markup's <br />). */
+interface Props {
+  text: string;
+}
+const lines = Astro.props.text.split('\n');
+---
+
+{lines.map((line, i) => (i === 0 ? line : <Fragment><br />{line}</Fragment>))}

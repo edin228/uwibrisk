@@ -2,7 +2,9 @@
  * California boutique hotels microsite (/hotels/**). Content extracted from the
  * old Next.js app: components/hotels/{content,HotelsLanding,HotelsSupporting,
  * HotelsShell,RiskBriefCover,HotelsContactForm}.js and pages/hotels/**.
- * Copy only; the design will be rebuilt.
+ * Single source of the copy for the faithful port in src/pages/hotels/** (styles in
+ * src/styles/microsites/hotels.css). A "\n" in a string is a forced line break (<br>)
+ * from the old markup.
  */
 import type { ImageMetadata } from 'astro';
 import heroImage from '../../assets/hotels/hero-boutique-hotel.jpg';
@@ -15,6 +17,28 @@ import { altFor } from '../../lib/alt';
 export interface LegacyImage {
   src: ImageMetadata;
   alt: string;
+}
+
+export interface MicrositeLink {
+  label: string;
+  href: string;
+}
+
+/** Header/footer of the old landing-page microsites (hotels, Coffee & Contracts). */
+export interface MicrositeBrand {
+  home: string;
+  /** Accessible name of the home link ("<label> home"). */
+  label: string;
+  /** Two-line descriptor next to the logo. */
+  descriptor: string;
+  navLabel: string;
+  /** `activePrefix`: highlight the item on every path that starts with it (otherwise exact match). */
+  nav: (MicrositeLink & { activePrefix?: string })[];
+  cta: MicrositeLink;
+  tagline: string;
+  footerColumns: MicrositeLink[][];
+  legalLinks: MicrositeLink[];
+  copyright: string;
 }
 
 export const HOTEL_PATHS = {
@@ -46,30 +70,48 @@ export const meta = {
 };
 
 /** Microsite header/footer (shared shell). */
-export const brand = {
+export const brand: MicrositeBrand = {
+  home: HOTEL_PATHS.home,
   label: 'UWIB boutique hotel insurance',
-  descriptor: 'Boutique hotel insurance',
+  descriptor: 'Boutique hotel\ninsurance',
+  navLabel: 'Boutique hotel insurance',
   nav: [
     { label: 'Why UWIB', href: HOTEL_PATHS.why },
     { label: 'Coverage', href: HOTEL_PATHS.coverage },
-    { label: 'Hotel Risk Brief', href: HOTEL_PATHS.briefs },
+    { label: 'Hotel Risk Brief', href: HOTEL_PATHS.briefs, activePrefix: HOTEL_PATHS.briefs },
     { label: 'About', href: `${HOTEL_PATHS.home}#team` },
   ],
   cta: { label: 'Request a review', href: `${HOTEL_PATHS.home}#contact` },
   tagline: 'Independent insurance guidance for California boutique hotels.',
-  footerLinks: [
-    { label: 'Why UWIB', href: HOTEL_PATHS.why },
-    { label: 'Coverage', href: HOTEL_PATHS.coverage },
-    { label: 'Risk Brief', href: HOTEL_PATHS.briefs },
-    { label: 'About', href: `${HOTEL_PATHS.home}#team` },
-    { label: 'Contact', href: `${HOTEL_PATHS.home}#contact` },
-    { label: 'Privacy', href: '/privacy-policy' },
+  footerColumns: [
+    [
+      { label: 'Why UWIB', href: HOTEL_PATHS.why },
+      { label: 'Coverage', href: HOTEL_PATHS.coverage },
+      { label: 'Risk Brief', href: HOTEL_PATHS.briefs },
+    ],
+    [
+      { label: 'About', href: `${HOTEL_PATHS.home}#team` },
+      { label: 'Contact', href: `${HOTEL_PATHS.home}#contact` },
+      { label: 'Privacy', href: '/privacy-policy' },
+    ],
+  ],
+  legalLinks: [
     { label: 'State licenses', href: '/licenses' },
+    { label: 'Privacy policy', href: '/privacy-policy' },
   ],
   copyright: '© 2026 UWIB Risk & Insurance Solutions',
 };
 
-export const coverageAreas = [
+export const coverageAreas: {
+  number: string;
+  id: string;
+  title: string;
+  shortTitle: string;
+  summary: string;
+  includes: string[];
+  /** Rendered as the dark row on /hotels/coverage. */
+  dark?: boolean;
+}[] = [
   {
     number: '01',
     id: 'property',
@@ -101,6 +143,7 @@ export const coverageAreas = [
     shortTitle: 'Cyber',
     summary: 'Prepare for the operational and reputational impact of a guest-data or payment-system event.',
     includes: ['Data breach response', 'Business interruption', 'Social engineering', 'Ransomware and recovery'],
+    dark: true,
   },
   {
     number: '05',
@@ -136,7 +179,7 @@ export const serviceTeam: (LegacyImage & { name: string; role: string })[] = [
 export const landing = {
   hero: {
     eyebrow: 'California hospitality insurance',
-    heading: 'Protect the place people remember.',
+    heading: 'Protect the place\npeople remember.',
     text: 'Insurance and risk guidance designed around the realities of independent hotels, from guest experience and property protection to workers’ compensation and cyber risk.',
     primaryCta: { label: 'Request a coverage review →', href: '#contact' },
     secondaryCta: { label: 'Explore hotel coverage', href: HOTEL_PATHS.coverage },
@@ -144,10 +187,11 @@ export const landing = {
     image: { src: heroImage, alt: altFor('src/assets/hotels/hero-boutique-hotel.jpg') } satisfies LegacyImage,
     imageCaption: 'Built for independent properties',
   },
+  credibilityLabel: 'California hospitality focus',
   credibility: ['Focused on California hospitality', 'Built for independent properties', 'Responsive, human service'],
   risks: {
     eyebrow: 'A hotel is never just a building',
-    heading: 'One property. A hundred moving parts.',
+    heading: 'One property.\nA hundred moving parts.',
     text: 'We help connect the risks that are too often handled in isolation, so your coverage reflects how your hotel actually operates.',
     items: [
       { number: '01', icon: 'property', title: 'Property & guest protection', text: 'Buildings, contents, equipment breakdown, guest liability, liquor and umbrella.' },
@@ -241,6 +285,7 @@ export const coveragePage = {
     heading: 'Connected coverage for a connected operation.',
     text: 'The goal is not more policies. It is fewer blind spots and a program that makes sense as one whole.',
   },
+  jumpLabel: 'Jump to',
   includesLabel: 'Often includes',
   cta: {
     eyebrow: 'The right program is property-specific',
@@ -253,8 +298,8 @@ export const coveragePage = {
 /** The "California Hospitality Risk Brief" cover graphic (rendered in HTML, not an image). */
 export const briefCover = {
   monogram: 'H',
-  issue: 'ISSUE 01 · SEPT 2026',
-  title: 'California Hospitality Risk Brief',
+  issue: 'ISSUE 01\nSEPT 2026',
+  title: 'California\nHospitality\nRisk Brief',
   tagline: 'Practical risk management insights.',
   focusLabel: 'This month’s focus',
   focus: 'Preventing housekeeping injuries: a silent cost driver.',
@@ -270,6 +315,7 @@ export const libraryPage = {
   newsletter: {
     eyebrow: 'Get the next issue',
     heading: 'One practical risk conversation each month.',
+    label: 'Work email',
     placeholder: 'Work email',
     button: 'Subscribe →',
     action: `${HOTEL_PATHS.home}?email={email}#contact`,
@@ -280,8 +326,11 @@ export const libraryPage = {
     text: 'Housekeeping is the backbone of every hotel experience. It is also one of the leading sources of worker injury and workers’ compensation pressure. Small process and equipment changes can make a measurable difference.',
     linkLabel: 'Read the full brief →',
   },
+  topicsLabel: 'All topics',
   topics: ['Insurance awareness', 'Employee well-being', 'Operational excellence', 'Property & cyber security'],
   moreHeading: 'More from the brief',
+  viewAll: { label: 'View all issues →', href: '#briefs' },
+  cardLinkLabel: 'Read brief →',
   cta: {
     eyebrow: 'A question for your property?',
     heading: 'Turn the next risk brief into a conversation with an advisor.',
@@ -309,6 +358,20 @@ export interface RiskBrief {
   checklist: string[];
   cta: string;
 }
+
+/** Fixed labels on every risk-brief article (/hotels/risk-briefs/[slug]). */
+export const briefArticle = {
+  breadcrumbRoot: 'Risk Brief',
+  issuePrefix: 'Issue',
+  publication: 'California Hospitality Risk Brief',
+  questionsLabel: 'Questions to ask',
+  considerLabel: 'Question to consider',
+  outlineLabel: 'In this brief',
+  checklistLabel: 'Manager checklist',
+  ctaEyebrow: 'Keep the conversation going',
+  primaryCta: { label: 'Request a review →', href: `${HOTEL_PATHS.home}#contact` },
+  secondaryCta: { label: 'Back to all briefs', href: HOTEL_PATHS.briefs },
+};
 
 export const briefDisclaimer =
   'This material is for general risk-management discussion and is not legal, medical or insurance coverage advice.';

@@ -1,0 +1,23 @@
+---
+/** The "California Hospitality Risk Brief" cover, drawn in HTML (hotels.css). */
+import { briefCover } from '../../data/legacy/hotels';
+import Lines from './Lines.astro';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['hm-briefCover', compact && 'hm-briefCoverCompact']}>
+  <div class="hm-briefCoverTop">
+    <span class="hm-briefMonogram" aria-hidden="true">{briefCover.monogram}</span>
+    <span class="hm-briefIssue"><Lines text={briefCover.issue} /></span>
+  </div>
+  <div class="hm-briefCoverTitle"><Lines text={briefCover.title} /></div>
+  <p>{briefCover.tagline}</p>
+  <div class="hm-briefCoverFocus">
+    <span>{briefCover.focusLabel}</span>
+    <strong>{briefCover.focus}</strong>
+  </div>
+</div>

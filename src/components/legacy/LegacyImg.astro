@@ -1,11 +1,37 @@
 ---
 import { Image } from 'astro:assets';
 import type { LegacyImage } from '../../data/legacy/hotels';
+
 interface Props {
   image: LegacyImage;
+  /** Fixed output width (ignored when `widths` is set). */
   width?: number;
+  /** Responsive candidate widths; requires `sizes`. */
+  widths?: number[];
+  sizes?: string;
+  class?: string;
+  /** Keep the image in colour. base.css makes every other image grayscale; use for people photos. */
+  color?: boolean;
+  /** CSS object-position for cover-fitted images. */
+  position?: string;
+  /** Above-the-fold image: load eagerly with high priority. */
+  priority?: boolean;
 }
-const { image, width = 960 } = Astro.props;
+
+const { image, width = 960, widths, sizes, class: className, color = false, position, priority = false } = Astro.props;
+const shared = {
+  class: className,
+  'data-color': color ? '' : undefined,
+  style: position ? `object-position: ${position}` : undefined,
+  loading: priority ? ('eager' as const) : undefined,
+  fetchpriority: priority ? ('high' as const) : undefined,
+};
 ---
 
-<Image src={image.src} alt={image.alt} width={width} />
+{
+  widths && sizes ? (
+    <Image src={image.src} alt={image.alt} widths={widths} sizes={sizes} {...shared} />
+  ) : (
+    <Image src={image.src} alt={image.alt} width={width} {...shared} />
+  )
+}
