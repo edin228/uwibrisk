@@ -7,7 +7,7 @@
 
 | Collection | Hygraph (published) | Exported | Location |
 | --- | --- | --- | --- |
-| Blog posts | 122 | 119 | src/content/blog/*.md(x) |
+| Blog posts | 122 | 118 | src/content/blog/*.md(x) |
 | Team members | 25 | 18 | src/content/team/*.md |
 | Pets (on team members) | - | 7 | team front matter `pets` |
 | Pages (rich text / listing) | 63 | 20 | src/content/pages/*.md(x) |
@@ -23,7 +23,7 @@
 | Check-up cards | 3 | 3 | src/data/check-up-cards.json |
 | Navigation items | 9 | 7 | src/data/navigation.json |
 | Hygraph form definitions | 1 | 1 | src/data/hygraph-forms.json |
-| Assets (all published) | 384 | 228 images + 2 files | src/assets/**, public/files/ |
+| Assets (all published) | 384 | 238 images + 2 files | src/assets/**, public/files/ |
 | Form submissions (DRAFT) | 15 | 15 | /tmp/uwib-submissions.csv (outside the repo; may contain PII) |
 
 Pages total (63 in Hygraph) = 20 pages + 35 form pages + 6 landing pages + 2 skipped test pages.
@@ -40,9 +40,10 @@ Pages total (63 in Hygraph) = 20 pages + 35 form pages + 6 landing pages + 2 ski
 | team | brittany-ross | isActive = false |
 | team | mary-joy | isActive = false |
 | team pets | josh-acosta/henry | pet isActive = false |
-| blog | amazon-sells-everything-even-insurance | isActive = false (still published, so currently reachable at /blog/<slug>) |
+| blog | amazon-sells-everything-even-insurance | isActive = false (was still published and reachable); 301 -> /blog |
 | blog | increase-chances-of-career-success-5-cliches-that-work-to-get-you-started | cut by owner (copied content); 301 -> /blog |
 | blog | excellence-in-the-workplace-maturity-is-an-expected-element | cut by owner (copied content); 301 -> /blog |
+| blog | how-independent-agents-can-help-condo-clients-reduce | duplicate of how-independent-agents-can-help-condo-clients-reduce-risk (owner decision); 301 -> /blog/how-independent-agents-can-help-condo-clients-reduce-risk |
 | pages | test-jotform | test page |
 | pages | sembley-test | test page |
 | carriers | SafeCo | isActive = false |
@@ -56,14 +57,14 @@ Pages total (63 in Hygraph) = 20 pages + 35 form pages + 6 landing pages + 2 ski
 
 ## Images and files
 
-- 228 images downloaded, long edge capped at 2400px, metadata stripped (SVGs and small GIFs copied as-is).
-- Original size 163.5 MB; written 24.9 MB (images + files).
+- 238 images downloaded, long edge capped at 2400px, metadata stripped (SVGs and small GIFs copied as-is).
+- Original size 172.9 MB; written 27.6 MB (images + files).
 
 | Directory | Files | Size |
 | --- | --- | --- |
 | public/files/clientportalbrochure.pdf | 1 | 315 KB |
 | public/files/key-risk-management-concepts-for-discussion-2024.pdf | 1 | 119 KB |
-| src/assets/blog | 110 | 13.4 MB |
+| src/assets/blog | 109 | 13.3 MB |
 | src/assets/carriers | 24 | 252 KB |
 | src/assets/check-up-cards | 2 | 150 KB |
 | src/assets/landing | 12 | 1.7 MB |
@@ -74,9 +75,9 @@ Pages total (63 in Hygraph) = 20 pages + 35 form pages + 6 landing pages + 2 ski
 | src/assets/pets | 7 | 1.7 MB |
 | src/assets/programs | 8 | 1.1 MB |
 | src/assets/quote-cards | 9 | 676 KB |
-| src/assets/team | 20 | 3.9 MB |
+| src/assets/team | 31 | 6.7 MB |
 
-- 56 opaque PNGs over 400 KB (photos saved as PNG) were re-encoded as JPEG q85: 62.0 MB -> 8.0 MB. PNGs with transparency were kept as PNG.
+- 57 opaque PNGs over 400 KB (photos saved as PNG) were re-encoded as JPEG q85: 62.4 MB -> 8.1 MB. PNGs with transparency were kept as PNG.
 
 PDFs moved to `public/files/` (links rewritten):
 
@@ -90,17 +91,16 @@ Hard-coded images from the old Next.js app (`main`), downloaded to `src/assets/l
 - `src/assets/legacy/safeco-logo.jpg` <- https://cdn.brinq.io/UWIBR/safeco4157.jpg (pages/index.js:131, pages/safeco-faq.js:67)
 - NOT downloaded: https://media.graphassets.com/I5lQ9O1nTv2SBBitaDMw (pages/dirt-haulers.js:19) - Dirt Haulers video (~155 MB mp4) - videos are dropped
 
-Images whose Hygraph alt text was just a file name (alt cleared, needs real alt text):
+### Alt text
 
-- blog:the-2030-insurance-agency-where-humans-and-machines-build-revenue-together: "Image (1).png"
-- page:our-core-values: "UWIBCoreValues_Dec17-01.png"
-- page:careers: "Join-a-winning-team.png"
-- All blog `heroAlt` and page `headerAlt` values are empty: Hygraph has no alt text for featured/header images.
+- Alt text for every image in `src/assets` lives in `src/data/alt-text.json` (keyed by asset path, AI-drafted, owner review in `docs/alt-text-review.md`). The export merges it into front matter / data (`heroAlt`, `photoAlt`, `logoAlt`, `imageAlt`, inline markdown alts); legacy pages read it via `src/lib/alt.ts`. Content schemas reject empty alt text, so a new image without an entry fails the build.
+- Hygraph alt text was ignored; 3 inline images only had a file name as alt.
+- Images without alt text in this export: none.
 
 ## Videos removed
 
 - blog:risk-management-why-being-proactive-pays-off-in-insurance: removed video node `Josh.mp4` (https://us-west-2.graphassets.com/AxLg70bPjR3y8qyVdg6FNz/cmbzo5gigfu6s07mzeqwxyqor)
-- Dirt Haulers video (https://media.graphassets.com/I5lQ9O1nTv2SBBitaDMw, ~155 MB) not downloaded; /dirt-haulers needs a redirect decision (see below).
+- Dirt Haulers video (https://media.graphassets.com/I5lQ9O1nTv2SBBitaDMw, ~155 MB) not downloaded; /dirt-haulers now 301s to the dirt-hauling survey (owner approved).
 - Hygraph video asset not exported: invideo-ai-720 Dirt Haulers_ Slash Insurance Costs & Av 2025-05-19.mp4 (148.0 MB).
 
 ## Callout blocks (Hygraph `class` nodes -> `<Callout>` in MDX)
@@ -115,19 +115,30 @@ Hygraph markdown drops the custom class; these blocks were wrapped in `<Callout 
 ## Links
 
 - Absolute internal links (uwibrisk.com / www.uwibrisk.com / uwib.com) rewritten to site-relative paths: 153.
-- Old uwib.com (pre-Next) contact URLs pointed at the new contact page: `/contact-us -> /contact`, `/contact-webform -> /contact` (4 links).
 
-### SharePoint links (flagged, unchanged - likely require a Microsoft login)
+### Link overrides applied (scripts/export-config.mjs `LINK_OVERRIDES`, owner decisions)
+
+- blog:4-things-to-consider-when-building-your-small-business-insurance-portfolio: `https://uwib.com/contact-us/` -> `/contact`
+- blog:protecting-yourself-from-vandalism-what-every-retail-business-owner-should-know: `https://uwib.com/contact-webform/` -> `/contact`
+- blog:protecting-yourself-from-vandalism-what-every-retail-business-owner-should-know: `https://uwib.com/contact-webform/` -> `/contact`
+- blog:contract-fail: `https://uwib.com/before-you-sign-on-the-dotted-line-consider-these-risks/` -> link removed, text kept
+- blog:your-data-could-be-the-victim-of-a-kidnapping: `https://uwib.com/contact-webform/?utm_medium=Blog&utm_campaign=Ransomware&utm_source=uwib%20website&utm_content=&utm_term=` -> `/contact`
+- blog:wealth-managers-team-with-risk-managers-to-cover-all-the-bases: `https://uwib.com/why-confidentiality-agreements-are-a-must/` -> link removed, text kept
+- blog:navigating-the-looming-labor-shortage-a-guide-for-hr-professionals: `https://uwibrisk.com/team/michael-kenneth` -> link removed, text kept
+
+### URL fixes applied (`URL_FIXES`)
+
+- program:drone-insurance: `https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin` -> `https://uwib.portal.skywatch.ai/brokerLogin`
+- quoteCards:drone: `https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin` -> `https://uwib.portal.skywatch.ai/brokerLogin`
+
+### SharePoint / Microsoft Loop links (left unchanged; owner must decide - likely require a Microsoft login)
 
 - blog:cyber-risk-is-moving-faster-than-ever-is-your-organization-ready: https://uwibcom-my.sharepoint.com/personal/dcoates_uwib_com/Documents/Desktop/chubb-cyber-claims-report-2026.pdf?EntityRepresentationId=b1e79f02-71b3-4870-88de-807f3bc4d50e
 - officeResource:uwib-intranet: https://loop.cloud.microsoft/p/eyJ3Ijp7InUiOiJodHRwczovL3V3aWJjb20uc2hhcmVwb2ludC5jb20vP25hdj1jejBsTWtZbVpEMWlJVVkyYVRCR2VVVmZWRVV0ZWxJNFpIVjBkM1Y0Y1MxVFNURm5hSEJ2YWpGQ2NrTk9lRkpqUXpOVlRqRm1WVkl3TUhKU2VtaFVOR2MwTVZBd2FXRkdOV2NtWmowd01UWkJSVVZZVjFCSE5VaFZSRUZTUmsxUlFrVkpTa2hXVmtwQk1rcEdTa2hDSm1NOUptWnNkV2xrUFRFJTNEIiwiciI6ZmFsc2V9LCJwIjp7InUiOiJodHRwczovL3V3aWJjb20uc2hhcmVwb2ludC5jb20vOmZsOi9yL2NvbnRlbnRzdG9yYWdlL0NTUF8xN2I0YTgxNy0zZjIxLTRmNGMtYjM0Ny1jNzZlYjcwYmIxYWIvRG9jdW1lbnQlMjBMaWJyYXJ5L0xvb3BBcHBEYXRhL1VudGl0bGVkLmxvb3A%2FZD13NmUyMThlNzIyMzFhNDE1ZDhjNGVjNDFmN2U1MzRkYzImY3NmPTEmd2ViPTEmbmF2PWN6MGxNa1pqYjI1MFpXNTBjM1J2Y21GblpTVXlSa05UVUY4eE4ySTBZVGd4TnkwelpqSXhMVFJtTkdNdFlqTTBOeTFqTnpabFlqY3dZbUl4WVdJbVpEMWlJVVkyYVRCR2VVVmZWRVV0ZWxJNFpIVjBkM1Y0Y1MxVFNURm5hSEJ2YWpGQ2NrTk9lRkpqUXpOVlRqRm1WVkl3TUhKU2VtaFVOR2MwTVZBd2FXRkdOV2NtWmowd01UWkJSVVZZVjB4VFVsbFJWelJIVWtSTVZrRlpXVlJYUlVRMU4wWkhWRTlESm1NOUpUSkdKbVpzZFdsa1BURW1ZVDFNYjI5d1FYQndKbkE5SlRRd1pteDFhV1I0SlRKR2JHOXZjQzF3WVdkbExXTnZiblJoYVc1bGNpWjRQU1UzUWlVeU1uY2xNaklsTTBFbE1qSlVNRkpVVlVoNE1XUXliR2xaTWpsMFRHNU9iMWxZU214alJ6bHdZbTVSZFZreU9YUm1SMGxvVW1wYWNFMUZXalZTVmpsVlVsTXhObFZxYUd0a1dGSXpaRmhvZUV4V1RrcE5WMlJ2WTBjNWNVMVZTbmxSTURVMFZXMU9SRTB4Vms5TlYxcFdWV3BCZDJOc1NqWmhSbEV3V25wUmVGVkVRbkJaVlZreFdqTjNkMDFVV2tKU1ZWWlpWakZDU0U1VmFGWlNSVVpUVW1zeFVsRnJWa3BUYTJoWFZtdHdRazFyY0VkVGEyaERKVEl5SlRKREpUSXlhU1V5TWlVelFTVXlNamN6WldZeE5ERXlMVFV3T0RFdE5Ea3daUzA0T1RRNExUbGpZalJsTkRFd1lXRTJPU1V5TWlVM1JBJTNEJTNEIiwiciI6ZmFsc2V9LCJpIjp7ImkiOiI3M2VmMTQxMi01MDgxLTQ5MGUtODk0OC05Y2I0ZTQxMGFhNjkifX0%3D
 
 ### Internal links that do not match a known route
 
-- blog:contract-fail: `https://uwib.com/before-you-sign-on-the-dotted-line-consider-these-risks/` -> `/before-you-sign-on-the-dotted-line-consider-these-risks`
-- blog:wealth-managers-team-with-risk-managers-to-cover-all-the-bases: `https://uwib.com/why-confidentiality-agreements-are-a-must/` -> `/why-confidentiality-agreements-are-a-must`
-- blog:navigating-the-looming-labor-shortage-a-guide-for-hr-professionals: `https://uwibrisk.com/team/michael-kenneth` -> `/team/michael-kenneth`
-- nav:contact: `/about` -> `/about`
+- nav:contact: `/about` -> `/about` (left as-is: Nav dropdown parent ("Contact"); an About page will exist in the redesign.)
 
 ### Unresolved asset URLs
 
@@ -234,11 +245,10 @@ Hygraph markdown drops the custom class; these blocks were wrapped in `<Callout 
 
 ## Blog notes
 
-- Posts with Hygraph template `WebForm` (exported as normal posts): `how-independent-agents-can-help-condo-clients-reduce`, `navigating-cyber-liability-insurance-in-the-age-of-remote-work`, `the-essential-guide-to-workers-compensation-for-small-businesses`.
+- Posts with Hygraph template `WebForm` (exported as normal posts): `navigating-cyber-liability-insurance-in-the-age-of-remote-work`, `the-essential-guide-to-workers-compensation-for-small-businesses`.
 - Posts without an author in Hygraph: `4-things-to-consider-when-building-your-small-business-insurance-portfolio`, `how-independent-agents-can-help-condo-clients-reduce-risk`.
 - `towing-insurance-what-you-need-to-know`: author is inactive -> author set to null (David Murphy).
 - `rawHtml` on blog posts was ignored (the live site never rendered it).
-- DUPLICATE: `how-independent-agents-can-help-condo-clients-reduce` has exactly the same body as `how-independent-agents-can-help-condo-clients-reduce-risk` (both exported). Decision: keep one and 301 the other.
 
 ## Landing pages (component data, need redesign)
 
@@ -300,41 +310,348 @@ Hygraph markdown drops the custom class; these blocks were wrapped in `<Callout 
 - The skipped `test-jotform` page uses Jotform 221506192459154, which is also the live form on: folded-hills.
 - The Hygraph-native contact form definition (fields/options) is in `src/data/hygraph-forms.json`; it needs an on-demand API route on the new site.
 
-## Redirects needing a decision
+## Redirects
 
-`src/data/redirects.ts` maps 227 old URLs (214 unchanged, 11 redirected, 2 dropped).
+Owner-approved redirects (served as real 301s by the Node server):
 
-| Old URL | Proposed | Decision needed |
+| Old URL | New URL | Decision |
 | --- | --- | --- |
-| /waiver | /waiver | Rebuild or retire /waiver (content only exists in old pages/waiver.js). |
-| /safeco-faq | /safeco-faq | Rebuild /safeco-faq from old pages/safeco-faq.js or retire it. |
-| /search | /search | Site search: rebuild client-side (e.g. Pagefind) or redirect /search -> /blog. |
-| /trusted-advisor | /trusted-advisor | Rebuild /trusted-advisor (content only in old pages/trusted-advisor.js). |
-| /coffee-and-contracts | /coffee-and-contracts | Rebuild /coffee-and-contracts (content only in old components/coffee/*). |
-| /hotels | /hotels | Rebuild hotels microsite (content only in old components/hotels/content.js). |
-| /hotels/coverage | /hotels/coverage | See /hotels. |
-| /hotels/why-uwib | /hotels/why-uwib | See /hotels. |
-| /hotels/risk-briefs | /hotels/risk-briefs | See /hotels. |
-| /hotels/risk-briefs/housekeeping-injuries | /hotels/risk-briefs/housekeeping-injuries | See /hotels. |
-| /hotels/risk-briefs/ransomware-readiness | /hotels/risk-briefs/ransomware-readiness | See /hotels. |
-| /hotels/risk-briefs/renovation-season | /hotels/risk-briefs/renovation-season | See /hotels. |
-| /hotels/risk-briefs/guest-amenities | /hotels/risk-briefs/guest-amenities | See /hotels. |
-| /dirt-haulers | /southern-states-dirt-hauling-and-excavation-contractors | Proposed 301 to the dirt-hauling survey form; alternative: the dirt-haulers blog post. |
-| /commercial-options | /commercial-options | Rebuild or redirect /commercial-options -> /get-quotes. |
-| /benefits-solutions111 | /benefits-solutions | Proposed 301 to /benefits-solutions. |
-| /old-contact | /contact | Proposed 301 to /contact. |
-| /resources | /resources | Retire (/resources -> /office-resources?) or build a resources hub. |
-| /blog/amazon-sells-everything-even-insurance | /blog | Inactive post (still published): confirm 301 -> /blog or re-activate. |
-| /team/lillian-chen | /team | Confirm 301 -> /team for former team members. |
-| /team/jamie-johnson | /team | Confirm 301 -> /team for former team members. |
-| /team/david-murphy | /team | Confirm 301 -> /team for former team members. |
-| /team/brittany-ross | /team | Confirm 301 -> /team for former team members. |
-| /team/mary-joy | /team | Confirm 301 -> /team for former team members. |
+| /dirt-haulers | /southern-states-dirt-hauling-and-excavation-contractors | 301 to the dirt-hauling survey (owner approved). |
+| /benefits-solutions111 | /benefits-solutions | 301 to /benefits-solutions (owner approved). |
+| /old-contact | /contact | 301 to /contact (owner approved). |
+| /blog/amazon-sells-everything-even-insurance | /blog | 301 to /blog (owner approved). |
+| /blog/increase-chances-of-career-success-5-cliches-that-work-to-get-you-started | /blog | Owner decision (scripts/export-config.mjs). |
+| /blog/excellence-in-the-workplace-maturity-is-an-expected-element | /blog | Owner decision (scripts/export-config.mjs). |
+| /blog/how-independent-agents-can-help-condo-clients-reduce | /blog/how-independent-agents-can-help-condo-clients-reduce-risk | Owner decision (scripts/export-config.mjs). |
+| /team/lillian-chen | /team | 301 to /team (owner approved). |
+| /team/jamie-johnson | /team | 301 to /team (owner approved). |
+| /team/david-murphy | /team | 301 to /team (owner approved). |
+| /team/brittany-ross | /team | 301 to /team (owner approved). |
+| /team/mary-joy | /team | 301 to /team (owner approved). |
+
+### Redirects needing a decision
+
+- none
+`src/data/redirects.ts` maps 227 old URLs (213 unchanged, 12 redirected, 2 dropped).
+
+
+## Pages migrated from the old Next.js code
+
+These pages were hard-coded in the old app (not in Hygraph). Owner: all are still used. Their copy, structured data, image references, contacts and form definitions were extracted by hand into `src/data/legacy/` (not touched by the export). Each URL has a minimal stub route that renders the content plainly until the redesign.
+
+| URL(s) | Content | Old source | Images | Form |
+| --- | --- | --- | --- | --- |
+| /hotels, /hotels/why-uwib, /hotels/coverage, /hotels/risk-briefs, /hotels/risk-briefs/<4 briefs> | `src/data/legacy/hotels.ts` | pages/hotels/**, components/hotels/* | src/assets/hotels/ (hero + 4 team photos) | Coverage review form -> POST /api/submit, Source "California boutique hotels page" (emails eschirding@uwib.com). Fields: Name, Email, Property name, Location, Number of rooms, Renewal month, Message. Risk-brief "subscribe" box only redirects to /hotels?email=...#contact. |
+| /coffee-and-contracts | `src/data/legacy/coffee-and-contracts.ts` | pages/coffee-and-contracts.js, components/coffee/* | src/assets/coffee-and-contracts/ (4 photos + Josh Acosta portrait); reuses the hotels service-team photos | Quick-quote form -> POST /api/submit, Source "Coffee & Contracts page" (emails josh@uwib.com). Fields: Name, Email, Business name, Location, Type of business, Renewal month, Message. |
+| /trusted-advisor | `src/data/legacy/trusted-advisor.ts` | pages/trusted-advisor.js | src/assets/legacy/trusted-advisor-dana-coates.jpg | Conversation form -> POST /api/submit, Source "Trusted Advisor page" (FORM_NOTIFICATION_TO). Fields: Name, Firm, Email, Phone (optional), Professional designation, Message. |
+| /safeco-faq | `src/data/legacy/safeco-faq.ts` | pages/safeco-faq.js | src/assets/legacy/safeco-logo.jpg | - |
+| /waiver | `src/data/legacy/waiver.ts` | pages/waiver.js | - | Third-party Waiver Electronic tab script (waiverelectronic.com, id 5ccc99bddb83f601b57306fb); no UWIB endpoint. |
+| /commercial-options | `src/data/legacy/commercial-options.ts` | pages/commercial-options.js | src/assets/commercial-options/ | - |
+| /resources | `src/data/legacy/resources.ts` | pages/resources/index.js (stub with the word "Resources") | - | - |
+| /coi | `src/data/legacy/coi.ts` | pages/coi.js | - | - |
+| /contact | `src/data/legacy/contact.ts` | pages/contact.js, components/contact/HomeContactForm.js | - | Advisor-matching wizard (state map -> personal/business -> questions -> producer booking link or /personal-quote). It never posted to /api/submit. Routing rules ported verbatim (isProducerMatch); they still reference inactive David Murphy. |
+| /sales-team | `src/data/legacy/sales-team.ts` | pages/sales-team.js | team motionPhotos (now exported) | - |
+| /get-quotes, /coverage-check-ups, /coverage-and-cost-estimates, /carriers, /programs, /glossary-terms, /office-resources | `src/data/legacy/listing-pages.ts` | pages/*.js (headings/meta only; content comes from data collections) | - | - |
+
+- Shared form definitions (fields, payload keys, Source values, messages): `src/data/legacy/forms.ts`.
+- The old pages sent the Hygraph id of the "Contact Form" as `id`; the new forms send `"contact-form"` (`LEGACY_FORM_ID`).
+- Every URL in `src/data/redirects.ts` now resolves on the new site (stub routes for CMS pages, forms, landing pages, listing grids and legacy pages; verified against `dist/` after build).
+- The team export now includes `motionPhotos` (alternate portraits used by the old /sales-team page).
+- Not migrated: the old home page (`pages/index.js`) layout/copy, which will be redesigned.
+
+## Form submissions backend
+
+- `POST /api/submit` is an on-demand route (`src/pages/api/submit.ts`) porting `pages/api/submit.js` + `lib/server/sendFormNotification.js`: same JSON request contract (`id` + fields, `website` honeypot -> 204), 32 KB body limit, max 50 fields, field names <= 100 chars, values <= 5,000 chars (string/number/boolean/null), Resend email with the same `SOURCE_RECIPIENTS`, subject/body format, reply-to and idempotency key.
+- Hygraph storage was dropped (Hygraph is being retired). The submission id is now a random UUID.
+- Behaviour change: because nothing else stores the submission, a failed notification email now returns `502` instead of the old `201 { notificationSent: false }`, so the visitor sees an error and can retry or email us.
+- Environment variables: `RESEND_API_KEY`, `FORM_FROM_EMAIL`, `FORM_NOTIFICATION_TO` (comma-separated); optional `RESEND_API_URL` (testing only). See README.
+- Hygraph-embedded forms (Jotform, vendor iframes) are unchanged: they post to their own providers.
+- Astro rejects cross-site form POSTs (`security.checkOrigin`), so submissions must come from the site origin; verify the forwarded host on DigitalOcean.
+- Smoke-tested locally against a mock Resend server (no real emails): valid hotels/trusted-advisor submissions -> 201 and the expected recipients, honeypot -> 204, invalid/oversized -> 400/413, email failure -> 502, cross-origin -> 403.
+
+## Search
+
+- Pagefind indexes the built site after `astro build` (`npm run build`); `/search` is a minimal page using the Pagefind UI.
+- Only pages that mark their content with `data-pagefind-body` are indexed: blog posts, team pages, CMS pages, landing pages and the legacy pages. Form/embed pages, listing grids and `/search` itself are excluded.
+
+## Copy to revise (cost promises)
+
+Lines in the migrated content (`src/content`, `src/data` incl. `legacy/`) that match savings/cost-promise language, for review against `docs/copy-guidelines.md`. Content was **not** changed. Patterns: save/saving, lower, reduce, premium credit, cut costs, percentages, and "cost" only when a promise word (less, cheaper, affordable, minimize, decrease, fraction of, no additional, free) is on the same line. Many hits are legitimate (glossary definitions, process language, statistics); this is a review list, not a verdict.
+
+266 lines in 109 files.
+
+| File | Line | Quote |
+| --- | --- | --- |
+| `src/content/blog/3-hidden-insurance-pitfalls-apartment-building-owners-should-watch-for.md` | 38 | “…sensors, or installing automatic shutoff valves can help you qualify for broader water coverage and lower deductibles.” |
+| `src/content/blog/3-hidden-insurance-pitfalls-apartment-building-owners-should-watch-for.md` | 56 | “…ocket in recent years. Many apartment buildings are still insured at outdated valuations — often 20–40% below actual replacement cost.” |
+| `src/content/blog/3-hidden-insurance-pitfalls-apartment-building-owners-should-watch-for.md` | 58 | “If your policy doesn’t reflect current rebuild costs, you risk becoming underinsured. Most policies also include a coinsurance penalty if you carry limits below the required threshold. In…” |
+| `src/content/blog/3-hidden-insurance-pitfalls-apartment-building-owners-should-watch-for.md` | 83 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/4-things-to-consider-when-building-your-small-business-insurance-portfolio.md` | 6 | “…portant. Having a properly structured insurance portfolio tailored to your small business needs can save you a significant amount of time and money in the case of unexpected events. While building the perfect insurance portfolio may seem da…” |
+| `src/content/blog/4-things-to-consider-when-building-your-small-business-insurance-portfolio.md` | 18 | “…portant. Having a properly structured insurance portfolio tailored to your small business needs can save you a significant amount of time and money in the case of unexpected events.” |
+| `src/content/blog/4-things-to-consider-when-building-your-small-business-insurance-portfolio.md` | 28 | “…properly insured, these assets expose your company to unnecessary risk. While it may be tempting to cut costs by insuring corporate-owned vehicles or property under a personal policy, don’t be fooled. When it comes to your company’s physica…” |
+| `src/content/blog/7-emerging-business-risks-in-2025and-the-insurance-to-match.mdx` | 27 | “…compromise (BEC), and funds-transfer fraud are hitting every sector. In fact, ransomware surged by ~25% in 2024, and 82% of those attacks target businesses under 1,000 employees. Shockingly, 75% of SMBs couldn’t continue operating after a r…” |
+| `src/content/blog/7-emerging-business-risks-in-2025and-the-insurance-to-match.mdx` | 83 | “Construction and material costs have jumped 20–30%, often leaving business insurance underinsured.” |
+| `src/content/blog/7-emerging-business-risks-in-2025and-the-insurance-to-match.mdx` | 127 | “[**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/a-comprehensive-guide-to-inland-marine-insurance-tools-equipment-and-installatio.md` | 36 | “- **Theft and Vandalism**: Protection against theft of tools and equipment will significantly reduce the financial burden associated with these unfortunate events.” |
+| `src/content/blog/a-comprehensive-guide-to-inland-marine-insurance-tools-equipment-and-installatio.md` | 60 | “…eds carefully. Enhancing your understanding of inland marine insurance can lead to significant cost savings and provide peace of mind as you navigate the complexities of your work environment.” |
+| `src/content/blog/a-comprehensive-guide-to-inland-marine-insurance-tools-equipment-and-installatio.md` | 66 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/annual-business-insurance-review-checklist-essential-steps-for-protection.md` | 24 | “…ur current coverage, identify any gaps, and make necessary adjustments. This proactive approach can save money and avoid unforeseen losses.” |
+| `src/content/blog/annual-business-insurance-review-checklist-essential-steps-for-protection.md` | 62 | “…isions to safeguard your business against unforeseen risks, optimize your coverage, and potentially save on costs.” |
+| `src/content/blog/annual-business-insurance-review-checklist-essential-steps-for-protection.md` | 72 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/beyond-covid-what-businesses-learned-about-risk-resilience-and-revenue-protection.md` | 91 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.md` | 24 | “…ntial coverages, such as general liability and commercial property insurance, into one package at a reduced cost. This policy aims to provide robust protection against various risks that businesses face, from property damage to liability cl…” |
+| `src/content/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.md` | 42 | “…tandalone policies. Since BOPs combine varying coverages into a single policy, they often result in lower premiums compared to buying each coverage separately.” |
+| `src/content/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.md` | 50 | “Managing a single BOP can simplify administrative tasks, reduce paperwork, and streamline the claims process. In contrast, juggling multiple standalone policies can complicate matters, making it es…” |
+| `src/content/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.md` | 54 | “…e general liability, workers' compensation, and equipment coverage. Conversely, a local bakery with lower risks might find that a BOP sufficiently covers their needs while keeping insurance costs manageable.” |
+| `src/content/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.md` | 68 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/certificates-of-insurance-cois-what-clients-actually-need.md` | 76 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/classic-and-collector-car-insurance-basics-a-comprehensive-guide.md` | 72 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/coi-request-template-and-best-practices-a-guide-for-insurance-novices.md` | 32 | “…uire COIs when engaging with contractors, vendors, and other third parties to ensure compliance and reduce the risk of financial liabilities.” |
+| `src/content/blog/coi-request-template-and-best-practices-a-guide-for-insurance-novices.md` | 42 | “…*Peace of Mind**: Knowing that those you work with have adequate insurance gives you confidence and reduces potential risks.” |
+| `src/content/blog/coi-request-template-and-best-practices-a-guide-for-insurance-novices.md` | 104 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 6 | “…gement specifically tailored for HVAC companies, examining strategies to safeguard your operations, reduce risk exposures, and enhance overall safety...."” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 20 | “…gement specifically tailored for HVAC companies, examining strategies to safeguard your operations, reduce risk exposures, and enhance overall safety.” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 42 | “…ld focus on safe driving practices, hazard recognition, and emergency response. This approach helps reduce the likelihood of accidents and fosters a culture of safety within the company.” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 46 | “…t could lead to accidents. Keeping vehicles well-maintained also extends their lifespan, ultimately saving money and resources.” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 50 | “…route optimization tools. These technologies enhance productivity, ensure better route management, reduce fuel costs, and provide critical data for analyzing driving habits and patterns, which can inform safety training.” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 62 | “Managing risks effectively can lead to significant financial benefits for HVAC companies. Lower claims history often results in reduced premiums on commercial auto policies. Moreover, improved safety measures can enhance employee…” |
+| `src/content/blog/commercial-auto-risk-management-for-hvac-companies.md` | 76 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/contract-fail.md` | 30 | “…ns, have your attorney look it over. Taking just a handful of brief and inexpensive precautions can save you time, frustration, and money, in the long run.” |
+| `src/content/blog/crime-fidelity-bonds-protecting-against-employee-theft.md` | 76 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/cyber-incident-tabletop-exercise-a-comprehensive-outline.md` | 74 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/cyber-insurance-for-smbs-requirements-and-underwriting.md` | 24 | “…ming; recent statistics indicate that the cybersecurity insurance market saw a staggering growth of 47.6% in 2022, reaching nearly $9.7 billion in direct written premiums. This surge highlights the recognition of cyber insurance as a necess…” |
+| `src/content/blog/cyber-insurance-for-smbs-requirements-and-underwriting.md` | 36 | “…uthentication (MFA):** Adding an additional layer of security beyond just passwords can drastically reduce unauthorized access.” |
+| `src/content/blog/cyber-insurance-for-smbs-requirements-and-underwriting.md` | 50 | “An effective response plan can substantially reduce the impact of a cyber incident. These plans should outline specific steps for managing and mitigating breaches, from initial detectio…” |
+| `src/content/blog/cyber-insurance-for-smbs-requirements-and-underwriting.md` | 62 | “…lts of the risk assessment. SMBs with comprehensive cybersecurity measures in place may qualify for lower premiums.” |
+| `src/content/blog/cyber-insurance-for-smbs-requirements-and-underwriting.md` | 82 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/disaster-preparedness-how-the-right-insurance-can-be-your-lifeline.md` | 26 | “…n quake-prone zones, where the trembling earth can shake the very foundations of your home—and your savings.” |
+| `src/content/blog/drone-operations-aviation-liability-and-compliance.md` | 60 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/electric-vehicle-insurance-what-s-different.md` | 28 | “One notable difference in electric vehicle insurance is the average cost of premiums. Data indicates that insuring an EV generally comes with higher yearly premiums compared to gas-powered vehicles. This is p…” |
+| `src/content/blog/electric-vehicle-insurance-what-s-different.md` | 44 | “…lly for electric vehicle owners. These can include discounts for having eco-friendly electric cars, reduced rates for safe driving records, and incentives for opting for advanced safety features common in many EV models.” |
+| `src/content/blog/electric-vehicle-insurance-what-s-different.md` | 46 | “Additionally, the lower maintenance costs typically associated with EVs can lead to savings in other areas, which may help to offset higher insurance premiums over time.” |
+| `src/content/blog/electric-vehicle-insurance-what-s-different.md` | 50 | “…the potential cost implications of insuring an electric vehicle, consider these strategies to help lower premiums:” |
+| `src/content/blog/electric-vehicle-insurance-what-s-different.md` | 56 | “- **Increase Deductibles:** Opting for higher deductibles can decrease your premium, but make sure you can afford the out-of-pocket cost if a claim arises.” |
+| `src/content/blog/electric-vehicle-insurance-what-s-different.md` | 72 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/electric-vehicles-and-auto-insurance-what-owners-need-to-know.md` | 41 | “…Ed, but Make It Modern**: Consider taking a defensive driving course. Some insurance companies will lower your rates if you prove you're committed to safe driving, even in an EV.” |
+| `src/content/blog/essential-insurance-coverages-for-contractors.md` | 68 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.md` | 6 | “…rkers’ compensation insurance rates are on the rise nationwide. While California is anticipating an 11% increase this fall, similar trends are emerging across the country."” |
+| `src/content/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.md` | 18 | “…rkers’ compensation insurance rates are on the rise nationwide. While California is anticipating an 11% increase this fall, similar trends are emerging across the country. The Workers’ Compensation Insurance Rating Bureau of California (WCI…” |
+| `src/content/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.md` | 24 | “…ding to adjustments in workers' compensation rates. For instance, while some regions have seen rate reductions, others are grappling with the need to increase premiums to maintain system sustainability. ​” |
+| `src/content/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.md` | 38 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/hnw-reccomendations.md` | 24 | “…investing in security systems, fire prevention systems, or other risk-reduction strategies that may lower your insurance premiums and protect your assets.” |
+| `src/content/blog/how-dirt-haulers-cut-insurance-costs-and-avoid-costly-pitfalls.md` | 20 | “At UWIB Risk, we work with dirt haulers, dump truck operators, and mixed-fleet businesses to lower insurance costs and create smarter coverage strategies. Below are just three areas where most operators leave money on the table—and h…” |
+| `src/content/blog/how-dirt-haulers-cut-insurance-costs-and-avoid-costly-pitfalls.md` | 26 | “…Understanding how underwriters view these risks allows you to adjust operations, train drivers, and lower premiums.” |
+| `src/content/blog/how-dirt-haulers-cut-insurance-costs-and-avoid-costly-pitfalls.md` | 48 | “\- Implementing safety training to reduce loss history (which insurers love to see).” |
+| `src/content/blog/how-dirt-haulers-cut-insurance-costs-and-avoid-costly-pitfalls.md` | 60 | “✔ Recognizing safety protocols that reduce your premiums.” |
+| `src/content/blog/how-dirt-haulers-cut-insurance-costs-and-avoid-costly-pitfalls.md` | 64 | “…haulers and dump truck operators. We know how to structure coverage that keeps you protected while lowering your overhead. Take the [**quick survey to see if your company qualifies**](/southern-states-dirt-hauling-and-excavation-contractor…” |
+| `src/content/blog/how-independent-agents-can-help-condo-clients-reduce-risk.md` | 4 | “title: "How Independent Agents Can Help Condo Clients Reduce Risk"” |
+| `src/content/blog/how-independent-agents-can-help-condo-clients-reduce-risk.md` | 5 | “slug: "how-independent-agents-can-help-condo-clients-reduce-risk"” |
+| `src/content/blog/how-independent-agents-can-help-condo-clients-reduce-risk.md` | 41 | “Detecting a maintenance or structural issue early can save your client a significant amount of work and money down the line and prevent avoidable tragedies. Discuss the measures your client is c…” |
+| `src/content/blog/how-independent-agents-can-help-condo-clients-reduce-risk.md` | 54 | “…courage preventative measures, and advocate for transparency you can help them feel more confident, save money, and most importantly avoid tragedies big or small.” |
+| `src/content/blog/how-to-build-a-home-inventory-for-insurance-claims.md` | 68 | “…ess. According to the California Department of Insurance, this kind of preparation can considerably reduce stress when filing a claim.” |
+| `src/content/blog/how-to-build-a-home-inventory-for-insurance-claims.md` | 84 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/how-underwriters-evaluate-your-business-a-behind-the-scenes-look.md` | 36 | “…s with relevant laws, such as employment regulations or health and safety protocols. Compliance can reduce perceived risks and result in more favorable insurance conditions.” |
+| `src/content/blog/how-underwriters-evaluate-your-business-a-behind-the-scenes-look.md` | 54 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/insurance-renewal-mistakes-why-submitting-quotes-through-multiple-agents-often-backfires.md` | 24 | “At UWIB Risk & Insurance Solutions, we routinely review accounts where this strategy quietly reduced options, weakened negotiating leverage, and led to worse outcomes for the client. In some cases, it eliminated the best insurance ma…” |
+| `src/content/blog/insurance-renewal-mistakes-why-submitting-quotes-through-multiple-agents-often-backfires.md` | 48 | “• Reduced credits and less pricing flexibility” |
+| `src/content/blog/insurance-renewal-mistakes-why-submitting-quotes-through-multiple-agents-often-backfires.md` | 116 | “This approach protects buying power and preserves options. It also reduces unpleasant surprises at renewal time.” |
+| `src/content/blog/insurance-tips-for-millennials-bridging-the-knowledge-gap.md` | 30 | “…sn't necessary when you're young and healthy, but that's actually the best time to get it—rates are lower, and it's an investment in your future. Whether it's about covering debts, supporting loved ones, or planning for unforeseen costs, li…” |
+| `src/content/blog/is-your-business-prepared-for-a-cyberattack-why-cyber-liability-insurance-is-a-must-in-2024.md` | 6 | “…d quarter of 2024, organizations experienced an average of 1,876 cyberattacks per week—a staggering 75% increase compared to the same period in 2023."” |
+| `src/content/blog/is-your-business-prepared-for-a-cyberattack-why-cyber-liability-insurance-is-a-must-in-2024.md` | 18 | “…d quarter of 2024, organizations experienced an average of 1,876 cyberattacks per week—a staggering 75% increase compared to the same period in 2023.” |
+| `src/content/blog/is-your-business-prepared-for-a-cyberattack-why-cyber-liability-insurance-is-a-must-in-2024.md` | 49 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/is-your-home-properly-insured-common-coverage-gaps-homeowners-overlook.md` | 69 | “…lize their coverage gaps until it’s too late. Reviewing your policy **before** disaster strikes can save you from financial stress later.” |
+| `src/content/blog/is-your-home-properly-insured-common-coverage-gaps-homeowners-overlook.md` | 79 | “Take advantage of this cost-free opportunity to safeguard your assets. [**Schedule your Private Client Review today!**](/contact)” |
+| `src/content/blog/key-person-insurance-for-founders-and-executives-a-critical-risk-management-tool.md` | 68 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/law-firms-and-the-rising-threats-of-cybercrime-wire-fraud-and-professional-liabi.md` | 60 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/leveraging-technology-how-independent-agencies-can-help-clients-adapt-to-the-digital-transformation-in-insurance.md` | 24 | “…nted precision. For clients, this means faster service, more personalized policies, and potentially lower costs.” |
+| `src/content/blog/leveraging-technology-how-independent-agencies-can-help-clients-adapt-to-the-digital-transformation-in-insurance.md` | 26 | “…re they occur. For example, connected devices can detect water leaks or monitor driving behavior to reduce premiums.” |
+| `src/content/blog/leveraging-technology-how-independent-agencies-can-help-clients-adapt-to-the-digital-transformation-in-insurance.md` | 58 | “**Take the first step towards comprehensive protection.**[**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 6 | “…ovice should be aware of is the loss control visit. This process is a cornerstone of proactive risk reduction strategies employed by many insurance companies. Understanding what to expect during a loss control visit and how to prepare can g…” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 20 | “…ovice should be aware of is the loss control visit. This process is a cornerstone of proactive risk reduction strategies employed by many insurance companies. Understanding what to expect during a loss control visit and how to prepare can g…” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 24 | “…dentify hazards, review existing safety measures, and provide recommendations to improve safety and reduce insurance costs.” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 32 | “…**: The insights gathered during the visit can lead to tailored insurance solutions and potentially lower premiums by demonstrating your commitment to risk management.” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 91 | “…aring adequately and engaging with the professionals conducting the assessment, you can effectively reduce risks and enhance your business’s safety culture.” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 93 | “…ing proactive steps not only protects your business but may also lead to better insurance deals and lower premiums in the long run.” |
+| `src/content/blog/loss-control-visits-what-to-expect-and-how-to-prepare.md` | 101 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/luxury-is-freedom-not-excess.md` | 60 | “_Take advantage of this cost-free opportunity to safeguard your assets._[_Schedule your Private Client Review today!_](/contact)” |
+| `src/content/blog/market-value-vs-insurance-value-whats-the-difference.md` | 22 | “…if it were sold today. To figure this out, experts look at several factors, like how much it would cost to rebuild, how much income the property might generate, and how similar properties have been selling. They also consider things like w…” |
+| `src/content/blog/medical-office-insurance-the-unsung-hero-of-your-healthcare-practice.md` | 39 | “…—like regular staff training, robust cybersecurity measures, and maintaining a safe environment—can reduce the likelihood of claims and keep premiums in check.” |
+| `src/content/blog/medical-office-insurance-the-unsung-hero-of-your-healthcare-practice.md` | 47 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/mid-year-loss-run-reviews-how-to-take-action.md` | 66 | “…ly, use your insights to adjust your insurance coverage as needed. If your loss run review suggests lower risk, it might be an opportune time to negotiate lower premiums or adjust coverage limits. Keep your insurance provider informed about…” |
+| `src/content/blog/mid-year-loss-run-reviews-how-to-take-action.md` | 80 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/navigating-cyber-liability-insurance-in-the-age-of-remote-work.md` | 33 | “…s are the first line of defense. Regular training on cybersecurity best practices can significantly reduce the risk of breaches.” |
+| `src/content/blog/navigating-cyber-underwriting-questionnaires-a-guide-to-success.md` | 50 | “…to carefully craft your responses will not only help you secure coverage but could also potentially lower your premiums and enhance your overall security posture. Armed with the right knowledge and preparation, you can confidently tackle CU…” |
+| `src/content/blog/navigating-cyber-underwriting-questionnaires-a-guide-to-success.md` | 58 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/navigating-insurance-during-southern-californias-wildfire-crisis.md` | 63 | “Take advantage of this cost-free opportunity to safeguard your assets. [**Schedule your Private Client Review today!**](/contact)” |
+| `src/content/blog/navigating-insurance-during-southern-californias-wildfire-crisis.md` | 70 | “Take the first step towards comprehensive protection. [**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/navigating-premises-liability-and-seasonal-staffing-risks-in-retail.md` | 48 | “…rticularly temporary employees. Ensure they understand safety protocols and emergency procedures to reduce accidents.” |
+| `src/content/blog/navigating-premises-liability-and-seasonal-staffing-risks-in-retail.md` | 78 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/navigating-the-waters-ocean-and-inland-cargo-risk-management-in-supply-chains.md` | 82 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/nevada-employers-an-important-workers-compensation-change-is-coming-october-1-2026.md` | 44 | “Because the state is also reducing loss costs, many employers may see little overall premium impact. The actual effect will vary depending on the type of work your em…” |
+| `src/content/blog/new-year-new-coverage-5-insurance-resolutions-to-protect-what-matters-in-2025.md` | 6 | “…o do your needs and risks. Starting 2025 with a comprehensive review of your insurance policies can save you from unexpected expenses and ensure you’re adequately protected."” |
+| `src/content/blog/new-year-new-coverage-5-insurance-resolutions-to-protect-what-matters-in-2025.md` | 20 | “…o do your needs and risks. Starting 2025 with a comprehensive review of your insurance policies can save you from unexpected expenses and ensure you’re adequately protected. Here are five key insurance resolutions to help safeguard what mat…” |
+| `src/content/blog/new-year-new-coverage-5-insurance-resolutions-to-protect-what-matters-in-2025.md` | 46 | “Combining personal and business insurance can lead to significant savings without sacrificing coverage quality.” |
+| `src/content/blog/new-year-new-coverage-5-insurance-resolutions-to-protect-what-matters-in-2025.md` | 49 | “- **What to do**: Ask your agent about bundling options for home, auto, and business policies to save time and money in 2025.” |
+| `src/content/blog/new-year-new-coverage-5-insurance-resolutions-to-protect-what-matters-in-2025.md` | 66 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/participant-waivers-and-liability-a-guide-for-fitness-studios-and-gyms.md` | 26 | “While waivers cannot completely exempt a gym from liability, they can significantly reduce the chances of legal claims against the business stemming from ordinary negligence. A well-crafted waiver informs clients of the pote…” |
+| `src/content/blog/participant-waivers-and-liability-a-guide-for-fitness-studios-and-gyms.md` | 56 | “…classes, the management consulted legal experts to draft a more robust waiver. This update not only reduced the number of claims but also enhanced confrontation during legal disputes, as clients could no longer contest their knowledge of th…” |
+| `src/content/blog/participant-waivers-and-liability-a-guide-for-fitness-studios-and-gyms.md` | 64 | “…out to a legal expert to review your current waiver. Implementing a robust waiver process today can save your business from complications tomorrow.” |
+| `src/content/blog/participant-waivers-and-liability-a-guide-for-fitness-studios-and-gyms.md` | 70 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/personal-cyber-insurance-a-necessity-for-families-and-executives.md` | 76 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/personal-umbrella-policies-the-safety-net-you-didnt-know-you-needed.md` | 6 | “…net you didn't know you needed. Picture this policy as your insurance's cape, ready to swoop in and save the day when your regular coverage just doesn't cut it."” |
+| `src/content/blog/personal-umbrella-policies-the-safety-net-you-didnt-know-you-needed.md` | 18 | “…net you didn't know you needed. Picture this policy as your insurance's cape, ready to swoop in and save the day when your regular coverage just doesn't cut it.” |
+| `src/content/blog/personal-umbrella-policies-the-safety-net-you-didnt-know-you-needed.md` | 26 | “…thing, and judgments can exceed your current coverage and tap into future earnings, inheritance, or savings. An umbrella policy is your financial fortress, safeguarding not only your current assets but also your future ones.” |
+| `src/content/blog/post-incident-review-template-for-safety-committees.md` | 87 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/premium-audits-a-survival-guide-for-small-businesses.md` | 54 | “…s the information, conducts interviews, and may perform site visits. Understanding these steps will reduce anxiety and prepare you for potential questions.” |
+| `src/content/blog/premium-audits-a-survival-guide-for-small-businesses.md` | 88 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/property-maintenance-tips-for-every-season.md` | 38 | “…clean the air-conditioning system. Regularly changing filters keeps the system running efficiently, saving on energy bills.” |
+| `src/content/blog/property-maintenance-tips-for-every-season.md` | 64 | “• Why: Safety devices save lives, but only if they work.” |
+| `src/content/blog/property-maintenance-tips-for-every-season.md` | 66 | “…Tip: Test smoke and carbon monoxide detectors monthly and replace batteries at the end of daylight saving time. Ensure detectors are installed in key areas like bedrooms and kitchens.” |
+| `src/content/blog/property-maintenance-tips-for-every-season.md` | 72 | “…rnace tune-up and duct cleaning before winter. Regularly changing filters prevents dust buildup and reduces fire risks.” |
+| `src/content/blog/property-maintenance-tips-for-every-season.md` | 100 | “…leasant environment for your tenants. Planning ahead and taking small steps throughout the year can save you from larger headaches down the road, leaving you more time to enjoy the fruits of your labor. Here's to a year of smooth sailing an…” |
+| `src/content/blog/protecting-vulnerable-populations-the-imperative-for-child-servicing-organizations.md` | 25 | “…e belief that an abuser would be a complete stranger to the organization and the child. In reality, 93% of reported child sexual abuse cases involve a perpetrator known and trusted by the child, such as a relative, caregiver, family friend,…” |
+| `src/content/blog/protecting-vulnerable-populations-the-imperative-for-child-servicing-organizations.md` | 27 | “…nd checks alone ensures program safety. While background checks are an important element, less than 10% of sexual abusers ever face legal consequences, with only 3% being convicted. This means that approximately 97% of sexual abusers can pa…” |
+| `src/content/blog/protecting-vulnerable-populations-the-imperative-for-child-servicing-organizations.md` | 29 | “…ver, studies show that when a child communicates an allegation – even if later recanted – more than 98% of such allegations are factual.” |
+| `src/content/blog/protecting-vulnerable-populations-the-imperative-for-child-servicing-organizations.md` | 35 | “…ms and MinistrySafe have developed a comprehensive five-step program designed to help organizations reduce the risk of child sexual abuse. This system is tailored to suit various types of organizations, including camps, schools, youth sport…” |
+| `src/content/blog/protecting-your-assets-essential-coverage-for-domestic-employees-and-household-staff.md` | 22 | “…or their employees’ injuries, regardless of fault. For example, in Washington, D.C., you must cover 100% of your employee’s medical expenses and lost income for life! Most other States have different but similar limitless liability. We can…” |
+| `src/content/blog/protecting-your-assets-essential-coverage-for-domestic-employees-and-household-staff.md` | 28 | “Arrange for your cost-free Private Client Review [today](/contact).” |
+| `src/content/blog/protecting-yourself-from-vandalism-what-every-retail-business-owner-should-know.md` | 58 | “● To reduce the possibility of arson, remove or conceal all trash containers.” |
+| `src/content/blog/protecting-yourself-from-vandalism-what-every-retail-business-owner-should-know.md` | 61 | “No security system can guarantee 100% effectiveness against the often unpredictable behavior of vandals or trespassers. The best way to protect yourself and your business is…” |
+| `src/content/blog/reality-hit-and-i-was-caught-totally-off-guard.md` | 64 | “…lifornia. Depending on its specific location, design, and finishes, it wouldn't be uncommon for the cost to rebuild that home today to approach $1.6 million. Yet I've seen many homeowners in areas like this with limits of $810,000 or less.…” |
+| `src/content/blog/reality-hit-and-i-was-caught-totally-off-guard.md` | 80 | “…t a strategy. Neither is assuming your insurance automatically keeps pace with today's construction costs. Unfortunately, I've also seen situations where replacement cost estimates were intentionally or unintentionally understated to make p…” |
+| `src/content/blog/reality-hit-and-i-was-caught-totally-off-guard.md` | 84 | “[At UWIB Risk & Insurance Solutions, we continue to offer cost-free consultations to help policyholders gain an objective perspective of their insurance portfolio and how it might perform under the…” |
+| `src/content/blog/recent-developments-in-californias-home-insurance-amid-wildfire-risks.md` | 22 | “…ent and severe, traditional insurers are re-evaluating their exposure to high-risk areas. Many have reduced their presence or ceased offering standard home insurance policies in these regions altogether. This retreat has paved the way for e…” |
+| `src/content/blog/recent-developments-in-californias-home-insurance-amid-wildfire-risks.md` | 45 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/recording-keeping-for-your-business.md` | 34 | “…wrongful termination, a hostile work environment, discrimination, or wage violations and less than 18% of employers have it. Do you?” |
+| `src/content/blog/recording-keeping-for-your-business.md` | 36 | “…nable, and if you have the misfortune of getting tangled in one of these cases, there's more than a 70% chance it without basis and you'll be glad you have the coverage and the full legal power of an insurance team that really understands t…” |
+| `src/content/blog/retail-understanding-premises-liability-and-seasonal-staffing-risks.md` | 70 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/rideshare-coverage-gaps-how-to-identify-and-fix-them.md` | 73 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/risk-management-why-being-proactive-pays-off-in-insurance.mdx` | 29 | “…powerful tool. When your agreements clearly outline scope, responsibilities, and expectations, you reduce the chances of misunderstandings or legal claims. Avoid language that over-promises—insurance policies rely on clarity and realism to…” |
+| `src/content/blog/risk-management-why-being-proactive-pays-off-in-insurance.mdx` | 48 | “If you're ready to take the next step, [**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/scheduling-jewelry-watches-and-fine-art-on-your-insurance-policy.md` | 68 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/start-2025-strong-why-an-insurance-review-should-be-your-first-new-year-to-do.md` | 6 | “…e of the smartest moves you can make to protect your financial well-being and find opportunities to save. Here’s why you should schedule your review ASAP—and how it can make a big impact in 2025."” |
+| `src/content/blog/start-2025-strong-why-an-insurance-review-should-be-your-first-new-year-to-do.md` | 18 | “…e of the smartest moves you can make to protect your financial well-being and find opportunities to save.” |
+| `src/content/blog/start-2025-strong-why-an-insurance-review-should-be-your-first-new-year-to-do.md` | 48 | “- **Increase deductibles:** Opting for a higher deductible can significantly lower your premiums.” |
+| `src/content/blog/start-2025-strong-why-an-insurance-review-should-be-your-first-new-year-to-do.md` | 73 | “Take advantage of this cost-free opportunity to safeguard your assets. [**Schedule your Private Client Review today!**](/contact)” |
+| `src/content/blog/start-2025-strong-why-an-insurance-review-should-be-your-first-new-year-to-do.md` | 81 | “Take the first step towards comprehensive protection. [**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 26 | “…yee benefits aren’t just perks; they’re a key differentiator in a talent war. Recent surveys show **60% of job seekers prioritize benefits** like health coverage and work-life balance over salary alone. For startups, a well-designed package…” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 29 | “- **Reduce turnover**, saving on recruitment costs” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 38 | “…oup plans that leverage economies of scale. High-deductible health plans (HDHPs) paired with Health Savings Accounts (HSAs) can lower premiums, empowering employees to manage costs.” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 39 | “- **Retirement Savings:** Offer a 401(k) with matching contributions: **even a modest match** (e.g., 50% up to 3% of salary) signals long-term commitment w…” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 50 | “…(e.g., via LinkedIn Learning) or stipends for conferences. This invests in your team’s growth at a fraction of the cost of raises.” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 57 | “Technology streamlines benefits administration, reducing overhead:” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 60 | “…e handle everything from plan design to claims processing for employers across the U.S., often at a lower cost than in-house efforts. Whether you’re in tech, healthcare, or e-commerce, we create packages that attract talent while fitting yo…” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 70 | “…:** Managing everything in-house can be overwhelming. Outsourcing to specialists like **UWIB Risk** saves time and money in the long run.” |
+| `src/content/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.md` | 88 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/state-farm-bows-out-of-super-bowl-advertising-amid-california-insurance-market-upheaval.md` | 26 | “…a. Now, to make up for mounting losses, they are rolling out substantial rate hikes—reportedly over 44% for auto insurance and more than 30% for home and business policies.” |
+| `src/content/blog/state-farm-bows-out-of-super-bowl-advertising-amid-california-insurance-market-upheaval.md` | 30 | “…r visibility and potential scrutiny, particularly for a company embroiled in controversy. The funds saved from the high-profile campaign are now being framed as part of State Farm’s effort to focus on their customers, but critics question w…” |
+| `src/content/blog/state-farm-bows-out-of-super-bowl-advertising-amid-california-insurance-market-upheaval.md` | 50 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/state-farm-nonrenewing-california-homeowners.md` | 26 | “…ers' policies, and on August 20, 2024, for the commercial apartment policies. This represents about 2% of State Farm General's policy volume in the state.” |
+| `src/content/blog/teen-drivers-costs-discounts-and-safety-tips.md` | 24 | “…ing a teen driver to an existing family policy can lead to an increase in premiums, sometimes up to 50%. This spike in costs stems from the associated risks insurers perceive, given that young drivers are more likely to engage in distracted…” |
+| `src/content/blog/teen-drivers-costs-discounts-and-safety-tips.md` | 32 | “…en results in higher premiums, while family-friendly cars with good safety ratings typically garner lower costs.” |
+| `src/content/blog/teen-drivers-costs-discounts-and-safety-tips.md` | 40 | “…a B average or higher. This not only promotes academic achievement but can directly translate into lower insurance costs.” |
+| `src/content/blog/teen-drivers-costs-discounts-and-safety-tips.md` | 48 | “…hrough mobile apps or devices installed in cars. Positive driving behaviors can lead to significant savings on premiums.” |
+| `src/content/blog/teen-drivers-costs-discounts-and-safety-tips.md` | 76 | “…By actively engaging in their driving education and establishing a culture of safety, families can lower insurance costs and foster responsible habits that last a lifetime.” |
+| `src/content/blog/teen-drivers-costs-discounts-and-safety-tips.md` | 84 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/the-2030-insurance-agency-where-humans-and-machines-build-revenue-together.md` | 44 | “…e “non-human layer” (bots, systems, and AI workflows) will now be producing tangible value and cost savings too — and that should be factored in.” |
+| `src/content/blog/the-2030-insurance-agency-where-humans-and-machines-build-revenue-together.md` | 58 | “• Some agency models, particularly those investing heavily in smart automation and reducing friction, might see this climb to $600,000–$750,000 per human, particularly in commercial lines and complex personal lines.” |
+| `src/content/blog/the-2030-insurance-agency-where-humans-and-machines-build-revenue-together.md` | 74 | “• For example, if a quoting bot replaces 40% of an assistant’s time, you might treat that bot as worth $100,000 of revenue capacity, just like you would a junior account manager.” |
+| `src/content/blog/the-essential-guide-to-workers-compensation-for-small-businesses.md` | 36 | “…**Experience Modification Rate (EMR)**: This is where you get credit for running a tight ship. A lower EMR means fewer claims and lower premiums.” |
+| `src/content/blog/the-essential-guide-to-workers-compensation-for-small-businesses.md` | 47 | “…the trenches. Consider the bakery that kneaded its way to a safer workplace, reducing accidents and lowering its EMR (and premiums) in the process. Or the tech startup that implemented ergonomic workstations, proving that an ounce of preven…” |
+| `src/content/blog/the-hard-market.md` | 29 | “- Costs for insurance are lower, which is great for your wallet.” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 4 | “title: "The Ultimate Guide to Home and Auto Insurance Bundles: Why Combining Policies Can Save You Money"” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 5 | “slug: "the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money"” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 6 | “…o managing your insurance needs, there's a secret weapon that can simplify your life and boost your savings: bundling your home and auto insurance policies. Whether you're a seasoned homeowner or a new car owner, combining these policies ca…” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 18 | “…o managing your insurance needs, there's a secret weapon that can simplify your life and boost your savings: bundling your home and auto insurance policies. Whether you're a seasoned homeowner or a new car owner, combining these policies ca…” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 24 | “…and offering multi-policy discounts is one way they show their appreciation. By bundling, you could save anywhere from 5% to 25% on your premiums, depending on the provider and your location.” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 27 | “…dle her home and auto insurance policies with the same provider. Her annual premium dropped by 20%, saving her over $400 a year. This extra cash allowed her to invest in home improvements and a new car stereo system.” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 34 | “…After bundling his policies, he enjoyed the convenience of one monthly payment, freeing up time and reducing stress.” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 41 | “…only had to contact one insurer, who quickly coordinated repairs for both his property and vehicle, saving him time and reducing his stress.” |
+| `src/content/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.md` | 70 | “Bundling your home and auto insurance policies is a smart move that can lead to substantial savings, convenience, and comprehensive coverage. By taking advantage of discounts, streamlined payments, and simplified claims processes, y…” |
+| `src/content/blog/third-party-cyber-risk-the-threat-you-may-not-have-seen-coming.md` | 32 | “…ience, third-party risks like ransomware attacks and vendor-related system failures accounted for **31% of all cyber insurance claims in 2024**. Even more concerning, **23% of those claims resulted in major financial losses**—up from **zero…” |
+| `src/content/blog/third-party-cyber-risk-the-threat-you-may-not-have-seen-coming.md` | 38 | “- 43% of claims were due to **direct ransomware attacks** on businesses.” |
+| `src/content/blog/third-party-cyber-risk-the-threat-you-may-not-have-seen-coming.md` | 40 | “- 18% came from **ransomware attacks on vendors**, which then hurt their customers.” |
+| `src/content/blog/third-party-cyber-risk-the-threat-you-may-not-have-seen-coming.md` | 42 | “- Together, ransomware was responsible for **61% of all claims with financial losses**.” |
+| `src/content/blog/third-party-cyber-risk-the-threat-you-may-not-have-seen-coming.md` | 44 | “…phishing attacks—the kind where someone tricks an employee into clicking a bad link—declined from **20% in 2023 to 9% in 2024**.” |
+| `src/content/blog/towing-insurance-what-you-need-to-know.md` | 74 | “Take the first step towards comprehensive protection. [**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/understanding-additional-living-expense-ale-coverage-what-it-isand-what-it-isnt.md` | 75 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-classic-and-collector-car-insurance-basics.md` | 48 | “…e the value of a car in a claim, classic car insurance protects the owner's investment without that reduction.” |
+| `src/content/blog/understanding-classic-and-collector-car-insurance-basics.md` | 66 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-liquor-liability-insurance-for-restaurants-and-event-venues.md` | 38 | “…eir intoxication, liquour liability insurance can cover the legal and settlement costs, potentially saving the venue from financial ruin.” |
+| `src/content/blog/understanding-liquor-liability-insurance-for-restaurants-and-event-venues.md` | 60 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-participant-waivers-and-liability-in-fitness-studios-and-gyms.md` | 78 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-per-project-aggregate-vs-per-location-aggregate-in-insurance.md` | 64 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-professional-liability-insurance-e-o-for-consultants-and-creatives.md` | 76 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-small-business-cyber-coverage-basics.md` | 86 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-the-importance-of-machine-guarding-product-liability-and-recalls-i.md` | 26 | “…is in harm's way. By implementing comprehensive guarding measures, manufacturers can significantly reduce workplace injuries, which not only protects employees but also avoids costly worker compensation claims and potential legal issues.” |
+| `src/content/blog/understanding-the-importance-of-machine-guarding-product-liability-and-recalls-i.md` | 34 | “…nufacturing defects, and inadequate warnings or instructions. In 2023, product recalls increased by 14.2%, emphasizing the importance of quality control and compliance in manufacturing processes.” |
+| `src/content/blog/understanding-the-importance-of-machine-guarding-product-liability-and-recalls-i.md` | 64 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-umbrella-insurance-policies-in-plain-english.md` | 28 | “…urance steps in to cover the additional $200,000, ensuring you do not have to deplete your personal savings or assets.” |
+| `src/content/blog/understanding-umbrella-insurance-policies-in-plain-english.md` | 40 | “1\. **Have significant assets:** If you own a home, investments, or significant savings, umbrella insurance can protect those assets from potential claims.” |
+| `src/content/blog/understanding-umbrella-insurance-policies-in-plain-english.md` | 62 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/understanding-umbrella-insurance-policies-your-comprehensive-guide.md` | 28 | “…more in liability coverage, making them effective for protecting significant assets like homes and savings.” |
+| `src/content/blog/understanding-umbrella-insurance-policies-your-comprehensive-guide.md` | 64 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/vendor-risk-assessment-checklist-for-smbs.md` | 82 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/wage-hour-risk-what-insurance-can-and-can-t-do.md` | 68 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/what-happens-when-technology-serves-people-instead-of-the-other-way-around.md` | 40 | “So we’ve been methodically incorporating AI tools into our daily processes to help reduce that burden. Not to make people work harder, but to make work lighter.” |
+| `src/content/blog/what-is-medical-malpractice-insurance-and-why-is-it-essential.md` | 56 | “Take the first step towards comprehensive protection. [**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/what-kind-of-insurance-does-a-coffee-shop-need.mdx` | 70 | “[Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.md` | 46 | “…rience. Ensure they issue a check within 48 hours for immediate needs, like clothing or toiletries. Save every receipt for anything you purchase during this time, as you’ll need these for reimbursement.” |
+| `src/content/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.md` | 52 | “…your contents coverage limit. Instead, consider using a reputable dry cleaner for items you hope to save.” |
+| `src/content/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.md` | 69 | “5\. **Save receipts**. Loss of use insurance will cover incidentals too – hairbrush, phone chargers, etc.” |
+| `src/content/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.md` | 87 | “…cost to replace not on sale from pottery barn, it should not be the price you paid for it with that 50% off coupon.” |
+| `src/content/blog/what-were-seeing-in-small-and-mid-sized-businesses-in-2026.md` | 30 | “…thoughtfully embracing AI tools, and we've seen firsthand how much they can improve efficiency and reduce repetitive work. At the same time, we've become increasingly aware that these tools require oversight.” |
+| `src/content/blog/when-to-increase-liability-limits-on-auto-insurance.md` | 60 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/why-accountants-need-insurance-even-if-their-math-is-always-right.md` | 52 | “Take the first step towards comprehensive protection. [**Schedule your cost-free Commercial Insurance Review today!**](/contact)” |
+| `src/content/blog/why-gig-economy-businesses-still-need-workers-compensation-insurance-even-if-you-only-hire-helpers-as-needed.md` | 40 | “3. It keeps your personal assets (house, savings, vehicles) shielded from a large liability claim.” |
+| `src/content/blog/why-gig-economy-businesses-still-need-workers-compensation-insurance-even-if-you-only-hire-helpers-as-needed.md` | 44 | “…erage, talk with your insurance advisor. A quick review of how you hire and direct your helpers can save you from a claim that could otherwise put you out of business. The peace of mind is worth far more than the modest premium - especially…” |
+| `src/content/blog/why-gig-economy-businesses-still-need-workers-compensation-insurance-even-if-you-only-hire-helpers-as-needed.md` | 46 | “…kers’ compensation for your gig-style or seasonal business? Speak with one of our consultants. It’s free. We’re happy to run the numbers for you and show exactly what a minimum-premium policy would cost.” |
+| `src/content/blog/why-good-leaders-must-eventually-become-less-important.md` | 46 | “That doesn’t lower the standard. It raises it.” |
+| `src/content/blog/why-small-businesses-need-cyber-liability-insurance-now-more-than-ever.md` | 6 | “…re reserved for large corporations has been debunked, as data reveals a stark reality: a staggering 94% of small businesses experienced cyberattacks in the past year, a significant rise from 73% the previous year."” |
+| `src/content/blog/why-small-businesses-need-cyber-liability-insurance-now-more-than-ever.md` | 18 | “…re reserved for large corporations has been debunked, as data reveals a stark reality: a staggering 94% of small businesses experienced cyberattacks in the past year, a significant rise from 73% the previous year.” |
+| `src/content/blog/why-small-businesses-need-cyber-liability-insurance-now-more-than-ever.md` | 28 | “Alarmingly, 60% of small businesses close within six months following a cyberattack, underscoring the severe impact these incidents can have.” |
+| `src/content/blog/why-small-businesses-need-cyber-liability-insurance-now-more-than-ever.md` | 60 | “Take the first step towards comprehensive protection. [Schedule your cost-free Commercial Insurance Review today!](/contact)” |
+| `src/content/blog/wildfire-preparedness-and-insurance-creating-defensible-space.md` | 24 | “…refers to the buffer zone between a structure and the wildland area around it, which is designed to reduce the risk of fire spreading to your home. Various factors contribute to this defensible space, such as the type of vegetation, its pro…” |
+| `src/content/blog/wildfire-preparedness-and-insurance-creating-defensible-space.md` | 50 | “…might qualify for premium discounts tied to their fire prevention measures, leading to significant savings in the long run. Engaging with your insurance provider to discuss adaptations made to your home can open up these opportunities.” |
+| `src/content/blog/wildfire-preparedness-and-insurance-creating-defensible-space.md` | 72 | “Take advantage of this cost-free opportunity to safeguard your assets. [Schedule your Private Client Review today!](/contact)” |
+| `src/content/blog/your-house-burns-down-do-you-actually-have-to-rebuild.md` | 93 | “- **Extended Replacement Cost:** 25%” |
+| `src/content/pages/compensation-disclosure.md` | 17 | “…w we are paid for these services. The use of UWIB Risk, Inc.’s Client Portal and Smartphone App are cost-free to our clients. However, for providing insurance brokerage services, UWIB Risk, Inc. is compensated in a variety of ways, includin…” |
+| `src/content/pages/partner-with-uwib.mdx` | 41 | “At UWIB Risk, we’re experts in assessing risk and finding solutions to help reduce it. However, we are not attorneys, accountants, or investment advisors. As we serve some of the nation’s top businesses and high-weal…” |
+| `src/data/forms.ts` | 56 | “…surance.com/links?agent_affiliation=ZDQZrQcF7q1GqpvK&serial=992855993&channel=affiliation\" width=\"100%\" height=\"1200px\" title=\"CRQ\"></iframe>"” |
+| `src/data/forms.ts` | 70 | “"rawHtml": "<iframe src=\"https://secure.consumerratequotes.com/ConsumerV2?id=50332\" width=\"100%\" height=\"1200px\" title=\"CRQ\">\n</iframe>"” |
+| `src/data/forms.ts` | 220 | “"rawHtml": "<div id=\"container-id\" style=\"width:100%;\"></div>\n<script id=\"strife\" src=\"https://strife.back9ins.com/production/strife.js\" data-strife-key=\"mYRedMRPrZ4XLoVN\" data-str…” |
+| `src/data/forms.ts` | 291 | “…eflood.com/consumer-app/?source=ul2IxnGOhM6ReQzdOWJXM0APKcNzQlIXDsa0loNzMFJvRB27HUT%2Bc1cDbgjFlrPMTY1%2BUxFwUVa5pol0hrD%2FI%2B0ugY8jxwbjokfluFImuPk%3D",” |
+| `src/data/forms.ts` | 293 | “…eflood.com/consumer-app/?source=ul2IxnGOhM6ReQzdOWJXM0APKcNzQlIXDsa0loNzMFJvRB27HUT%2Bc1cDbgjFlrPMTY1%2BUxFwUVa5pol0hrD%2FI%2B0ugY8jxwbjokfluFImuPk%3D\" width=\"100%\" height=\"1200px\" title=\"CRQ\"> </iframe>"” |
+| `src/data/forms.ts` | 308 | “…src=\"https://form.jotform.com/92255315907156\"\n frameborder=\"0\"\n style=\"min-width:100%;max-width:100%;height:3654px;border:none;\"\n scrolling=\"no\"\n >\n </iframe>\n <script src='https://cdn.jotfor.ms/s/umd…” |
+| `src/data/forms.ts` | 323 | “…src=\"https://form.jotform.com/81067268667165\"\n frameborder=\"0\"\n style=\"min-width:100%;max-width:100%;height:3654px;border:none;\"\n scrolling=\"no\"\n >\n </iframe>\n <script src='https://cdn.jotfor.ms/s/umd…” |
+| `src/data/forms.ts` | 338 | “…src=\"https://form.jotform.com/80625205586155\"\n frameborder=\"0\"\n style=\"min-width:100%;max-width:100%;height:539px;border:none;\"\n scrolling=\"no\"\n >\n </iframe>\n <script src='https://cdn.jotfor.ms/s/umd/…” |
+| `src/data/forms.ts` | 353 | “…src=\"https://form.jotform.com/242486712781059\"\n frameborder=\"0\"\n style=\"min-width:100%;max-width:100%;height:539px;border:none;\"\n scrolling=\"no\"\n >\n </iframe>\n <script src='https://cdn.jotfor.ms/s/umd/…” |
+| `src/data/glossary.json` | 209 | “…n": "Commercial property insurance policies generally are subject to a coinsurance clause of either 80%, 90%, or 100%. Assuming your policy has an 80% coinsurance clause, it doesn’t mean you’ll only receive 80% of your loss, it means that (…” |
+| `src/data/glossary.json` | 233 | “…th insurance coverage for up to 36 months after a qualifying event (e.g. termination of employment, reduction in hours, divorce). The right to continue such coverage ends when a qualified beneficiary becomes covered under any other group he…” |
+| `src/data/glossary.json` | 503 | “…ution crime coverage that relates to the erroneous transferring of funds to or from the checking or savings account of a customer based upon instructions fraudulently transmitted by a non-employee. There are two categories of this type of f…” |
+| `src/data/glossary.json` | 617 | “…op a replacement. It is designed to offset losses resulting from the death of a key person, such as reduced sales, interruption of a vital research project, flow of production, or an impaired credit standing.",” |
+| `src/data/landing/driver-safety.json` | 30 | “"header": "Training that reduces risk—at no extra cost to you.",” |
+| `src/data/landing/driver-safety.json` | 31 | “…iver safety training for your team—because prevention is the best protection.\n\nOur training helps reduce the likelihood of accidents, injuries, and insurance claims—without adding expense to your budget.\n",” |
+| `src/data/landing/driver-safety.json` | 73 | “"text": "We’re more than just your insurance agency—we’re your partner in prevention. \n\n**Lower Risk Without Raising Costs**\n\nWe fully sponsor the training—no cost to you.\n\n**Reduce Claims & Improve Compliance**\n\nTrained dri…” |
+| `src/data/landing/earthquake-quote.json` | 56 | “…ted States Geological Survey. Compared with the prior 2018 model, California locations have up to a 10% increase in the chances of experiencing a damaging earthquake. The new USGS data also marks the chances of a 7.0 magnitude earthquake be…” |
+| `src/data/landing/hvac.json` | 34 | “"header": "Lower Costs, Safer Crews, Stronger Business",” |
+| `src/data/landing/hvac.json` | 35 | “…dification Factor (Ex-Mod) rises—leading to higher premiums.\n\nWe help you manage claims actively, reduce costs, and protect your bottom line.\n",” |
+| `src/data/landing/hvac.json` | 64 | “"description": "Audit carrier logic, reduce inflated reserves, and speed up closures.",” |
+| `src/data/landing/hvac.json` | 71 | “"header": "Why Oversight Saves HVAC Companies Money",” |
+| `src/data/landing/hvac.json` | 72 | “"text": "Employers who dedicate internal staff to claims see measurable cost reductions— UWIB Risk delivers that same expertise at a fraction of the cost.\n\n**Direct Loss-Run Access**\n\nCarriers send claims data dir…” |
+| `src/data/landing/hvac.json` | 88 | “…*Fewer Legal Disputes**\n\nProactive management minimizes disputes, keeping claims out of court and saving legal fees.\n\n**Quicker Return to Work**\n\nTailored return‑to‑work plans get technicians back on the job sooner, reducing lost‑time…” |
+| `src/data/legacy/coffee-and-contracts.ts` | 79 | “…se of our focus, these services come at no additional cost, and our free review often helps clients save money right away.',” |
+| `src/data/legacy/hotels.ts` | 326 | “'Small changes in process, training and equipment can support safer teams and reduce the operational disruption that follows an injury.',” |
+| `src/data/legacy/safeco-faq.ts` | 8 | “description: 'Frequently asked questions about Safeco’s recent decision to reduce policies in Western States.',” |
+| `src/data/legacy/safeco-faq.ts` | 21 | “'Safeco has made a business decision to reduce the number of policies they write and renew. This decision is not based on your account history or claims - it is simply their intern…” |
+| `src/data/legacy/trusted-advisor.ts` | 100 | “{ label: 'The purpose', text: 'Reduce financial surprise.' },” |
+| `src/data/office-resources.json` | 275 | “…V5TWlVM1JBJTNEJTNEIiwiciI6ZmFsc2V9LCJpIjp7ImkiOiI3M2VmMTQxMi01MDgxLTQ5MGUtODk0OC05Y2I0ZTQxMGFhNjkifX0%3D",” |
+| `src/data/programs.json` | 32 | “…"description": "Find the right insurance coverage for your contracting business. Gain up to 25% in premium credit. Get details on policy options, limits, and deductibles, make informed decisions with the support of a local, reputable, comm…” |
+| `src/data/programs.json` | 59 | “…"description": "Find the right insurance coverage for your contracting business. Gain up to 25% in premium credit. Get details on policy options, limits, and deductibles, make informed decisions with the support of a local, reputable, comm…” |
+
 
 ## Other notes
 
-- program:drone-insurance: malformed URL (two URLs concatenated): https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin
-- quoteCards:drone: malformed URL (two URLs concatenated): https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin
 - Nav item "COI & Client Portal" has externalUrl https://clientportal.vertafore.com/Login/3004020-1 but isExternalUrl=false (href uses /coi).
 
 ## Failures / warnings
