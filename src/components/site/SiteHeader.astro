@@ -1,0 +1,364 @@
+---
+/**
+ * Site header. `overlay` sits transparently on top of a dark hero image;
+ * `solid` is the black bar used on pages without a photo hero.
+ */
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/uwib-wide-light.webp';
+import { clientLinks, company, primaryNav, quoteLink } from '../../data/site';
+
+interface Props {
+  variant?: 'overlay' | 'solid';
+}
+const { variant = 'solid' } = Astro.props;
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) => href !== '/' && (path === href || path.startsWith(`${href}/`));
+---
+
+<header class:list={['site-header', `site-header--${variant}`]} data-site-header>
+  <div class="bar">
+    <a href="/" class="brand" aria-label={`${company.name} home`}>
+      <Image src={logo} alt="" width={182} data-color loading="eager" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main">
+      <ul class="nav-list">
+        {
+          primaryNav.map((l) => (
+            <li>
+              <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="divider" aria-hidden="true"></li>
+        <li class="dropdown">
+          <button type="button" aria-expanded="false" aria-controls="client-menu" data-dropdown-toggle>
+            Client center
+          </button>
+          <ul id="client-menu" class="dropdown-menu" hidden>
+            {
+              clientLinks.map((l) => (
+                <li>
+                  <a href={l.href} {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}>
+                    {l.label}
+                    {l.external && <span aria-hidden="true"> ↗</span>}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+      </ul>
+      <a href={quoteLink.href} class="quote">{quoteLink.label}</a>
+    </nav>
+
+    <div class="mobile-actions">
+      <a href={quoteLink.href} class="quote quote--sm">{quoteLink.label}</a>
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="visually-hidden">Menu</span>
+        <span class="lines" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <nav aria-label="Main">
+      <ul class="mobile-primary">
+        {
+          primaryNav.map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="eyebrow on-dark">Client center</p>
+      <ul class="mobile-secondary">
+        {
+          clientLinks.map((l) => (
+            <li>
+              <a href={l.href} {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}>
+                {l.label}
+                {l.external && <span aria-hidden="true"> ↗</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a href={company.phoneHref} class="mobile-call">Call {company.phone}</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  for (const header of document.querySelectorAll<HTMLElement>('[data-site-header]')) {
+    const menuToggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const menu = header.querySelector<HTMLElement>('#mobile-menu');
+    menuToggle?.addEventListener('click', () => {
+      const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+      menuToggle.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('is-open', open);
+      if (menu) menu.hidden = !open;
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+    });
+
+    const ddToggle = header.querySelector<HTMLButtonElement>('[data-dropdown-toggle]');
+    const dd = header.querySelector<HTMLElement>('#client-menu');
+    const setDropdown = (open: boolean) => {
+      ddToggle?.setAttribute('aria-expanded', String(open));
+      if (dd) dd.hidden = !open;
+    };
+    ddToggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setDropdown(ddToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    document.addEventListener('click', (e) => {
+      if (dd && !dd.contains(e.target as Node)) setDropdown(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setDropdown(false);
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 50;
+    color: var(--color-paper);
+  }
+
+  .site-header--solid {
+    background: var(--color-night);
+  }
+
+  .site-header--overlay {
+    position: absolute;
+    inset: 0 0 auto;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-h);
+    padding-inline: var(--gutter);
+    border-bottom: 1px solid rgb(255 255 255 / 0.14);
+  }
+
+  .site-header--solid .bar {
+    border-bottom-color: transparent;
+  }
+
+  .brand {
+    flex-shrink: 0;
+  }
+
+  .brand img {
+    width: 182px;
+    height: auto;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-list a,
+  .nav-list button {
+    padding: 8px 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-list a:hover,
+  .nav-list button:hover,
+  .nav-list a[aria-current='page'] {
+    color: var(--color-mustard);
+  }
+
+  .divider {
+    width: 1px;
+    height: 20px;
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 18px);
+    right: -18px;
+    min-width: 230px;
+    margin: 0;
+    padding: 10px 0;
+    background: var(--color-night);
+    border: 1px solid #262626;
+    border-top: 2px solid var(--color-mustard);
+    list-style: none;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .quote {
+    padding: 12px 18px;
+    border: 1px solid var(--color-paper);
+    color: var(--color-paper);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .quote:hover {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .mobile-actions,
+  .mobile-menu {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    .bar {
+      padding-inline: 20px;
+    }
+
+    .brand img {
+      width: 146px;
+    }
+
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .quote--sm {
+      padding: 9px 12px;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .menu-toggle {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin-right: -9px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 22px;
+    }
+
+    .lines span {
+      height: 2px;
+      background: currentColor;
+      transition: transform 0.2s ease;
+    }
+
+    .is-open .lines span:first-child {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    .is-open .lines span:last-child {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    .is-open {
+      position: fixed;
+      inset: 0;
+      background: var(--color-night);
+      overflow-y: auto;
+    }
+
+    .mobile-menu:not([hidden]) {
+      display: block;
+      padding: 32px 20px 48px;
+    }
+
+    .mobile-primary,
+    .mobile-secondary {
+      margin: 0 0 40px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mobile-primary a {
+      display: block;
+      padding: 12px 0;
+      border-bottom: 1px solid #262626;
+      color: var(--color-paper);
+      font-family: var(--font-display);
+      font-size: 34px;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      text-decoration: none;
+    }
+
+    .mobile-menu .eyebrow {
+      margin-bottom: 12px;
+    }
+
+    .mobile-secondary a {
+      display: block;
+      padding: 10px 0;
+      color: #e6e6e6;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .mobile-call {
+      display: block;
+      padding: 17px;
+      background: var(--color-mustard);
+      color: var(--color-ink);
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+    }
+  }
+</style>

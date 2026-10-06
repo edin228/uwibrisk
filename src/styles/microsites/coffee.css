@@ -1,0 +1,61 @@
+/*
+ * Coffee & Contracts additions on top of hotels.css (port of the old
+ * styles/Coffee.module.css). Classes are prefixed "cf-" and scoped under .hm-site
+ * so they win over hotels.css regardless of stylesheet order, as they did in the old app.
+ */
+.hm-site .cf-aboutSection { padding: 112px; scroll-margin-top: 20px; }
+.hm-site .cf-aboutIntro { max-width: 1216px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.hm-site .cf-aboutIntro > div { display: flex; flex-direction: column; gap: 20px; }
+.hm-site .cf-aboutIntro h2 { width: 640px; max-width: 100%; font-size: 50px; line-height: 56px; letter-spacing: -.035em; }
+.hm-site .cf-aboutIntro > p { width: 380px; flex: 0 0 auto; color: #555; font-size: 17px; line-height: 27px; }
+.hm-site .cf-aboutImage { max-width: 1216px; margin: 64px auto 0; aspect-ratio: 1216 / 560; position: relative; overflow: hidden; border-bottom: 8px solid var(--hotel-yellow); background: #161616; }
+.hm-site .cf-aboutPoints { max-width: 1216px; margin: 64px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+.hm-site .cf-aboutPoints article { padding: 0 40px; display: flex; flex-direction: column; gap: 14px; border-left: 1px solid var(--hotel-line); }
+.hm-site .cf-aboutPoints article:first-child { padding-left: 0; border-left: 0; }
+.hm-site .cf-aboutPoints article:last-child { padding-right: 0; }
+.hm-site .cf-aboutPoints h3 { margin-top: 4px; font-size: 25px; line-height: 30px; }
+.hm-site .cf-aboutPoints p { color: #555; font-size: 15px; line-height: 25px; }
+
+.hm-site .cf-featurePhoto { width: 488px; height: 582px; flex: 0 0 auto; position: relative; background: #161616; box-shadow: 12px 12px 0 var(--hotel-yellow); }
+.hm-site .cf-differentiators { padding-top: 8px; border-bottom: 1px solid #3a3a3a; }
+.hm-site .cf-differentiators article { padding: 20px 0; display: grid; grid-template-columns: 28px 150px 1fr; align-items: baseline; gap: 28px; border-top: 1px solid #3a3a3a; }
+.hm-site .cf-differentiators span { color: var(--hotel-yellow); font-size: 11px; line-height: 14px; font-weight: 800; letter-spacing: .1em; }
+.hm-site .cf-differentiators h3 { font-size: 23px; line-height: 28px; }
+.hm-site .cf-differentiators p { color: #c8c8c8; font-size: 15px; line-height: 24px; }
+
+.hm-site .cf-processIntroStacked { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 20px; }
+.hm-site .cf-processIntroStacked h2 { width: 820px; max-width: 100%; }
+
+.hm-site .cf-leadPhoto { width: 216px; height: 256px; position: relative; overflow: hidden; }
+.hm-site .cf-leadContact { margin: 0; padding-top: 20px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #4b4b4b; }
+.hm-site .cf-leadContact > div { display: grid; grid-template-columns: 52px 1fr; align-items: baseline; gap: 12px; }
+.hm-site .cf-leadContact dt { color: #8c8c8c; font-size: 11px; line-height: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.hm-site .cf-leadContact dd { margin: 0; }
+.hm-site .cf-leadContact a { color: #fff; font-size: 14px; line-height: 20px; font-weight: 600; }
+
+.hm-site .cf-directContact { margin-top: 18px; padding-top: 28px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--hotel-line); font-size: 15px; }
+.hm-site .cf-contactPhoto { width: 100%; margin: auto 0 0; aspect-ratio: 390 / 200; position: relative; overflow: hidden; background: #161616; }
+
+@media (max-width: 1120px) {
+  .hm-site .cf-aboutSection { padding-left: 56px; padding-right: 56px; }
+  .hm-site .cf-aboutPoints article { padding: 0 28px; }
+  .hm-site .cf-featurePhoto { width: 410px; height: 540px; }
+  .hm-site .cf-differentiators article { grid-template-columns: 28px 1fr; }
+  .hm-site .cf-differentiators p { grid-column: 2; }
+  .hm-site .cf-leadPhoto { width: 180px; height: 213px; }
+}
+
+@media (max-width: 820px) {
+  .hm-site .cf-aboutSection { padding: 72px 24px; }
+  .hm-site .cf-aboutIntro { align-items: flex-start; flex-direction: column; }
+  .hm-site .cf-aboutIntro h2 { width: auto; font-size: 42px; line-height: 48px; }
+  .hm-site .cf-aboutIntro > p { width: auto; }
+  .hm-site .cf-aboutImage { margin-top: 42px; aspect-ratio: 4 / 3; }
+  .hm-site .cf-aboutPoints { margin-top: 20px; grid-template-columns: 1fr; }
+  .hm-site .cf-aboutPoints article,
+  .hm-site .cf-aboutPoints article:first-child,
+  .hm-site .cf-aboutPoints article:last-child { padding: 30px 0; border-left: 0; border-bottom: 1px solid var(--hotel-line); }
+  .hm-site .cf-featurePhoto { width: min(100%, 420px); height: 520px; }
+  .hm-site .cf-processIntroStacked h2 { width: auto; }
+  .hm-site .cf-contactPhoto { display: none; }
+}

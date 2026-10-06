@@ -1,26 +1,33 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import CarrierMarquee from '../components/home/CarrierMarquee.astro';
+import ClaimsMoment from '../components/home/ClaimsMoment.astro';
+import CoverageAccordion from '../components/home/CoverageAccordion.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import IndustryIndex from '../components/home/IndustryIndex.astro';
+import InsightsRow from '../components/home/InsightsRow.astro';
+import Statement from '../components/home/Statement.astro';
+import TeamStrip from '../components/site/TeamStrip.astro';
+import { hero, team } from '../data/home';
+import { company } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { getTeam } from '../lib/content';
+
+const members = await getTeam();
+const featured = team.featured.map((slug) => {
+  const m = members.find((x) => x.id === slug);
+  if (!m) throw new Error(`Featured team member ${slug} not found`);
+  return m;
+});
+const strip = [...featured, ...members.filter((m) => !team.featured.includes(m.id))];
 ---
 
-<BaseLayout title="UWIB Risk & Insurance Solutions">
-  <section class="container placeholder">
-    <p class="label">UWIB Risk &amp; Insurance Solutions</p>
-    <h1>Our new website is on its way.</h1>
-    <p class="lead">
-      We&rsquo;re redesigning uwibrisk.com. In the meantime, our team is available at
-      <a href="tel:+18003785554">(800) 378-5554</a> or
-      <a href="mailto:helpdesk@uwib.com">helpdesk@uwib.com</a>.
-    </p>
-    <p class="lead">Pasadena, CA &middot; Coeur d&rsquo;Alene, ID &middot; Nashville, TN</p>
-  </section>
-</BaseLayout>
-
-<style>
-  .placeholder {
-    padding-block: 120px;
-  }
-  .lead {
-    font-size: var(--text-lead);
-    max-width: 60ch;
-  }
-</style>
+<SiteLayout title={company.name} description={hero.text} image={hero.photo.src} header="overlay">
+  <HomeHero />
+  <CarrierMarquee />
+  <Statement />
+  <CoverageAccordion />
+  <IndustryIndex />
+  <TeamStrip members={strip} eyebrow={team.eyebrow} heading={team.heading} text={team.text} link={team.link} />
+  <InsightsRow />
+  <ClaimsMoment />
+</SiteLayout>

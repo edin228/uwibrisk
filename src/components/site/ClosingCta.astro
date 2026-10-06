@@ -1,0 +1,73 @@
+---
+/** Mustard closing band above the footer ("Tell us what you're protecting."). */
+import Button from '../ui/Button.astro';
+import { company } from '../../data/site';
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  primary?: { label: string; href: string };
+  /** Defaults to calling the main line. */
+  secondary?: { label: string; href: string } | null;
+}
+const {
+  eyebrow = 'Start a conversation',
+  heading = 'Tell us what you’re protecting.',
+  primary = { label: 'Start a quote →', href: '/get-quotes' },
+  secondary = { label: `Call ${company.phone}`, href: company.phoneHref },
+} = Astro.props;
+---
+
+<section class="closing" aria-labelledby="closing-heading">
+  <p class="eyebrow">{eyebrow}</p>
+  <h2 id="closing-heading">{heading}</h2>
+  <div class="actions">
+    <Button href={primary.href} variant="ink" size="lg" block>{primary.label}</Button>
+    {
+      secondary && (
+        <Button href={secondary.href} variant="outline-dark" size="lg" block>
+          {secondary.label}
+        </Button>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .closing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: clamp(96px, 10vw, 150px) var(--gutter) clamp(88px, 9.5vw, 140px);
+    background: var(--color-mustard);
+    text-align: center;
+  }
+
+  .eyebrow {
+    color: var(--color-ink);
+  }
+
+  h2 {
+    max-width: 1000px;
+    font-size: clamp(48px, 1.4rem + 5.2vw, 96px);
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 24px;
+    padding-top: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .actions {
+      flex-direction: column;
+      align-self: stretch;
+      gap: 10px;
+    }
+  }
+</style>

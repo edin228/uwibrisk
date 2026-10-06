@@ -1,0 +1,203 @@
+---
+import { Image } from 'astro:assets';
+import Button from '../ui/Button.astro';
+import { company } from '../../data/site';
+import { hero } from '../../data/home';
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <Image
+    class="bg"
+    src={hero.photo.src}
+    alt=""
+    widths={[780, 1440, 2000]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="shade" aria-hidden="true"></div>
+  <div class="content">
+    <div class="title">
+      <p class="eyebrow-line"><span aria-hidden="true"></span>{hero.eyebrow}</p>
+      <h1 id="hero-heading">{hero.heading[0]}<br />{hero.heading[1]}</h1>
+    </div>
+    <div class="aside">
+      <p>{hero.text}</p>
+      <div class="actions">
+        <Button href={hero.cta.href} size="lg" block>{hero.cta.label}</Button>
+        <a class="phone" href={company.phoneHref}><span class="call">Call </span>{company.phone}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: min(900px, 100svh);
+    padding: calc(var(--header-h) + 64px) var(--gutter) 72px;
+    background: #1a1a1a;
+    color: var(--color-paper);
+    overflow: hidden;
+  }
+
+  .bg,
+  .shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bg {
+    object-fit: cover;
+    object-position: 50% 55%;
+  }
+
+  .shade {
+    background: linear-gradient(
+      180deg,
+      rgb(17 17 17 / 0.6) 0%,
+      rgb(17 17 17 / 0) 20%,
+      rgb(17 17 17 / 0) 42%,
+      rgb(17 17 17 / 0.78) 68%,
+      rgb(17 17 17 / 0.94) 100%
+    );
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .eyebrow-line {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--color-mustard);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 16px;
+    text-transform: uppercase;
+  }
+
+  .eyebrow-line span {
+    width: 36px;
+    height: 1px;
+    background: var(--color-mustard);
+  }
+
+  h1 {
+    color: var(--color-paper);
+    font-size: var(--text-display);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex-shrink: 0;
+    width: 360px;
+    padding-bottom: 12px;
+    color: #d6d6d6;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .phone {
+    color: var(--color-paper);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .call {
+    display: none;
+  }
+
+  @media (max-width: 1100px) {
+    .content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 720px;
+      padding: calc(var(--header-h) + 48px) 20px 36px;
+    }
+
+    .bg {
+      object-position: 62% 50%;
+    }
+
+    .content {
+      gap: 20px;
+    }
+
+    .title {
+      gap: 20px;
+    }
+
+    .eyebrow-line {
+      font-size: 11px;
+    }
+
+    .eyebrow-line span {
+      width: 28px;
+    }
+
+    h1 {
+      letter-spacing: -0.045em;
+      line-height: 1;
+    }
+
+    .aside {
+      width: 100%;
+      gap: 20px;
+      padding-bottom: 0;
+    }
+
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .phone {
+      padding: 16px;
+      border: 1px solid rgb(255 255 255 / 0.4);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .call {
+      display: inline;
+    }
+  }
+</style>

@@ -1,0 +1,1909 @@
+/*
+ * Trusted Advisor page (/trusted-advisor). Faithful port of the old Next.js
+ * styles/TrustedAdvisor.module.css: class names are the CSS-module names prefixed
+ * with "ta-" so nothing leaks into the rest of the site.
+ */
+@import "./preflight.css";
+
+.ta-page {
+  --ink: #191919;
+  --paper: #ffffff;
+  --plaster: #f7f6f2;
+  --graphite: #55524c;
+  --gold: #b78900;
+  --bright-gold: #d7b14d;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "Inter Variable", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+}
+
+.ta-page h1,
+.ta-page h2,
+.ta-page h3,
+.ta-page p,
+.ta-page blockquote {
+  margin: 0;
+}
+
+.ta-page h1,
+.ta-page h2,
+.ta-page h3,
+.ta-page blockquote {
+  font-family: "Lora", Georgia, serif;
+}
+
+.ta-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ta-brand {
+  position: relative;
+  display: block;
+  width: 240px;
+  height: 27px;
+  flex: 0 0 240px;
+}
+
+.ta-siteHeader {
+  position: relative;
+  z-index: 100;
+  height: 96px;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.ta-headerInner {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.ta-headerBrand {
+  display: flex;
+  width: 240px;
+  flex: 0 0 240px;
+  align-items: center;
+}
+
+.ta-desktopNav {
+  position: static;
+  top: auto;
+  right: auto;
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.3vw, 34px);
+}
+
+.ta-desktopNav a,
+.ta-headerCta {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 18px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ta-desktopNav a {
+  color: #f7f6f2;
+  transition: color 160ms ease;
+}
+
+.ta-desktopNav a:hover,
+.ta-desktopNav a:focus-visible {
+  color: var(--bright-gold);
+}
+
+.ta-headerCta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--bright-gold) !important;
+}
+
+.ta-headerCta span {
+  font-size: 18px;
+}
+
+.ta-mobileMenu {
+  display: none;
+  position: relative;
+}
+
+.ta-mobileMenu summary {
+  display: flex;
+  width: 38px;
+  height: 38px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid #4b4842;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ta-mobileMenu summary::-webkit-details-marker {
+  display: none;
+}
+
+.ta-mobileMenu summary span {
+  width: 17px;
+  height: 1px;
+  background: var(--paper);
+}
+
+.ta-mobileMenu nav {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  display: flex;
+  width: min(310px, calc(100vw - 48px));
+  padding: 18px;
+  flex-direction: column;
+  border-top: 2px solid var(--gold);
+  color: var(--paper);
+  background: var(--ink);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 22%);
+}
+
+.ta-mobileMenu nav a {
+  padding: 12px 0;
+  border-bottom: 1px solid #3b3935;
+  font-size: 13px;
+}
+
+.ta-hero {
+  background: var(--plaster);
+}
+
+.ta-heroInner {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 704px;
+  margin: 0 auto;
+  padding: 92px 72px 76px;
+}
+
+.ta-heroLead {
+  display: flex;
+  width: 70%;
+  padding-right: 96px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ta-heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.ta-heroLabel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #7a6224;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.ta-heroLabel span {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.ta-hero h1 {
+  max-width: 820px;
+  font-size: clamp(52px, 4.6vw, 66px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.09;
+}
+
+.ta-heroCopy > p {
+  max-width: 680px;
+  color: var(--graphite);
+  font-family: "Lora", Georgia, serif;
+  font-size: 26px;
+  line-height: 38px;
+}
+
+.ta-heroAction {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ta-heroAction > span {
+  color: #73706a;
+  font-size: 13px;
+}
+
+.ta-darkButton {
+  display: flex;
+  min-width: 244px;
+  padding: 19px 22px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: var(--paper) !important;
+  background: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.ta-darkButtonCompact {
+  min-width: 226px;
+  padding: 17px 22px;
+}
+
+.ta-darkButton:hover,
+.ta-darkButton:focus-visible {
+  background: #302d28;
+  transform: translateY(-2px);
+}
+
+.ta-buttonArrow {
+  color: var(--bright-gold);
+  font-size: 20px;
+}
+
+.ta-heroQuote {
+  display: flex;
+  width: 30%;
+  padding: 52px 0 12px 48px;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 24px;
+  border-left: 1px solid #d6d0c2;
+}
+
+.ta-quoteMark {
+  color: var(--gold);
+  font-family: "Lora", Georgia, serif;
+  font-size: 84px;
+  line-height: 60px;
+}
+
+.ta-heroQuote p {
+  color: #25231f;
+  font-family: "Lora", Georgia, serif;
+  font-size: 28px;
+  line-height: 40px;
+}
+
+.ta-learned,
+.ta-responsibility,
+.ta-auditRisk,
+.ta-insureTax,
+.ta-ambassador,
+.ta-danaMessage,
+.ta-conversationCta,
+.ta-conversation,
+.ta-library,
+.ta-footer {
+  width: 100%;
+}
+
+.ta-learned {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 124px 160px 132px;
+  border-bottom: 1px solid #e7e4dc;
+}
+
+.ta-sectionTitle {
+  display: flex;
+  width: 30%;
+  padding-top: 6px;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ta-sectionTitle span,
+.ta-responsibilityHeading > div > span {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.ta-sectionTitle h2 {
+  max-width: 250px;
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 46px;
+}
+
+.ta-articleCopy {
+  display: flex;
+  width: 70%;
+  max-width: 720px;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.ta-articleCopy p {
+  color: var(--graphite);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-articleCopy .ta-articleLead {
+  color: #2c2a26;
+  font-family: "Lora", Georgia, serif;
+  font-size: 25px;
+  line-height: 38px;
+}
+
+.ta-articleCopy blockquote {
+  padding: 6px 0 6px 22px;
+  border-left: 3px solid var(--gold);
+  font-size: 27px;
+  line-height: 39px;
+}
+
+.ta-responsibility {
+  padding: 122px max(32px, calc((100% - 1120px) / 2)) 128px;
+  background: var(--plaster);
+}
+
+.ta-responsibilityHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.ta-responsibilityHeading > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ta-responsibilityHeading h2 {
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 56px;
+}
+
+.ta-responsibilityHeading > p {
+  max-width: 390px;
+  color: var(--graphite);
+  font-family: "Lora", Georgia, serif;
+  font-size: 24px;
+  line-height: 34px;
+}
+
+.ta-advisorComparison {
+  display: flex;
+  margin-top: 70px;
+  gap: 64px;
+}
+
+.ta-advisorComparison article {
+  width: 50%;
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+}
+
+.ta-advisorComparison article + article {
+  border-color: var(--gold);
+}
+
+.ta-advisorComparison h3 {
+  margin-bottom: 18px;
+  color: #7a6224;
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.ta-advisorComparison p {
+  color: var(--graphite);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-responsibilityList {
+  display: flex;
+  margin-top: 70px;
+  padding-top: 40px;
+  border-top: 1px solid #d6d0c2;
+}
+
+.ta-responsibilityList > div {
+  display: flex;
+  width: 33.333%;
+  padding-right: 48px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ta-responsibilityList > div + div {
+  padding-left: 48px;
+  border-left: 1px solid #d6d0c2;
+}
+
+.ta-responsibilityList span {
+  color: var(--gold);
+  font-size: 22px;
+}
+
+.ta-responsibilityList p {
+  font-family: "Lora", Georgia, serif;
+  font-size: 22px;
+  line-height: 31px;
+}
+
+.ta-awareness {
+  display: flex;
+  min-height: 640px;
+  padding: 110px max(32px, calc((100% - 1000px) / 2));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  color: var(--paper);
+  background: var(--ink);
+  text-align: center;
+}
+
+.ta-eyebrow {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.ta-awareness .ta-eyebrow,
+.ta-danaMessage .ta-eyebrow {
+  color: var(--bright-gold);
+}
+
+.ta-awareness h2 {
+  max-width: 900px;
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 64px;
+}
+
+.ta-awareness > p {
+  max-width: 650px;
+  color: #c8c5be;
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-awarenessRule {
+  width: 1px;
+  height: 54px;
+  background: #6f6858;
+}
+
+.ta-awareness blockquote {
+  max-width: 800px;
+  color: var(--plaster);
+  font-size: 28px;
+  line-height: 41px;
+}
+
+.ta-auditRisk {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 128px 160px 136px;
+  gap: 96px;
+}
+
+.ta-auditIntro {
+  display: flex;
+  width: 43%;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.ta-auditIntro h2,
+.ta-insureTax h2,
+.ta-ambassador h2,
+.ta-danaCopy h2,
+.ta-conversationCta h2,
+.ta-conversationIntro h2 {
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 59px;
+}
+
+.ta-auditIntro > p {
+  color: var(--graphite);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-auditIntro .ta-auditConclusion {
+  color: #2c2a26;
+  font-family: "Lora", Georgia, serif;
+  font-size: 25px;
+  line-height: 37px;
+}
+
+.ta-auditList {
+  width: 57%;
+  padding-top: 4px;
+  border-top: 1px solid #b8b3a8;
+}
+
+.ta-auditList > div {
+  display: flex;
+  min-height: 88px;
+  padding: 22px 8px;
+  align-items: center;
+  border-bottom: 1px solid #dcd8cf;
+}
+
+.ta-auditList span {
+  width: 54px;
+  flex: 0 0 54px;
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ta-auditList h3 {
+  width: 190px;
+  flex: 0 0 190px;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.ta-auditList p {
+  color: #65615b;
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.ta-insureTax {
+  display: flex;
+  padding: 118px max(32px, calc((100% - 1120px) / 2)) 126px;
+  background: var(--plaster);
+}
+
+.ta-insureTaxHeading {
+  display: flex;
+  width: 45%;
+  padding-right: 72px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 56px;
+}
+
+.ta-insureTaxHeading > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ta-insureTaxWordmark {
+  color: #7a6224;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ta-insureTaxWordmark span {
+  color: var(--ink);
+}
+
+.ta-insureTaxCopy {
+  display: flex;
+  width: 55%;
+  padding-left: 72px;
+  flex-direction: column;
+  gap: 30px;
+  border-left: 1px solid #d6d0c2;
+}
+
+.ta-insureTaxCopy > p:first-child {
+  color: #2c2a26;
+  font-family: "Lora", Georgia, serif;
+  font-size: 27px;
+  line-height: 40px;
+}
+
+.ta-insureTaxCopy > p:nth-child(2) {
+  color: var(--graphite);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-insureTaxNotes {
+  display: flex;
+  padding-top: 18px;
+  gap: 42px;
+  border-top: 1px solid #d6d0c2;
+}
+
+.ta-insureTaxNotes > div {
+  width: 50%;
+}
+
+.ta-insureTaxNotes span,
+.ta-ambassadorSteps > div > span {
+  color: #7a6224;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ta-insureTaxNotes p {
+  margin-top: 8px;
+  color: var(--graphite);
+}
+
+.ta-ambassador {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 126px 160px 136px;
+}
+
+.ta-ambassadorHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 72px;
+}
+
+.ta-ambassadorHeading > div {
+  display: flex;
+  max-width: 690px;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.ta-ambassadorHeading > p {
+  max-width: 390px;
+  color: var(--graphite);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-ambassadorSteps {
+  display: flex;
+  margin-top: 66px;
+  align-items: stretch;
+  gap: 7%;
+}
+
+.ta-ambassadorSteps > div {
+  position: relative;
+  display: flex;
+  width: 28.666%;
+  min-height: 236px;
+  padding: 30px 36px 32px 0;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 2px solid var(--ink);
+}
+
+.ta-ambassadorSteps > div:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: calc(-12.2% - 15px);
+  color: var(--gold);
+  content: "→";
+  font-size: 28px;
+}
+
+.ta-ambassadorSteps .ta-featuredStep {
+  padding-left: 36px;
+  background: var(--plaster);
+  border-color: var(--gold);
+}
+
+.ta-ambassadorSteps > div:last-child {
+  padding-right: 0;
+  padding-left: 36px;
+}
+
+.ta-ambassadorSteps h3 {
+  margin-bottom: 12px;
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 34px;
+}
+
+.ta-ambassadorSteps p {
+  color: #65615b;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.ta-danaMessage {
+  display: flex;
+  padding: 120px max(32px, calc((100% - 1120px) / 2)) 128px;
+  gap: 104px;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.ta-danaPortraitColumn {
+  width: 38%;
+}
+
+.ta-danaPortrait {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border-left: 3px solid var(--gold);
+}
+
+.ta-danaIdentity {
+  display: flex;
+  padding: 20px 0 0 21px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ta-danaIdentity strong {
+  font-family: "Lora", Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 31px;
+}
+
+.ta-danaIdentity span {
+  color: #c8c5be;
+  font-size: 14px;
+}
+
+.ta-danaIdentity span:last-child {
+  color: var(--bright-gold);
+  font-size: 13px;
+}
+
+.ta-danaCopy {
+  display: flex;
+  width: 62%;
+  padding-top: 14px;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.ta-danaCopy > p:not(.ta-danaSmallCopy) {
+  color: var(--plaster);
+  font-family: "Lora", Georgia, serif;
+  font-size: 27px;
+  line-height: 41px;
+}
+
+.ta-danaLesson {
+  display: flex;
+  padding: 26px 0;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #5d574b;
+  border-bottom: 1px solid #5d574b;
+  font-family: "Lora", Georgia, serif;
+  font-size: 34px;
+  line-height: 45px;
+}
+
+.ta-danaLesson span:last-child {
+  color: var(--bright-gold);
+}
+
+.ta-danaSmallCopy {
+  color: #c8c5be;
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-danaCopy blockquote {
+  font-size: 32px;
+  font-style: italic;
+  line-height: 44px;
+}
+
+.ta-conversationCta {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 104px 160px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 72px;
+}
+
+.ta-conversationCta > div {
+  display: flex;
+  max-width: 760px;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.ta-conversationCta > div > p {
+  max-width: 700px;
+  color: var(--graphite);
+  font-size: 18px;
+  line-height: 31px;
+}
+
+.ta-noPressure {
+  display: flex;
+  gap: 12px;
+  color: #77736b;
+  font-family: "Lora", Georgia, serif;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.ta-noPressure b {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+.ta-conversation {
+  display: flex;
+  padding: 120px max(32px, calc((100% - 1120px) / 2)) 128px;
+  gap: 96px;
+  background: var(--plaster);
+}
+
+.ta-conversationIntro {
+  display: flex;
+  width: 36%;
+  padding-bottom: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ta-conversationIntro > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ta-conversationIntro p {
+  color: var(--graphite);
+  font-size: 17px;
+  line-height: 29px;
+}
+
+.ta-conversationIntro > span {
+  color: #77736b;
+  font-size: 13px;
+  line-height: 21px;
+}
+
+.ta-form {
+  position: relative;
+  display: flex;
+  width: 64%;
+  padding: 42px 48px 48px;
+  flex-direction: column;
+  gap: 26px;
+  background: var(--paper);
+  border-top: 3px solid var(--gold);
+}
+
+.ta-honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+}
+
+.ta-formPair {
+  display: flex;
+  gap: 28px;
+}
+
+.ta-form label,
+.ta-formPair label {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ta-form label > span {
+  color: var(--graphite);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.ta-form label em {
+  color: #8a867e;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ta-form input,
+.ta-form select,
+.ta-form textarea {
+  width: 100%;
+  padding: 11px 2px;
+  border: 0;
+  border-bottom: 1px solid #8d8981;
+  border-radius: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  font: inherit;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.ta-form input,
+.ta-form select {
+  min-height: 46px;
+}
+
+.ta-form textarea {
+  min-height: 108px;
+  resize: vertical;
+}
+
+.ta-form input:focus,
+.ta-form select:focus,
+.ta-form textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 1px 0 var(--gold);
+}
+
+.ta-formFooter {
+  display: flex;
+  padding-top: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.ta-formFooter button {
+  display: flex;
+  min-width: 180px;
+  padding: 17px 22px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border: 0;
+  color: var(--paper);
+  background: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ta-formFooter button span:last-child {
+  color: var(--bright-gold);
+  font-size: 20px;
+}
+
+.ta-formFooter button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.ta-formFooter > p {
+  max-width: 310px;
+  color: #77736b;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.ta-formStatus {
+  min-height: 0;
+  color: #4d6744;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.ta-formStatus:empty {
+  display: none;
+}
+
+.ta-formError {
+  color: #8d2f2f;
+}
+
+.ta-library {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 110px 160px 122px;
+  border-top: 1px solid #e7e4dc;
+}
+
+.ta-libraryHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.ta-libraryHeading > div {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ta-libraryHeading h2 {
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 52px;
+}
+
+.ta-libraryHeading > p {
+  max-width: 450px;
+  color: var(--graphite);
+  font-size: 17px;
+  line-height: 28px;
+}
+
+.ta-resourceList {
+  margin-top: 58px;
+  border-top: 1px solid #b8b3a8;
+}
+
+.ta-resourceList > div {
+  display: flex;
+  min-height: 104px;
+  align-items: center;
+  border-bottom: 1px solid #dcd8cf;
+}
+
+.ta-resourceList > div > span {
+  width: 80px;
+  flex: 0 0 80px;
+  color: var(--gold);
+  font-size: 14px;
+}
+
+.ta-resourceList h3 {
+  width: 320px;
+  flex: 0 0 320px;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.ta-resourceList p {
+  flex: 1;
+  color: #65615b;
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.ta-resourceList em {
+  width: 90px;
+  flex: 0 0 90px;
+  color: var(--gold);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.ta-footer {
+  padding: 64px max(32px, calc((100% - 1296px) / 2)) 34px;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.ta-footerMain {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+}
+
+.ta-footerMain .ta-brand {
+  width: 220px;
+  height: 24px;
+  flex-basis: 220px;
+}
+
+.ta-footerMain > div > p {
+  max-width: 420px;
+  margin-top: 18px;
+  color: #bdbab3;
+  font-family: "Lora", Georgia, serif;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.ta-footerMain nav {
+  position: static;
+  top: auto;
+  right: auto;
+  display: flex;
+  width: auto;
+  gap: 70px;
+}
+
+.ta-footerMain nav > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ta-footerMain nav strong {
+  color: var(--bright-gold);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.ta-footerMain nav a {
+  color: #d0cdc6;
+  font-size: 13px;
+}
+
+.ta-footerMain nav a:hover,
+.ta-footerMain nav a:focus-visible,
+.ta-footerLegal a:hover,
+.ta-footerLegal a:focus-visible {
+  color: var(--bright-gold);
+}
+
+.ta-footerLegal {
+  display: flex;
+  margin-top: 46px;
+  padding-top: 28px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border-top: 1px solid #3b3935;
+  color: #8f8b84;
+  font-size: 11px;
+}
+
+.ta-footerLegal > div {
+  display: flex;
+  gap: 26px;
+}
+
+@media (max-width: 1220px) {
+  .ta-headerInner {
+    padding: 0 32px;
+  }
+
+  .ta-desktopNav {
+    display: none;
+  }
+
+  .ta-mobileMenu {
+    display: block;
+  }
+
+  .ta-headerCta {
+    margin-left: auto;
+  }
+
+  .ta-heroInner {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+
+  .ta-learned,
+  .ta-auditRisk,
+  .ta-ambassador,
+  .ta-conversationCta,
+  .ta-library {
+    padding-right: 72px;
+    padding-left: 72px;
+  }
+
+  .ta-responsibility,
+  .ta-insureTax,
+  .ta-danaMessage,
+  .ta-conversation {
+    padding-right: 72px;
+    padding-left: 72px;
+  }
+
+  .ta-footer {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ta-siteHeader {
+    height: 80px;
+  }
+
+  .ta-headerCta {
+    display: none;
+  }
+
+  .ta-heroInner,
+  .ta-learned,
+  .ta-auditRisk,
+  .ta-insureTax,
+  .ta-danaMessage,
+  .ta-conversation,
+  .ta-conversationCta {
+    flex-direction: column;
+  }
+
+  .ta-heroLead,
+  .ta-heroQuote,
+  .ta-sectionTitle,
+  .ta-articleCopy,
+  .ta-auditIntro,
+  .ta-auditList,
+  .ta-insureTaxHeading,
+  .ta-insureTaxCopy,
+  .ta-danaPortraitColumn,
+  .ta-danaCopy,
+  .ta-conversationIntro,
+  .ta-form {
+    width: 100%;
+  }
+
+  .ta-heroLead {
+    min-height: 480px;
+    padding-right: 0;
+  }
+
+  .ta-heroQuote {
+    margin-top: 56px;
+    padding: 36px 0 0;
+    border-top: 1px solid #d6d0c2;
+    border-left: 0;
+  }
+
+  .ta-sectionTitle h2 {
+    max-width: none;
+  }
+
+  .ta-articleCopy {
+    margin-top: 48px;
+  }
+
+  .ta-responsibilityHeading,
+  .ta-ambassadorHeading,
+  .ta-libraryHeading,
+  .ta-footerMain {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ta-advisorComparison {
+    gap: 36px;
+  }
+
+  .ta-responsibilityList > div,
+  .ta-responsibilityList > div + div {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .ta-ambassadorSteps {
+    gap: 24px;
+  }
+
+  .ta-ambassadorSteps > div {
+    width: 33.333%;
+  }
+
+  .ta-ambassadorSteps > div:not(:last-child)::after {
+    display: none;
+  }
+
+  .ta-insureTaxHeading {
+    gap: 34px;
+  }
+
+  .ta-insureTaxCopy {
+    margin-top: 54px;
+    padding: 48px 0 0;
+    border-top: 1px solid #d6d0c2;
+    border-left: 0;
+  }
+
+  .ta-danaCopy {
+    padding-top: 62px;
+  }
+
+  .ta-conversationCta {
+    align-items: flex-start;
+  }
+
+  .ta-conversationCta .ta-darkButton {
+    margin-top: 34px;
+  }
+
+  .ta-conversationIntro > span {
+    display: none;
+  }
+
+  .ta-form {
+    margin-top: 54px;
+  }
+
+  .ta-resourceList h3 {
+    width: 250px;
+    flex-basis: 250px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ta-siteHeader {
+    height: 66px;
+  }
+
+  .ta-headerInner {
+    padding: 0 22px;
+  }
+
+  .ta-headerBrand {
+    width: 190px;
+    flex-basis: 190px;
+  }
+
+  .ta-headerBrand .ta-brand {
+    width: 190px;
+    height: 21px;
+    flex-basis: 190px;
+  }
+
+  .ta-mobileMenu {
+    margin-right: 52px;
+  }
+
+  .ta-heroInner {
+    min-height: 680px;
+    padding: 58px 24px 42px;
+    flex-direction: column;
+  }
+
+  .ta-heroLead {
+    min-height: 0;
+  }
+
+  .ta-heroCopy {
+    gap: 24px;
+  }
+
+  .ta-heroLabel {
+    gap: 12px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .ta-heroLabel span {
+    width: 34px;
+  }
+
+  .ta-hero h1 {
+    font-size: 44px;
+    line-height: 50px;
+  }
+
+  .ta-heroCopy > p {
+    font-size: 21px;
+    line-height: 31px;
+  }
+
+  .ta-heroAction {
+    margin-top: 48px;
+  }
+
+  .ta-heroAction > span {
+    display: none;
+  }
+
+  .ta-heroAction .ta-darkButton {
+    width: 100%;
+  }
+
+  .ta-heroQuote {
+    margin-top: 30px;
+    padding-top: 30px;
+    gap: 14px;
+  }
+
+  .ta-quoteMark {
+    display: none;
+  }
+
+  .ta-heroQuote p {
+    font-size: 23px;
+    line-height: 33px;
+  }
+
+  .ta-heroQuote p + p {
+    display: none;
+  }
+
+  .ta-learned,
+  .ta-responsibility,
+  .ta-auditRisk,
+  .ta-insureTax,
+  .ta-ambassador,
+  .ta-danaMessage,
+  .ta-conversationCta,
+  .ta-conversation,
+  .ta-library {
+    padding: 68px 24px 72px;
+  }
+
+  .ta-sectionTitle {
+    gap: 16px;
+  }
+
+  .ta-sectionTitle h2,
+  .ta-responsibilityHeading h2,
+  .ta-auditIntro h2,
+  .ta-insureTax h2,
+  .ta-ambassador h2,
+  .ta-danaCopy h2,
+  .ta-conversationCta h2,
+  .ta-conversationIntro h2,
+  .ta-libraryHeading h2 {
+    font-size: 34px;
+    line-height: 41px;
+  }
+
+  .ta-articleCopy {
+    margin-top: 34px;
+    gap: 22px;
+  }
+
+  .ta-articleCopy p,
+  .ta-articleCopy .ta-articleLead {
+    font-size: 16px;
+    line-height: 27px;
+  }
+
+  .ta-articleCopy blockquote {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .ta-responsibilityHeading {
+    gap: 24px;
+  }
+
+  .ta-responsibilityHeading > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ta-responsibilityHeading > p {
+    font-size: 21px;
+    line-height: 31px;
+  }
+
+  .ta-advisorComparison {
+    margin-top: 38px;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .ta-advisorComparison article {
+    width: 100%;
+    padding-top: 22px;
+  }
+
+  .ta-advisorComparison p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .ta-responsibilityList {
+    margin-top: 42px;
+    padding-top: 0;
+    flex-direction: column;
+    border-top: 1px solid #d6d0c2;
+  }
+
+  .ta-responsibilityList > div,
+  .ta-responsibilityList > div + div {
+    width: 100%;
+    padding: 22px 0;
+    flex-direction: row;
+    gap: 16px;
+    border-bottom: 1px solid #d6d0c2;
+    border-left: 0;
+  }
+
+  .ta-responsibilityList span {
+    width: 34px;
+    flex: 0 0 34px;
+    font-size: 12px;
+  }
+
+  .ta-responsibilityList p {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .ta-awareness {
+    min-height: 550px;
+    padding: 72px 24px 78px;
+    gap: 26px;
+  }
+
+  .ta-eyebrow {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .ta-awareness h2 {
+    font-size: 31px;
+    line-height: 40px;
+  }
+
+  .ta-awareness > p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .ta-awarenessRule {
+    height: 42px;
+  }
+
+  .ta-awareness blockquote {
+    font-size: 21px;
+    line-height: 31px;
+  }
+
+  .ta-auditRisk {
+    gap: 36px;
+  }
+
+  .ta-auditIntro {
+    gap: 24px;
+  }
+
+  .ta-auditIntro > p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .ta-auditIntro .ta-auditConclusion {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .ta-auditList > div {
+    min-height: 62px;
+    padding: 16px 0;
+  }
+
+  .ta-auditList span {
+    width: 42px;
+    flex-basis: 42px;
+    font-size: 12px;
+  }
+
+  .ta-auditList h3 {
+    width: auto;
+    flex: 1;
+    font-size: 19px;
+    line-height: 26px;
+  }
+
+  .ta-auditList p {
+    display: none;
+  }
+
+  .ta-insureTaxHeading {
+    padding-right: 0;
+    gap: 30px;
+  }
+
+  .ta-insureTaxCopy {
+    margin-top: 38px;
+    padding-top: 34px;
+    gap: 24px;
+  }
+
+  .ta-insureTaxCopy > p:first-child {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .ta-insureTaxCopy > p:nth-child(2) {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .ta-insureTaxNotes {
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .ta-insureTaxNotes > div {
+    width: 100%;
+  }
+
+  .ta-ambassadorHeading {
+    gap: 24px;
+  }
+
+  .ta-ambassadorHeading > div {
+    gap: 18px;
+  }
+
+  .ta-ambassadorHeading > p {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .ta-ambassadorSteps {
+    margin-top: 38px;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid #b8b3a8;
+  }
+
+  .ta-ambassadorSteps > div,
+  .ta-ambassadorSteps .ta-featuredStep,
+  .ta-ambassadorSteps > div:last-child {
+    width: 100%;
+    min-height: 0;
+    padding: 22px 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+    background: transparent;
+    border-top: 0;
+    border-bottom: 1px solid #dcd8cf;
+  }
+
+  .ta-ambassadorSteps > div > span {
+    width: 58px;
+    flex: 0 0 58px;
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .ta-ambassadorSteps h3 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .ta-ambassadorSteps p {
+    font-size: 14px;
+    line-height: 23px;
+  }
+
+  .ta-danaMessage {
+    gap: 0;
+  }
+
+  .ta-danaPortrait {
+    height: 380px;
+  }
+
+  .ta-danaIdentity {
+    display: none;
+  }
+
+  .ta-danaCopy {
+    padding-top: 42px;
+    gap: 24px;
+  }
+
+  .ta-danaCopy > p:not(.ta-danaSmallCopy) {
+    font-size: 21px;
+    line-height: 32px;
+  }
+
+  .ta-danaLesson {
+    padding: 22px 0;
+    font-size: 25px;
+    line-height: 35px;
+  }
+
+  .ta-danaSmallCopy {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .ta-danaCopy blockquote {
+    font-size: 23px;
+    line-height: 34px;
+  }
+
+  .ta-conversationCta {
+    gap: 0;
+  }
+
+  .ta-conversationCta > div {
+    gap: 18px;
+  }
+
+  .ta-conversationCta > div > p {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .ta-noPressure {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    font-size: 17px;
+  }
+
+  .ta-conversationCta .ta-darkButton {
+    width: 100%;
+  }
+
+  .ta-conversation {
+    gap: 0;
+  }
+
+  .ta-conversationIntro > div {
+    gap: 18px;
+  }
+
+  .ta-conversationIntro p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .ta-form {
+    margin-top: 34px;
+    padding: 32px 22px;
+    gap: 24px;
+  }
+
+  .ta-formPair {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ta-formFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ta-formFooter button {
+    width: 100%;
+  }
+
+  .ta-formFooter > p {
+    max-width: none;
+  }
+
+  .ta-libraryHeading {
+    gap: 22px;
+  }
+
+  .ta-libraryHeading > div {
+    gap: 16px;
+  }
+
+  .ta-libraryHeading > p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .ta-resourceList {
+    margin-top: 34px;
+  }
+
+  .ta-resourceList > div {
+    min-height: 86px;
+    flex-wrap: wrap;
+    padding: 18px 0;
+  }
+
+  .ta-resourceList > div > span {
+    display: none;
+  }
+
+  .ta-resourceList h3 {
+    width: calc(100% - 86px);
+    flex: 0 0 calc(100% - 86px);
+    font-size: 19px;
+    line-height: 27px;
+  }
+
+  .ta-resourceList p {
+    width: 100%;
+    margin-top: 8px;
+    flex: 0 0 100%;
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .ta-resourceList em {
+    width: 86px;
+    flex-basis: 86px;
+  }
+
+  .ta-footer {
+    padding: 48px 24px 30px;
+  }
+
+  .ta-footerMain {
+    gap: 38px;
+  }
+
+  .ta-footerMain nav {
+    display: none;
+  }
+
+  .ta-footerMain > div > p {
+    font-size: 17px;
+    line-height: 26px;
+  }
+
+  .ta-footerLegal {
+    margin-top: 28px;
+    padding-top: 22px;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+    gap: 22px;
+    font-size: 10px;
+  }
+
+  .ta-footerLegal > div {
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ta-darkButton,
+  .ta-desktopNav a {
+    transition: none;
+  }
+}
+
+/* Fill images (next/image layout="fill" in the old app). */
+.ta-page .ta-fill { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center top; }
+.ta-page .ta-fill-contain { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; object-position: left center; }
+/* The header/footer live in BaseLayout's header/footer slots, outside <main>; let the mobile menu overflow. */
+.ta-page.ta-chrome { overflow: visible; }
+
+/* Smooth in-page navigation (was an inline <style> on the old page). */
+html:has(.ta-page) { scroll-behavior: smooth; scroll-padding-top: 96px; }
+@media (max-width: 900px) { html:has(.ta-page) { scroll-padding-top: 80px; } }
+@media (max-width: 767px) { html:has(.ta-page) { scroll-padding-top: 66px; } }
+@media (prefers-reduced-motion: reduce) { html:has(.ta-page) { scroll-behavior: auto; } }

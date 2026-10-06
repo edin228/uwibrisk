@@ -1,0 +1,183 @@
+---
+/**
+ * "Faces, not phone trees." Header row plus a horizontally scrolling strip of
+ * color team portraits that bleeds off the right edge.
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import TextLink from '../ui/TextLink.astro';
+
+interface Props {
+  members: CollectionEntry<'team'>[];
+  eyebrow?: string;
+  heading: string;
+  text?: string;
+  link?: { label: string; href: string };
+  /** Background: white (default) or the warm gray surface. */
+  surface?: 'paper' | 'surface';
+}
+const { members, eyebrow, heading, text, link, surface = 'paper' } = Astro.props;
+---
+
+<section class:list={['team-strip', `surface-${surface}`]} aria-labelledby="team-strip-heading">
+  <div class="head">
+    <div class="title">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h2 id="team-strip-heading">{heading}</h2>
+    </div>
+    {
+      (text || link) && (
+        <div class="aside">
+          {text && <p>{text}</p>}
+          {link && <TextLink href={link.href}>{link.label}</TextLink>}
+        </div>
+      )
+    }
+  </div>
+
+  <ul class="strip">
+    {
+      members.map((m) => (
+        <li>
+          <a href={`/team/${m.id}`}>
+            <Image src={m.data.photo} alt={m.data.photoAlt} width={560} widths={[280, 560]} sizes="280px" data-color />
+            <span class="name">{m.data.name}</span>
+            <span class="role">{m.data.role}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .team-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    padding-block: clamp(80px, 9.7vw, 140px) clamp(80px, 10.4vw, 150px);
+    overflow: hidden;
+  }
+
+  .surface-surface {
+    background: var(--color-surface);
+  }
+
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px 64px;
+    width: 100%;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 640px;
+  }
+
+  h2 {
+    letter-spacing: -0.04em;
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex-shrink: 0;
+    width: 340px;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .strip {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0 var(--gutter) 8px max(var(--gutter), calc((100vw - var(--container)) / 2));
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+    list-style: none;
+  }
+
+  .strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .strip li {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+  }
+
+  .strip a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .strip img {
+    width: 280px;
+    height: 360px;
+    margin-bottom: 12px;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  .name {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .strip a:hover .name {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
+  }
+
+  .role {
+    color: var(--color-muted);
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  @media (max-width: 760px) {
+    .team-strip {
+      gap: 32px;
+    }
+
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .aside {
+      width: auto;
+    }
+
+    .strip li {
+      flex-basis: 160px;
+    }
+
+    .strip img {
+      width: 160px;
+      height: 200px;
+    }
+
+    .name {
+      font-size: 17px;
+      line-height: 22px;
+    }
+  }
+</style>

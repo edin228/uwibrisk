@@ -1,0 +1,348 @@
+---
+/**
+ * "What we cover": three photo panels. One is open; selecting another (click,
+ * hover on desktop, or keyboard) opens it. Without JS the first panel stays open
+ * and every panel still links to its page.
+ */
+import { Image } from 'astro:assets';
+import { coverage } from '../../data/home';
+---
+
+<section class="coverage" aria-labelledby="coverage-heading">
+  <div class="head">
+    <div class="title">
+      <p class="eyebrow">{coverage.eyebrow}</p>
+      <h2 id="coverage-heading">{coverage.heading}</h2>
+    </div>
+    <p class="intro">{coverage.text}</p>
+  </div>
+
+  <div class="panels" data-accordion>
+    {
+      coverage.panels.map((p, i) => (
+        <article class="panel" data-open={i === 0 ? '' : undefined} data-panel>
+          <Image class="photo" src={p.photo.src} alt="" widths={[420, 840, 1300]} sizes="(max-width: 760px) 100vw, 832px" />
+          <div class="shade" aria-hidden="true" />
+          <button class="toggle" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`panel-${p.id}`}>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="short">{p.short}</span>
+            <span class="plus" aria-hidden="true">+</span>
+          </button>
+          <div class="body" id={`panel-${p.id}`}>
+            <p class="eyebrow on-dark">
+              {String(i + 1).padStart(2, '0')} · {p.label}
+            </p>
+            <h3>
+              {p.heading[0]}
+              <br />
+              {p.heading[1]}
+            </h3>
+            <div class="row">
+              <p>{p.text}</p>
+              <a class="go" href={p.href} aria-label={`Explore ${p.label.toLowerCase()} coverage`}>
+                →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-accordion]')) {
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    const open = (panel: HTMLElement) => {
+      for (const p of panels) {
+        const isOpen = p === panel;
+        p.toggleAttribute('data-open', isOpen);
+        p.querySelector('.toggle')?.setAttribute('aria-expanded', String(isOpen));
+      }
+    };
+    const hover = window.matchMedia('(hover: hover) and (min-width: 761px)');
+    for (const panel of panels) {
+      panel.querySelector('.toggle')?.addEventListener('click', () => open(panel));
+      panel.addEventListener('mouseenter', () => {
+        if (hover.matches) open(panel);
+      });
+    }
+  }
+</script>
+
+<style>
+  .coverage {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding: 0 var(--gutter) clamp(88px, 11vw, 160px);
+  }
+
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px 64px;
+    padding-bottom: 16px;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 720px;
+  }
+
+  h2 {
+    letter-spacing: -0.04em;
+  }
+
+  .intro {
+    flex-shrink: 0;
+    width: 340px;
+    padding-bottom: 8px;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .panels {
+    display: flex;
+    gap: 12px;
+    height: 640px;
+  }
+
+  .panel {
+    position: relative;
+    flex: 0 0 234px;
+    background: var(--color-night-raised);
+    overflow: hidden;
+    transition: flex-basis 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .panel[data-open] {
+    flex: 1 1 auto;
+  }
+
+  .photo,
+  .shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .photo {
+    object-fit: cover;
+    opacity: 0.42;
+    transition: opacity 0.4s ease;
+  }
+
+  .panel[data-open] .photo {
+    opacity: 1;
+  }
+
+  .shade {
+    opacity: 0;
+    background: linear-gradient(0deg, rgb(20 20 20 / 0.92) 0%, rgb(20 20 20 / 0.2) 60%, rgb(20 20 20 / 0) 100%);
+    transition: opacity 0.4s ease;
+  }
+
+  .panel[data-open] .shade {
+    opacity: 1;
+  }
+
+  .toggle {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-paper);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .panel[data-open] .toggle {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .num {
+    position: absolute;
+    top: 32px;
+    left: 28px;
+    color: #8c8c8c;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .short {
+    position: absolute;
+    top: calc(100% - 72px);
+    left: calc(50% - 24px);
+    font-family: var(--font-display);
+    font-size: 44px;
+    letter-spacing: -0.03em;
+    line-height: 48px;
+    white-space: nowrap;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+  }
+
+  .plus {
+    position: absolute;
+    bottom: 32px;
+    left: 28px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .body {
+    position: absolute;
+    left: 48px;
+    right: 48px;
+    bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+
+  .panel[data-open] .body {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.2s;
+  }
+
+  .body .eyebrow {
+    letter-spacing: 0.14em;
+  }
+
+  h3 {
+    color: var(--color-paper);
+    font-size: clamp(36px, 1rem + 3.2vw, 64px);
+    letter-spacing: -0.04em;
+    line-height: 1.03;
+    white-space: nowrap;
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .row p {
+    max-width: 420px;
+    color: #cfcfcf;
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .go {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    background: var(--color-mustard);
+    color: var(--color-ink);
+    font-size: 20px;
+    text-decoration: none;
+  }
+
+  .go:hover {
+    background: #ffd54f;
+  }
+
+  @media (max-width: 1100px) {
+    .head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .intro {
+      width: auto;
+      max-width: 560px;
+    }
+
+    .panel {
+      flex-basis: 140px;
+    }
+
+    .short {
+      left: calc(50% - 18px);
+      font-size: 32px;
+      line-height: 36px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .panels {
+      flex-direction: column;
+      height: auto;
+      gap: 8px;
+    }
+
+    .panel {
+      flex: 0 0 auto;
+      height: 84px;
+      transition: height 0.4s ease;
+    }
+
+    .panel[data-open] {
+      height: 420px;
+    }
+
+    .num {
+      display: none;
+    }
+
+    .short {
+      top: 50%;
+      bottom: auto;
+      left: 20px;
+      width: auto;
+      font-size: 26px;
+      line-height: 30px;
+      transform: translateY(-50%);
+    }
+
+    .plus {
+      top: 50%;
+      right: 20px;
+      bottom: auto;
+      left: auto;
+      transform: translateY(-50%);
+    }
+
+    .body {
+      left: 20px;
+      right: 20px;
+      bottom: 24px;
+      gap: 14px;
+    }
+
+    h3 {
+      font-size: 34px;
+      white-space: normal;
+    }
+
+    .row p {
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    .go {
+      width: 48px;
+      height: 48px;
+    }
+  }
+</style>

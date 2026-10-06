@@ -1,0 +1,88 @@
+/*
+ * Element defaults the old landing pages were designed on: Tailwind v3 preflight plus
+ * the element rules from the old styles/globals.css (p colour, bold h2). Scoped to the
+ * microsite roots (.hm-site, .ta-page) and kept at low specificity so the page CSS wins,
+ * while neutralising the new site's global heading/link styles from base.css.
+ */
+:where(.hm-site, .ta-page) *,
+:where(.hm-site, .ta-page) *::before,
+:where(.hm-site, .ta-page) *::after {
+  box-sizing: border-box;
+  border: 0 solid #e5e7eb;
+}
+
+/* base.css styles h1-h4 globally (0,0,1); this needs to beat it but stay below the page CSS. */
+.hm-site :is(h1, h2, h3, h4, h5, h6),
+.ta-page :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  line-height: inherit;
+}
+
+.hm-site h2,
+.ta-page h2 {
+  font-weight: bold;
+}
+
+:where(.hm-site, .ta-page) p {
+  margin: 0;
+  color: #24252a;
+}
+
+:where(.hm-site, .ta-page) :is(blockquote, dl, dd, figure, hr, pre) {
+  margin: 0;
+}
+
+:where(.hm-site, .ta-page) :is(ol, ul, menu) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(.hm-site, .ta-page) a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+:where(.hm-site, .ta-page) :is(b, strong) {
+  font-weight: bolder;
+}
+
+:where(.hm-site, .ta-page) :is(button, input, optgroup, select, textarea) {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+:where(.hm-site, .ta-page) :is(button, [type='button'], [type='submit']) {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+}
+
+:where(.hm-site, .ta-page) textarea {
+  resize: vertical;
+}
+
+:where(.hm-site, .ta-page) :is(input, textarea)::placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+:where(.hm-site, .ta-page) :is(img, svg) {
+  display: block;
+  vertical-align: middle;
+}
+
+:where(.hm-site, .ta-page) summary {
+  display: list-item;
+}

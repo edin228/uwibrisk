@@ -1,0 +1,147 @@
+---
+import carriers from '../../data/carriers.json';
+import { marqueeCarriers } from '../../data/home';
+
+const known = new Set(carriers.map((c) => c.name));
+for (const name of marqueeCarriers) {
+  if (!known.has(name)) throw new Error(`Marquee carrier "${name}" is not in src/data/carriers.json`);
+}
+---
+
+<section class="marquee" aria-label={`We work with ${carriers.length} carriers`}>
+  <p class="label" aria-hidden="true">We work with<br />{carriers.length} carriers</p>
+  <div class="track-wrap">
+    <ul class="track">
+      {
+        [0, 1].map((copy) =>
+          marqueeCarriers.map((name) => (
+            <li aria-hidden={copy === 1 ? 'true' : undefined}>
+              <span class="name">{name}</span>
+              <span class="dot" aria-hidden="true" />
+            </li>
+          )),
+        )
+      }
+    </ul>
+  </div>
+  <a class="all" href="/carriers">See all carriers →</a>
+</section>
+
+<style>
+  .marquee {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    height: 120px;
+    padding-left: var(--gutter);
+    border-bottom: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    overflow: hidden;
+  }
+
+  .label {
+    flex-shrink: 0;
+    width: 120px;
+    color: var(--color-muted);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  .track-wrap {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 92%, transparent);
+  }
+
+  .track {
+    display: flex;
+    width: max-content;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation: scroll 60s linear infinite;
+  }
+
+  .track-wrap:hover .track {
+    animation-play-state: paused;
+  }
+
+  .track li {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding-right: 40px;
+  }
+
+  .name {
+    color: #7a7a7a;
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 36px;
+    white-space: nowrap;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-mustard);
+  }
+
+  .all {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .all:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    padding-right: var(--gutter);
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .marquee {
+      height: 92px;
+      gap: 20px;
+      padding-left: 20px;
+    }
+
+    .label {
+      width: 92px;
+      font-size: 10px;
+    }
+
+    .name {
+      font-size: 22px;
+    }
+
+    .track li {
+      gap: 24px;
+      padding-right: 24px;
+    }
+  }
+</style>

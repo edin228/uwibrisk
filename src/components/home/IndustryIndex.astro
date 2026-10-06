@@ -1,0 +1,319 @@
+---
+/**
+ * Industry programs index on black. Hovering or focusing a row swaps the large
+ * photo; every row links to its program page.
+ */
+import { Image } from 'astro:assets';
+import { industries } from '../../data/home';
+
+const total = industries.items.length;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="industries on-dark" aria-labelledby="industries-heading" data-industries>
+  <div class="list-col">
+    <p class="eyebrow">{industries.eyebrow}</p>
+    <h2 id="industries-heading">{industries.heading}</h2>
+    <ol class="list">
+      {
+        industries.items.map((item, i) => (
+          <li data-active={i === 1 ? '' : undefined} data-index={i} data-caption={item.caption}>
+            <a href={item.href}>
+              <span class="num">{pad(i + 1)}</span>
+              <span class="name">{item.label}</span>
+              <span class="rule" aria-hidden="true" />
+              <span class="explore" aria-hidden="true">
+                Explore →
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+    <a class="more" href={industries.allLink.href}>{industries.allLink.label} →</a>
+  </div>
+
+  <div class="media-col" aria-hidden="true">
+    <div class="frame">
+      {
+        industries.items.map((item, i) => (
+          <Image
+            src={item.photo.src}
+            alt=""
+            widths={[520, 1040]}
+            sizes="520px"
+            data-index={i}
+            data-active={i === 1 ? '' : undefined}
+          />
+        ))
+      }
+    </div>
+    <div class="caption">
+      <span data-caption>{industries.items[1]?.caption}</span>
+      <span><span data-count>{pad(2)}</span> / {pad(total)}</span>
+    </div>
+    <div class="thumbs">
+      {
+        industries.items.map((item, i) => (
+          <button type="button" tabindex="-1" data-index={i} data-active={i === 1 ? '' : undefined}>
+            <Image src={item.photo.src} alt="" width={160} />
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-industries]')) {
+    const caption = root.querySelector<HTMLElement>('[data-caption]');
+    const count = root.querySelector<HTMLElement>('[data-count]');
+    const select = (index: number) => {
+      for (const el of root.querySelectorAll<HTMLElement>('[data-index]')) {
+        el.toggleAttribute('data-active', Number(el.dataset.index) === index);
+      }
+      const item = root.querySelector<HTMLElement>(`.list li[data-index="${index}"]`);
+      if (caption && item) caption.textContent = item.dataset.caption ?? '';
+      if (count) count.textContent = String(index + 1).padStart(2, '0');
+    };
+    for (const el of root.querySelectorAll<HTMLElement>('.list li, .thumbs button')) {
+      const index = Number(el.dataset.index);
+      el.addEventListener('mouseenter', () => select(index));
+      el.addEventListener('focusin', () => select(index));
+      if (el instanceof HTMLButtonElement) el.addEventListener('click', () => select(index));
+    }
+  }
+</script>
+
+<style>
+  .industries {
+    display: flex;
+    justify-content: space-between;
+    gap: 96px;
+    padding: clamp(88px, 9.7vw, 140px) max(var(--gutter), calc((100vw - var(--container)) / 2)) clamp(88px, 11vw, 160px);
+    background: var(--color-night);
+    color: var(--color-paper);
+  }
+
+  .list-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 696px;
+  }
+
+  .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    margin-bottom: 56px;
+    color: var(--color-paper);
+    font-size: clamp(32px, 1rem + 2.2vw, 44px);
+    letter-spacing: -0.03em;
+    line-height: 1.18;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--color-ink-rule);
+    list-style: none;
+  }
+
+  .list li {
+    border-top: 1px solid var(--color-ink-rule);
+  }
+
+  .list a {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-block: 18px;
+    color: #5e5e5e;
+    text-decoration: none;
+  }
+
+  .num {
+    flex-shrink: 0;
+    width: 32px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 1rem + 1.7vw, 38px);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+  }
+
+  .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--color-mustard);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .explore {
+    white-space: nowrap;
+    color: var(--color-mustard);
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  li[data-active] .num,
+  li[data-active] .explore {
+    color: var(--color-mustard);
+    opacity: 1;
+  }
+
+  li[data-active] .name {
+    color: var(--color-paper);
+    font-style: italic;
+  }
+
+  li[data-active] .rule {
+    transform: scaleX(1);
+  }
+
+  .more {
+    align-self: flex-start;
+    margin-top: 24px;
+    color: var(--color-ink-muted);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .more:hover {
+    color: var(--color-mustard);
+  }
+
+  .media-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-shrink: 0;
+    width: 520px;
+    padding-top: 140px;
+  }
+
+  .frame {
+    position: relative;
+    height: 620px;
+    background: var(--color-night-raised);
+  }
+
+  .frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .frame img[data-active] {
+    opacity: 1;
+  }
+
+  .caption {
+    display: flex;
+    justify-content: space-between;
+    color: #8c8c8c;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .thumbs {
+    display: flex;
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .thumbs button {
+    width: 76px;
+    height: 76px;
+    padding: 0;
+    border: 0;
+    background: none;
+    opacity: 0.45;
+    cursor: pointer;
+  }
+
+  .thumbs button[data-active] {
+    opacity: 1;
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 3px;
+  }
+
+  .thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1100px) {
+    .industries {
+      gap: 48px;
+    }
+
+    .media-col {
+      width: 360px;
+      padding-top: 120px;
+    }
+
+    .frame {
+      height: 460px;
+    }
+
+    .thumbs {
+      display: none;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .industries {
+      flex-direction: column-reverse;
+      gap: 0;
+      padding-inline: 20px;
+    }
+
+    .media-col {
+      display: none;
+    }
+
+    h2 {
+      margin-bottom: 32px;
+    }
+
+    .list a {
+      gap: 16px;
+      padding-block: 14px;
+    }
+
+    .rule {
+      display: none;
+    }
+
+    .name {
+      font-size: 26px;
+    }
+
+    .explore {
+      margin-left: auto;
+    }
+
+    li:not([data-active]) .name {
+      color: #8c8c8c;
+    }
+  }
+</style>

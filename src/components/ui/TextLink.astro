@@ -1,0 +1,43 @@
+---
+/** Inline arrow link with a thin underline ("Meet the team →"). */
+interface Props {
+  href: string;
+  /** Underline color: mustard (default) or ink. */
+  rule?: 'mustard' | 'ink';
+  tone?: 'ink' | 'light';
+}
+const { href, rule = 'mustard', tone = 'ink' } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+<a
+  href={href}
+  class:list={['text-link', `rule-${rule}`, `tone-${tone}`]}
+  {...(external ? { target: '_blank', rel: 'noopener' } : {})}><slot /></a
+>
+
+<style>
+  .text-link {
+    display: inline-block;
+    padding-block: 5px;
+    border-bottom: 1px solid var(--color-mustard);
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 18px;
+    text-decoration: none;
+  }
+
+  .rule-ink {
+    border-color: var(--color-ink);
+  }
+
+  .tone-light {
+    color: var(--color-paper);
+  }
+
+  .text-link:hover {
+    border-bottom-width: 2px;
+    padding-bottom: 4px;
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+/** Small uppercase label. `rule` adds the short mustard bar (left or below). */
+interface Props {
+  tone?: 'gold' | 'mustard' | 'ink' | 'muted';
+  rule?: 'left' | 'below' | false;
+  as?: 'p' | 'span' | 'div';
+  class?: string;
+}
+const { tone = 'gold', rule = false, as: Tag = 'p', class: className } = Astro.props;
+---
+
+<Tag class:list={['eyebrow-wrap', rule && `rule-${rule}`, className]}>
+  {rule === 'left' && <span class="bar" aria-hidden="true" />}
+  <span class:list={['eyebrow', `tone-${tone}`]}><slot /></span>
+  {rule === 'below' && <span class="bar" aria-hidden="true" />}
+</Tag>
+
+<style>
+  .eyebrow-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin: 0;
+  }
+
+  .rule-left {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .bar {
+    flex-shrink: 0;
+    width: 36px;
+    height: 2px;
+    background: var(--color-mustard);
+  }
+
+  .rule-left .bar {
+    height: 1px;
+  }
+
+  .tone-gold {
+    color: var(--color-gold);
+  }
+
+  .tone-mustard {
+    color: var(--color-mustard);
+  }
+
+  .tone-ink {
+    color: var(--color-ink);
+  }
+
+  .tone-muted {
+    color: var(--color-muted);
+  }
+</style>

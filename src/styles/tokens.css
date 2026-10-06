@@ -1,39 +1,58 @@
-/* Design tokens (source: Paper design file). Sharp corners everywhere: no radius tokens. */
+/* Design tokens (source: Paper design file, "Site Redesign" page). Sharp corners everywhere. */
 :root {
   /* Color */
   --color-paper: #ffffff;
   --color-ink: #111111;
   --color-body: #3f3f3f;
   --color-muted: #666666;
+  --color-faint: #8c8c8c;
   --color-rule: #e2e2e2;
-  --color-ink-body: #c8c8c8;
-  --color-ink-rule: #3a3a3a;
+  --color-surface: #f3f3f1;
   --color-mustard: #f4c430;
   --color-gold: #8a6b00;
-  --color-surface: #f3f3f1;
+
+  /* Dark sections */
+  --color-night: #0c0c0c;
+  --color-night-raised: #1c1c1c;
+  --color-ink-body: #c8c8c8;
+  --color-ink-muted: #a8a8a8;
+  --color-ink-rule: #2a2a2a;
 
   /* Type families (self-hosted via @fontsource, see src/styles/fonts.css) */
   --font-display: "Lora", Georgia, "Times New Roman", serif;
   --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Type scale */
+  /* Type scale (fluid between 390px and 1440px viewports) */
+  --text-eyebrow: 12px;
   --text-label: 12px;
   --text-sm: 14px;
   --text-body: 17px;
   --text-lead: 18px;
+  --text-display: clamp(56px, 2.2rem + 6vw, 120px);
+  --text-h1: clamp(44px, 1.6rem + 4vw, 84px);
+  --text-h2: clamp(34px, 1.1rem + 2.7vw, 56px);
+  --text-h3: clamp(28px, 1rem + 1.95vw, 44px);
   --text-h4: 23px;
-  --text-h3: 32px;
-  --text-h2: 52px;
-  --text-h1: 68px;
 
   /* Tracking */
-  --tracking-display: -0.035em;
+  --tracking-display: -0.045em;
+  --tracking-heading: -0.035em;
+  --tracking-eyebrow: 0.18em;
   --tracking-label: 0.16em;
 
   /* Layout */
   --container: 1312px;
-  --gutter: 64px;
+  --gutter: clamp(20px, 4.4vw, 64px);
+  --label-col: 300px;
+  --section-y: clamp(80px, 9vw, 150px);
+  --header-h: 96px;
 
   /* Shape */
   --radius: 0;
+}
+
+@media (max-width: 960px) {
+  :root {
+    --header-h: 60px;
+  }
 }

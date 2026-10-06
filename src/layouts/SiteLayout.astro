@@ -1,0 +1,31 @@
+---
+/**
+ * Standard page chrome for the redesign: header, page content, optional mustard
+ * closing band, footer. Use `header="overlay"` when the page opens with a dark
+ * photo hero (the hero must leave room for the header: padding-top var(--header-h)).
+ */
+import type { ComponentProps } from 'astro/types';
+import ClosingCta from '../components/site/ClosingCta.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import BaseLayout from './BaseLayout.astro';
+
+type BaseProps = ComponentProps<typeof BaseLayout>;
+interface Props extends BaseProps {
+  header?: 'overlay' | 'solid';
+  /** Closing band props, or false to omit it. */
+  closing?: ComponentProps<typeof ClosingCta> | false;
+}
+
+const { header = 'solid', closing = {}, ...base } = Astro.props;
+---
+
+<BaseLayout {...base}>
+  <slot name="head" slot="head" />
+  <SiteHeader slot="header" variant={header} />
+  <slot />
+  <Fragment slot="footer">
+    {closing !== false && <ClosingCta {...closing} />}
+    <SiteFooter />
+  </Fragment>
+</BaseLayout>

@@ -1,4 +1,4 @@
-/* Minimal base styles. The real design system lands once the Paper designs are final. */
+/* Global base styles for the redesign ("Ink & Paper"). Components own their layout. */
 *,
 *::before,
 *::after {
@@ -8,6 +8,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
 }
 
 body {
@@ -17,25 +18,40 @@ body {
   font-family: var(--font-sans);
   font-size: var(--text-body);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
 }
 
 h1,
 h2,
 h3,
 h4 {
+  margin: 0;
   color: var(--color-ink);
   font-family: var(--font-display);
-  letter-spacing: var(--tracking-display);
-  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  line-height: 1.1;
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(40px, 6vw, var(--text-h1)); }
-h2 { font-size: clamp(32px, 4.5vw, var(--text-h2)); }
+h1 { font-size: var(--text-h1); letter-spacing: var(--tracking-display); line-height: 1; }
+h2 { font-size: var(--text-h2); }
 h3 { font-size: var(--text-h3); }
-h4 { font-size: var(--text-h4); }
+h4 { font-size: var(--text-h4); letter-spacing: -0.015em; }
+
+p {
+  margin: 0;
+}
 
 a {
-  color: var(--color-gold);
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-mustard);
+  outline-offset: 3px;
 }
 
 /* Photography is black and white site-wide; only team photos (data-color) stay in color. */
@@ -44,6 +60,7 @@ img:not([data-color]) {
 }
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
 }
@@ -52,7 +69,23 @@ img {
   width: 100%;
   max-width: calc(var(--container) + 2 * var(--gutter));
   margin-inline: auto;
-  padding-inline: clamp(20px, 5vw, var(--gutter));
+  padding-inline: var(--gutter);
+}
+
+/* Small uppercase label above headings. Gold on light, mustard on dark (.on-dark). */
+.eyebrow {
+  display: block;
+  color: var(--color-gold);
+  font-size: var(--text-eyebrow);
+  font-weight: 800;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.on-dark .eyebrow,
+.eyebrow.on-dark {
+  color: var(--color-mustard);
 }
 
 .label {
@@ -60,6 +93,15 @@ img {
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--color-muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .skip-link {
@@ -76,12 +118,100 @@ img {
   top: 8px;
 }
 
+/* Long-form rich text (blog posts, CMS pages). */
 .prose {
   max-width: 72ch;
+  color: var(--color-body);
+  font-size: var(--text-body);
+  line-height: 1.75;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h2 {
+  margin-top: 2em;
+  font-size: clamp(28px, 1rem + 1.6vw, 36px);
+}
+
+.prose h3 {
+  margin-top: 1.75em;
+  font-size: clamp(22px, 1rem + 0.8vw, 26px);
+}
+
+.prose h4 {
+  margin-top: 1.5em;
+  font-size: 20px;
+}
+
+.prose a {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-mustard);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.prose strong {
+  color: var(--color-ink);
+  font-weight: 650;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--color-gold);
 }
 
 .prose blockquote {
   margin-inline: 0;
-  padding-left: 1rem;
+  padding-left: 24px;
   border-left: 3px solid var(--color-mustard);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.prose img {
+  width: 100%;
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.prose th,
+.prose td {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--color-rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }

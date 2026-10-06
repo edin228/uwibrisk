@@ -1,0 +1,161 @@
+---
+import { Image } from 'astro:assets';
+import testimonials from '../../data/testimonials.json';
+import { claims } from '../../data/home';
+import Button from '../ui/Button.astro';
+
+const t = testimonials.find((x) => x.id === claims.testimonial.id);
+if (!t) throw new Error(`Testimonial ${claims.testimonial.id} not found`);
+// Excerpts must be verbatim (copy guidelines): every word between the ellipses must appear in the testimonial.
+const core = claims.testimonial.excerpt.replace(/^…|…$/g, '');
+if (!t.text.replace(/\s+/g, ' ').includes(core)) throw new Error('Claims testimonial excerpt is not verbatim');
+---
+
+<section class="claims" aria-labelledby="claims-heading">
+  <Image class="bg" src={claims.photo.src} alt="" widths={[780, 1440, 2000]} sizes="100vw" />
+  <div class="shade" aria-hidden="true"></div>
+  <div class="content">
+    <div class="main">
+      <p class="eyebrow on-dark">{claims.eyebrow}</p>
+      <h2 id="claims-heading">{claims.heading}</h2>
+      <div class="actions">
+        <Button href="/carriers" block>Report a claim →</Button>
+        <Button href="/coi" variant="outline-light">Request a certificate</Button>
+        <Button href="https://uwibrisk.epaypolicy.com/" variant="outline-light">Make a payment</Button>
+      </div>
+    </div>
+    <figure class="quote">
+      <blockquote>“{claims.testimonial.excerpt}”</blockquote>
+      <figcaption>{t.from} · {t.subText}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .claims {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 700px;
+    padding: 120px var(--gutter) 72px;
+    background: var(--color-night);
+    color: var(--color-paper);
+    overflow: hidden;
+  }
+
+  .bg,
+  .shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bg {
+    object-fit: cover;
+  }
+
+  .shade {
+    background:
+      linear-gradient(90deg, rgb(20 20 20 / 0.75) 0%, rgb(20 20 20 / 0.25) 60%, rgb(20 20 20 / 0.1) 100%),
+      linear-gradient(0deg, rgb(20 20 20 / 0.7) 0%, rgb(20 20 20 / 0) 55%);
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+  }
+
+  h2 {
+    color: var(--color-paper);
+    font-size: clamp(44px, 1.2rem + 3.9vw, 72px);
+    letter-spacing: -0.045em;
+    line-height: 1.03;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .quote {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex-shrink: 0;
+    width: 380px;
+    margin: 0;
+    padding: 28px;
+    border-left: 3px solid var(--color-mustard);
+    background: rgb(12 12 12 / 0.72);
+  }
+
+  blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-style: italic;
+    line-height: 28px;
+  }
+
+  figcaption {
+    color: var(--color-ink-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 1100px) {
+    .content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .claims {
+      min-height: 0;
+      padding: 220px 20px 40px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .actions :global(.btn--block) {
+      grid-column: 1 / -1;
+    }
+
+    .actions :global(.btn) {
+      padding-inline: 8px;
+      font-size: 13px;
+    }
+
+    .quote {
+      width: 100%;
+      padding: 20px;
+    }
+
+    blockquote {
+      font-size: 17px;
+      line-height: 26px;
+    }
+  }
+</style>

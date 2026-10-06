@@ -1,0 +1,511 @@
+/*
+ * Boutique hotels microsite (/hotels/**) and the Coffee & Contracts page.
+ * Faithful port of the old Next.js styles/Hotels.module.css: class names are the
+ * CSS-module names prefixed with "hm-" so nothing leaks into the rest of the site.
+ * Keep it in sync with the markup in src/pages/hotels/**, src/pages/coffee-and-contracts.astro
+ * and src/components/legacy/*.
+ */
+@import "./preflight.css";
+
+.hm-site {
+  --hotel-black: #111111;
+  --hotel-yellow: #f4c430;
+  --hotel-gold: #8a6b00;
+  --hotel-text: #111111;
+  --hotel-muted: #555555;
+  --hotel-line: #d8d8d8;
+  min-width: 0;
+  overflow: hidden;
+  background: #ffffff;
+  color: var(--hotel-text);
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hm-site * { box-sizing: border-box; }
+.hm-site a { color: inherit; text-decoration: none; }
+.hm-site nav { position: static; inset: auto; width: auto; }
+.hm-site h1,
+.hm-site h2,
+.hm-site h3,
+.hm-site h4,
+.hm-site p { margin: 0; }
+.hm-site h1,
+.hm-site h2,
+.hm-site h3,
+.hm-site h4 { font-family: "Lora", Georgia, serif; font-weight: 500; }
+.hm-site button,
+.hm-site input,
+.hm-site select,
+.hm-site textarea { font: inherit; }
+
+.hm-header { height: 92px; background: var(--hotel-black); color: #d8d8d8; }
+.hm-headerInner { width: 100%; max-width: 1440px; height: 100%; margin: 0 auto; padding: 0 72px; display: flex; align-items: center; justify-content: space-between; }
+.hm-brandLockup { width: 316px; display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.hm-logo { width: 182px; height: 20px; position: relative; display: block; flex: 0 0 auto; }
+.hm-brandDivider { width: 1px; height: 24px; background: #555555; }
+.hm-brandDescriptor { font-size: 11px; line-height: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.hm-desktopNav { display: flex; align-items: center; gap: 34px; font-size: 13px; font-weight: 600; }
+.hm-desktopNav a { transition: color .18s ease; }
+.hm-desktopNav a:hover,
+.hm-navActive { color: var(--hotel-yellow) !important; }
+.hm-desktopNav .hm-headerCta { padding: 13px 18px; background: var(--hotel-yellow); color: var(--hotel-black); }
+.hm-mobileMenu { display: none; position: relative; }
+.hm-mobileMenu summary { width: 40px; height: 40px; display: flex; flex-direction: column; justify-content: center; gap: 7px; cursor: pointer; list-style: none; }
+.hm-mobileMenu summary::-webkit-details-marker { display: none; }
+.hm-mobileMenu summary span { width: 24px; height: 2px; background: #fff; margin-left: auto; }
+.hm-mobileMenu nav { position: absolute; right: 0; top: 46px; z-index: 20; width: 250px; padding: 22px; background: var(--hotel-black); border-top: 4px solid var(--hotel-yellow); display: flex; flex-direction: column; gap: 18px; box-shadow: 0 14px 30px rgba(0,0,0,.18); }
+.hm-mobileMenu nav a:last-child { color: var(--hotel-yellow); font-weight: 700; }
+
+.hm-footer { min-height: 280px; padding: 62px 72px 30px; display: flex; flex-direction: column; justify-content: space-between; background: var(--hotel-black); color: #aaa; }
+.hm-footerTop,
+.hm-footerBottom { width: 100%; max-width: 1296px; margin: 0 auto; display: flex; justify-content: space-between; }
+.hm-footerBrand p { width: 360px; max-width: 100%; padding-top: 14px; color: #aaa; font-size: 12px; line-height: 19px; }
+.hm-footerNav { display: flex; gap: 62px; font-size: 12px; line-height: 26px; }
+.hm-footerNav > div { display: flex; flex-direction: column; }
+.hm-footerCta { color: var(--hotel-yellow) !important; font-weight: 800; }
+.hm-footerBottom { padding-top: 20px; border-top: 1px solid #3f3f3f; color: #777; font-size: 10px; line-height: 12px; }
+
+.hm-eyebrow { color: var(--hotel-gold); font-size: 12px; line-height: 16px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.hm-eyebrowLight { color: var(--hotel-yellow); }
+.hm-button { display: inline-flex; justify-content: center; align-items: center; min-height: 52px; padding: 16px 23px; background: var(--hotel-black); color: #fff !important; font-size: 14px; line-height: 18px; font-weight: 800; }
+.hm-buttonLight { background: var(--hotel-yellow); color: var(--hotel-black) !important; }
+.hm-buttonOutline { border: 1px solid var(--hotel-black); background: transparent; color: var(--hotel-black) !important; }
+.hm-textLink { padding: 5px 0; border-bottom: 1px solid var(--hotel-black); font-size: 14px; font-weight: 700; }
+.hm-yellowLink { color: var(--hotel-yellow) !important; font-weight: 700; }
+.hm-yellowRule { display: block; width: 72px; height: 6px; margin-top: 12px; background: var(--hotel-yellow); }
+.hm-itemNumber { color: var(--hotel-gold); font-size: 11px; line-height: 14px; font-weight: 800; letter-spacing: .14em; }
+.hm-srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.hm-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
+
+/* Landing */
+.hm-landingHero { width: 100%; max-width: 1440px; min-height: 760px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 790fr) minmax(480px, 650fr); }
+.hm-heroCopy { padding: 76px 84px 76px 112px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+.hm-heroCopy h1 { font-size: clamp(52px, 4.72vw, 68px); line-height: 1.06; letter-spacing: -.045em; }
+.hm-heroCopy > p { max-width: 590px; color: #3f3f3f; font-size: 18px; line-height: 29px; }
+.hm-heroActions { padding-top: 10px; display: flex; align-items: center; gap: 22px; }
+.hm-heroTrust { padding-top: 14px; display: flex; align-items: center; gap: 12px; color: #666; font-size: 12px; line-height: 16px; letter-spacing: .04em; }
+.hm-heroTrust span { width: 28px; height: 1px; flex: 0 0 auto; background: var(--hotel-yellow); }
+.hm-heroImage { min-height: 760px; position: relative; overflow: hidden; background: #161616; }
+.hm-heroImage > span { position: absolute; left: 28px; bottom: 28px; z-index: 2; padding: 12px 15px; background: #fff; color: #102a43; font-size: 11px; line-height: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.hm-credibilityStrip { min-height: 142px; padding: 0 max(7.8vw, 24px); display: grid; grid-template-columns: 1.1fr 1fr 1.1fr; align-items: center; background: var(--hotel-yellow); font-size: 15px; line-height: 22px; font-weight: 650; }
+.hm-credibilityStrip > div { min-height: 42px; display: flex; align-items: center; padding: 0 48px; border-left: 1px solid rgba(17,17,17,.28); }
+.hm-credibilityStrip > div:first-child { padding-left: 0; border-left: 0; font-size: 12px; line-height: 16px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.hm-riskSection { min-height: 850px; padding: 112px; }
+.hm-sectionIntroSplit { max-width: 1216px; margin: 0 auto; padding-bottom: 72px; display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; border-bottom: 1px solid var(--hotel-line); }
+.hm-sectionIntroSplit h2 { max-width: 680px; margin-top: 18px; font-size: 52px; line-height: 58px; letter-spacing: -.035em; }
+.hm-sectionIntroSplit > p { width: 390px; color: #4c4c4c; font-size: 17px; line-height: 27px; }
+.hm-riskGrid { max-width: 1216px; margin: 0 auto; padding-top: 52px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.hm-riskGrid article { min-height: 300px; padding: 18px 28px; display: flex; flex-direction: column; gap: 22px; border-right: 1px solid var(--hotel-line); }
+.hm-riskGrid article:first-child { padding-left: 0; }
+.hm-riskGrid article:last-child { padding-right: 0; border-right: 0; }
+.hm-riskIcon { width: 48px; height: 48px; display: grid; place-items: center; background: var(--hotel-yellow); }
+.hm-riskIcon svg { width: 24px; height: 24px; fill: none; stroke: var(--hotel-black); stroke-width: 1.7; }
+.hm-riskGrid h3 { font-size: 26px; line-height: 31px; }
+.hm-riskGrid p { color: #555; font-size: 14px; line-height: 22px; }
+.hm-briefFeature { min-height: 790px; padding: 104px 112px; display: flex; align-items: center; justify-content: center; gap: 104px; background: var(--hotel-black); color: #fff; }
+.hm-briefFeatureCopy { width: 600px; display: flex; flex-direction: column; gap: 24px; }
+.hm-briefFeatureCopy h2 { font-size: 52px; line-height: 58px; letter-spacing: -.035em; }
+.hm-briefFeatureCopy > p { max-width: 530px; color: #c8c8c8; font-size: 17px; line-height: 27px; }
+.hm-topicTags { padding-top: 8px; display: flex; flex-wrap: wrap; gap: 10px; }
+.hm-topicTags span { padding: 10px 13px; border: 1px solid #555; color: #eee; font-size: 12px; line-height: 16px; }
+.hm-briefCover { width: 488px; height: 582px; flex: 0 0 auto; padding: 38px; display: flex; flex-direction: column; background: #fff; color: var(--hotel-black); box-shadow: 12px 12px 0 var(--hotel-yellow); }
+.hm-briefCoverCompact { width: 410px; height: 540px; padding: 34px; border: 1px solid #ccc; }
+.hm-briefCoverTop { padding-bottom: 28px; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: 2px solid var(--hotel-black); }
+.hm-briefMonogram { width: 70px; height: 70px; display: grid; place-items: center; border: 2px solid var(--hotel-black); border-radius: 50%; font-family: "Lora", Georgia, serif; font-size: 26px; }
+.hm-briefCoverCompact .hm-briefMonogram { width: 58px; height: 58px; }
+.hm-briefIssue { padding: 8px 10px; background: var(--hotel-black); color: #fff; font-size: 9px; line-height: 13px; font-weight: 800; }
+.hm-briefCoverTitle { padding-top: 26px; font-family: "Lora", Georgia, serif; font-size: 38px; line-height: 40px; font-weight: 600; letter-spacing: -.025em; }
+.hm-briefCoverCompact .hm-briefCoverTitle { font-size: 33px; line-height: 36px; }
+.hm-briefCover > p { padding-top: 12px; color: #555; font-size: 12px; line-height: 18px; }
+.hm-briefCoverFocus { margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #ccc; }
+.hm-briefCoverFocus span { color: var(--hotel-gold); font-size: 10px; line-height: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.hm-briefCoverFocus strong { font-family: "Lora", Georgia, serif; font-size: 24px; line-height: 29px; font-weight: 400; }
+.hm-briefCoverCompact .hm-briefCoverFocus strong { font-size: 21px; line-height: 27px; }
+.hm-coveragePreview { min-height: 880px; padding: 112px; display: grid; grid-template-columns: 390px minmax(0, 706px); justify-content: center; gap: 120px; }
+.hm-coveragePreviewIntro { display: flex; flex-direction: column; gap: 22px; }
+.hm-coveragePreviewIntro h2 { font-size: 50px; line-height: 56px; letter-spacing: -.035em; }
+.hm-coveragePreviewIntro p { color: #555; font-size: 17px; line-height: 27px; }
+.hm-coveragePreviewList { border-top: 1px solid #bdbdbd; }
+.hm-coveragePreviewList a { min-height: 112px; display: grid; grid-template-columns: 48px 1fr 32px; align-items: center; border-bottom: 1px solid var(--hotel-line); }
+.hm-coveragePreviewList a > span { color: var(--hotel-gold); font-size: 11px; font-weight: 800; }
+.hm-coveragePreviewList h3 { font-size: 25px; line-height: 30px; }
+.hm-coveragePreviewList p { margin-top: 5px; color: #666; font-size: 13px; line-height: 20px; }
+.hm-coveragePreviewList strong { text-align: right; font-size: 18px; }
+.hm-processSection { min-height: 700px; padding: 96px 112px; background: var(--hotel-yellow); }
+.hm-processIntro { max-width: 1216px; margin: 0 auto; padding-bottom: 64px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; border-bottom: 1px solid rgba(17,17,17,.35); }
+.hm-processIntro h2 { width: 670px; font-size: 46px; line-height: 52px; font-weight: 600; letter-spacing: -.035em; }
+.hm-processGrid { max-width: 1216px; margin: 0 auto; padding-top: 58px; display: grid; grid-template-columns: repeat(3, 1fr); }
+.hm-processGrid article { min-height: 250px; padding: 0 44px; display: flex; flex-direction: column; gap: 20px; border-right: 1px solid rgba(17,17,17,.35); }
+.hm-processGrid article:first-child { padding-left: 0; }
+.hm-processGrid article:last-child { padding-right: 0; border-right: 0; }
+.hm-processGrid span { font-size: 14px; line-height: 18px; font-weight: 900; }
+.hm-processGrid h3 { font-size: 30px; line-height: 35px; font-weight: 600; }
+.hm-processGrid p { font-size: 15px; line-height: 24px; }
+.hm-teamSection { min-height: 1120px; padding: 104px 112px; background: var(--hotel-black); color: #fff; scroll-margin-top: 20px; }
+.hm-teamIntro { max-width: 1216px; margin: 0 auto; padding-bottom: 62px; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; border-bottom: 1px solid #4b4b4b; }
+.hm-teamIntro > div { width: 720px; display: flex; flex-direction: column; gap: 20px; }
+.hm-teamIntro h2 { font-size: 50px; line-height: 56px; letter-spacing: -.035em; }
+.hm-teamIntro > p { width: 380px; color: #c8c8c8; font-size: 16px; line-height: 26px; }
+.hm-teamRoster { max-width: 1216px; margin: 0 auto; padding-top: 60px; display: grid; grid-template-columns: 300px minmax(0, 844px); gap: 72px; }
+.hm-ericCard { padding-right: 42px; display: flex; flex-direction: column; gap: 20px; border-right: 1px solid #4b4b4b; }
+.hm-ericPhoto { width: 144px; height: 144px; position: relative; overflow: hidden; }
+.hm-ericCard h3 { font-size: 25px; line-height: 30px; }
+.hm-ericCard span,
+.hm-teamGrid span { color: var(--hotel-yellow); font-size: 11px; line-height: 17px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.hm-ericCard p { color: #bdbdbd; font-size: 14px; line-height: 23px; }
+.hm-ericCard a { font-size: 13px; font-weight: 700; }
+.hm-serviceTeam { display: flex; flex-direction: column; gap: 30px; }
+.hm-serviceTeam > div:first-child h3 { margin-top: 10px; font-size: 32px; line-height: 38px; }
+.hm-teamGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.hm-teamPhoto { width: 100%; aspect-ratio: 264 / 270; position: relative; overflow: hidden; }
+.hm-teamGrid h4 { margin-top: 18px; font-size: 23px; line-height: 28px; }
+.hm-teamGrid span { display: block; margin-top: 7px; }
+.hm-teamSupport { padding: 26px 0 0 32px; border-top: 1px solid #4b4b4b; border-left: 8px solid var(--hotel-yellow); color: #c8c8c8; font-size: 14px; line-height: 23px; }
+.hm-contactSection { min-height: 912px; padding: 112px; display: grid; grid-template-columns: 390px minmax(0, 706px); justify-content: center; gap: 120px; scroll-margin-top: 20px; }
+.hm-contactIntro { display: flex; flex-direction: column; gap: 22px; }
+.hm-contactIntro h2 { font-size: 52px; line-height: 58px; letter-spacing: -.035em; }
+.hm-contactIntro > p { color: #555; font-size: 17px; line-height: 27px; }
+.hm-contactIntro > div:last-child { margin-top: 18px; padding-top: 28px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--hotel-line); font-size: 15px; }
+.hm-contactIntro strong { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.hm-contactForm { min-height: 688px; padding: 46px 54px; position: relative; display: flex; flex-direction: column; gap: 28px; border-top: 8px solid var(--hotel-yellow); background: var(--hotel-black); color: #fff; }
+.hm-contactFormHeader { display: flex; justify-content: space-between; gap: 24px; }
+.hm-contactFormHeader h3 { font-size: 30px; line-height: 36px; }
+.hm-contactFormHeader > span { color: #bdbdbd; font-size: 11px; line-height: 16px; text-align: right; }
+.hm-formGrid { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 28px; row-gap: 24px; }
+.hm-contactForm label { display: flex; flex-direction: column; gap: 10px; }
+.hm-contactForm label > span { color: var(--hotel-yellow); font-size: 11px; line-height: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.hm-contactForm input,
+.hm-contactForm select,
+.hm-contactForm textarea { width: 100%; padding: 8px 0 14px; border: 0; border-bottom: 1px solid #666; border-radius: 0; outline: none; background: transparent; color: #fff; font-size: 15px; }
+.hm-contactForm textarea { resize: vertical; }
+.hm-contactForm input::placeholder,
+.hm-contactForm textarea::placeholder { color: #999; opacity: 1; }
+.hm-contactForm select { color: #bbb; }
+.hm-contactForm select option { color: #111; }
+.hm-formFooter { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+.hm-formFooter button { flex: 0 0 auto; padding: 17px 22px; border: 0; background: var(--hotel-yellow); color: var(--hotel-black); font-size: 14px; line-height: 18px; font-weight: 800; cursor: pointer; }
+.hm-formFooter button:disabled { opacity: .6; cursor: wait; }
+.hm-formFooter p { max-width: 300px; color: #999; font-size: 11px; line-height: 17px; }
+.hm-formSuccess,
+.hm-formError { min-height: 18px; font-size: 13px; }
+.hm-formSuccess { color: #fff; }
+.hm-formError { color: #ffcfcc; }
+
+/* Why UWIB */
+.hm-whyHero { min-height: 640px; display: grid; grid-template-columns: minmax(0, 870px) minmax(420px, 570px); }
+.hm-whyHero > div { padding: 82px 112px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+.hm-whyHero h1 { font-size: clamp(52px, 4.6vw, 66px); line-height: 1.06; letter-spacing: -.045em; }
+.hm-whyHero > div > p { max-width: 620px; color: #555; font-size: 18px; line-height: 29px; }
+.hm-whyHero aside { padding: 72px; display: flex; flex-direction: column; justify-content: space-between; border-left: 12px solid var(--hotel-yellow); background: var(--hotel-black); color: #fff; }
+.hm-whyHero aside h2 { font-size: 38px; line-height: 46px; }
+.hm-whyHero aside p { color: #bdbdbd; font-size: 13px; line-height: 21px; }
+.hm-whyPointsSection { min-height: 900px; padding: 104px 112px; }
+.hm-whyPointsSection .hm-sectionIntroSplit h2 { width: 660px; font-size: 48px; line-height: 54px; }
+.hm-whyPointsSection .hm-sectionIntroSplit > p { width: 360px; font-size: 16px; line-height: 25px; }
+.hm-whyPoints { max-width: 1216px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); }
+.hm-whyPoints article { min-height: 230px; padding: 36px 54px; display: grid; grid-template-columns: 46px 1fr; gap: 30px; }
+.hm-whyPoints article:nth-child(odd) { padding-left: 0; border-right: 1px solid #ccc; }
+.hm-whyPoints article:nth-child(even) { padding-right: 0; }
+.hm-whyPoints article:nth-child(-n+2) { border-bottom: 1px solid #ccc; }
+.hm-whyPoints article > span { color: var(--hotel-gold); font-size: 12px; font-weight: 850; }
+.hm-whyPoints h3 { font-size: 29px; line-height: 35px; }
+.hm-whyPoints p { margin-top: 14px; color: #555; font-size: 15px; line-height: 24px; }
+.hm-advisorStages { min-height: 620px; padding: 100px 112px; background: var(--hotel-black); color: #fff; }
+.hm-advisorStages > div:first-child { display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; }
+.hm-advisorStages h2 { width: 690px; font-size: 46px; line-height: 52px; }
+.hm-stageGrid { margin-top: 66px; padding-top: 34px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #555; }
+.hm-stageGrid span { color: var(--hotel-yellow); font-size: 12px; font-weight: 800; }
+.hm-stageGrid h3 { margin-top: 14px; font-size: 24px; line-height: 30px; }
+.hm-stageGrid p { margin-top: 10px; color: #aaa; font-size: 13px; line-height: 20px; }
+.hm-supportingCta,
+.hm-coverageCta { min-height: 330px; padding: 70px 112px; display: flex; align-items: center; justify-content: space-between; gap: 48px; background: var(--hotel-yellow); }
+.hm-supportingCta h2 { width: 760px; font-size: 46px; line-height: 52px; }
+
+/* Coverage */
+.hm-coverageHero { min-height: 520px; padding: 72px 112px; display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+.hm-coverageHero > div { width: 780px; display: flex; flex-direction: column; gap: 22px; }
+.hm-coverageHero h1 { font-size: clamp(54px, 4.72vw, 68px); line-height: 1.06; letter-spacing: -.045em; }
+.hm-coverageHero > p { width: 350px; color: #555; font-size: 18px; line-height: 29px; }
+.hm-coverageJump { min-height: 128px; padding: 0 112px; display: grid; grid-template-columns: 243px repeat(5, auto); align-items: center; gap: 38px; background: var(--hotel-yellow); font-size: 13px; font-weight: 750; }
+.hm-coverageJump strong { font-size: 12px; font-weight: 850; text-transform: uppercase; }
+.hm-coverageRow { min-height: 410px; padding: 82px 112px; display: grid; grid-template-columns: 430px 390px minmax(260px, 396px); align-items: start; border-bottom: 1px solid #d2d2d2; scroll-margin-top: 20px; }
+.hm-coverageRowTint { background: #f4f4f2; }
+.hm-coverageRowDark { background: var(--hotel-black); color: #fff; border-color: #444; }
+.hm-coverageRowTitle { display: grid; grid-template-columns: 42px 315px; gap: 28px; }
+.hm-coverageRowTitle span { color: var(--hotel-gold); font-size: 12px; font-weight: 850; }
+.hm-coverageRowDark .hm-coverageRowTitle span { color: var(--hotel-yellow); }
+.hm-coverageRow h2 { font-size: 36px; line-height: 42px; }
+.hm-coverageRow > p { width: 390px; color: #555; font-size: 16px; line-height: 26px; }
+.hm-coverageRowDark > p { color: #c8c8c8; }
+.hm-coverageRow > div:last-child { padding-left: 74px; }
+.hm-coverageRow ul { margin: 18px 0 0; padding: 0; list-style: none; color: #333; font-size: 14px; line-height: 30px; }
+.hm-coverageRowDark ul { color: #e5e5e5; }
+.hm-coverageCta { min-height: 430px; }
+.hm-coverageCta > div:first-child { width: 770px; }
+.hm-coverageCta h2 { margin-top: 20px; font-size: 48px; line-height: 54px; }
+
+/* Risk brief library */
+.hm-libraryHero { min-height: 600px; padding: 80px 112px; display: flex; align-items: center; justify-content: space-between; gap: 70px; background: var(--hotel-black); color: #fff; }
+.hm-libraryHero > div { width: 760px; display: flex; flex-direction: column; gap: 22px; }
+.hm-libraryHero h1 { font-size: clamp(52px, 4.58vw, 66px); line-height: 1.06; letter-spacing: -.04em; }
+.hm-libraryHero > div > p { width: 630px; max-width: 100%; color: #c8c8c8; font-size: 17px; line-height: 28px; }
+.hm-newsletterCard { width: 350px; padding: 36px; display: flex; flex-direction: column; gap: 18px; background: var(--hotel-yellow); color: var(--hotel-black); }
+.hm-newsletterCard h2 { font-size: 28px; line-height: 34px; }
+.hm-newsletterCard input { width: 100%; height: 52px; padding: 0 17px; border: 0; background: #fff; font-size: 13px; }
+.hm-newsletterCard button { height: 50px; border: 0; background: var(--hotel-black); color: #fff; font-size: 13px; font-weight: 800; cursor: pointer; }
+.hm-featuredBrief { min-height: 720px; padding: 80px 112px; display: flex; align-items: center; justify-content: center; gap: 100px; }
+.hm-featuredBrief > div:last-child { width: 600px; display: flex; flex-direction: column; gap: 22px; }
+.hm-featuredBrief h2 { font-size: 48px; line-height: 54px; }
+.hm-featuredBrief p { color: #555; font-size: 17px; line-height: 27px; }
+.hm-featuredBrief a { padding-top: 12px; font-size: 14px; font-weight: 800; }
+.hm-topicBar { min-height: 116px; padding: 0 112px; display: flex; align-items: center; gap: 42px; background: var(--hotel-yellow); font-size: 13px; font-weight: 750; }
+.hm-topicBar strong { font-weight: 900; text-transform: uppercase; }
+.hm-moreBriefs { min-height: 690px; padding: 82px 112px; }
+.hm-moreBriefsHeader { display: flex; align-items: flex-end; justify-content: space-between; }
+.hm-moreBriefsHeader h2 { font-size: 44px; line-height: 54px; }
+.hm-moreBriefsHeader a { font-size: 13px; font-weight: 750; }
+.hm-briefCards { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); }
+.hm-briefCard { min-height: 390px; padding: 34px 42px; display: flex; flex-direction: column; border-right: 1px solid #ccc; }
+.hm-briefCard:first-child { padding-left: 0; }
+.hm-briefCard:last-child { padding-right: 0; border-right: 0; }
+.hm-briefCard h3 { margin-top: 26px; font-size: 29px; line-height: 35px; }
+.hm-briefCard p { margin-top: 18px; color: #555; font-size: 14px; line-height: 22px; }
+.hm-briefCard a { margin-top: auto; font-size: 13px; font-weight: 800; }
+.hm-darkCta { min-height: 360px; padding: 72px 112px; display: flex; align-items: center; justify-content: space-between; gap: 60px; background: var(--hotel-black); color: #fff; }
+.hm-darkCta > div { width: 760px; }
+.hm-darkCta h2 { margin-top: 20px; font-size: 46px; line-height: 52px; }
+
+/* Risk brief articles */
+.hm-articleHero { min-height: 650px; padding: 78px 180px; display: flex; flex-direction: column; gap: 24px; }
+.hm-breadcrumb { color: #666; font-size: 12px; line-height: 16px; font-weight: 750; }
+.hm-articleHero > .hm-eyebrow { margin-top: 20px; }
+.hm-articleHero h1 { max-width: 950px; font-size: clamp(52px, 4.45vw, 64px); line-height: 1.1; letter-spacing: -.04em; }
+.hm-articleHero > p { max-width: 820px; color: #555; font-size: 19px; line-height: 30px; }
+.hm-articleMeta { padding-top: 12px; display: flex; flex-wrap: wrap; gap: 28px; color: #666; font-size: 12px; line-height: 16px; }
+.hm-articleBody { min-height: 1580px; padding: 100px 180px; display: grid; grid-template-columns: minmax(0, 700px) 270px; justify-content: center; align-items: start; gap: 110px; border-top: 1px solid #ddd; }
+.hm-articleMain { display: flex; flex-direction: column; gap: 30px; color: #444; font-size: 17px; line-height: 30px; }
+.hm-articleLead { color: var(--hotel-black); font-family: "Lora", Georgia, serif; font-size: 31px; line-height: 44px; }
+.hm-articleSection { display: flex; flex-direction: column; gap: 24px; }
+.hm-articleSection h2 { padding-top: 20px; color: var(--hotel-black); font-size: 37px; line-height: 44px; }
+.hm-questionBox { margin-top: 2px; padding: 28px 32px; border-left: 5px solid var(--hotel-yellow); background: #f5f5f3; color: var(--hotel-black); }
+.hm-questionBox ul,
+.hm-outlineBox ul { margin: 14px 0 0; padding: 0; list-style: none; }
+.hm-questionBox li { font-size: 16px; line-height: 30px; }
+.hm-articleAside { display: flex; flex-direction: column; gap: 30px; }
+.hm-considerBox { padding: 30px; background: var(--hotel-yellow); }
+.hm-considerBox p { margin-top: 18px; font-family: "Lora", Georgia, serif; font-size: 25px; line-height: 34px; font-style: italic; }
+.hm-outlineBox { padding: 28px; border: 1px solid #ccc; }
+.hm-outlineBox li { font-size: 14px; line-height: 34px; }
+.hm-articleAside > p { color: #777; font-size: 12px; line-height: 20px; }
+.hm-checklistSection { min-height: 520px; padding: 86px 180px; display: grid; grid-template-columns: 360px 620px; justify-content: center; gap: 100px; background: var(--hotel-black); color: #fff; }
+.hm-checklistSection h2 { margin-top: 22px; font-size: 42px; line-height: 49px; }
+.hm-checklistSection ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid #555; }
+.hm-checklistSection li { min-height: 76px; display: grid; grid-template-columns: 48px 1fr; align-items: center; border-bottom: 1px solid #444; font-size: 16px; line-height: 22px; }
+.hm-checklistSection li span { color: var(--hotel-yellow); font-weight: 850; }
+.hm-articleCta { min-height: 360px; padding: 72px 180px; display: flex; align-items: center; justify-content: space-between; gap: 48px; background: var(--hotel-yellow); }
+.hm-articleCta > div:first-child { width: 700px; }
+.hm-articleCta h2 { margin-top: 18px; font-size: 44px; line-height: 50px; }
+.hm-articleCta > div:last-child { display: flex; gap: 12px; }
+
+@media (max-width: 1120px) {
+  .hm-headerInner { padding: 0 32px; }
+  .hm-desktopNav { display: none; }
+  .hm-mobileMenu { display: block; }
+  .hm-landingHero { grid-template-columns: 1fr 44%; }
+  .hm-heroCopy { padding: 70px 56px; }
+  .hm-riskSection,
+  .hm-briefFeature,
+  .hm-coveragePreview,
+  .hm-processSection,
+  .hm-teamSection,
+  .hm-contactSection,
+  .hm-whyPointsSection,
+  .hm-advisorStages,
+  .hm-supportingCta,
+  .hm-coverageHero,
+  .hm-coverageJump,
+  .hm-coverageRow,
+  .hm-coverageCta,
+  .hm-libraryHero,
+  .hm-featuredBrief,
+  .hm-topicBar,
+  .hm-moreBriefs,
+  .hm-darkCta,
+  .hm-articleHero,
+  .hm-articleBody,
+  .hm-checklistSection,
+  .hm-articleCta { padding-left: 56px; padding-right: 56px; }
+  .hm-briefFeature { gap: 64px; }
+  .hm-briefCover { width: 410px; height: 540px; padding: 34px; }
+  .hm-coveragePreview { grid-template-columns: 34% 1fr; gap: 72px; }
+  .hm-teamRoster { grid-template-columns: 240px 1fr; gap: 42px; }
+  .hm-contactSection { grid-template-columns: 34% 1fr; gap: 72px; }
+  .hm-whyHero { grid-template-columns: 60% 40%; }
+  .hm-whyHero > div { padding-left: 56px; padding-right: 56px; }
+  .hm-whyHero aside { padding: 52px; }
+  .hm-coverageRow { grid-template-columns: 36% 32% 32%; }
+  .hm-coverageRow > div:last-child { padding-left: 38px; }
+  .hm-articleBody { grid-template-columns: minmax(0, 1fr) 250px; gap: 60px; }
+  .hm-checklistSection { grid-template-columns: 34% 1fr; gap: 60px; }
+}
+
+@media (max-width: 820px) {
+  .hm-header { height: 78px; }
+  .hm-headerInner { padding: 0 22px; }
+  .hm-mobileMenu { margin-right: 52px; }
+  .hm-brandLockup { width: auto; }
+  .hm-logo { width: 146px; height: 16px; }
+  .hm-brandDescriptor,
+  .hm-brandDivider { display: none; }
+  .hm-footer { padding: 48px 24px 26px; }
+  .hm-footerTop { flex-direction: column; gap: 42px; }
+  .hm-footerNav { justify-content: space-between; gap: 30px; }
+  .hm-footerBottom { margin-top: 42px; flex-direction: column; gap: 10px; }
+  .hm-landingHero { display: flex; flex-direction: column; }
+  .hm-heroCopy { padding: 72px 24px; }
+  .hm-heroCopy h1 { font-size: 49px; }
+  .hm-heroCopy > p { font-size: 17px; line-height: 27px; }
+  .hm-heroActions { align-items: flex-start; flex-direction: column; }
+  .hm-heroImage { min-height: 620px; }
+  .hm-credibilityStrip { padding: 0; grid-template-columns: 1fr; }
+  .hm-credibilityStrip > div { min-height: 78px; padding: 18px 24px; border-left: 0; border-top: 1px solid rgba(17,17,17,.25); }
+  .hm-credibilityStrip > div:first-child { padding-left: 24px; border-top: 0; }
+  .hm-riskSection,
+  .hm-briefFeature,
+  .hm-coveragePreview,
+  .hm-processSection,
+  .hm-teamSection,
+  .hm-contactSection,
+  .hm-whyPointsSection,
+  .hm-advisorStages,
+  .hm-supportingCta,
+  .hm-coverageHero,
+  .hm-coverageJump,
+  .hm-coverageRow,
+  .hm-coverageCta,
+  .hm-libraryHero,
+  .hm-featuredBrief,
+  .hm-topicBar,
+  .hm-moreBriefs,
+  .hm-darkCta,
+  .hm-articleHero,
+  .hm-articleBody,
+  .hm-checklistSection,
+  .hm-articleCta { padding-left: 24px; padding-right: 24px; }
+  .hm-sectionIntroSplit { padding-bottom: 42px; align-items: flex-start; flex-direction: column; }
+  .hm-sectionIntroSplit h2 { font-size: 42px; line-height: 48px; }
+  .hm-sectionIntroSplit > p { width: auto; }
+  .hm-riskSection { padding-top: 72px; padding-bottom: 72px; }
+  .hm-riskGrid { grid-template-columns: repeat(2, 1fr); }
+  .hm-riskGrid article { padding: 30px; border-bottom: 1px solid var(--hotel-line); }
+  .hm-riskGrid article:nth-child(odd) { padding-left: 0; }
+  .hm-riskGrid article:nth-child(even) { padding-right: 0; border-right: 0; }
+  .hm-briefFeature { padding-top: 72px; padding-bottom: 80px; flex-direction: column; align-items: flex-start; }
+  .hm-briefFeatureCopy { width: auto; }
+  .hm-briefFeatureCopy h2 { font-size: 42px; line-height: 48px; }
+  .hm-briefCover { width: min(100%, 420px); height: 520px; }
+  .hm-coveragePreview { padding-top: 72px; padding-bottom: 72px; grid-template-columns: 1fr; gap: 56px; }
+  .hm-coveragePreviewIntro h2 { font-size: 42px; line-height: 48px; }
+  .hm-processSection { padding-top: 72px; padding-bottom: 72px; }
+  .hm-processIntro { padding-bottom: 42px; align-items: flex-start; flex-direction: column; }
+  .hm-processIntro h2 { width: auto; font-size: 40px; line-height: 46px; }
+  .hm-processGrid { grid-template-columns: 1fr; }
+  .hm-processGrid article { min-height: 0; padding: 34px 0; border-right: 0; border-bottom: 1px solid rgba(17,17,17,.35); }
+  .hm-processGrid article:last-child { border-bottom: 0; }
+  .hm-teamSection { padding-top: 72px; padding-bottom: 72px; }
+  .hm-teamIntro { align-items: flex-start; flex-direction: column; }
+  .hm-teamIntro > div,
+  .hm-teamIntro > p { width: auto; }
+  .hm-teamIntro h2 { font-size: 42px; line-height: 48px; }
+  .hm-teamRoster { grid-template-columns: 1fr; }
+  .hm-ericCard { padding-right: 0; padding-bottom: 42px; border-right: 0; border-bottom: 1px solid #4b4b4b; }
+  .hm-teamGrid { grid-template-columns: 1fr; }
+  .hm-teamPhoto { aspect-ratio: 4 / 3; }
+  .hm-teamSupport { padding-left: 20px; }
+  .hm-contactSection { padding-top: 72px; padding-bottom: 72px; grid-template-columns: 1fr; }
+  .hm-contactIntro h2 { font-size: 42px; line-height: 48px; }
+  .hm-contactForm { padding: 38px 24px; }
+  .hm-formGrid { grid-template-columns: 1fr; }
+  .hm-formFooter { align-items: flex-start; flex-direction: column; }
+  .hm-whyHero { display: flex; flex-direction: column; }
+  .hm-whyHero > div { padding: 72px 24px; }
+  .hm-whyHero h1 { font-size: 48px; }
+  .hm-whyHero aside { min-height: 460px; padding: 48px 36px; border-left-width: 8px; }
+  .hm-whyPointsSection { padding-top: 72px; padding-bottom: 72px; }
+  .hm-whyPoints { grid-template-columns: 1fr; }
+  .hm-whyPoints article { min-height: 0; padding: 34px 0; border-right: 0 !important; border-bottom: 1px solid #ccc; }
+  .hm-advisorStages { padding-top: 72px; padding-bottom: 72px; }
+  .hm-advisorStages > div:first-child { align-items: flex-start; flex-direction: column; }
+  .hm-advisorStages h2 { width: auto; font-size: 40px; line-height: 46px; }
+  .hm-stageGrid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+  .hm-supportingCta,
+  .hm-coverageCta,
+  .hm-darkCta,
+  .hm-articleCta { padding-top: 72px; padding-bottom: 72px; align-items: flex-start; flex-direction: column; }
+  .hm-supportingCta h2,
+  .hm-darkCta > div,
+  .hm-articleCta > div:first-child { width: auto; }
+  .hm-supportingCta h2,
+  .hm-darkCta h2,
+  .hm-articleCta h2 { font-size: 40px; line-height: 46px; }
+  .hm-coverageHero { padding-top: 72px; padding-bottom: 72px; align-items: flex-start; flex-direction: column; }
+  .hm-coverageHero > div,
+  .hm-coverageHero > p { width: auto; }
+  .hm-coverageHero h1 { font-size: 48px; }
+  .hm-coverageJump { padding-top: 26px; padding-bottom: 26px; display: flex; flex-wrap: wrap; gap: 20px 30px; }
+  .hm-coverageJump strong { width: 100%; }
+  .hm-coverageRow { padding-top: 60px; padding-bottom: 60px; grid-template-columns: 1fr; gap: 30px; }
+  .hm-coverageRowTitle { grid-template-columns: 38px 1fr; }
+  .hm-coverageRow > p { width: auto; }
+  .hm-coverageRow > div:last-child { padding-left: 66px; }
+  .hm-coverageCta > div:first-child { width: auto; }
+  .hm-coverageCta h2 { font-size: 42px; line-height: 48px; }
+  .hm-libraryHero { padding-top: 72px; padding-bottom: 72px; align-items: flex-start; flex-direction: column; }
+  .hm-libraryHero > div,
+  .hm-newsletterCard { width: 100%; }
+  .hm-libraryHero h1 { font-size: 48px; }
+  .hm-featuredBrief { padding-top: 72px; padding-bottom: 72px; align-items: flex-start; flex-direction: column; }
+  .hm-featuredBrief > div:last-child { width: auto; }
+  .hm-featuredBrief h2 { font-size: 40px; line-height: 46px; }
+  .hm-topicBar { padding-top: 30px; padding-bottom: 30px; flex-wrap: wrap; gap: 18px 28px; }
+  .hm-briefCards { grid-template-columns: 1fr; }
+  .hm-briefCard { min-height: 330px; padding: 38px 0; border-right: 0; border-bottom: 1px solid #ccc; }
+  .hm-articleHero { min-height: 0; padding-top: 72px; padding-bottom: 72px; }
+  .hm-articleHero h1 { font-size: 47px; }
+  .hm-articleMeta { gap: 12px 22px; }
+  .hm-articleBody { padding-top: 72px; padding-bottom: 72px; grid-template-columns: 1fr; gap: 60px; }
+  .hm-articleAside { display: grid; grid-template-columns: 1fr; }
+  .hm-checklistSection { padding-top: 72px; padding-bottom: 72px; grid-template-columns: 1fr; }
+  .hm-articleCta > div:last-child { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 500px) {
+  .hm-heroCopy h1,
+  .hm-whyHero h1,
+  .hm-coverageHero h1,
+  .hm-libraryHero h1,
+  .hm-articleHero h1 { font-size: 40px; line-height: 1.08; }
+  .hm-heroImage { min-height: 520px; }
+  .hm-riskGrid { grid-template-columns: 1fr; }
+  .hm-riskGrid article,
+  .hm-riskGrid article:nth-child(odd),
+  .hm-riskGrid article:nth-child(even) { padding: 32px 0; border-right: 0; }
+  .hm-briefCover { height: 500px; padding: 28px; }
+  .hm-briefCoverTitle { font-size: 32px; line-height: 35px; }
+  .hm-stageGrid { grid-template-columns: 1fr; }
+  .hm-coverageRowTitle { display: block; }
+  .hm-coverageRowTitle h2 { margin-top: 14px; font-size: 32px; line-height: 38px; }
+  .hm-coverageRow > div:last-child { padding-left: 0; }
+  .hm-articleLead { font-size: 27px; line-height: 38px; }
+  .hm-articleSection h2 { font-size: 32px; line-height: 39px; }
+  .hm-footerNav { flex-wrap: wrap; }
+}
+
+/* Fill images (next/image layout="fill" objectFit="cover" in the old app). */
+.hm-site .hm-fill { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.hm-site .hm-fill-contain { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: contain; object-position: left center; }
+/* The header/footer live in BaseLayout's header/footer slots, outside <main>; let the mobile menu overflow. */
+.hm-site.hm-chrome { overflow: visible; }

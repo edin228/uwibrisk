@@ -1,0 +1,149 @@
+---
+import { getCollection } from 'astro:content';
+import carriers from '../../data/carriers.json';
+import { statement } from '../../data/home';
+import { company, siteOffices } from '../../data/site';
+
+const team = await getCollection('team');
+const states = siteOffices.map((o) => o.stateCode);
+const stats = [
+  { value: String(company.founded), label: 'Founded in Pasadena' },
+  { value: String(siteOffices.length), label: `Offices in ${states.slice(0, -1).join(', ')} and ${states.at(-1)}` },
+  { value: String(carriers.length), label: 'Carrier partners' },
+  { value: String(team.length), label: 'People, all reachable by name' },
+];
+---
+
+<section class="statement" aria-labelledby="statement-heading">
+  <div class="label-col">
+    <p class="eyebrow">{statement.eyebrow}</p>
+    <span class="bar" aria-hidden="true"></span>
+  </div>
+  <div class="body">
+    <h2 id="statement-heading">
+      <span class="muted">{statement.muted}</span>
+      {statement.lead}
+    </h2>
+    <dl class="stats">
+      {
+        stats.map((s) => (
+          <div>
+            <dt>{s.label}</dt>
+            <dd>{s.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .statement {
+    display: flex;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding: var(--section-y) var(--gutter);
+  }
+
+  .label-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex-shrink: 0;
+    width: var(--label-col);
+    padding-top: 20px;
+  }
+
+  .bar {
+    width: 36px;
+    height: 2px;
+    background: var(--color-mustard);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    min-width: 0;
+    max-width: 948px;
+  }
+
+  h2 {
+    font-size: clamp(30px, 1rem + 2.6vw, 50px);
+    letter-spacing: -0.035em;
+    line-height: 1.24;
+    text-wrap: pretty;
+  }
+
+  .muted {
+    display: block;
+    margin-bottom: 6px;
+    color: #ababab;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 28px 28px 0;
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .stats div:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: clamp(40px, 1.2rem + 2.6vw, 56px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  dt {
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  @media (max-width: 1100px) {
+    .statement {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .label-col {
+      width: auto;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .body {
+      gap: 48px;
+    }
+
+    .stats {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 32px;
+    }
+
+    .stats div,
+    .stats div:first-child {
+      padding: 24px 0 0;
+      border-left: 0;
+    }
+  }
+</style>

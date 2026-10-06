@@ -1,0 +1,106 @@
+---
+/**
+ * Square call-to-action button.
+ *   mustard       yellow fill, ink text (primary on dark and light)
+ *   ink           black fill, white text (primary on mustard)
+ *   outline-light white outline (on dark/photos)
+ *   outline-dark  ink outline (on light/mustard)
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  href: string;
+  variant?: 'mustard' | 'ink' | 'outline-light' | 'outline-dark';
+  size?: 'md' | 'lg';
+  /** Stretch to the container width on small screens. */
+  block?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'mustard', size = 'md', block = false, class: className, ...rest } = Astro.props;
+const external = /^https?:\/\//.test(href);
+---
+
+<a
+  href={href}
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, { 'btn--block': block }, className]}
+  {...(external ? { target: '_blank', rel: 'noopener' } : {})}
+  {...rest}
+>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid transparent;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .btn--md {
+    padding: 13px 18px;
+  }
+
+  .btn--lg {
+    padding: 17px 24px;
+  }
+
+  .btn--mustard {
+    background: var(--color-mustard);
+    color: var(--color-ink);
+  }
+
+  .btn--mustard:hover {
+    background: #ffd54f;
+  }
+
+  .btn--ink {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .btn--ink:hover {
+    background: #2b2b2b;
+  }
+
+  .btn--outline-light {
+    border-color: rgb(255 255 255 / 0.45);
+    color: var(--color-paper);
+    font-weight: 600;
+  }
+
+  .btn--outline-light:hover {
+    border-color: var(--color-paper);
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  .btn--outline-dark {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .btn--outline-dark:hover {
+    background: rgb(17 17 17 / 0.06);
+  }
+
+  @media (max-width: 640px) {
+    .btn--block {
+      width: 100%;
+      padding-block: 17px;
+      font-size: 15px;
+    }
+  }
+</style>
