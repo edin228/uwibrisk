@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/why-small-businesses-need-cyber-liability-insurance-now-more-than-ever.webp"
-heroAlt: ""
+heroAlt: "Green streams of digital code on a black screen"
 draft: false
 hygraphId: "cm7o0vw143tuo07n7exjla8ke"
 ---

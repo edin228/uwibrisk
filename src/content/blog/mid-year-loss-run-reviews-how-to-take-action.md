@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/mid-year-loss-run-reviews-how-to-take-action.jpg"
-heroAlt: ""
+heroAlt: "Two professionals reviewing pie and bar charts on printed reports beside a laptop"
 draft: false
 hygraphId: "cmj762gur763907lubnbn6x4m"
 ---

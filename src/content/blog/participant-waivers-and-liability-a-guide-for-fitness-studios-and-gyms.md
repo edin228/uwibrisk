@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/participant-waivers-and-liability-a-guide-for-fitness-studios-and-gyms.jpg"
-heroAlt: ""
+heroAlt: "“Participant Waiver Liability” form with a gavel, dumbbell and sneakers"
 draft: false
 hygraphId: "cmgb97yh4lnhy07mxstc0gex6"
 ---

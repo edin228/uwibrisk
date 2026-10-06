@@ -13,7 +13,7 @@ const team = await getTeam();
       {
         team.map((member) => (
           <li>
-            <Image src={member.data.photo} alt={member.data.name} width={320} />
+            <Image src={member.data.photo} alt={member.data.photoAlt} width={320} />
             <h2>
               {member.data.hasTeamPage ? <a href={`/team/${member.id}`}>{member.data.name}</a> : member.data.name}
             </h2>

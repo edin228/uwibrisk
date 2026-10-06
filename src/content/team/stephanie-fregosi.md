@@ -13,9 +13,12 @@ order: 0
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/stephanie-fregosi.jpg"
+photoAlt: "Portrait of Stephanie Fregosi, Client Services Manager"
+motionPhotos: []
 pets:
   - name: "Ruger"
     photo: "../../assets/pets/ruger.png"
+    photoAlt: "Ruger, a white Great Dane with gray patches, curled up on a dog bed"
     bio: null
 hygraphId: "cldio6c77avdx0blh0gnlibdn"
 ---

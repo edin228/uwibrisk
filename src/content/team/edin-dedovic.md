@@ -13,6 +13,8 @@ order: null
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/edin-dedovic.png"
+photoAlt: "Portrait of Edin Dedovic, Sr. Executive, Data Analytics"
+motionPhotos: []
 pets: []
 hygraphId: "clfd5ngtwdl9t0alm8h47z5yh"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/rideshare-coverage-gaps-how-to-identify-and-fix-them.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a man with a magnifying glass inspecting a crack beside a rideshare car"
 draft: false
 hygraphId: "cmfo9metyczy406n46n5n695y"
 ---

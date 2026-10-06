@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: []
 tags: []
 heroImage: "../../assets/blog/protecting-your-assets-essential-coverage-for-domestic-employees-and-household-staff.jpg"
-heroAlt: ""
+heroAlt: "Modern glass office building under a blue sky"
 draft: false
 hygraphId: "cm3hw2wfv362q08n35oxixnn2"
 ---

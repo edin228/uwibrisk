@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/navigating-premises-liability-and-seasonal-staffing-risks-in-retail.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a shopper slipping by a wet-floor sign as a store worker and manager look on"
 draft: false
 hygraphId: "cmgtdk6iisu5p06n09l9pab0x"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/start-2025-strong-why-an-insurance-review-should-be-your-first-new-year-to-do.jpg"
-heroAlt: ""
+heroAlt: "Stethoscope and pen resting on a medical form"
 draft: false
 hygraphId: "cm5mm9gl91xgr0en02wyas6k1"
 ---

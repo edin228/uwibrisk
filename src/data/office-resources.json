@@ -6,7 +6,8 @@
     "category": "CRM",
     "order": 1,
     "altLogoText": "Wunderite",
-    "image": "../assets/office-resources/wunderite.png"
+    "image": "../assets/office-resources/wunderite.png",
+    "imageAlt": "Wunderite logo"
   },
   {
     "id": "coterie-self-service",
@@ -15,7 +16,8 @@
     "category": "Insurtech",
     "order": 2,
     "altLogoText": "Coterie Self-Service",
-    "image": "../assets/office-resources/coterie-self-service.png"
+    "image": "../assets/office-resources/coterie-self-service.png",
+    "imageAlt": "Coterie logo"
   },
   {
     "id": "agencyzoom",
@@ -24,7 +26,8 @@
     "category": "CRM",
     "order": 3,
     "altLogoText": "AgencyZoom",
-    "image": "../assets/office-resources/agencyzoom.svg"
+    "image": "../assets/office-resources/agencyzoom.svg",
+    "imageAlt": "AgencyZoom logo"
   },
   {
     "id": "amtrust",
@@ -33,7 +36,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "AmTrust",
-    "image": "../assets/office-resources/amtrust.png"
+    "image": "../assets/office-resources/amtrust.png",
+    "imageAlt": "AmTrust logo"
   },
   {
     "id": "arrowhead",
@@ -42,7 +46,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "Arrowhead",
-    "image": "../assets/office-resources/arrowhead.png"
+    "image": "../assets/office-resources/arrowhead.png",
+    "imageAlt": "Arrowhead logo"
   },
   {
     "id": "bhhc",
@@ -51,7 +56,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "BHHC",
-    "image": "../assets/office-resources/bhhc.png"
+    "image": "../assets/office-resources/bhhc.png",
+    "imageAlt": "Berkshire Hathaway Homestate Companies logo"
   },
   {
     "id": "bondexchange",
@@ -60,7 +66,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "BondExchange",
-    "image": "../assets/office-resources/bondexchange.png"
+    "image": "../assets/office-resources/bondexchange.png",
+    "imageAlt": "BondExchange logo"
   },
   {
     "id": "brinq",
@@ -69,7 +76,8 @@
     "category": "Office",
     "order": 3,
     "altLogoText": "Brinq",
-    "image": "../assets/office-resources/brinq.png"
+    "image": "../assets/office-resources/brinq.png",
+    "imageAlt": "Brinq logo"
   },
   {
     "id": "chubb",
@@ -78,7 +86,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "Chubb",
-    "image": "../assets/office-resources/chubb.png"
+    "image": "../assets/office-resources/chubb.png",
+    "imageAlt": "Chubb logo"
   },
   {
     "id": "cna",
@@ -87,7 +96,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "CNA",
-    "image": "../assets/office-resources/cna.png"
+    "image": "../assets/office-resources/cna.png",
+    "imageAlt": "CNA logo"
   },
   {
     "id": "corelogic",
@@ -96,7 +106,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "CoreLogic",
-    "image": "../assets/office-resources/corelogic.png"
+    "image": "../assets/office-resources/corelogic.png",
+    "imageAlt": "CoreLogic logo"
   },
   {
     "id": "coterie",
@@ -105,7 +116,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "COTERIE",
-    "image": "../assets/office-resources/coterie-self-service.png"
+    "image": "../assets/office-resources/coterie-self-service.png",
+    "imageAlt": "Coterie logo"
   },
   {
     "id": "employers",
@@ -114,7 +126,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "Employers",
-    "image": "../assets/office-resources/employers.png"
+    "image": "../assets/office-resources/employers.png",
+    "imageAlt": "Employers logo"
   },
   {
     "id": "erisk",
@@ -123,7 +136,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "ERisk",
-    "image": "../assets/office-resources/erisk.jpg"
+    "image": "../assets/office-resources/erisk.jpg",
+    "imageAlt": "E-Risk Services logo"
   },
   {
     "id": "gigins",
@@ -132,7 +146,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "Gigins",
-    "image": "../assets/office-resources/gigins.gif"
+    "image": "../assets/office-resources/gigins.gif",
+    "imageAlt": "GIG logo"
   },
   {
     "id": "insuredmine",
@@ -141,7 +156,8 @@
     "category": "CRM",
     "order": 3,
     "altLogoText": "InsuredMine",
-    "image": "../assets/office-resources/insuredmine.png"
+    "image": "../assets/office-resources/insuredmine.png",
+    "imageAlt": "InsuredMine logo"
   },
   {
     "id": "liberty-mutual",
@@ -150,7 +166,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "Liberty Mutual",
-    "image": "../assets/office-resources/liberty-mutual.png"
+    "image": "../assets/office-resources/liberty-mutual.png",
+    "imageAlt": "Liberty Mutual Insurance logo"
   },
   {
     "id": "lio-hoa",
@@ -159,7 +176,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "LIO - HOA",
-    "image": "../assets/office-resources/lio-hoa.png"
+    "image": "../assets/office-resources/lio-hoa.png",
+    "imageAlt": "LIO logo"
   },
   {
     "id": "lost-business-survey",
@@ -168,7 +186,8 @@
     "category": "Office",
     "order": 3,
     "altLogoText": "Lost Business Survey",
-    "image": "../assets/office-resources/lost-business-survey.png"
+    "image": "../assets/office-resources/lost-business-survey.png",
+    "imageAlt": "UWIB logo mark"
   },
   {
     "id": "naics-to-sic",
@@ -177,7 +196,8 @@
     "category": "Office",
     "order": 3,
     "altLogoText": "NAICS to SIC",
-    "image": "../assets/office-resources/lost-business-survey.png"
+    "image": "../assets/office-resources/lost-business-survey.png",
+    "imageAlt": "UWIB logo mark"
   },
   {
     "id": "prowriters",
@@ -186,7 +206,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "ProWriters",
-    "image": "../assets/office-resources/prowriters.png"
+    "image": "../assets/office-resources/prowriters.png",
+    "imageAlt": "ProWriters logo"
   },
   {
     "id": "rocketreferrals",
@@ -195,7 +216,8 @@
     "category": "CRM",
     "order": 3,
     "altLogoText": "RocketReferrals",
-    "image": "../assets/office-resources/rocketreferrals.png"
+    "image": "../assets/office-resources/rocketreferrals.png",
+    "imageAlt": "Rocket Referrals logo"
   },
   {
     "id": "the-hanover",
@@ -204,7 +226,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "The Hanover",
-    "image": "../assets/office-resources/the-hanover.png"
+    "image": "../assets/office-resources/the-hanover.png",
+    "imageAlt": "The Hanover Insurance Group logo"
   },
   {
     "id": "the-hartford",
@@ -213,7 +236,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "The Hartford",
-    "image": "../assets/office-resources/the-hartford.png"
+    "image": "../assets/office-resources/the-hartford.png",
+    "imageAlt": "The Hartford logo"
   },
   {
     "id": "travelers",
@@ -222,7 +246,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "Travelers",
-    "image": "../assets/office-resources/travelers.png"
+    "image": "../assets/office-resources/travelers.png",
+    "imageAlt": "Travelers logo"
   },
   {
     "id": "umbrellapro",
@@ -231,7 +256,8 @@
     "category": "Insurtech",
     "order": 3,
     "altLogoText": "UmbrellaPro",
-    "image": "../assets/office-resources/umbrellapro.png"
+    "image": "../assets/office-resources/umbrellapro.png",
+    "imageAlt": "UmbrellaPro logo"
   },
   {
     "id": "us-assure",
@@ -240,7 +266,8 @@
     "category": "Carriers",
     "order": 3,
     "altLogoText": "US Assure",
-    "image": "../assets/office-resources/us-assure.png"
+    "image": "../assets/office-resources/us-assure.png",
+    "imageAlt": "US Assure logo"
   },
   {
     "id": "uwib-intranet",
@@ -249,7 +276,8 @@
     "category": "Office",
     "order": 3,
     "altLogoText": "UWIB Intranet",
-    "image": "../assets/office-resources/lost-business-survey.png"
+    "image": "../assets/office-resources/lost-business-survey.png",
+    "imageAlt": "UWIB logo mark"
   },
   {
     "id": "vertafore-ams360",
@@ -258,7 +286,8 @@
     "category": "Office",
     "order": 3,
     "altLogoText": "Vertafore AMS360",
-    "image": "../assets/office-resources/vertafore-ams360.svg"
+    "image": "../assets/office-resources/vertafore-ams360.svg",
+    "imageAlt": "Vertafore logo"
   },
   {
     "id": "lio-other",
@@ -267,7 +296,8 @@
     "category": "Insurtech",
     "order": 4,
     "altLogoText": "LIO - Other",
-    "image": "../assets/office-resources/lio-hoa.png"
+    "image": "../assets/office-resources/lio-hoa.png",
+    "imageAlt": "LIO logo"
   },
   {
     "id": "residential-property-worksheet",
@@ -276,6 +306,7 @@
     "category": "Office",
     "order": 6,
     "altLogoText": "Residential Property Worksheet",
-    "image": "../assets/office-resources/lost-business-survey.png"
+    "image": "../assets/office-resources/lost-business-survey.png",
+    "imageAlt": "UWIB logo mark"
   }
 ]

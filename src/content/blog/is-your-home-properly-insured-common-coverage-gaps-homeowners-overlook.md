@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/is-your-home-properly-insured-common-coverage-gaps-homeowners-overlook.jpg"
-heroAlt: ""
+heroAlt: "Firefighter on a ladder truck beside a fire-damaged house roof"
 draft: false
 hygraphId: "cm6sgtnmvaut307n4153j247n"
 ---

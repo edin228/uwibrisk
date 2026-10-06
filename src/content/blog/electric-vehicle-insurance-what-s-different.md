@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/electric-vehicle-insurance-what-s-different.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a blue electric car at a charging station beside a shield with a check mark"
 draft: false
 hygraphId: "cmfqsm9151y7z07ln4ecsbrc4"
 ---

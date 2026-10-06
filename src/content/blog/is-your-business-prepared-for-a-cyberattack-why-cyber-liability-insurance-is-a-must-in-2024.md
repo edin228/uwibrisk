@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/is-your-business-prepared-for-a-cyberattack-why-cyber-liability-insurance-is-a-must-in-2024.jpg"
-heroAlt: ""
+heroAlt: "Close-up of lines of computer code on a dark screen"
 draft: false
 hygraphId: "cm6i6gw2e0bj207mxiypobwja"
 ---

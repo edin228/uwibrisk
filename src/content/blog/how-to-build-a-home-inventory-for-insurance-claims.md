@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/how-to-build-a-home-inventory-for-insurance-claims.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a person photographing furniture and writing a home inventory checklist"
 draft: false
 hygraphId: "cmfiubkkfium707myv1wqhxri"
 ---

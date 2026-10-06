@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Business", "Educational"]
 heroImage: "../../assets/blog/why-good-leaders-must-eventually-become-less-important.jpg"
-heroAlt: ""
+heroAlt: "Overhead view of four colleagues working with laptops at a white conference table"
 draft: false
 hygraphId: "cmqinhqosejsk06n2zmftcqhw"
 ---

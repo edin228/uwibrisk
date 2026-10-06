@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/wage-hour-risk-what-insurance-can-and-can-t-do.jpg"
-heroAlt: ""
+heroAlt: "Sign reading “Wage and Hour Claims” with a clock, calculators, cash and a shield icon"
 draft: false
 hygraphId: "cmfwwt1u7i2p707mz6ean11nd"
 ---

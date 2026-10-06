@@ -13,6 +13,8 @@ order: 5
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/harrison-santiago.png"
+photoAlt: "Portrait of Harrison Santiago, Private Client Specialist"
+motionPhotos: []
 pets: []
 hygraphId: "cmn7sreocgu8o07n4h7v7cq6v"
 ---

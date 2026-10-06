@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/your-insurancesimplified-discover-the-power-of-our-client-portal.jpg"
-heroAlt: ""
+heroAlt: "Person typing on a laptop while sitting on a gray sofa"
 draft: false
 hygraphId: "cm90nkx5fzqtk07n7u422bnms"
 ---

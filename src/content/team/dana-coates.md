@@ -13,7 +13,16 @@ order: null
 hasTeamPage: true
 miniBio: "Dana Coates is the CEO and Director of Strategic Partnerships at UWIB Risk & Insurance Solutions. With over 50 years of experience in risk mitigation and insurance advising, Dana has guided clients of all sizes—from billionaires to family businesses—through challenges ranging from wildfires to market disruptions. A fourth-generation insurance professional, he has led UWIB Risk & Insurance Solutions since 1996, combining traditional expertise with modern innovations like AMS360 and AI-driven tools. Known for his creativity and hands-on approach, Dana remains dedicated to client-first service, mentorship, and building forward-thinking, “white-glove” insurance solutions."
 photo: "../../assets/team/dana-coates.jpg"
+photoAlt: "Portrait of Dana Coates, Strategic Partnerships"
 blogPhoto: "../../assets/team/dana-coates-blog.jpg"
+blogPhotoAlt: "Illustration of black glasses and a mustache, used as Dana Coates’ author avatar"
+motionPhotos:
+  - src: "../../assets/team/dana-coates-motion-1.jpg"
+    alt: "Portrait of Dana Coates, Strategic Partnerships"
+  - src: "../../assets/team/dana-coates-motion-2.jpg"
+    alt: "Portrait of Dana Coates, Strategic Partnerships"
+  - src: "../../assets/team/dana-coates.jpg"
+    alt: "Portrait of Dana Coates, Strategic Partnerships"
 pets: []
 hygraphId: "cl5jxhoq67eb90an7fjjse7ti"
 ---

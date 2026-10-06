@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/risk-management-why-being-proactive-pays-off-in-insurance.jpg"
-heroAlt: ""
+heroAlt: "Small caution cone sitting on a laptop keyboard"
 draft: false
 hygraphId: "cmqq6f4snmvnk07ljktzgr0c8"
 ---

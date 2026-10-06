@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/key-person-insurance-for-founders-and-executives-a-critical-risk-management-tool.jpg"
-heroAlt: ""
+heroAlt: "Illustration of executives with a clipboard showing a shielded person icon"
 draft: false
 hygraphId: "cmg3nksv4b0ki07n36b0yp2by"
 ---

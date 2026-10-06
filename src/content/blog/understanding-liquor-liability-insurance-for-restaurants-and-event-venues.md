@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-liquor-liability-insurance-for-restaurants-and-event-venues.jpg"
-heroAlt: ""
+heroAlt: "Glass of whiskey beside an insurance clipboard and a table setting"
 draft: false
 hygraphId: "cml55q2z80m1s07ljfwwfgsj4"
 ---

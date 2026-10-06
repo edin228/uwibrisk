@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-fundamentals-of-bi-claims.jpg"
-heroAlt: ""
+heroAlt: "Wooden structure engulfed in flames at night"
 draft: false
 hygraphId: "clwqfu9pv7ckz07lnfs0h5wta"
 ---

@@ -10,7 +10,7 @@ author: null
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/towing-insurance-what-you-need-to-know.jpg"
-heroAlt: ""
+heroAlt: "White pickup truck being loaded onto a flatbed tow truck"
 draft: false
 hygraphId: "cm6tz9c0f3i8m07n8x0f1pdv1"
 ---

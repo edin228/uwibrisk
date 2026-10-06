@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["News", "Educational"]
 heroImage: "../../assets/blog/protecting-yourself-from-vandalism-what-every-retail-business-owner-should-know.jpg"
-heroAlt: ""
+heroAlt: "Black-and-white photo of a crowd of protesters holding signs and phones"
 draft: false
 hygraphId: "cl5k60bnnet3g0bmybdff05sv"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/wealth-managers-team-with-risk-managers-to-cover-all-the-bases.webp"
-heroAlt: ""
+heroAlt: "Smiling man in a suit holding a laptop on a city street"
 draft: false
 hygraphId: "cltgdzmv0lrul07n4p08q3xf6"
 ---
@@ -27,7 +27,7 @@ The good news is that Wealth Managers are not expected to tackle this problem si
 
 The assets for which Wealth Managers are responsible exist as the result of someone’s effort, it may be old money or new money, but somebody has built the asset that is being managed. It is that asset’s physical safety and security which is the focus of a Risk Manager. There are many ways assets can be eroded, which is why a thorough and strategic evaluation is so important to those with substantial wealth. Where appropriate, risk can be shifted to the shoulders of a third party either through contractual agreement or the use of insurance.
 
-Some of today’s most experienced Wealth Managers team with Risk Managers to see that insurance adequately [protects physical assets and intangible liabilities](/why-confidentiality-agreements-are-a-must). Doing so can be both a wise and cost-efficient decision in protecting client portfolios. For example, the cost of properly and legitimately insuring $100 million at risk might be as little as $90,000.
+Some of today’s most experienced Wealth Managers team with Risk Managers to see that insurance adequately protects physical assets and intangible liabilities. Doing so can be both a wise and cost-efficient decision in protecting client portfolios. For example, the cost of properly and legitimately insuring $100 million at risk might be as little as $90,000.
 
 **Five Reasons Wealth Managers Shy Away From Discussing P&C Insurance**
 

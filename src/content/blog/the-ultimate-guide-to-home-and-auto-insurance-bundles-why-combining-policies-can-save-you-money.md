@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-ultimate-guide-to-home-and-auto-insurance-bundles-why-combining-policies-can-save-you-money.jpg"
-heroAlt: ""
+heroAlt: "Green toy car on pavement"
 draft: false
 hygraphId: "clysdegvh9j2807lrbzdtwhzy"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/vendor-risk-assessment-checklist-for-smbs.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a man with a magnifying glass reviewing a checklist beside a check-mark shield"
 draft: false
 hygraphId: "cmnf3z632gcqk08mujgijtjzb"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/market-value-vs-insurance-value-whats-the-difference.jpg"
-heroAlt: ""
+heroAlt: "Isometric illustration of a building on a city block with a parachute above it"
 draft: false
 hygraphId: "cm01ej0hlwvnl07n2p4nhhpfe"
 ---

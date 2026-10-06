@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/beyond-covid-what-businesses-learned-about-risk-resilience-and-revenue-protection.webp"
-heroAlt: ""
+heroAlt: "Man wearing a headset working alone at a computer in a bright, empty office"
 draft: false
 hygraphId: "cm7utu9yw1m0h06n33uivzugg"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: []
 tags: ["Educational"]
 heroImage: "../../assets/blog/navigating-internal-barriers-in-sales-and-everyday-life-the-inner-struggle.webp"
-heroAlt: ""
+heroAlt: "Stressed woman at a desk as coworkers stand beside her holding papers"
 draft: false
 hygraphId: "clo7nnxa7f8j90amy7hexvlo3"
 ---

@@ -13,13 +13,24 @@ order: null
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/josh-acosta.png"
+photoAlt: "Portrait of Josh Acosta, Co-Founder"
 blogPhoto: "../../assets/team/josh-acosta-blog.jpg"
+blogPhotoAlt: "Portrait of Josh Acosta, Co-Founder"
+motionPhotos:
+  - src: "../../assets/team/josh-acosta.png"
+    alt: "Portrait of Josh Acosta, Co-Founder"
+  - src: "../../assets/team/josh-acosta-motion-2.png"
+    alt: "Portrait of Josh Acosta, Co-Founder"
+  - src: "../../assets/team/josh-acosta-motion-3.png"
+    alt: "Portrait of Josh Acosta, Co-Founder"
 pets:
   - name: "Penny Mae"
     photo: "../../assets/pets/penny-mae.jpg"
+    photoAlt: "Penny Mae, a red retriever in a hunting vest, sitting by a marsh"
     bio: null
   - name: "Maggie"
     photo: "../../assets/pets/maggie.jpg"
+    photoAlt: "Maggie, a merle sheepdog puppy, lying in the grass"
     bio: null
 hygraphId: "cl76nqcpj72q40almzr0c3pe3"
 ---

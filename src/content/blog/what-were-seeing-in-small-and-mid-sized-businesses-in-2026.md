@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/7-emerging-business-risks-in-2025and-the-insurance-to-match.jpg"
-heroAlt: ""
+heroAlt: "Woman’s face lit by projected lines of code and data in blue and red"
 draft: false
 hygraphId: "cmqveybm8q00z07n6heuht262"
 ---

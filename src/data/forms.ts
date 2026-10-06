@@ -21,6 +21,7 @@ export interface FormPage {
   wordingUnderTitle: string | null;
   template: string;
   headerImage: ImageMetadata | null;
+  headerImageAlt: string;
   note?: string;
   embed: FormEmbed;
 }
@@ -32,6 +33,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "222237488943162",
@@ -46,6 +48,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "iframe",
       "src": "https://track.nextinsurance.com/links?agent_affiliation=ZDQZrQcF7q1GqpvK&serial=992855993&channel=affiliation",
@@ -59,6 +62,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "iframe",
       "src": "https://secure.consumerratequotes.com/ConsumerV2?id=50332",
@@ -72,6 +76,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "80625205586155",
@@ -86,6 +91,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "61897143389167",
@@ -100,6 +106,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: "As you continue to grow your wealth and make plans for the future, ordinary insurance protection likely isn’t enough. UWIB Risk Insurance Solutions Private Client Services (UWIB PCS) has the expertise and specialty solutions that can help you protect the things you care about most.",
     template: "LandingPage",
     headerImage: header_privateclient,
+    headerImageAlt: "Illustration of a white luxury coupe parked in front of an ornate stone mansion",
     note: "Embed lives on a landing page (see src/data/landing).",
     embed: {
       "type": "jotform",
@@ -115,6 +122,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "63547659246165",
@@ -129,6 +137,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "73017311786152",
@@ -143,6 +152,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "220146095802046",
@@ -157,6 +167,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "231903820509150",
@@ -171,6 +182,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "232366177334054",
@@ -185,6 +197,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "232486933719165",
@@ -199,6 +212,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "script",
       "src": "https://strife.back9ins.com/production/strife.js",
@@ -212,6 +226,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "iframe",
       "src": "https://www.agentmaxonline.com/agentmaxweb/widgets/quotetool.html?widgetid=265889&accam=F208368&code=ABIYU4TLWGBGTNHC6ZWLRSKAR65GB6C5JLBJOIXR7QY3M6I5HDDOVM447AML2BHJN5PPXQ3N2T7G7NW3OYKK54CPJHRRWEP4VQZTBFKOMOLUW6HE2WAV2IH3TSTYYXDH",
@@ -225,6 +240,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "82848013967164",
@@ -239,6 +255,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "240455724675159",
@@ -253,6 +270,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: header_it_and_technology_service_providers,
+    headerImageAlt: "Man wearing a headset working alone at a computer in a bright, empty office",
     embed: {
       "type": "jotform",
       "jotformId": "240446823300144",
@@ -267,6 +285,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "SingleColumn",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "iframe",
       "src": "https://neptuneflood.com/consumer-app/?source=ul2IxnGOhM6ReQzdOWJXM0APKcNzQlIXDsa0loNzMFJvRB27HUT%2Bc1cDbgjFlrPMTY1%2BUxFwUVa5pol0hrD%2FI%2B0ugY8jxwbjokfluFImuPk%3D",
@@ -280,6 +299,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "92255315907156",
@@ -294,6 +314,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "81067268667165",
@@ -308,6 +329,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "80625205586155",
@@ -322,6 +344,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "242486712781059",
@@ -336,6 +359,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "DualRow",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "video",
       "src": "https://fast.wistia.net/embed/iframe/ycabzivnrg",
@@ -349,6 +373,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "20404358594",
@@ -363,6 +388,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "81547209665161",
@@ -377,6 +403,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "91715805115151",
@@ -391,6 +418,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "62237376699168",
@@ -405,6 +433,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "81966902884169",
@@ -419,6 +448,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "82236232265149",
@@ -433,6 +463,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "92335409273155",
@@ -447,6 +478,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "221506192459154",
@@ -461,6 +493,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "260126815091048",
@@ -475,6 +508,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "260484411054046",
@@ -489,6 +523,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "91316040202136",
@@ -503,6 +538,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "261185736822058",
@@ -517,6 +553,7 @@ export const forms: FormPage[] = [
     wordingUnderTitle: null,
     template: "WebForm",
     headerImage: null,
+    headerImageAlt: "",
     embed: {
       "type": "jotform",
       "jotformId": "262777369889182",

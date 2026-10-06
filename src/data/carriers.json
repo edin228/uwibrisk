@@ -11,7 +11,8 @@
     "claimLink": "https://www.allrisks.com/how-can-we-help/claims/",
     "payLink": "https://www.allrisks.com/how-can-we-help/make-a-payment/",
     "showInCarousel": true,
-    "logo": "../assets/carriers/all-risks.png"
+    "logo": "../assets/carriers/all-risks.png",
+    "logoAlt": "All Risks logo"
   },
   {
     "id": "allstate",
@@ -25,7 +26,8 @@
     "claimLink": "https://www.allstate.com/claims/file-claim.aspx",
     "payLink": "https://myaccountrwd.allstate.com/anoN/Account/login",
     "showInCarousel": false,
-    "logo": "../assets/carriers/allstate.png"
+    "logo": "../assets/carriers/allstate.png",
+    "logoAlt": "Allstate logo"
   },
   {
     "id": "arrowhead",
@@ -39,7 +41,8 @@
     "claimLink": "https://www.arrowheadgrp.com/claims/",
     "payLink": null,
     "showInCarousel": false,
-    "logo": "../assets/carriers/arrowhead.png"
+    "logo": "../assets/carriers/arrowhead.png",
+    "logoAlt": "Arrowhead logo"
   },
   {
     "id": "btis",
@@ -53,7 +56,8 @@
     "claimLink": null,
     "payLink": null,
     "showInCarousel": false,
-    "logo": "../assets/carriers/btis.png"
+    "logo": "../assets/carriers/btis.png",
+    "logoAlt": "BTIS logo"
   },
   {
     "id": "builders",
@@ -67,7 +71,8 @@
     "claimLink": "https://www.bldrs.com/claims-center/",
     "payLink": "https://bol.bldrs.com/CheckEntrySearch",
     "showInCarousel": false,
-    "logo": "../assets/carriers/builders.png"
+    "logo": "../assets/carriers/builders.png",
+    "logoAlt": "Builders logo"
   },
   {
     "id": "chubb",
@@ -81,7 +86,8 @@
     "claimLink": "https://www.chubb.com/us-en/claims.html",
     "payLink": "https://www.chubb.com/quickbillpayContent/ng/pay/#/generic?returnToURL=https:%2F%2Fwww.chubb.com%2Fus-en%2Flog-in%2F",
     "showInCarousel": true,
-    "logo": "../assets/carriers/chubb.png"
+    "logo": "../assets/carriers/chubb.png",
+    "logoAlt": "Chubb logo"
   },
   {
     "id": "cna",
@@ -95,7 +101,8 @@
     "claimLink": "https://www.cna.com/web/guest/cna/claim-center",
     "payLink": "https://billing.cna.com/",
     "showInCarousel": false,
-    "logo": "../assets/carriers/cna.png"
+    "logo": "../assets/carriers/cna.png",
+    "logoAlt": "CNA logo"
   },
   {
     "id": "cna-surety",
@@ -109,7 +116,8 @@
     "claimLink": "https://www.cnasurety.com/cna/guest/cnasurety/claimservices/%21ut/p/b1/04_Sj9CPykssy0xPLMnMz0vMAfGjzOJNDLy9Q3xMQo28TF0cDTz9_IIDLB2djP3NzIEKIoEKDHAARwNC-r30o9Jz8pOAVoXrR-FV7GMAVYDHMj-P_NxU_YLciMrggHRFAAOrDXM%21/dl4/d5/L2dBISEvZ0FBIS9nQSEh/",
     "payLink": "https://onlinepay.cnasurety.com/EpayWeb/",
     "showInCarousel": false,
-    "logo": "../assets/carriers/cna-surety.png"
+    "logo": "../assets/carriers/cna-surety.png",
+    "logoAlt": "CNA Surety logo"
   },
   {
     "id": "foremost",
@@ -123,7 +131,8 @@
     "claimLink": "https://www.foremost.com/claims/",
     "payLink": "https://css.foremost.com/PrimaryAuthn/?ref=po",
     "showInCarousel": false,
-    "logo": "../assets/carriers/foremost.png"
+    "logo": "../assets/carriers/foremost.png",
+    "logoAlt": "Foremost logo"
   },
   {
     "id": "geovera",
@@ -137,7 +146,8 @@
     "claimLink": "https://www.mygeosource.com/ClaimsHelp.aspx",
     "payLink": "https://www.mygeosource.com/",
     "showInCarousel": false,
-    "logo": "../assets/carriers/geovera.png"
+    "logo": "../assets/carriers/geovera.png",
+    "logoAlt": "GeoVera logo"
   },
   {
     "id": "hagerty",
@@ -151,7 +161,8 @@
     "claimLink": "https://www.hagerty.com/insurance/claims",
     "payLink": "https://login.hagerty.com/TemporaryAccess?purpose=PayBill",
     "showInCarousel": false,
-    "logo": "../assets/carriers/hagerty.png"
+    "logo": "../assets/carriers/hagerty.png",
+    "logoAlt": "Hagerty logo"
   },
   {
     "id": "hanover",
@@ -165,7 +176,8 @@
     "claimLink": "https://www.hanover.com/claims/claims-services/report-claim",
     "payLink": "https://www.hanover.com/pay-your-bill",
     "showInCarousel": true,
-    "logo": "../assets/carriers/hanover.png"
+    "logo": "../assets/carriers/hanover.png",
+    "logoAlt": "Hanover logo"
   },
   {
     "id": "hartford",
@@ -179,7 +191,8 @@
     "claimLink": "https://thehartford.worxbranding.com/general-liability/?_ga=GA1.1.494969759.1647632955",
     "payLink": null,
     "showInCarousel": true,
-    "logo": "../assets/carriers/hartford.png"
+    "logo": "../assets/carriers/hartford.png",
+    "logoAlt": "Hartford logo"
   },
   {
     "id": "k-and-k",
@@ -193,7 +206,8 @@
     "claimLink": "https://www.kandkinsurance.com/Pages/Claims.aspx",
     "payLink": null,
     "showInCarousel": false,
-    "logo": "../assets/carriers/k-and-k.png"
+    "logo": "../assets/carriers/k-and-k.png",
+    "logoAlt": "K&K logo"
   },
   {
     "id": "kemper",
@@ -207,7 +221,8 @@
     "claimLink": "https://www.kemper.com/claims/report-a-claim",
     "payLink": "https://www.ekemper.com/KemperCustomerPublic/login.jspx",
     "showInCarousel": false,
-    "logo": "../assets/carriers/kemper.png"
+    "logo": "../assets/carriers/kemper.png",
+    "logoAlt": "Kemper logo"
   },
   {
     "id": "liberty-mutual",
@@ -221,7 +236,8 @@
     "claimLink": "https://www.libertymutual.com/log-in?target=reportClaim",
     "payLink": "https://eservice.libertymutual.com/account/billing/pwol#pwolLanding",
     "showInCarousel": true,
-    "logo": "../assets/carriers/liberty-mutual.png"
+    "logo": "../assets/carriers/liberty-mutual.png",
+    "logoAlt": "Liberty Mutual logo"
   },
   {
     "id": "mercury",
@@ -235,7 +251,8 @@
     "claimLink": "https://mercury.assured.claims/",
     "payLink": "https://www.mercuryinsurance.com/payment/options.html",
     "showInCarousel": true,
-    "logo": "../assets/carriers/mercury.png"
+    "logo": "../assets/carriers/mercury.png",
+    "logoAlt": "Mercury logo"
   },
   {
     "id": "metlife",
@@ -249,7 +266,8 @@
     "claimLink": "https://www.metlife.com/support-and-manage/file-a-claim/",
     "payLink": "https://online.metlife.com/paymentcenter/web/public/us/quickpay",
     "showInCarousel": false,
-    "logo": "../assets/carriers/metlife.png"
+    "logo": "../assets/carriers/metlife.png",
+    "logoAlt": "MetLife logo"
   },
   {
     "id": "national-general",
@@ -263,7 +281,8 @@
     "claimLink": "https://claims.nationalgeneral.com/",
     "payLink": "https://www.mynatgenpolicy.com/",
     "showInCarousel": false,
-    "logo": "../assets/carriers/national-general.png"
+    "logo": "../assets/carriers/national-general.png",
+    "logoAlt": "National General logo"
   },
   {
     "id": "nationwide",
@@ -277,7 +296,8 @@
     "claimLink": "https://www.nationwide.com/personal/insurance/claims/",
     "payLink": "https://www.nationwide.com/personal/member-services/pay-bill",
     "showInCarousel": true,
-    "logo": "../assets/carriers/nationwide.png"
+    "logo": "../assets/carriers/nationwide.png",
+    "logoAlt": "Nationwide logo"
   },
   {
     "id": "philadelphia-insurance-companies",
@@ -291,7 +311,8 @@
     "claimLink": "https://www.phly.com/Claims/default.aspx",
     "payLink": "https://www.phly.com/myphly/login.aspx",
     "showInCarousel": false,
-    "logo": "../assets/carriers/philadelphia-insurance-companies.png"
+    "logo": "../assets/carriers/philadelphia-insurance-companies.png",
+    "logoAlt": "Philadelphia Insurance Companies logo"
   },
   {
     "id": "prime-insurance-company",
@@ -305,7 +326,8 @@
     "claimLink": "https://www.claimsdirectaccess.com/submit-a-claim/",
     "payLink": null,
     "showInCarousel": false,
-    "logo": "../assets/carriers/prime-insurance-company.png"
+    "logo": "../assets/carriers/prime-insurance-company.png",
+    "logoAlt": "Prime Insurance Company logo"
   },
   {
     "id": "tokio-marine",
@@ -319,7 +341,8 @@
     "claimLink": "https://www.worldtrips.com/insurance-resources/claims-guide/",
     "payLink": null,
     "showInCarousel": false,
-    "logo": "../assets/carriers/tokio-marine.png"
+    "logo": "../assets/carriers/tokio-marine.png",
+    "logoAlt": "Tokio Marine logo"
   },
   {
     "id": "travelers",
@@ -333,6 +356,7 @@
     "claimLink": "https://www.travelers.com/claims/report-claim",
     "payLink": "https://www.travelers.com/pay-your-bill?lob=bi",
     "showInCarousel": true,
-    "logo": "../assets/carriers/travelers.png"
+    "logo": "../assets/carriers/travelers.png",
+    "logoAlt": "Travelers logo"
   }
 ]

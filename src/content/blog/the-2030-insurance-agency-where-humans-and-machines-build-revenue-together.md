@@ -10,12 +10,12 @@ author: "dana-coates"
 categories: ["Opinion"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-2030-insurance-agency-where-humans-and-machines-build-revenue-together.webp"
-heroAlt: ""
+heroAlt: "Profile of a woman with glowing binary code projected on her face"
 draft: false
 hygraphId: "cma43lcnl3f9307mz6q9uvq15"
 ---
 
-![](../../assets/blog/the-2030-insurance-agency-where-humans-and-machines-build-revenue-together-inline-1.png)
+![Bar chart of revenue per FTE: about $250K in 2025 (human) vs about $800K in 2030 (human plus virtual)](../../assets/blog/the-2030-insurance-agency-where-humans-and-machines-build-revenue-together-inline-1.png)
 
 The Baseline: 2025 Human Layer Benchmark  
   

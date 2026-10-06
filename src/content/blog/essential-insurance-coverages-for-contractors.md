@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/essential-insurance-coverages-for-contractors.jpg"
-heroAlt: ""
+heroAlt: "Workers smoothing fresh concrete into a form at a construction site"
 draft: false
 hygraphId: "cm9rfurc39kbi0dlq4nnoj3nq"
 ---

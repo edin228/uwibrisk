@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/medical-office-insurance-the-unsung-hero-of-your-healthcare-practice.jpg"
-heroAlt: ""
+heroAlt: "Smiling doctor in a white coat working at a computer in a bright office"
 draft: false
 hygraphId: "cm91w1eux1wdf07lpwa4p2o4k"
 ---

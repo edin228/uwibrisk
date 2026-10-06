@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/how-underwriters-evaluate-your-business-a-behind-the-scenes-look.jpg"
-heroAlt: ""
+heroAlt: "Illustration of an underwriter reviewing an insurance checklist, with a magnifying glass over a business"
 draft: false
 hygraphId: "cmhovc1c0ap1w09lqxbhgc5gg"
 ---

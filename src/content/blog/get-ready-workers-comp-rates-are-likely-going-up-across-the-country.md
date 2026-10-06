@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg"
-heroAlt: ""
+heroAlt: "Word cloud with “Work Safety” highlighted in yellow among workplace terms"
 draft: false
 hygraphId: "cm9vrnvmz8eyz07n6t81jyq1x"
 ---

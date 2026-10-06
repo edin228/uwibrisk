@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/when-to-increase-liability-limits-on-auto-insurance.jpg"
-heroAlt: ""
+heroAlt: "Car keys and a calculator on an insurance policy document"
 draft: false
 hygraphId: "cmghxzlof6g7p07lsjcx2pi6s"
 ---

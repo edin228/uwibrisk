@@ -10,7 +10,7 @@ author: "nick-latshaw"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/startup-benefit-packages-how-to-build-a-competitive-offering-without-breaking-the-bank.jpg"
-heroAlt: ""
+heroAlt: "Graphic titled “Startup Benefit Packages” showing a team with benefit icons and a growth chart"
 draft: false
 hygraphId: "cmg016ytoxqm407muq79aimfj"
 ---

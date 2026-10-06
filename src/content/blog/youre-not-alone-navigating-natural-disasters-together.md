@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/youre-not-alone-navigating-natural-disasters-together.webp"
-heroAlt: ""
+heroAlt: "Satellite view of wildfires burning across mountains and a city at night"
 draft: false
 hygraphId: "cm5r3558w3y7508lvf47xi5gw"
 ---

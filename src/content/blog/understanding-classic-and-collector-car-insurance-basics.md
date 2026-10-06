@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-classic-and-collector-car-insurance-basics.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a red classic coupe with shield, policy and umbrella icons"
 draft: false
 hygraphId: "cmfpd6voe0bfm07lnph1tgwno"
 ---

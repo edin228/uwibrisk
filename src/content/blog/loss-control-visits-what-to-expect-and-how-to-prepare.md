@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/loss-control-visits-what-to-expect-and-how-to-prepare.jpg"
-heroAlt: ""
+heroAlt: "Inspector in a hard hat taking notes on a clipboard with a colleague in a warehouse"
 draft: false
 hygraphId: "cmgqin3rvepmf07n19s9gneyz"
 ---

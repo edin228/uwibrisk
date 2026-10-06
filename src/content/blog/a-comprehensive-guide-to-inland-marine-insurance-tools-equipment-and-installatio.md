@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/a-comprehensive-guide-to-inland-marine-insurance-tools-equipment-and-installatio.jpg"
-heroAlt: ""
+heroAlt: "Hard hat, gloves, drill and tools around a sign reading “Inland Marine Insurance”"
 draft: false
 hygraphId: "cmihg5mk67tvp07lugzab3i36"
 ---

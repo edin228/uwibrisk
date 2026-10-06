@@ -25,6 +25,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import * as config from './export-config.mjs';
 
 // ---------------------------------------------------------------------------
 // Configuration / owner decisions
@@ -38,100 +39,18 @@ const CACHE_DIR = path.join(os.tmpdir(), 'uwib-hygraph-asset-cache');
 const MAX_EDGE = 2400;
 const DOWNLOAD_CONCURRENCY = 4;
 
-/** Test pages that must not be migrated. */
-const SKIP_PAGE_SLUGS = new Set(['test-jotform', 'sembley-test']);
-/** Blog posts cut by the owner (copied content). 301 -> /blog. */
-const CUT_BLOG_SLUGS = new Set([
-  'increase-chances-of-career-success-5-cliches-that-work-to-get-you-started',
-  'excellence-in-the-workplace-maturity-is-an-expected-element',
-]);
+const SKIP_PAGE_SLUGS = new Set(config.SKIP_PAGE_SLUGS);
+const DROPPED_BLOG_POSTS = config.DROPPED_BLOG_POSTS;
+const LEGACY_IMAGES = config.LEGACY_REMOTE_IMAGES;
+const LEGACY_SKIPPED = config.LEGACY_SKIPPED;
+const OLD_STATIC_ROUTES = config.OLD_STATIC_ROUTES;
+const LINK_OVERRIDES = new Map(Object.entries(config.LINK_OVERRIDES));
+const URL_FIXES = new Map(Object.entries(config.URL_FIXES));
+const ALT_TEXT_PATH = 'src/data/alt-text.json';
 /** Page templates built from components (exported as JSON for redesign). */
 const LANDING_TEMPLATES = new Set(['LandingPage', 'customLandingPage']);
 /** Templates whose content is rendered by a dedicated (formerly hard-coded) route. */
 const LISTING_TEMPLATES = new Set(['Blog', 'Grid', 'GridWithSearch', 'DualColumn']);
-
-/**
- * Images hard-coded in the old Next.js app (found by grepping `main` for
- * graphassets.com / cdn.brinq.io). Videos are intentionally excluded.
- */
-const LEGACY_IMAGES = [
-  {
-    url: 'https://us-west-2.graphassets.com/AxLg70bPjR3y8qyVdg6FNz/cmfx68c9z00k807n5vnyzdmxq',
-    name: 'sales-team-logo',
-    source: 'pages/sales-team.js:44 (inside a commented-out block)',
-  },
-  {
-    url: 'https://us-west-2.graphassets.com/AxLg70bPjR3y8qyVdg6FNz/cmfx7hsh31lb507n5gluvg1ka',
-    name: 'trusted-advisor-dana-coates',
-    source: 'pages/trusted-advisor.js:14 (same file as Dana Coates team photo)',
-  },
-  {
-    url: 'https://cdn.brinq.io/UWIBR/safeco4157.jpg',
-    name: 'safeco-logo',
-    source: 'pages/index.js:131, pages/safeco-faq.js:67',
-  },
-];
-const LEGACY_SKIPPED = [
-  {
-    url: 'https://media.graphassets.com/I5lQ9O1nTv2SBBitaDMw',
-    source: 'pages/dirt-haulers.js:19',
-    reason: 'Dirt Haulers video (~155 MB mp4) - videos are dropped',
-  },
-];
-
-/**
- * Links in content that point at URLs from the pre-Next (WordPress-era) uwib.com site
- * with an obvious new home. Only content links are rewritten; these are not redirects.
- */
-const LEGACY_LINK_FIXES = new Map([
-  ['/contact-us', '/contact'],
-  ['/contact-webform', '/contact'],
-]);
-
-/** Static routes of the old Next.js app (pages/*.js) and what happens to them. */
-const OLD_STATIC_ROUTES = [
-  { path: '/', note: 'Home page (hard-coded layout + Hygraph data). Redesign.' },
-  { path: '/blog', note: 'Blog index.' },
-  { path: '/team', note: 'Team index.' },
-  { path: '/get-quotes', note: 'Quote cards grid (quoteCards data).' },
-  { path: '/contact', note: 'Contact page (CMS text + Hygraph contact form -> needs a form API route).' },
-  { path: '/coi', note: 'COI & client portal page (hard-coded in old app).' },
-  { path: '/waiver', note: 'Hard-coded page in old app; content not in Hygraph.', decision: 'Rebuild or retire /waiver (content only exists in old pages/waiver.js).' },
-  { path: '/carriers', note: 'Carrier directory (carriers data).' },
-  { path: '/programs', note: 'Programs grid (programs data).' },
-  { path: '/glossary-terms', note: 'Glossary (glossary data).' },
-  { path: '/office-resources', note: 'Office resources grid (officeResources data).' },
-  { path: '/coverage-check-ups', note: 'Check-up cards grid (checkUpCards data).' },
-  { path: '/coverage-and-cost-estimates', note: 'Grid page (quote/check-up cards).' },
-  { path: '/sales-team', note: 'Producers list (team data, isProducer).' },
-  { path: '/safeco-faq', note: 'Hard-coded FAQ in old app; content not in Hygraph.', decision: 'Rebuild /safeco-faq from old pages/safeco-faq.js or retire it.' },
-  { path: '/search', note: 'Blog search (Hygraph _search).', decision: 'Site search: rebuild client-side (e.g. Pagefind) or redirect /search -> /blog.' },
-  { path: '/trusted-advisor', note: 'Hard-coded landing page in old app.', decision: 'Rebuild /trusted-advisor (content only in old pages/trusted-advisor.js).' },
-  { path: '/coffee-and-contracts', note: 'Hard-coded landing page in old app.', decision: 'Rebuild /coffee-and-contracts (content only in old components/coffee/*).' },
-  { path: '/hotels', note: 'Hard-coded hotels microsite.', decision: 'Rebuild hotels microsite (content only in old components/hotels/content.js).' },
-  { path: '/hotels/coverage', note: 'Hard-coded hotels microsite.', decision: 'See /hotels.' },
-  { path: '/hotels/why-uwib', note: 'Hard-coded hotels microsite.', decision: 'See /hotels.' },
-  { path: '/hotels/risk-briefs', note: 'Hard-coded hotels microsite.', decision: 'See /hotels.' },
-  { path: '/hotels/risk-briefs/housekeeping-injuries', note: 'Hard-coded hotels risk brief.', decision: 'See /hotels.' },
-  { path: '/hotels/risk-briefs/ransomware-readiness', note: 'Hard-coded hotels risk brief.', decision: 'See /hotels.' },
-  { path: '/hotels/risk-briefs/renovation-season', note: 'Hard-coded hotels risk brief.', decision: 'See /hotels.' },
-  { path: '/hotels/risk-briefs/guest-amenities', note: 'Hard-coded hotels risk brief.', decision: 'See /hotels.' },
-  {
-    path: '/dirt-haulers',
-    to: '/southern-states-dirt-hauling-and-excavation-contractors',
-    note: 'Page was only the dropped Dirt Haulers video (which forwarded to the dirt-hauling survey when finished).',
-    decision: 'Proposed 301 to the dirt-hauling survey form; alternative: the dirt-haulers blog post.',
-  },
-  { path: '/commercial-options', note: 'Hard-coded page (quote cards).', decision: 'Rebuild or redirect /commercial-options -> /get-quotes.' },
-  {
-    path: '/benefits-solutions111',
-    to: '/benefits-solutions',
-    note: 'Hard-coded duplicate/older version of the benefits-solutions landing page.',
-    decision: 'Proposed 301 to /benefits-solutions.',
-  },
-  { path: '/old-contact', to: '/contact', note: 'Old contact page variant.', decision: 'Proposed 301 to /contact.' },
-  { path: '/resources', note: 'Stub page in old app ("Resources" text only); also the nav dropdown slug.', decision: 'Retire (/resources -> /office-resources?) or build a resources hub.' },
-];
 
 // ---------------------------------------------------------------------------
 // Small utilities
@@ -330,6 +249,7 @@ const Q = {
     bIo { markdown raw }
     photo { ${ASSET} }
     blogPhoto { ${ASSET} }
+    motionProfilePhoto { ${ASSET} }
     pets { id name slug isActive bio { markdown } photo { ${ASSET} } }`,
   pages: `id slug title wordingUnderTitle template isActive isPasswordProtected publishedAt updatedAt createdAt
     content { markdown json }
@@ -401,7 +321,9 @@ const report = {
   notes: [],
   legacy: [],
   webformPosts: [],
-  legacyLinkFixes: [],
+  linkOverrides: [],
+  urlFixes: [],
+  altMissing: [],
   duplicatePosts: [],
   convertedPng: [],
 };
@@ -537,6 +459,38 @@ async function processImage(buf, ext) {
 /** old dest -> new dest when an image changed format during processing. */
 const renamedDest = new Map();
 
+// ---- Alt text (src/data/alt-text.json, keyed by final asset path) ----------
+let altMap = {};
+function loadAltText() {
+  const file = abs(ALT_TEXT_PATH);
+  if (!fs.existsSync(file)) return {};
+  const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  return Object.fromEntries(Object.entries(raw).filter(([k]) => !k.startsWith('$')));
+}
+/** Placeholder resolved after image processing (paths may change format). */
+function altToken(dest, kind = 'json') {
+  return dest ? `@@ALT${kind === 'md' ? 'M' : 'J'}:${dest}@@` : '';
+}
+const finalDest = (dest) => renamedDest.get(dest) ?? dest;
+function resolveAltTokens() {
+  const missing = new Set();
+  for (const [rel, content] of outputs) {
+    if (typeof content !== 'string' || !content.includes('@@ALT')) continue;
+    const next = content.replace(/@@ALT([JM]):([^@]+)@@/g, (_m, kind, dest) => {
+      const fd = finalDest(dest);
+      const alt = altMap[fd];
+      if (typeof alt !== 'string' || !alt.trim()) {
+        missing.add(fd);
+        return '';
+      }
+      if (kind === 'M') return alt.replace(/([[\]\\])/g, '\\$1');
+      return JSON.stringify(alt).slice(1, -1);
+    });
+    outputs.set(rel, next);
+  }
+  report.altMissing = [...missing].sort();
+}
+
 /** Point every text output at renamed image files (relative paths end in the dest tail). */
 function applyRenames() {
   if (!renamedDest.size) return;
@@ -616,10 +570,6 @@ function normalizeInternalPath(p) {
   const m = out.match(/^([^?#]*)(.*)$/);
   let pathname = m[1].replace(/\/{2,}/g, '/');
   if (pathname.length > 1) pathname = pathname.replace(/\/+$/, '');
-  if (LEGACY_LINK_FIXES.has(pathname)) {
-    report.legacyLinkFixes.push(`${pathname} -> ${LEGACY_LINK_FIXES.get(pathname)}`);
-    pathname = LEGACY_LINK_FIXES.get(pathname);
-  }
   pathname = pathRewrites.get(pathname) ?? pathname;
   return pathname + m[2];
 }
@@ -627,7 +577,11 @@ function normalizeInternalPath(p) {
 /** Rewrite one URL found in content. Returns the new URL. */
 function rewriteUrl(url, source) {
   if (!url) return url;
-  const raw = url.trim();
+  let raw = url.trim();
+  if (URL_FIXES.has(raw)) {
+    report.urlFixes.push({ source, from: raw, to: URL_FIXES.get(raw) });
+    raw = URL_FIXES.get(raw);
+  }
   if (/^(mailto|tel):/i.test(raw) || raw.startsWith('#')) return raw;
   if (INTERNAL_RE.test(raw)) {
     const p = normalizeInternalPath(raw.replace(INTERNAL_RE, '') || '/');
@@ -647,6 +601,7 @@ function rewriteUrl(url, source) {
 function toHref(value, source) {
   if (!value) return null;
   const v = String(value).trim();
+  if (URL_FIXES.has(v)) return rewriteUrl(v, source);
   if (/^https?:\/\/[^?#]*https?:\/\//i.test(v)) report.notes.push(`${source}: malformed URL (two URLs concatenated): ${v}`);
   if (/^(https?:|mailto:|tel:|\/|#)/i.test(v)) return rewriteUrl(v, source);
   return rewriteUrl(`/${v}`, source);
@@ -779,7 +734,8 @@ function processMarkdown(markdown, ctx) {
     inlineIndex++;
     const dest = planImage(asset, ctx.assetDir, `${ctx.assetBase}-inline-${inlineIndex}`, ctx.source);
     if (!dest) return all;
-    return `![${altText}](${relFrom(ctx.file, dest)}${keepTitle})`;
+    void altText; // Hygraph alt text is replaced by src/data/alt-text.json
+    return `![${altToken(dest, 'md')}](${relFrom(ctx.file, dest)}${keepTitle})`;
   });
 
   // 3. Links: [text](url "title")
@@ -801,6 +757,13 @@ function processMarkdown(markdown, ctx) {
       }
     } else {
       newUrl = rewriteUrl(url, ctx.source);
+      const pathOnly = newUrl.startsWith('/') ? newUrl.replace(/[?#].*$/, '') : null;
+      if (pathOnly && LINK_OVERRIDES.has(pathOnly)) {
+        const target = LINK_OVERRIDES.get(pathOnly);
+        report.linkOverrides.push({ source: ctx.source, from: url, to: target });
+        if (target === null) return text; // unlink, keep the text
+        newUrl = target + newUrl.slice(pathOnly.length);
+      }
     }
     // Hygraph sets the link title to the URL itself; drop URL-like titles.
     const keepTitle = title && title !== url && title !== rawUrl && !/^\s*https?:/i.test(title) ? ` "${title}"` : '';
@@ -851,6 +814,7 @@ function parseEmbed(rawBlobs) {
 
 async function main() {
   log(`Hygraph endpoint: ${new URL(ENDPOINT).host} (read-only)`);
+  altMap = loadAltText();
 
   // 1. Fetch everything (sequentially).
   const data = {};
@@ -880,7 +844,10 @@ async function main() {
 
   // URLs that move on the new site; content links are rewritten to the new location.
   for (const r of OLD_STATIC_ROUTES) if (r.to && r.to !== r.path) pathRewrites.set(r.path, r.to);
-  for (const p of data.blogPosts) if (!p.isActive || CUT_BLOG_SLUGS.has(p.slug)) pathRewrites.set(`/blog/${p.slug}`, '/blog');
+  for (const p of data.blogPosts) {
+    if (DROPPED_BLOG_POSTS[p.slug]) pathRewrites.set(`/blog/${p.slug}`, DROPPED_BLOG_POSTS[p.slug].to);
+    else if (!p.isActive) pathRewrites.set(`/blog/${p.slug}`, '/blog');
+  }
   for (const m of data.teamMembers) if (!m.isActive && m.slug) pathRewrites.set(`/${m.slug}`, '/team');
   for (const m of data.teamMembers.filter((x) => !x.isActive)) {
     report.skipped.push({ collection: 'team', id: teamSlugOf(m) ?? m.name, reason: 'isActive = false' });
@@ -892,6 +859,10 @@ async function main() {
     const file = `src/content/team/${slug}.md`;
     const photo = planImage(m.photo, 'team', slug, `team:${slug}`);
     const blogPhoto = m.blogPhoto ? planImage(m.blogPhoto, 'team', `${slug}-blog`, `team:${slug}`) : null;
+    const motionPhotos = (m.motionProfilePhoto ?? [])
+      .map((a, i) => planImage(a, 'team', `${slug}-motion-${i + 1}`, `team:${slug}`))
+      .filter(Boolean)
+      .map((d) => ({ src: relFrom(file, d), alt: altToken(d) }));
     const pets = [];
     for (const p of m.pets ?? []) {
       if (!p.isActive) {
@@ -902,6 +873,7 @@ async function main() {
       pets.push({
         name: p.name,
         photo: petPhoto ? relFrom(file, petPhoto) : null,
+        photoAlt: altToken(petPhoto),
         bio: cleanText(p.bio?.markdown),
       });
       petCount++;
@@ -926,7 +898,10 @@ async function main() {
           hasTeamPage: Boolean(m.hasTeamPage),
           miniBio: cleanText(m.miniBio),
           photo: photo ? relFrom(file, photo) : null,
+          photoAlt: altToken(photo),
           blogPhoto: blogPhoto ? relFrom(file, blogPhoto) : undefined,
+          blogPhotoAlt: blogPhoto ? altToken(blogPhoto) : undefined,
+          motionPhotos,
           pets,
           hygraphId: m.id,
         },
@@ -943,12 +918,13 @@ async function main() {
   const blogBodies = new Map();
   const skippedBlog = [];
   for (const p of data.blogPosts) {
-    if (!p.isActive) {
-      skippedBlog.push({ slug: p.slug, reason: 'isActive = false (still published, so currently reachable at /blog/<slug>)' });
+    const dropped = DROPPED_BLOG_POSTS[p.slug];
+    if (dropped) {
+      skippedBlog.push({ slug: p.slug, to: dropped.to, reason: `${dropped.reason}; 301 -> ${dropped.to}`, approved: true });
       continue;
     }
-    if (CUT_BLOG_SLUGS.has(p.slug)) {
-      skippedBlog.push({ slug: p.slug, reason: 'cut by owner (copied content); 301 -> /blog' });
+    if (!p.isActive) {
+      skippedBlog.push({ slug: p.slug, to: '/blog', reason: 'isActive = false (was still published and reachable); 301 -> /blog', approved: config.APPROVED.inactiveBlogPosts });
       continue;
     }
     const slug = p.slug;
@@ -986,7 +962,7 @@ async function main() {
           categories: (p.blogCategories ?? []).filter((c) => c.isActive).map((c) => c.title),
           tags: (p.blogTags ?? []).filter((t) => t.isActive).map((t) => t.title),
           heroImage: hero ? relFrom(file, hero) : null,
-          heroAlt: '',
+          heroAlt: altToken(hero),
           draft: false,
           hygraphId: p.id,
         },
@@ -1002,8 +978,8 @@ async function main() {
     blogCount++;
   }
   for (const s of skippedBlog) report.skipped.push({ collection: 'blog', id: s.slug, reason: s.reason });
-  for (const s of CUT_BLOG_SLUGS) {
-    if (!data.blogPosts.some((p) => p.slug === s)) report.notes.push(`Cut blog post ${s} was not found in Hygraph (already gone?).`);
+  for (const s of Object.keys(DROPPED_BLOG_POSTS)) {
+    if (!data.blogPosts.some((p) => p.slug === s)) report.notes.push(`Dropped blog post ${s} was not found in Hygraph (already gone?).`);
   }
   report.counts.blog = blogCount;
 
@@ -1041,14 +1017,14 @@ async function main() {
             break;
           case 'PageHeader': {
             const img = c.headerImage ? planImage(c.headerImage, 'landing', `${slug}-${++imgN}`, `landing:${slug}`) : null;
-            components.push({ type: 'PageHeader', header: c.header, image: img ? relFrom(file, img) : null });
+            components.push({ type: 'PageHeader', header: c.header, image: img ? relFrom(file, img) : null, imageAlt: altToken(img) });
             break;
           }
           case 'WideCard': {
             const images = (c.image ?? [])
               .map((a) => planImage(a, 'landing', `${slug}-${++imgN}`, `landing:${slug}`))
               .filter(Boolean)
-              .map((d) => relFrom(file, d));
+              .map((d) => ({ src: relFrom(file, d), alt: altToken(d) }));
             if (c.videoUrl) addExternal(c.videoUrl, `landing:${slug}`);
             components.push({
               type: 'WideCard',
@@ -1088,6 +1064,7 @@ async function main() {
         description: cleanText(pg.wordingUnderTitle),
         template: pg.template,
         headerImage: header ? relFrom(file, header) : null,
+        headerImageAlt: altToken(header),
         formEmbed: embed ? slug : null,
         components,
       });
@@ -1132,7 +1109,7 @@ async function main() {
           template: pg.template,
           hasBody: parts.length > 0,
           headerImage: header ? relFrom(finalFile, header) : null,
-          headerAlt: '',
+          headerAlt: altToken(header),
           updatedDate: pg.updatedAt,
           hygraphId: pg.id,
         },
@@ -1153,12 +1130,14 @@ async function main() {
     const rows = [];
     for (const { pg, embed, note } of forms) {
       let headerRef = 'null';
+      let headerAlt = '';
       if (pg.headerImage) {
         const dest = planImage(pg.headerImage, 'forms', `${pg.slug}-header`, `form:${pg.slug}`);
         if (dest) {
           const ident = `header_${slugify(pg.slug).replace(/-/g, '_')}`;
           imports.push(`import ${ident} from '${relFrom(file, dest)}';`);
           headerRef = ident;
+          headerAlt = altToken(dest);
         }
       }
       if (embed.src) addExternal(embed.src, `form:${pg.slug}`);
@@ -1169,6 +1148,7 @@ async function main() {
           `    wordingUnderTitle: ${JSON.stringify(cleanText(pg.wordingUnderTitle))},\n` +
           `    template: ${JSON.stringify(pg.template)},\n` +
           `    headerImage: ${headerRef},\n` +
+          `    headerImageAlt: ${JSON.stringify(headerAlt)},\n` +
           (note ? `    note: ${JSON.stringify(note)},\n` : '') +
           `    embed: ${JSON.stringify(
             { type: embed.type, ...(embed.jotformId ? { jotformId: embed.jotformId } : {}), src: embed.src, provider: embed.provider, rawHtml: embed.rawHtml },
@@ -1186,7 +1166,7 @@ async function main() {
         (imports.length ? `${imports.join('\n')}\n` : '') +
         `\nexport type FormEmbedType = 'jotform' | 'iframe' | 'script' | 'video';\n\n` +
         `export interface FormEmbed {\n  type: FormEmbedType;\n  jotformId?: string;\n  src: string;\n  provider: string | null;\n  /** Verbatim embed HTML from Hygraph (reference only). */\n  rawHtml: string;\n}\n\n` +
-        `export interface FormPage {\n  slug: string;\n  title: string;\n  wordingUnderTitle: string | null;\n  template: string;\n  headerImage: ImageMetadata | null;\n  note?: string;\n  embed: FormEmbed;\n}\n\n` +
+        `export interface FormPage {\n  slug: string;\n  title: string;\n  wordingUnderTitle: string | null;\n  template: string;\n  headerImage: ImageMetadata | null;\n  headerImageAlt: string;\n  note?: string;\n  embed: FormEmbed;\n}\n\n` +
         `export const forms: FormPage[] = [\n${rows.join('\n')}\n];\n`,
     );
   }
@@ -1231,6 +1211,7 @@ async function main() {
           payLink: c.payLink ? rewriteUrl(c.payLink, `carrier:${id}`) : null,
           showInCarousel: Boolean(c.showInCarousel),
           logo: logo ? relFrom(file, logo) : null,
+          logoAlt: altToken(logo),
         };
       });
     writeJson(file, rows);
@@ -1243,7 +1224,7 @@ async function main() {
       .map((p) => {
         const id = uniqueId('programs', slugify(p.title));
         const image = planImage(p.image, 'programs', id, `program:${id}`);
-        return { id, title: p.title.trim(), description: cleanText(p.description), url: toHref(p.url, `program:${id}`), order: p.order ?? null, image: image ? relFrom(file, image) : null };
+        return { id, title: p.title.trim(), description: cleanText(p.description), url: toHref(p.url, `program:${id}`), order: p.order ?? null, image: image ? relFrom(file, image) : null, imageAlt: altToken(image) };
       });
     writeJson(file, rows);
     report.counts.programs = rows.length;
@@ -1255,7 +1236,7 @@ async function main() {
       .map((r) => {
         const id = uniqueId('officeResources', slugify(r.title));
         const image = planImage(r.image, 'office-resources', id, `officeResource:${id}`);
-        return { id, title: r.title.trim(), link: toHref(r.link, `officeResource:${id}`), category: r.category, order: r.order ?? null, altLogoText: cleanText(r.altLogoText), image: image ? relFrom(file, image) : null };
+        return { id, title: r.title.trim(), link: toHref(r.link, `officeResource:${id}`), category: r.category, order: r.order ?? null, altLogoText: cleanText(r.altLogoText), image: image ? relFrom(file, image) : null, imageAlt: altToken(image) };
       });
     writeJson(file, rows);
     report.counts.officeResources = rows.length;
@@ -1280,6 +1261,7 @@ async function main() {
           established: est ? Number(est[1]) : null,
           order: o.order ?? null,
           image: image ? relFrom(file, image) : null,
+          imageAlt: altToken(image),
         };
       });
     writeJson(file, rows);
@@ -1314,7 +1296,7 @@ async function main() {
       .map((c) => {
         const id = uniqueId(model, slugify(c.label));
         const image = planImage(c.image, dir, id, `${model}:${id}`);
-        return { id, label: c.label, href: toHref(c.slug, `${model}:${id}`), icon: c.icon ?? null, order: c.order ?? null, image: image ? relFrom(file, image) : null };
+        return { id, label: c.label, href: toHref(c.slug, `${model}:${id}`), icon: c.icon ?? null, order: c.order ?? null, image: image ? relFrom(file, image) : null, imageAlt: altToken(image) };
       });
     writeJson(file, rows);
     report.counts[model] = rows.length;
@@ -1390,16 +1372,16 @@ async function main() {
     urlMap.push({ status: 301, ...entry });
   };
   for (const r of OLD_STATIC_ROUTES) {
-    addMap({ from: r.path, to: r.to ?? r.path, kind: 'static', note: r.note, ...(r.decision ? { decision: r.decision } : {}) });
+    addMap({ from: r.path, to: r.to ?? r.path, kind: 'static', note: r.note, ...(r.approved ? { approved: r.approved } : {}) });
   }
   for (const s of exportedBlogSlugs) addMap({ from: `/blog/${s}`, to: `/blog/${s}`, kind: 'blog' });
   for (const s of skippedBlog) {
     addMap({
       from: `/blog/${s.slug}`,
-      to: '/blog',
+      to: s.to,
       kind: 'blog',
       note: s.reason,
-      ...(CUT_BLOG_SLUGS.has(s.slug) ? {} : { decision: 'Inactive post (still published): confirm 301 -> /blog or re-activate.' }),
+      approved: typeof s.approved === 'string' ? s.approved : 'Owner decision (scripts/export-config.mjs).',
     });
   }
   for (const m of activeTeam) {
@@ -1408,7 +1390,7 @@ async function main() {
   }
   for (const m of data.teamMembers.filter((x) => !x.isActive && x.slug)) {
     const s = teamSlugOf(m);
-    addMap({ from: `/team/${s}`, to: '/team', kind: 'team', note: 'Inactive team member (page was still reachable on the old site).', decision: 'Confirm 301 -> /team for former team members.' });
+    addMap({ from: `/team/${s}`, to: '/team', kind: 'team', note: 'Inactive team member (page was still reachable on the old site).', approved: config.APPROVED.inactiveTeamMembers });
   }
   for (const row of pageRows) addMap({ from: `/${row.slug}`, to: `/${row.slug}`, kind: row.listing ? 'listing-page' : 'page', note: `Hygraph page (template ${row.template}).` });
   for (const row of landing) addMap({ from: `/${row.slug}`, to: `/${row.slug}`, kind: 'landing', note: `Component landing page (${row.template}); content in src/data/landing/${row.slug}.json, needs redesign.` });
@@ -1424,7 +1406,7 @@ async function main() {
     `// Every URL of the old Next.js site and where it lives on the new site.\n` +
     `// Identity entries (from === to) document URLs that stay the same; only entries whose\n` +
     `// destination differs become real redirects (see \`redirects\` below / astro.config.mjs).\n\n` +
-    `export interface UrlMapping {\n  from: string;\n  /** null = intentionally dropped (404/410). */\n  to: string | null;\n  status: 301 | 302 | 308 | 410;\n  kind: 'static' | 'blog' | 'team' | 'page' | 'listing-page' | 'landing' | 'form' | 'dropped';\n  note?: string;\n  /** Set when the owner still needs to decide; \`to\` is the current proposal. */\n  decision?: string;\n}\n\n` +
+    `export interface UrlMapping {\n  from: string;\n  /** null = intentionally dropped (404/410). */\n  to: string | null;\n  status: 301 | 302 | 308 | 410;\n  kind: 'static' | 'blog' | 'team' | 'page' | 'listing-page' | 'landing' | 'form' | 'dropped';\n  note?: string;\n  /** Owner decision behind a redirect (see scripts/export-config.mjs). */\n  approved?: string;\n  /** Set when the owner still needs to decide; \`to\` is the current proposal. */\n  decision?: string;\n}\n\n` +
     `export const urlMap: UrlMapping[] = ${JSON.stringify(urlMap, null, 2)};\n\n` +
     `/** Astro \`redirects\` config: only URLs that actually move. */\n` +
     `export const redirects: Record<string, { status: 301 | 302 | 308; destination: string }> = Object.fromEntries(\n` +
@@ -1438,6 +1420,7 @@ async function main() {
   log(`downloading/processing ${assetPlans.size} assets...`);
   await runAssetPlans();
   applyRenames();
+  resolveAltTokens();
 
   // ---- Submissions CSV (outside the repo) ----------------------------------
   if (submissions.length) {
@@ -1459,10 +1442,12 @@ async function main() {
   for (const l of report.internalLinks) {
     const p = l.to.replace(/[?#].*$/, '') || '/';
     if (p.startsWith('/files/')) continue;
+    if (LINK_OVERRIDES.has(p)) continue; // handled by an owner decision (listed separately)
     if (!knownPaths.has(p)) brokenInternal.push(l);
   }
 
   // ---- Report -------------------------------------------------------------------
+  emit('docs/alt-text-review.md', buildAltReview());
   emit(
     'docs/migration-report.md',
     buildReport({ data, contentAsOf, landing, forms, urlMap, brokenInternal, submissions }),
@@ -1547,6 +1532,119 @@ function table(headers, rows) {
   return [`| ${headers.join(' | ')} |`, `| ${headers.map(() => '---').join(' | ')} |`, ...rows.map((r) => `| ${r.map(esc).join(' | ')} |`)].join('\n');
 }
 
+/** Every image file in src/assets after this export (generated + hand-added legacy assets). */
+function currentAssetFiles() {
+  const manifestFile = abs(MANIFEST_PATH);
+  const tracked = fs.existsSync(manifestFile) ? JSON.parse(fs.readFileSync(manifestFile, 'utf8')).files ?? {} : {};
+  const files = new Set([...outputs.keys()].filter((k) => k.startsWith('src/assets/')));
+  const walk = (dir) => {
+    if (!fs.existsSync(abs(dir))) return;
+    for (const e of fs.readdirSync(abs(dir), { withFileTypes: true })) {
+      const rel = `${dir}/${e.name}`;
+      if (e.isDirectory()) walk(rel);
+      else if (!tracked[rel]) files.add(rel); // hand-added (not produced by the export)
+    }
+  };
+  walk('src/assets');
+  return [...files].filter((f) => /\.(png|jpe?g|webp|gif|svg|avif)$/i.test(f)).sort();
+}
+
+function buildAltReview() {
+  const files = currentAssetFiles();
+  const missing = files.filter((f) => !altMap[f]);
+  const unused = Object.keys(altMap).filter((k) => !files.includes(k));
+  const L = [
+    '# Alt text review',
+    '',
+    '> Generated by `scripts/export-hygraph.mjs` from `src/data/alt-text.json`. Edit alt text in that JSON file (not here), then re-run `npm run export:hygraph`.',
+    '>',
+    '> **AI-drafted:** every description below was written by an AI assistant after looking at the image. Please skim and correct anything inaccurate (names, places, text in images).',
+    '',
+    `${files.length} images, ${files.length - missing.length} with alt text${missing.length ? `, ${missing.length} missing` : ''}.`,
+    '',
+  ];
+  if (missing.length) L.push('Missing:', '', ...missing.map((m) => `- \`${m}\``), '');
+  if (unused.length) L.push('Entries in alt-text.json without a matching image (stale):', '', ...unused.map((m) => `- \`${m}\``), '');
+  L.push(table(['Image', 'Alt text'], files.map((f) => [`\`${f}\``, altMap[f] ?? '(missing)'])));
+  L.push('');
+  return L.join('\n');
+}
+
+function staticSections() {
+  const L = [];
+  L.push('## Pages migrated from the old Next.js code');
+  L.push('');
+  L.push('These pages were hard-coded in the old app (not in Hygraph). Owner: all are still used. Their copy, structured data, image references, contacts and form definitions were extracted by hand into `src/data/legacy/` (not touched by the export). Each URL has a minimal stub route that renders the content plainly until the redesign.');
+  L.push('');
+  L.push(
+    table(
+      ['URL(s)', 'Content', 'Old source', 'Images', 'Form'],
+      config.LEGACY_PAGES.map((p) => [p.paths.join(', '), `\`${p.data}\``, p.source, p.images ?? '-', p.form ?? '-']),
+    ),
+  );
+  L.push('');
+  L.push('- Shared form definitions (fields, payload keys, Source values, messages): `src/data/legacy/forms.ts`.');
+  L.push('- The old pages sent the Hygraph id of the "Contact Form" as `id`; the new forms send `"contact-form"` (`LEGACY_FORM_ID`).');
+  L.push('- Every URL in `src/data/redirects.ts` now resolves on the new site (stub routes for CMS pages, forms, landing pages, listing grids and legacy pages; verified against `dist/` after build).');
+  L.push('- The team export now includes `motionPhotos` (alternate portraits used by the old /sales-team page).');
+  L.push('- Not migrated: the old home page (`pages/index.js`) layout/copy, which will be redesigned.');
+  L.push('');
+  L.push('## Form submissions backend');
+  L.push('');
+  L.push('- `POST /api/submit` is an on-demand route (`src/pages/api/submit.ts`) porting `pages/api/submit.js` + `lib/server/sendFormNotification.js`: same JSON request contract (`id` + fields, `website` honeypot -> 204), 32 KB body limit, max 50 fields, field names <= 100 chars, values <= 5,000 chars (string/number/boolean/null), Resend email with the same `SOURCE_RECIPIENTS`, subject/body format, reply-to and idempotency key.');
+  L.push('- Hygraph storage was dropped (Hygraph is being retired). The submission id is now a random UUID.');
+  L.push('- Behaviour change: because nothing else stores the submission, a failed notification email now returns `502` instead of the old `201 { notificationSent: false }`, so the visitor sees an error and can retry or email us.');
+  L.push('- Environment variables: `RESEND_API_KEY`, `FORM_FROM_EMAIL`, `FORM_NOTIFICATION_TO` (comma-separated); optional `RESEND_API_URL` (testing only). See README.');
+  L.push('- Hygraph-embedded forms (Jotform, vendor iframes) are unchanged: they post to their own providers.');
+  L.push('- Astro rejects cross-site form POSTs (`security.checkOrigin`), so submissions must come from the site origin; verify the forwarded host on DigitalOcean.');
+  L.push('- Smoke-tested locally against a mock Resend server (no real emails): valid hotels/trusted-advisor submissions -> 201 and the expected recipients, honeypot -> 204, invalid/oversized -> 400/413, email failure -> 502, cross-origin -> 403.');
+  L.push('');
+  L.push('## Search');
+  L.push('');
+  L.push('- Pagefind indexes the built site after `astro build` (`npm run build`); `/search` is a minimal page using the Pagefind UI.');
+  L.push('- Only pages that mark their content with `data-pagefind-body` are indexed: blog posts, team pages, CMS pages, landing pages and the legacy pages. Form/embed pages, listing grids and `/search` itself are excluded.');
+  L.push('');
+  return L;
+}
+
+function copyAuditSection() {
+  const sources = new Map();
+  for (const [rel, content] of outputs) {
+    if (typeof content !== 'string') continue;
+    if (!/^src\/(content|data)\//.test(rel)) continue;
+    if (/alt-text\.json$|redirects\.ts$/.test(rel)) continue;
+    sources.set(rel, content);
+  }
+  const legacyDir = 'src/data/legacy';
+  if (fs.existsSync(abs(legacyDir))) {
+    for (const f of fs.readdirSync(abs(legacyDir)).sort()) sources.set(`${legacyDir}/${f}`, fs.readFileSync(abs(`${legacyDir}/${f}`), 'utf8'));
+  }
+  const hits = [];
+  for (const [rel, content] of [...sources].sort(([a], [b]) => a.localeCompare(b))) {
+    content.split('\n').forEach((line, i) => {
+      if (/assets\/|^#|"?[A-Za-z]*[Aa]lt"?:|hygraphId|^import /.test(line.trim())) return;
+      const re = config.COST_PROMISE_PATTERNS.find((r) => r.test(line));
+      if (!re) return;
+      const m = line.match(re);
+      const at = m?.index ?? 0;
+      let snippet = line.slice(Math.max(0, at - 100), at + 140).replace(/\s+/g, ' ').trim();
+      if (at > 100) snippet = `…${snippet}`;
+      if (at + 140 < line.length) snippet = `${snippet}…`;
+      hits.push([rel, i + 1, snippet.replace(/`/g, "'")]);
+    });
+  }
+  const L = [];
+  L.push('## Copy to revise (cost promises)');
+  L.push('');
+  L.push('Lines in the migrated content (`src/content`, `src/data` incl. `legacy/`) that match savings/cost-promise language, for review against `docs/copy-guidelines.md`. Content was **not** changed. Patterns: save/saving, lower, reduce, premium credit, cut costs, percentages, and "cost" only when a promise word (less, cheaper, affordable, minimize, decrease, fraction of, no additional, free) is on the same line. Many hits are legitimate (glossary definitions, process language, statistics); this is a review list, not a verdict.');
+  L.push('');
+  L.push(`${hits.length} lines in ${new Set(hits.map((h) => h[0])).size} files.`);
+  L.push('');
+  L.push(table(['File', 'Line', 'Quote'], hits.map(([f, n, q]) => [`\`${f}\``, n, `“${q}”`])));
+  L.push('');
+  return L;
+}
+
 function buildReport({ data, contentAsOf, landing, forms, urlMap, brokenInternal, submissions }) {
   const c = report.counts;
   const L = [];
@@ -1617,15 +1715,16 @@ function buildReport({ data, contentAsOf, landing, forms, urlMap, brokenInternal
   for (const l of report.legacy) L.push(`- \`${l.dest}\` <- ${l.url} (${l.source})`);
   for (const l of LEGACY_SKIPPED) L.push(`- NOT downloaded: ${l.url} (${l.source}) - ${l.reason}`);
   L.push('');
-  L.push('Images whose Hygraph alt text was just a file name (alt cleared, needs real alt text):');
+  L.push('### Alt text');
   L.push('');
-  for (const a of report.altNeeded) L.push(`- ${a.source}: "${a.was}"`);
-  L.push('- All blog `heroAlt` and page `headerAlt` values are empty: Hygraph has no alt text for featured/header images.');
+  L.push(`- Alt text for every image in \`src/assets\` lives in \`${ALT_TEXT_PATH}\` (keyed by asset path, AI-drafted, owner review in \`docs/alt-text-review.md\`). The export merges it into front matter / data (\`heroAlt\`, \`photoAlt\`, \`logoAlt\`, \`imageAlt\`, inline markdown alts); legacy pages read it via \`src/lib/alt.ts\`. Content schemas reject empty alt text, so a new image without an entry fails the build.`);
+  L.push(`- Hygraph alt text was ignored; ${report.altNeeded.length} inline images only had a file name as alt.`);
+  L.push(`- Images without alt text in this export: ${report.altMissing.length ? report.altMissing.map((a) => `\`${a}\``).join(', ') : 'none'}.`);
   L.push('');
   L.push('## Videos removed');
   L.push('');
   for (const v of report.removedVideos) L.push(`- ${v.source}: removed video node \`${v.file}\` (${v.url})${v.removed ? '' : ' - NOT FOUND in markdown'}`);
-  L.push(`- Dirt Haulers video (${LEGACY_SKIPPED[0].url}, ~155 MB) not downloaded; /dirt-haulers needs a redirect decision (see below).`);
+  L.push(`- Dirt Haulers video (${LEGACY_SKIPPED[0].url}, ~155 MB) not downloaded; /dirt-haulers now 301s to the dirt-hauling survey (owner approved).`);
   const vids = data.assets.filter((a) => a.mimeType?.startsWith('video/'));
   for (const v of vids) L.push(`- Hygraph video asset not exported: ${v.fileName} (${fmtBytes(v.size ?? 0)}).`);
   L.push('');
@@ -1638,10 +1737,18 @@ function buildReport({ data, contentAsOf, landing, forms, urlMap, brokenInternal
   L.push('## Links');
   L.push('');
   L.push(`- Absolute internal links (uwibrisk.com / www.uwibrisk.com / uwib.com) rewritten to site-relative paths: ${report.internalLinks.length}.`);
-  const fixes = [...new Set(report.legacyLinkFixes)];
-  if (fixes.length) L.push(`- Old uwib.com (pre-Next) contact URLs pointed at the new contact page: ${fixes.map((f) => `\`${f}\``).join(', ')} (${report.legacyLinkFixes.length} links).`);
   L.push('');
-  L.push('### SharePoint links (flagged, unchanged - likely require a Microsoft login)');
+  L.push('### Link overrides applied (scripts/export-config.mjs `LINK_OVERRIDES`, owner decisions)');
+  L.push('');
+  if (!report.linkOverrides.length) L.push('- none');
+  for (const o of report.linkOverrides) L.push(`- ${o.source}: \`${o.from}\` -> ${o.to === null ? 'link removed, text kept' : `\`${o.to}\``}`);
+  L.push('');
+  L.push('### URL fixes applied (`URL_FIXES`)');
+  L.push('');
+  if (!report.urlFixes.length) L.push('- none');
+  for (const o of report.urlFixes) L.push(`- ${o.source}: \`${o.from}\` -> \`${o.to}\``);
+  L.push('');
+  L.push('### SharePoint / Microsoft Loop links (left unchanged; owner must decide - likely require a Microsoft login)');
   L.push('');
   if (!report.sharepoint.length) L.push('- none');
   for (const s of report.sharepoint) L.push(`- ${s.source}: ${s.url}`);
@@ -1649,7 +1756,10 @@ function buildReport({ data, contentAsOf, landing, forms, urlMap, brokenInternal
   L.push('### Internal links that do not match a known route');
   L.push('');
   if (!brokenInternal.length) L.push('- none');
-  for (const b of brokenInternal) L.push(`- ${b.source}: \`${b.from}\` -> \`${b.to}\``);
+  for (const b of brokenInternal) {
+    const known = config.KNOWN_UNRESOLVED_LINKS[b.to.replace(/[?#].*$/, '')];
+    L.push(`- ${b.source}: \`${b.from}\` -> \`${b.to}\`${known ? ` (left as-is: ${known})` : ''}`);
+  }
   L.push('');
   L.push('### Unresolved asset URLs');
   L.push('');
@@ -1703,11 +1813,21 @@ function buildReport({ data, contentAsOf, landing, forms, urlMap, brokenInternal
   }
   L.push('- The Hygraph-native contact form definition (fields/options) is in `src/data/hygraph-forms.json`; it needs an on-demand API route on the new site.');
   L.push('');
-  L.push('## Redirects needing a decision');
+  L.push('## Redirects');
   L.push('');
+  L.push('Owner-approved redirects (served as real 301s by the Node server):');
+  L.push('');
+  L.push(table(['Old URL', 'New URL', 'Decision'], urlMap.filter((m) => m.approved).map((m) => [m.from, m.to, m.approved])));
+  L.push('');
+  L.push('### Redirects needing a decision');
+  L.push('');
+  if (!urlMap.some((m) => m.decision)) L.push('- none');
   L.push(`\`src/data/redirects.ts\` maps ${urlMap.length} old URLs (${urlMap.filter((m) => m.to === m.from).length} unchanged, ${urlMap.filter((m) => m.to && m.to !== m.from).length} redirected, ${urlMap.filter((m) => !m.to).length} dropped).`);
   L.push('');
-  L.push(table(['Old URL', 'Proposed', 'Decision needed'], urlMap.filter((m) => m.decision).map((m) => [m.from, m.to ?? '(404)', m.decision])));
+  if (urlMap.some((m) => m.decision)) L.push(table(['Old URL', 'Proposed', 'Decision needed'], urlMap.filter((m) => m.decision).map((m) => [m.from, m.to ?? '(404)', m.decision])));
+  L.push('');
+  L.push(...staticSections());
+  L.push(...copyAuditSection());
   L.push('');
   L.push('## Other notes');
   L.push('');

@@ -13,6 +13,8 @@ order: 6
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/jason-puno.png"
+photoAlt: "Portrait of Jayson Puno, Personal Lines Support"
+motionPhotos: []
 pets: []
 hygraphId: "cmlk79eufswjp08lspzwqn0sy"
 ---

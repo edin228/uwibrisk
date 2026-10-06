@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education", "Opinion"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-essential-safety-net-business-interruption-insurance.jpg"
-heroAlt: ""
+heroAlt: "Stressed woman holding her head over a desk with a laptop and planner"
 draft: false
 hygraphId: "cm8xhimhpa6wn07mzt75qd8xt"
 ---
@@ -39,7 +39,7 @@ At UWIB Risk, we understand the challenges you’re facing. As a thoughtful empl
 
 **Meet Michael Kenneth, Our Benefits Expert**
 
-To guide you through these evolving times, we’d like to introduce you to [Michael Kenneth](/team/michael-kenneth), one of our seasoned Account Executives. Michael brings a wealth of experience in crafting tailored benefits solutions that resonate with today’s workforce. Feel free to reach out to him at [michael@uwib.com](mailto:michael@uwib.com) or 626-376-9672.
+To guide you through these evolving times, we’d like to introduce you to Michael Kenneth, one of our seasoned Account Executives. Michael brings a wealth of experience in crafting tailored benefits solutions that resonate with today’s workforce. Feel free to reach out to him at [michael@uwib.com](mailto:michael@uwib.com) or 626-376-9672.
 
 Navigating the future of work can be complex, but with the right strategies and partners, you’re well-equipped to lead your organization to success. Remember, in the world of HR, adaptability isn’t just a buzzword—it’s your superpower.
 

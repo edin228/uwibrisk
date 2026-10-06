@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-essential-safety-net-business-interruption-insurance.jpg"
-heroAlt: ""
+heroAlt: "Stressed woman holding her head over a desk with a laptop and planner"
 draft: false
 hygraphId: "cm5px8a1hlwub07mzf7m7to6w"
 ---

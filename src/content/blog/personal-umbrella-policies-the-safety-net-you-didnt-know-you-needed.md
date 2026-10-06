@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/personal-umbrella-policies-the-safety-net-you-didnt-know-you-needed.webp"
-heroAlt: ""
+heroAlt: "Canopy of brightly colored umbrellas suspended overhead"
 draft: false
 hygraphId: "cltgekr6mmy3x07n4dq8xatzn"
 ---

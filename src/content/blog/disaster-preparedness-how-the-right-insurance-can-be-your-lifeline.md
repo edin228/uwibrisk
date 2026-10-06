@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/disaster-preparedness-how-the-right-insurance-can-be-your-lifeline.webp"
-heroAlt: ""
+heroAlt: "Firefighter pointing across smoking debris at a disaster scene"
 draft: false
 hygraphId: "cluvhq0d4kdaj06lt2iyd96bs"
 ---

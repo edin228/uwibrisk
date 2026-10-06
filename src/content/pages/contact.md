@@ -7,7 +7,7 @@ description: null
 template: "GraphForm"
 hasBody: true
 headerImage: "../../assets/pages/careers-header.jpg"
-headerAlt: ""
+headerAlt: "Overhead view of colleagues reviewing blueprints at a table"
 updatedDate: "2026-03-10T23:45:08.343446+00:00"
 hygraphId: "cldxm8mkj543d09n3xdgdnibo"
 ---

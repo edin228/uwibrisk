@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/new-year-new-coverage-5-insurance-resolutions-to-protect-what-matters-in-2025.jpg"
-heroAlt: ""
+heroAlt: "Colorful fireworks bursting over water at night"
 draft: false
 hygraphId: "cm5l795r83td707mzju4hjlyj"
 ---

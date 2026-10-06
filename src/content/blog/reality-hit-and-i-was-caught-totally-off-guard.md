@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/wildfire-preparedness-and-insurance-creating-defensible-space.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a house with a cleared yard as wildfire burns in nearby trees, with an insurance document"
 draft: false
 hygraphId: "cmrkwzcm3e97607mw0wru3k2t"
 ---

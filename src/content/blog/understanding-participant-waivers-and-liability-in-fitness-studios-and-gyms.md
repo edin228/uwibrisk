@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-participant-waivers-and-liability-in-fitness-studios-and-gyms.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a liability waiver being signed while a woman exercises in a gym"
 draft: false
 hygraphId: "cmhaismye579z07mzp13f9kws"
 ---

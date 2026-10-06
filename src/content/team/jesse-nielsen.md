@@ -13,7 +13,16 @@ order: null
 hasTeamPage: true
 miniBio: "Jesse, originally from Coeur d’Alene, Idaho, is a former collegiate All-American wrestler and NJCAA National Champion with a degree in Nutrition from the University of Northern Colorado. After college, he launched a successful insurance career with Allstate, earning his Certified Insurance Counselor designation and Top Commercial Producer honors. Now with UWIB Risk & Insurance Solutions, Jesse brings a strong background in both captive and independent agency work, along with a passion for the outdoors and family life."
 photo: "../../assets/team/jesse-nielsen.png"
+photoAlt: "Portrait of Jesse Nielsen, Account Executive"
 blogPhoto: "../../assets/team/jesse-nielsen.png"
+blogPhotoAlt: "Portrait of Jesse Nielsen, Account Executive"
+motionPhotos:
+  - src: "../../assets/team/jesse-nielsen.png"
+    alt: "Portrait of Jesse Nielsen, Account Executive"
+  - src: "../../assets/team/jesse-nielsen-motion-2.png"
+    alt: "Portrait of Jesse Nielsen, Account Executive"
+  - src: "../../assets/team/jesse-nielsen-motion-3.png"
+    alt: "Portrait of Jesse Nielsen, Account Executive"
 pets: []
 hygraphId: "cl76nrk7y6wp50ck49tyx7fsl"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-umbrella-insurance-policies-in-plain-english.jpg"
-heroAlt: ""
+heroAlt: "Businessman holding an umbrella over paper cutouts of a family, house, car and dollar sign"
 draft: false
 hygraphId: "cmin5wb3033m107n4fzaqj0zv"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-the-importance-of-machine-guarding-product-liability-and-recalls-i.jpg"
-heroAlt: ""
+heroAlt: "Worker in a hard hat near machinery and hands holding gears beside a warning sign"
 draft: false
 hygraphId: "cmikb0ut0m5o607n1lpxe8pn7"
 ---

@@ -7,7 +7,7 @@ description: null
 template: "SingleColumn"
 hasBody: true
 headerImage: "../../assets/pages/our-history-header.png"
-headerAlt: ""
+headerAlt: "Framed oil portraits of three men in suits displayed side by side"
 updatedDate: "2024-01-22T19:59:53.895745+00:00"
 hygraphId: "clcuv39hekgj40cmzalypd57n"
 ---

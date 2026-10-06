@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/hnw-reccomendations.jpg"
-heroAlt: ""
+heroAlt: "Stately stone mansion with formal gardens and a fountain"
 draft: false
 hygraphId: "clmgms1n808x70an3i1i8g7bi"
 ---

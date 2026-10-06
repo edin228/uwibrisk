@@ -13,6 +13,8 @@ order: 3
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/crystal-van-eekhout.jpg"
+photoAlt: "Portrait of Crystal van Eekhout, Commercial Account Manager"
+motionPhotos: []
 pets: []
 hygraphId: "clqzqp2s5ee6b0bmz1f2ptb0d"
 ---

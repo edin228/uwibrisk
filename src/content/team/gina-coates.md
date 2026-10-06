@@ -13,9 +13,12 @@ order: null
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/gina-coates.jpg"
+photoAlt: "Portrait of Gina Coates, President & Sr. Executive"
+motionPhotos: []
 pets:
   - name: "Dolly Sue"
     photo: "../../assets/pets/dolly-sue.jpg"
+    photoAlt: "Dolly Sue, a fluffy black-and-white dog, sitting on a table by a fireplace with stockings"
     bio: null
 hygraphId: "cl76ncepr6rbt0allwysn943x"
 ---

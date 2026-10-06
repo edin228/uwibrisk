@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/post-incident-review-template-for-safety-committees.jpg"
-heroAlt: ""
+heroAlt: "Illustration of three people at a table discussing a “Post-Incident Review” clipboard"
 draft: false
 hygraphId: "cmfredyhaza3p07lh66ro9l17"
 ---

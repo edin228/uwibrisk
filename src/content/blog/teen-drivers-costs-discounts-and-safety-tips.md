@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/teen-drivers-costs-discounts-and-safety-tips.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a teen driving a small car beside a checklist and dollar and percent icons"
 draft: false
 hygraphId: "cmfmiavyuwafe07myk58nmm5c"
 ---

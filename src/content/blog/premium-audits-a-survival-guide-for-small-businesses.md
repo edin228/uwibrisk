@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/premium-audits-a-survival-guide-for-small-businesses.jpg"
-heroAlt: ""
+heroAlt: "Clipboard reading “Premium Audit” with a bar chart, beside a magnifying glass and calculator"
 draft: false
 hygraphId: "cmg0spqi5e4na07mustpfae2v"
 ---

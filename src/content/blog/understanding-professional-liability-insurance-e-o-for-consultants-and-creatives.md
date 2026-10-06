@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-professional-liability-insurance-e-o-for-consultants-and-creatives.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a consultant at a laptop beside an E&O shield"
 draft: false
 hygraphId: "cmiel9uu6h4zm08lpmog2zezn"
 ---

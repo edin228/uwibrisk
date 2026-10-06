@@ -7,12 +7,12 @@ description: null
 template: "SingleColumn"
 hasBody: true
 headerImage: "../../assets/pages/careers-header.jpg"
-headerAlt: ""
+headerAlt: "Overhead view of colleagues reviewing blueprints at a table"
 updatedDate: "2025-02-12T22:44:02.649688+00:00"
 hygraphId: "clcuvcb7vkm9y0cmzx97pxwcu"
 ---
 
-![](../../assets/pages/careers-inline-1.png)
+![Banner reading “Join a Winning Team”](../../assets/pages/careers-inline-1.png)
 
 We have the technology and infrastructure to create even greater success for any independent agent who’s looking for “more”
 

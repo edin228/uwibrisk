@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Opinion"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/luxury-is-freedom-not-excess.jpg"
-heroAlt: ""
+heroAlt: "Yellow backhoe loader moving gravel on a sunny dirt lot"
 draft: false
 hygraphId: "cm5zripms01an07lqe77ppvfq"
 ---

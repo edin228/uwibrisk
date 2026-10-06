@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/independent-contractors-vs-employees-understanding-liability-and-risk.webp"
-heroAlt: ""
+heroAlt: "Business meeting with two people shaking hands across a conference table"
 draft: false
 hygraphId: "cm70xq9tzjj0a08mzf6gcwp1k"
 ---

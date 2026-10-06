@@ -10,7 +10,7 @@ author: "jesse-nielsen"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/3-hidden-insurance-pitfalls-apartment-building-owners-should-watch-for.jpg"
-heroAlt: ""
+heroAlt: "Illustrated graphic: “3 Hidden Insurance Pitfalls Apartment Building Owners Should Watch For” beside an apartment building"
 draft: false
 hygraphId: "cmho3xqzysdrr07n1zahdb9yk"
 ---

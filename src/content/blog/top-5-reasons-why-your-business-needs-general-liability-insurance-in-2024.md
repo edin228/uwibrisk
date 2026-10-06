@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/top-5-reasons-why-your-business-needs-general-liability-insurance-in-2024.webp"
-heroAlt: ""
+heroAlt: "Businesswoman writing on a glass whiteboard in an office"
 draft: false
 hygraphId: "cly4xittt9x9007lwulr7d5v5"
 ---

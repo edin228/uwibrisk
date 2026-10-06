@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational", "Business"]
 heroImage: "../../assets/blog/navigating-cyber-liability-insurance-in-the-age-of-remote-work.jpg"
-heroAlt: ""
+heroAlt: "Woodworker in a dust mask using a laptop at a workshop bench"
 draft: false
 hygraphId: "clsvurejf0ebr07lp7ce2hron"
 ---

@@ -28,9 +28,10 @@ const { data } = member;
   title={data.name}
   description={data.miniBio ?? `${data.name}, ${data.role} at UWIB Risk & Insurance Solutions.`}
   image={data.photo}
+  searchable
 >
   <article class="container member">
-    <Image src={data.photo} alt={data.name} width={480} loading="eager" />
+    <Image src={data.photo} alt={data.photoAlt} width={480} loading="eager" />
     <div>
       <p class="label"><a href="/team">Team</a></p>
       <h1>{data.name}</h1>
@@ -48,7 +49,7 @@ const { data } = member;
             <ul class="pets">
               {data.pets.map((pet) => (
                 <li>
-                  <Image src={pet.photo} alt={pet.name} width={240} />
+                  <Image src={pet.photo} alt={pet.photoAlt} width={240} />
                   <p>{pet.name}</p>
                 </li>
               ))}

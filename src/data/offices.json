@@ -10,7 +10,8 @@
     "email": "josh@uwib.com",
     "established": 2022,
     "order": 1,
-    "image": "../assets/offices/nashville.jpg"
+    "image": "../assets/offices/nashville.jpg",
+    "imageAlt": "Nashville skyline and pedestrian bridge over the Cumberland River at sunset"
   },
   {
     "id": "pasadena",
@@ -23,7 +24,8 @@
     "email": "helpdesk@uwib.com",
     "established": 1995,
     "order": 2,
-    "image": "../assets/offices/pasadena.jpg"
+    "image": "../assets/offices/pasadena.jpg",
+    "imageAlt": "Downtown Los Angeles skyline against the San Gabriel Mountains at sunset"
   },
   {
     "id": "coeur-dalene",
@@ -36,6 +38,7 @@
     "email": "jesse@uwib.com",
     "established": 2020,
     "order": 3,
-    "image": "../assets/blog/putting-your-strongest-people-in-positions-to-win.jpg"
+    "image": "../assets/blog/putting-your-strongest-people-in-positions-to-win.jpg",
+    "imageAlt": "City skyline with a domed capitol building at dusk"
   }
 ]

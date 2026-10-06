@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/cyber-incident-tabletop-exercise-a-comprehensive-outline.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a business team planning around a laptop with a lock icon and a warning alert"
 draft: false
 hygraphId: "cmntosxrrlumd07mxamf8jq09"
 ---

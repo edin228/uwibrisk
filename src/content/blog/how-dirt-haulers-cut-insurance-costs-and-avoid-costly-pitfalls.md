@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/how-dirt-haulers-cut-insurance-costs-and-avoid-costly-pitfalls.jpg"
-heroAlt: ""
+heroAlt: "Wheel loader filling a dump truck at a dirt quarry"
 draft: false
 hygraphId: "cm6ttjdd2dyh908n6oxpodzxn"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-comprehensive-guide-to-home-insurance-for-new-homeowners.jpg"
-heroAlt: ""
+heroAlt: "Large stone house with a curved driveway and lawn at dusk"
 draft: false
 hygraphId: "clteuvt4bagc607ln0pj6silj"
 ---

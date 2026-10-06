@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/what-is-medical-malpractice-insurance-and-why-is-it-essential.jpg"
-heroAlt: ""
+heroAlt: "Doctor holding a chalkboard sign reading “Medical Malpractice Insurance”"
 draft: false
 hygraphId: "cm90o4nqa02oj07n7jthekk6d"
 ---

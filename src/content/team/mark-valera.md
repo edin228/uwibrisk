@@ -13,6 +13,8 @@ order: 5
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/mark-valera.jpg"
+photoAlt: "Portrait of Mark Valera, Commercial Lines Associate"
+motionPhotos: []
 pets: []
 hygraphId: "cmuedy6plpz7y08n0lq0a0d7j"
 ---

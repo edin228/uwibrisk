@@ -13,9 +13,12 @@ order: 5
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/jaimie-le.jpg"
+photoAlt: "Portrait of Jaimie Le, Private Client Specialist"
+motionPhotos: []
 pets:
   - name: "Jaimie's Dogs"
     photo: "../../assets/pets/jaimies-dogs.jpg"
+    photoAlt: "Three dogs posing in front of a festive fireplace with a wreath"
     bio: null
 hygraphId: "cmsdvilcrjr5i07n0e6pyr7lm"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/crime-fidelity-bonds-protecting-against-employee-theft.jpg"
-heroAlt: ""
+heroAlt: "Handcuffed hand pulling a $100 bill from an open safe"
 draft: false
 hygraphId: "cmhm0gieuy3pb07n1lo7b44be"
 ---

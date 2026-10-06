@@ -13,6 +13,8 @@ order: 5
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/maria-cunado.jpg"
+photoAlt: "Portrait of Maria Cunado, Commercial Lines Associate"
+motionPhotos: []
 pets: []
 hygraphId: "cmmteev0qvn5l07n6n9lbz8kd"
 ---

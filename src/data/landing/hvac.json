@@ -5,12 +5,14 @@
   "description": null,
   "template": "customLandingPage",
   "headerImage": null,
+  "headerImageAlt": "",
   "formEmbed": null,
   "components": [
     {
       "type": "PageHeader",
       "header": "Smarter Insurance for HVAC Contractors",
-      "image": "../../assets/landing/hvac-1.png"
+      "image": "../../assets/landing/hvac-1.png",
+      "imageAlt": "UWIB banner: “HVAC. Insurance solutions how you want them, when you need them”"
     },
     {
       "type": "ActionBanner",
@@ -37,7 +39,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/landing/hvac-2.jpg"
+        {
+          "src": "../../assets/landing/hvac-2.jpg",
+          "alt": "Technician inspecting an outdoor air-conditioning unit beside a house"
+        }
       ]
     },
     {
@@ -71,7 +76,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/landing/hvac-3.jpg"
+        {
+          "src": "../../assets/landing/hvac-3.jpg",
+          "alt": "Technician bending over to service an outdoor air-conditioning unit"
+        }
       ]
     },
     {
@@ -84,7 +92,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg"
+        {
+          "src": "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg",
+          "alt": "Word cloud with “Work Safety” highlighted in yellow among workplace terms"
+        }
       ]
     },
     {
@@ -106,7 +117,10 @@
         }
       ],
       "images": [
-        "../../assets/landing/hvac-5.jpg"
+        {
+          "src": "../../assets/landing/hvac-5.jpg",
+          "alt": "Fleet of semi trucks parked in a row under a cloudy sky"
+        }
       ]
     }
   ]

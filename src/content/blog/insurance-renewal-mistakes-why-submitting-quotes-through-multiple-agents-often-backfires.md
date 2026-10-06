@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education", "Opinion"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/insurance-renewal-mistakes-why-submitting-quotes-through-multiple-agents-often-backfires.jpg"
-heroAlt: ""
+heroAlt: "Illustration of three agents holding quotes A, B and C beside an advisor meeting with a client"
 draft: false
 hygraphId: "cmmtsloww62bc07n31uhxqrlc"
 ---

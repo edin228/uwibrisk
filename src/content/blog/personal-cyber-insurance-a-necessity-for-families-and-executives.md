@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/personal-cyber-insurance-a-necessity-for-families-and-executives.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a family inside a padlock shield beside a man in a suit"
 draft: false
 hygraphId: "cmh9ibdtjmg8607lpshwezv3m"
 ---

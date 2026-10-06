@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/certificates-of-insurance-cois-what-clients-actually-need.jpg"
-heroAlt: ""
+heroAlt: "Certificate of insurance form on a desk with a pen, glasses and coffee"
 draft: false
 hygraphId: "cmh4t16714dmr07lnsiiy2hw4"
 ---

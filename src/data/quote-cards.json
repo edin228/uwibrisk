@@ -5,7 +5,8 @@
     "href": "/commercial-options",
     "icon": "agency",
     "order": 0,
-    "image": "../assets/quote-cards/coverage-for-your-business.jpg"
+    "image": "../assets/quote-cards/coverage-for-your-business.jpg",
+    "imageAlt": "Curved glass office building against the sky"
   },
   {
     "id": "employee-benefits-payroll-and-hr",
@@ -13,7 +14,8 @@
     "href": "/benefits-quote",
     "icon": "medical",
     "order": 1,
-    "image": "../assets/quote-cards/employee-benefits-payroll-and-hr.jpg"
+    "image": "../assets/quote-cards/employee-benefits-payroll-and-hr.jpg",
+    "imageAlt": "Hospital building with a red “Emergency” sign"
   },
   {
     "id": "home-and-auto-coverage",
@@ -21,7 +23,8 @@
     "href": "/personal-quote",
     "icon": "house",
     "order": 2,
-    "image": "../assets/quote-cards/home-and-auto-coverage.jpg"
+    "image": "../assets/quote-cards/home-and-auto-coverage.jpg",
+    "imageAlt": "Large stone house with a curved driveway and lawn at dusk"
   },
   {
     "id": "personal-flood-coverage",
@@ -29,7 +32,8 @@
     "href": "/flood-quote",
     "icon": "flood",
     "order": 3,
-    "image": "../assets/quote-cards/personal-flood-coverage.jpg"
+    "image": "../assets/quote-cards/personal-flood-coverage.jpg",
+    "imageAlt": "Flooded neighborhood with trucks and rooftops surrounded by water"
   },
   {
     "id": "life",
@@ -37,7 +41,8 @@
     "href": "/life-insurance-needs",
     "icon": "life",
     "order": 4,
-    "image": "../assets/quote-cards/life.webp"
+    "image": "../assets/quote-cards/life.webp",
+    "imageAlt": "Small green seedling sprouting from a tree stump"
   },
   {
     "id": "travel",
@@ -45,7 +50,8 @@
     "href": "/travel-insurance",
     "icon": "travel",
     "order": 5,
-    "image": "../assets/quote-cards/travel.webp"
+    "image": "../assets/quote-cards/travel.webp",
+    "imageAlt": "Hand holding a small globe above a mountain valley"
   },
   {
     "id": "bonds",
@@ -53,7 +59,8 @@
     "href": "https://bxsurety.com/bx-pro-landing/92507",
     "icon": "certificate",
     "order": 6,
-    "image": "../assets/quote-cards/bonds.webp"
+    "image": "../assets/quote-cards/bonds.webp",
+    "imageAlt": "Two people passing a document and pen across a white desk"
   },
   {
     "id": "pet",
@@ -61,15 +68,17 @@
     "href": "https://agency.petinsurance.com/uwib",
     "icon": "pet",
     "order": 7,
-    "image": "../assets/quote-cards/pet.jpg"
+    "image": "../assets/quote-cards/pet.jpg",
+    "imageAlt": "Cocker spaniel on a leash sitting on a forest trail"
   },
   {
     "id": "drone",
     "label": "Drone",
-    "href": "https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin",
+    "href": "https://uwib.portal.skywatch.ai/brokerLogin",
     "icon": "drone",
     "order": 8,
-    "image": "../assets/quote-cards/drone.webp"
+    "image": "../assets/quote-cards/drone.webp",
+    "imageAlt": "White camera drone hovering in the sky"
   },
   {
     "id": "earthquake",
@@ -77,6 +86,7 @@
     "href": "/earthquake-quote",
     "icon": "apartment",
     "order": 10,
-    "image": "../assets/landing/earthquake-quote-3.jpg"
+    "image": "../assets/landing/earthquake-quote-3.jpg",
+    "imageAlt": "Cracked, dry earth"
   }
 ]

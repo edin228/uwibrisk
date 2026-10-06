@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Business", "Educational"]
 heroImage: "../../assets/blog/your-data-could-be-the-victim-of-a-kidnapping.webp"
-heroAlt: ""
+heroAlt: "Cursor pointing at the word “Security” on a dark screen"
 draft: false
 hygraphId: "cltgdvre9lv7b06myz1ai2jzq"
 ---

@@ -13,7 +13,16 @@ order: null
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/nick-latshaw.png"
+photoAlt: "Portrait of Nick Latshaw, Account Executive"
 blogPhoto: "../../assets/team/nick-latshaw.png"
+blogPhotoAlt: "Portrait of Nick Latshaw, Account Executive"
+motionPhotos:
+  - src: "../../assets/team/nick-latshaw.png"
+    alt: "Portrait of Nick Latshaw, Account Executive"
+  - src: "../../assets/team/nick-latshaw-motion-2.png"
+    alt: "Portrait of Nick Latshaw, Account Executive"
+  - src: "../../assets/team/nick-latshaw-motion-3.png"
+    alt: "Portrait of Nick Latshaw, Account Executive"
 pets: []
 hygraphId: "cl76np0g66uja0ck4rwh6pcq4"
 ---

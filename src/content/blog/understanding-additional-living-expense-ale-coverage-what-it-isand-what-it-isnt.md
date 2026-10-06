@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/essential-insurance-considerations-for-new-entrepreneurs.webp"
-heroAlt: ""
+heroAlt: "Young team gathered around laptops at a table in a bright office"
 draft: false
 hygraphId: "cm5x28edmi0o407ln55jdv40q"
 ---

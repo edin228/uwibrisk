@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational", "Business"]
 heroImage: "../../assets/blog/protecting-your-business-from-interruption-a-closer-look-at-business-interruption-insurance.jpg"
-heroAlt: ""
+heroAlt: "Empty office desk and chair in a sunlit room"
 draft: false
 hygraphId: "clve49gt90dem07lrs9k3xeu7"
 ---

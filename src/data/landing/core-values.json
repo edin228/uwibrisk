@@ -5,12 +5,14 @@
   "description": null,
   "template": "customLandingPage",
   "headerImage": null,
+  "headerImageAlt": "",
   "formEmbed": null,
   "components": [
     {
       "type": "PageHeader",
       "header": null,
-      "image": "../../assets/landing/core-values-1.png"
+      "image": "../../assets/landing/core-values-1.png",
+      "imageAlt": "UWIB Risk & Insurance Solutions logo"
     },
     {
       "type": "ActionBanner",
@@ -54,7 +56,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/blog/essential-insurance-considerations-for-new-entrepreneurs.webp"
+        {
+          "src": "../../assets/blog/essential-insurance-considerations-for-new-entrepreneurs.webp",
+          "alt": "Young team gathered around laptops at a table in a bright office"
+        }
       ]
     },
     {
@@ -72,7 +77,10 @@
         }
       ],
       "images": [
-        "../../assets/blog/independent-contractors-vs-employees-understanding-liability-and-risk.webp"
+        {
+          "src": "../../assets/blog/independent-contractors-vs-employees-understanding-liability-and-risk.webp",
+          "alt": "Business meeting with two people shaking hands across a conference table"
+        }
       ]
     }
   ]

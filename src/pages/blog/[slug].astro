@@ -25,6 +25,7 @@ const author = post.data.author ? await getEntry(post.data.author) : undefined;
   image={post.data.heroImage}
   type="article"
   publishedTime={post.data.pubDate}
+  searchable
 >
   <article class="container">
     <p class="label"><a href="/blog">Blog</a></p>

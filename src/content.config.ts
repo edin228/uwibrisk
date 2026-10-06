@@ -6,6 +6,9 @@ import { defineCollection, reference, type SchemaContext } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+/** Alt text is required for every image; it comes from src/data/alt-text.json. */
+const alt = z.string().min(1, 'Missing alt text: add the image path to src/data/alt-text.json and re-run npm run export:hygraph');
+
 /** Site-relative path or absolute URL. */
 const href = z.string().regex(/^(\/|https?:\/\/|mailto:|tel:)/, 'Expected a site path or absolute URL');
 
@@ -22,7 +25,7 @@ const blog = defineCollection({
       categories: z.array(z.string()).default([]),
       tags: z.array(z.string()).default([]),
       heroImage: image(),
-      heroAlt: z.string().default(''),
+      heroAlt: alt,
       draft: z.boolean().default(false),
       hygraphId: z.string().optional(),
     }),
@@ -44,9 +47,13 @@ const team = defineCollection({
       hasTeamPage: z.boolean(),
       miniBio: z.string().nullable(),
       photo: image(),
+      photoAlt: alt,
       blogPhoto: image().optional(),
+      blogPhotoAlt: alt.optional(),
+      /** Alternate portraits (the old sales-team page cycled through them). */
+      motionPhotos: z.array(z.object({ src: image(), alt })).default([]),
       pets: z
-        .array(z.object({ name: z.string(), photo: image(), bio: z.string().nullable() }))
+        .array(z.object({ name: z.string(), photo: image(), photoAlt: alt, bio: z.string().nullable() }))
         .default([]),
       hygraphId: z.string().optional(),
     }),
@@ -64,7 +71,8 @@ const pages = defineCollection({
       /** false for listing pages whose content comes from data (blog, carriers, ...). */
       hasBody: z.boolean(),
       headerImage: image().nullable(),
-      headerAlt: z.string().default(''),
+      /** Empty when there is no header image. */
+      headerAlt: z.string(),
       updatedDate: z.coerce.date().optional(),
       hygraphId: z.string().optional(),
     }),
@@ -94,6 +102,7 @@ const carriers = defineCollection({
       payLink: href.nullable(),
       showInCarousel: z.boolean(),
       logo: image(),
+      logoAlt: alt,
     }),
 });
 
@@ -106,6 +115,7 @@ const programs = defineCollection({
       url: href,
       order: z.number().int().nullable(),
       image: image(),
+      imageAlt: alt,
     }),
 });
 
@@ -119,6 +129,7 @@ const officeResources = defineCollection({
       order: z.number().int().nullable(),
       altLogoText: z.string().nullable(),
       image: image(),
+      imageAlt: alt,
     }),
 });
 
@@ -136,6 +147,7 @@ const offices = defineCollection({
       established: z.number().int().nullable(),
       order: z.number().int().nullable(),
       image: image(),
+      imageAlt: alt,
     }),
 });
 
@@ -157,6 +169,7 @@ const cardSchema = ({ image }: SchemaContext) =>
     icon: z.string().nullable(),
     order: z.number().int().nullable(),
     image: image(),
+    imageAlt: alt,
   });
 
 const quoteCards = defineCollection({
@@ -225,12 +238,13 @@ const landing = defineCollection({
       description: z.string().nullable(),
       template: z.string(),
       headerImage: image().nullable(),
+      headerImageAlt: z.string(),
       /** Slug of the matching entry in src/data/forms.ts, if the page embeds a form. */
       formEmbed: z.string().nullable(),
       components: z.array(
         z.discriminatedUnion('type', [
           z.object({ type: z.literal('InfoCard'), title: z.string(), description: z.string().nullable(), icon: z.string().nullable() }),
-          z.object({ type: z.literal('PageHeader'), header: z.string().nullable(), image: image().nullable() }),
+          z.object({ type: z.literal('PageHeader'), header: z.string().nullable(), image: image().nullable(), imageAlt: z.string() }),
           z.object({
             type: z.literal('WideCard'),
             header: z.string().nullable(),
@@ -240,7 +254,7 @@ const landing = defineCollection({
             useVideo: z.boolean(),
             videoUrl: z.url().nullable(),
             buttons: z.array(button),
-            images: z.array(image()),
+            images: z.array(z.object({ src: image(), alt })),
           }),
           z.object({
             type: z.literal('ActionBanner'),

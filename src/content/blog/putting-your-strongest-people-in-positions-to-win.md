@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/putting-your-strongest-people-in-positions-to-win.jpg"
-heroAlt: ""
+heroAlt: "City skyline with a domed capitol building at dusk"
 draft: false
 hygraphId: "cmqrm0uovr5no07lnk5gpzq4d"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/today-i-froze-my-credit.webp"
-heroAlt: ""
+heroAlt: "Frustrated woman holding her head at a laptop"
 draft: false
 hygraphId: "clyywiilgicg707n2p52w12ds"
 ---

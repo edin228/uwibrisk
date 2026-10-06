@@ -13,9 +13,12 @@ order: null
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/sean-ortega.jpg"
+photoAlt: "Portrait of Sean Ortega, Sr. Executive, Agency Operations"
+motionPhotos: []
 pets:
   - name: "Zoe"
     photo: "../../assets/pets/zoe.jpg"
+    photoAlt: "Zoe, a Boston terrier in a plaid bandana, sitting on a couch"
     bio: null
 hygraphId: "cl76nerud6ngc0ck4twejiqcn"
 ---

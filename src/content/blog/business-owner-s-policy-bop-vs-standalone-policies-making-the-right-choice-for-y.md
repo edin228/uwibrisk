@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a businesswoman between two signs: “BOP” vs. “Standalone Policies”"
 draft: false
 hygraphId: "cmgohzjjdnmad07lputlhej1q"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/natural-disasters-and-insurance-are-you-truly-prepared.jpg"
-heroAlt: ""
+heroAlt: "Firefighters in heavy smoke among the burned remains of a home"
 draft: false
 hygraphId: "cltorsoxc6ndj07k91skbrizq"
 ---

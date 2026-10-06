@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/classic-and-collector-car-insurance-basics-a-comprehensive-guide.jpg"
-heroAlt: ""
+heroAlt: "Hand holding up a red classic sports car above a laptop and notebook"
 draft: false
 hygraphId: "cmj1vj7xkd06s07n3345w4k66"
 ---

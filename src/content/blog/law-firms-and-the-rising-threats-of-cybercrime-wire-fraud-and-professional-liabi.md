@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/law-firms-and-the-rising-threats-of-cybercrime-wire-fraud-and-professional-liabi.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a padlock shield, Lady Justice, a gavel and a phishing email on a laptop"
 draft: false
 hygraphId: "cmj4b6e2urfxx07n1rp9szge1"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Business", "Educational"]
 heroImage: "../../assets/blog/recording-keeping-for-your-business.webp"
-heroAlt: ""
+heroAlt: "Alphabetized tab dividers in a bin of records"
 draft: false
 hygraphId: "cls3tp80dfus80blot308u28z"
 ---

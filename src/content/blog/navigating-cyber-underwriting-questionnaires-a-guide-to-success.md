@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/navigating-cyber-underwriting-questionnaires-a-guide-to-success.jpg"
-heroAlt: ""
+heroAlt: "Person filling out a security questionnaire on a tablet showing a padlock shield"
 draft: false
 hygraphId: "cmrf8y2jwy98g07loq4iwccp0"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: []
 tags: ["Educational"]
 heroImage: "../../assets/blog/protecting-vulnerable-populations-the-imperative-for-child-servicing-organizations.jpg"
-heroAlt: ""
+heroAlt: "Colorful playground climbing structure with slides in a park"
 draft: false
 hygraphId: "clnooomxqrszs0ble8shxzhet"
 ---

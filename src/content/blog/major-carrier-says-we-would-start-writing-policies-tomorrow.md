@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["News"]
 tags: ["News"]
 heroImage: "../../assets/blog/major-carrier-says-we-would-start-writing-policies-tomorrow.jpg"
-heroAlt: ""
+heroAlt: "Hillside view over a coastal California town toward the ocean"
 draft: false
 hygraphId: "clvfeo8si1cu508n1bt0jc8sb"
 ---

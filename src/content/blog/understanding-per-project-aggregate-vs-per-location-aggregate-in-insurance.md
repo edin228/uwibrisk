@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-per-project-aggregate-vs-per-location-aggregate-in-insurance.jpg"
-heroAlt: ""
+heroAlt: "Illustration comparing a per-project aggregate and a per-location aggregate under umbrellas"
 draft: false
 hygraphId: "cmgw8df4ht9zh08lqgoeqe4sj"
 ---

@@ -5,7 +5,8 @@
     "description": "Protect your business and yourself with Lloyd’s-backed IRS Audit Insurance. InsureTax covers legal defense, tax adjustments, penalties, and interest - giving you the resources to hire top professionals, safeguard cash flow, and keep operations running smoothly when audits strike.",
     "url": "https://irsinsurance.tax",
     "order": 0,
-    "image": "../assets/programs/irs-audit-insurance.jpg"
+    "image": "../assets/programs/irs-audit-insurance.jpg",
+    "imageAlt": "Two businessmen behind an “Audit” shield, between a “Business” box and an “IRS” sign"
   },
   {
     "id": "property-investors-managers-and-contractors",
@@ -13,7 +14,8 @@
     "description": "Find the right insurance coverage for your property investment, management, or contracting business. Access competitive premiums, explore policy options, limits, and deductibles, and make informed decisions with the support of a local, reputable, commercial insurance specialist.",
     "url": "/property-investors-managers-and-contractors",
     "order": 1,
-    "image": "../assets/programs/property-investors-managers-and-contractors.jpg"
+    "image": "../assets/programs/property-investors-managers-and-contractors.jpg",
+    "imageAlt": "Graphic: “Find the right insurance coverage for your property investment, management, or contracting business”"
   },
   {
     "id": "coffee-industry",
@@ -21,7 +23,8 @@
     "description": "Protect your coffee business with tailored coverage designed specifically for roasters, cafes, and coffee suppliers. From liability and property insurance to equipment protection, ensure your passion stays brewing without worry. Let us safeguard your beans, machines, and dreams.",
     "url": "/coffee-industry",
     "order": 2,
-    "image": "../assets/blog/what-kind-of-insurance-does-a-coffee-shop-need.webp"
+    "image": "../assets/blog/what-kind-of-insurance-does-a-coffee-shop-need.webp",
+    "imageAlt": "Barista pouring latte art into a cup of coffee"
   },
   {
     "id": "commercial-and-industrial-businesses",
@@ -29,15 +32,17 @@
     "description": "Find the right insurance coverage for your contracting business. Gain up to 25% in premium credit. Get details on policy options, limits, and deductibles, make informed decisions with the support of a local, reputable, commercial insurance specialist.",
     "url": "/qualifying-survey-for-commercial-and-industrial-accounts",
     "order": 2,
-    "image": "../assets/programs/commercial-and-industrial-businesses.jpg"
+    "image": "../assets/programs/commercial-and-industrial-businesses.jpg",
+    "imageAlt": "Worker driving a yellow forklift through a warehouse"
   },
   {
     "id": "drone-insurance",
     "title": "Drone Insurance",
     "description": "Drone insurance offers financial protection for drone operators, covering damage to the drone, liability for injuries or property damage, and risks like theft or loss. Essential for both recreational and commercial use, it helps mitigate financial risks from drone-related incidents.",
-    "url": "https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin",
+    "url": "https://uwib.portal.skywatch.ai/brokerLogin",
     "order": 2,
-    "image": "../assets/programs/drone-insurance.jpg"
+    "image": "../assets/programs/drone-insurance.jpg",
+    "imageAlt": "Drone flying against an orange sunset"
   },
   {
     "id": "epli",
@@ -45,7 +50,8 @@
     "description": "EPLI insurance is designed to cover wrongful termination, discrimination, sexual harassment, hostile work environment and in some cases, even wage and hour disputes. EPLI coverage is an essential coverage in today’s litigious society.",
     "url": "https://epli.uwib.com/",
     "order": 2,
-    "image": "../assets/programs/epli.png"
+    "image": "../assets/programs/epli.png",
+    "imageAlt": "Cartoon businessman holding cash while sitting on top of an hourglass"
   },
   {
     "id": "hvac-plumbing-and-electrical-contractors",
@@ -53,7 +59,8 @@
     "description": "Find the right insurance coverage for your contracting business. Gain up to 25% in premium credit. Get details on policy options, limits, and deductibles, make informed decisions with the support of a local, reputable, commercial insurance specialist.",
     "url": "/qualifying-survey-for-electrical-contractors",
     "order": 2,
-    "image": "../assets/programs/hvac-plumbing-and-electrical-contractors.png"
+    "image": "../assets/programs/hvac-plumbing-and-electrical-contractors.png",
+    "imageAlt": "Technician repairing the wiring of an air-conditioning unit"
   },
   {
     "id": "it-and-technology-service-providers",
@@ -61,7 +68,8 @@
     "description": "Specialized insurance solutions for IT and Technology Service Providers, offering protection against professional liabilities, data breaches, and equipment losses to secure your digital and technical operations.",
     "url": "/it-and-technology-service-providers",
     "order": 2,
-    "image": "../assets/blog/beyond-covid-what-businesses-learned-about-risk-resilience-and-revenue-protection.webp"
+    "image": "../assets/blog/beyond-covid-what-businesses-learned-about-risk-resilience-and-revenue-protection.webp",
+    "imageAlt": "Man wearing a headset working alone at a computer in a bright, empty office"
   },
   {
     "id": "private-client-services",
@@ -69,7 +77,8 @@
     "description": "As you continue to grow your wealth and make plans for the future, ordinary insurance protection likely isn’t enough. UWIB Risk Insurance Solutions Private Client Services (UWIB PCS) has the expertise and specialty solutions that can help you protect the things you care about most.",
     "url": "/privateclient",
     "order": 2,
-    "image": "../assets/blog/hnw-reccomendations.jpg"
+    "image": "../assets/blog/hnw-reccomendations.jpg",
+    "imageAlt": "Stately stone mansion with formal gardens and a fountain"
   },
   {
     "id": "product-recall-insurance",
@@ -77,7 +86,8 @@
     "description": "Product recall insurance protects businesses from the costs of retrieving, repairing, or replacing defective products. It covers expenses like customer notification, product disposal, legal fees, and public relations, helping companies manage the impact of a recall without severe financial loss.",
     "url": "/product-recall-insurance",
     "order": 2,
-    "image": "../assets/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.webp"
+    "image": "../assets/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.webp",
+    "imageAlt": "Burned debris and charred framing on the ground after a fire"
   },
   {
     "id": "southern-states-dirt-hauling-and-excavation-contractors",
@@ -85,7 +95,8 @@
     "description": "Insurance options tailored for dirt hauling and excavation contractors in the southern United States, covering liabilities, equipment damage, and more to safeguard your operations.",
     "url": "/southern-states-dirt-hauling-and-excavation-contractors",
     "order": 2,
-    "image": "../assets/blog/luxury-is-freedom-not-excess.jpg"
+    "image": "../assets/blog/luxury-is-freedom-not-excess.jpg",
+    "imageAlt": "Yellow backhoe loader moving gravel on a sunny dirt lot"
   },
   {
     "id": "towing-industry",
@@ -93,7 +104,8 @@
     "description": "Protect Your Towing Business! Get the right coverage to keep your tow trucks and operations safe. Fill out our quick insurance form today and get a customized quote!",
     "url": "/towing-industry-survey",
     "order": 2,
-    "image": "../assets/programs/towing-industry.jpg"
+    "image": "../assets/programs/towing-industry.jpg",
+    "imageAlt": "Classic car loaded on a flatbed tow truck on a city street"
   },
   {
     "id": "hard-market-property-insurance-worksheet",
@@ -101,6 +113,7 @@
     "description": "An essential worksheet for navigating the complexities of residential property insurance in this hard market. Ensure you're informed and prepared with this detailed guide.",
     "url": "/california-hard-market-residential-property-insurance-worksheet",
     "order": 3,
-    "image": "../assets/programs/hard-market-property-insurance-worksheet.jpg"
+    "image": "../assets/programs/hard-market-property-insurance-worksheet.jpg",
+    "imageAlt": "Modern white stucco house with a walkway and lawn"
   }
 ]

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/drone-operations-aviation-liability-and-compliance.jpg"
-heroAlt: ""
+heroAlt: "Man in a suit flying a drone with a remote controller in front of an airliner"
 draft: false
 hygraphId: "cmk611405fww507n2pkive1qk"
 ---

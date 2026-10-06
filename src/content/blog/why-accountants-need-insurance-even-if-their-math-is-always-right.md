@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/why-accountants-need-insurance-even-if-their-math-is-always-right.jpg"
-heroAlt: ""
+heroAlt: "Woman in a blazer using a calculator and laptop over printed charts"
 draft: false
 hygraphId: "cm93efro678er07n1658n3mxl"
 ---

@@ -5,6 +5,7 @@
   "description": "As you continue to grow your wealth and make plans for the future, ordinary insurance protection likely isn’t enough. UWIB Risk Insurance Solutions Private Client Services (UWIB PCS) has the expertise and specialty solutions that can help you protect the things you care about most.",
   "template": "LandingPage",
   "headerImage": "../../assets/landing/privateclient-header.png",
+  "headerImageAlt": "Illustration of a white luxury coupe parked in front of an ornate stone mansion",
   "formEmbed": "privateclient",
   "components": [
     {

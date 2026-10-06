@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/annual-business-insurance-review-checklist-essential-steps-for-protection.jpg"
-heroAlt: ""
+heroAlt: "Hand checking off an “Annual Business Insurance Review” checklist on a clipboard beside a laptop"
 draft: false
 hygraphId: "cmfxxtx4neyv207mz509y1a6m"
 ---

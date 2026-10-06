@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/cyber-insurance-for-smbs-requirements-and-underwriting.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a businessman beside a computer and shield lock icons"
 draft: false
 hygraphId: "cmhgi8uvvbmss07n161jdfvli"
 ---

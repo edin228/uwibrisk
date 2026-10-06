@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/ensuring-business-continuity-the-importance-of-comprehensive-business-interruption-insurance.jpg"
-heroAlt: ""
+heroAlt: "Stressed woman holding her head over a desk with a laptop and planner"
 draft: false
 hygraphId: "clynee47pc4qt07mv3vgxbu8z"
 ---

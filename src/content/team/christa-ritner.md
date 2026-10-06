@@ -13,6 +13,8 @@ order: 2
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/christa-ritner.jpg"
+photoAlt: "Portrait of Christa Ritner, Senior Account Manager"
+motionPhotos: []
 pets: []
 hygraphId: "cl76nvh8w6yku0ck46wnp1l5d"
 ---

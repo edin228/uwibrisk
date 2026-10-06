@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational", "Business"]
 heroImage: "../../assets/blog/the-essential-guide-to-workers-compensation-for-small-businesses.jpg"
-heroAlt: ""
+heroAlt: "Aerial view of a deep construction excavation with a crane and workers"
 draft: false
 hygraphId: "clsz98zrz58du07n53th1qrte"
 ---

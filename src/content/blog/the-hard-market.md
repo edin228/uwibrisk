@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-hard-market.webp"
-heroAlt: ""
+heroAlt: "Lightning storm over calm water with a lone sailboat at sunset"
 draft: false
 hygraphId: "clw9jsgjrehl707mv7kt503x0"
 ---

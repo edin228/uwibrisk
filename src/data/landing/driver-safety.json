@@ -5,12 +5,14 @@
   "description": null,
   "template": "customLandingPage",
   "headerImage": null,
+  "headerImageAlt": "",
   "formEmbed": null,
   "components": [
     {
       "type": "PageHeader",
       "header": "Prevent Auto Claims Before They Happen",
-      "image": "../../assets/landing/driver-safety-1.png"
+      "image": "../../assets/landing/driver-safety-1.png",
+      "imageAlt": "UWIB banner: “Driver Safety. Insurance solutions how you want them, when you need them”"
     },
     {
       "type": "ActionBanner",
@@ -33,7 +35,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/landing/hvac-5.jpg"
+        {
+          "src": "../../assets/landing/hvac-5.jpg",
+          "alt": "Fleet of semi trucks parked in a row under a cloudy sky"
+        }
       ]
     },
     {
@@ -72,7 +77,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg"
+        {
+          "src": "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg",
+          "alt": "Word cloud with “Work Safety” highlighted in yellow among workplace terms"
+        }
       ]
     }
   ]

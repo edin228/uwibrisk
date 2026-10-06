@@ -10,7 +10,7 @@ author: "jesse-nielsen"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/your-house-burns-down-do-you-actually-have-to-rebuild.jpg"
-heroAlt: ""
+heroAlt: "Burned-out house beside a model home, an insurance policy and a pen at sunset"
 draft: false
 hygraphId: "cmsjbvqzlpgrm08mrvvjmsq6h"
 ---

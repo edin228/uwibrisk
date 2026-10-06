@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/third-party-cyber-risk-the-threat-you-may-not-have-seen-coming.jpg"
-heroAlt: ""
+heroAlt: "Man sitting at a desktop computer by a window with blinds"
 draft: false
 hygraphId: "cm7tqlk7qcdbs07n5pyg3mtx1"
 ---

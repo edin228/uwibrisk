@@ -16,6 +16,8 @@ interface Props {
   type?: 'website' | 'article';
   noindex?: boolean;
   publishedTime?: Date | undefined;
+  /** Include the page in the Pagefind search index (content pages only). */
+  searchable?: boolean;
 }
 
 const SITE_NAME = 'UWIB Risk & Insurance Solutions';
@@ -30,6 +32,7 @@ const {
   type = 'website',
   noindex = false,
   publishedTime,
+  searchable = false,
 } = Astro.props;
 
 const fullTitle = title === SITE_NAME ? title : `${title} | UWIB Risk`;
@@ -67,7 +70,7 @@ const ogImage = image
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot name="header" />
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
       <slot />
     </main>
     <slot name="footer" />

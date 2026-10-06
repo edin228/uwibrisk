@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["News"]
 tags: ["News"]
 heroImage: "../../assets/blog/navigating-insurance-during-southern-californias-wildfire-crisis.webp"
-heroAlt: ""
+heroAlt: "Wildfire burning across the hills above a Southern California neighborhood"
 draft: false
 hygraphId: "cm5zre7z2a85d07n06xslogib"
 ---

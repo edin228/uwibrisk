@@ -5,12 +5,14 @@
   "description": null,
   "template": "customLandingPage",
   "headerImage": null,
+  "headerImageAlt": "",
   "formEmbed": null,
   "components": [
     {
       "type": "PageHeader",
       "header": "Earthquake Insurance",
-      "image": "../../assets/landing/earthquake-quote-1.png"
+      "image": "../../assets/landing/earthquake-quote-1.png",
+      "imageAlt": "UWIB Risk & Insurance Solutions logo"
     },
     {
       "type": "ActionBanner",
@@ -42,7 +44,10 @@
         }
       ],
       "images": [
-        "../../assets/landing/earthquake-quote-2.jpg"
+        {
+          "src": "../../assets/landing/earthquake-quote-2.jpg",
+          "alt": "Two-story house with a front porch and a two-car garage"
+        }
       ]
     },
     {
@@ -60,7 +65,10 @@
         }
       ],
       "images": [
-        "../../assets/landing/earthquake-quote-3.jpg"
+        {
+          "src": "../../assets/landing/earthquake-quote-3.jpg",
+          "alt": "Cracked, dry earth"
+        }
       ]
     },
     {

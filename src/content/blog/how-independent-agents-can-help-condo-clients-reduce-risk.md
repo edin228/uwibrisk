@@ -10,7 +10,7 @@ author: null
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/how-independent-agents-can-help-condo-clients-reduce-risk.jpg"
-heroAlt: ""
+heroAlt: "Modern high-rise condominium tower against a blue sky"
 draft: false
 hygraphId: "cl5jx2q1t6wwy0bmylfv1dwo7"
 ---

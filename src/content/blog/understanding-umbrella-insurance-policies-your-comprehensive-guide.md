@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-umbrella-insurance-policies-your-comprehensive-guide.jpg"
-heroAlt: ""
+heroAlt: "Umbrella sheltering a paper family cutout beside stacks of coins"
 draft: false
 hygraphId: "cmfitrma4ik0c07myqwmqs0l6"
 ---

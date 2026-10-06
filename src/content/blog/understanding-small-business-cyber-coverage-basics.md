@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/understanding-small-business-cyber-coverage-basics.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a businessman beside a shop protected by a padlock shield"
 draft: false
 hygraphId: "cmh7nw7y3x96607ln8d7ygbo9"
 ---

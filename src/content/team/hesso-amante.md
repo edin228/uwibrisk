@@ -13,6 +13,8 @@ order: 5
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/hesso-amante.jpg"
+photoAlt: "Portrait of Hesso Amante, Commercial Lines Associate"
+motionPhotos: []
 pets: []
 hygraphId: "cmuedqzthpuga07n4v86llyhy"
 ---

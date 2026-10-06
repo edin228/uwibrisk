@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.webp"
-heroAlt: ""
+heroAlt: "Burned debris and charred framing on the ground after a fire"
 draft: false
 hygraphId: "cm5px6htilpas07mz1q7m2ba7"
 ---

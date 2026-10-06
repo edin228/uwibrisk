@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational", "Business"]
 heroImage: "../../assets/blog/contract-fail.jpg"
-heroAlt: ""
+heroAlt: "Hand signing a contract with a fountain pen"
 draft: false
 hygraphId: "clsc5sm6h90i30bn0cy9cdp54"
 ---
@@ -27,7 +27,7 @@ Always include an indemnity clause that favors you, the party that’s having th
 
 CAUTION: If you are relying on the contractor’s contract, you might be asking for trouble.
 
-[Before signing a contract](/before-you-sign-on-the-dotted-line-consider-these-risks), review it, get your insurance broker’s perspective and if there are any remaining concerns, have your attorney look it over. Taking just a handful of brief and inexpensive precautions can save you time, frustration, and money, in the long run.
+Before signing a contract, review it, get your insurance broker’s perspective and if there are any remaining concerns, have your attorney look it over. Taking just a handful of brief and inexpensive precautions can save you time, frustration, and money, in the long run.
 
 Here's an indemnity clause that I like. It fits most situations, and it’s not totally one-sided. In our experience, most contractors and attorneys will concede to adopt this version as a replacement for their (likely) less favorable version.
 

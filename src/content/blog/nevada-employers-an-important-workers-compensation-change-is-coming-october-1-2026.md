@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/nevada-employers-an-important-workers-compensation-change-is-coming-october-1-2026.jpg"
-heroAlt: ""
+heroAlt: "Workers’ compensation form, hard hat, calculator and laptop in front of a Nevada outline and capitol"
 draft: false
 hygraphId: "cmshx3maplcls07n415xury07"
 ---

@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/navigating-the-waters-ocean-and-inland-cargo-risk-management-in-supply-chains.jpg"
-heroAlt: ""
+heroAlt: "Illustration of a container ship and cargo truck linked by a dashed route to a shield with a check mark"
 draft: false
 hygraphId: "cmidl7igep73e08lpytu3wohk"
 ---

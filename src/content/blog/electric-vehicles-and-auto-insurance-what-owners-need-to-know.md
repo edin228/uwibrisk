@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/electric-vehicles-and-auto-insurance-what-owners-need-to-know.webp"
-heroAlt: ""
+heroAlt: "Charging cable plugged into the port of a dark electric car"
 draft: false
 hygraphId: "cltormo0z6goa07k9ellnffj6"
 ---

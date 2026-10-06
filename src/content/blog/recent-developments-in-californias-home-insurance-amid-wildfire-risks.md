@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/the-importance-of-effective-risk-management-and-insurance-in-protecting-community-assets.jpg"
-heroAlt: ""
+heroAlt: "Firefighters in protective suits spraying water at a large blaze"
 draft: false
 hygraphId: "cm5v315juciti07lim8n6hdfs"
 ---

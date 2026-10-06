@@ -7,7 +7,7 @@ description: null
 template: "SingleColumn"
 hasBody: true
 headerImage: "../../assets/pages/our-core-values-header.jpg"
-headerAlt: ""
+headerAlt: "Two businesspeople shaking hands over a desk with a laptop and paperwork"
 updatedDate: "2025-02-12T22:44:21.380027+00:00"
 hygraphId: "clcuv8a97kla609lj11sd8ay1"
 ---
@@ -16,4 +16,4 @@ We are a forward-thinking boutique agency with roots steeped in tradition. This 
 
 Our culture is vital to our success. And, our Core Values are vital to building and maintaining our culture. In 2020, our team developed these values together as guideposts for how we all should treat one another, our clients, and all other partners.
 
-![](../../assets/pages/our-core-values-inline-1.png)
+![UWIB core values: Listening, Learning and Leading, each with a short description](../../assets/pages/our-core-values-inline-1.png)

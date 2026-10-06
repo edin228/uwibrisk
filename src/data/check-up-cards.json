@@ -5,7 +5,8 @@
     "href": "/business-coverage-check-up",
     "icon": "agency",
     "order": 0,
-    "image": "../assets/blog/protecting-your-assets-essential-coverage-for-domestic-employees-and-household-staff.jpg"
+    "image": "../assets/blog/protecting-your-assets-essential-coverage-for-domestic-employees-and-household-staff.jpg",
+    "imageAlt": "Modern glass office building under a blue sky"
   },
   {
     "id": "personal-coverage-check-up",
@@ -13,7 +14,8 @@
     "href": "/personal-coverage-check-up",
     "icon": "house",
     "order": 1,
-    "image": "../assets/check-up-cards/personal-coverage-check-up.jpg"
+    "image": "../assets/check-up-cards/personal-coverage-check-up.jpg",
+    "imageAlt": "Blue two-story house with a three-car garage at dusk"
   },
   {
     "id": "benefits-coverage-check-up",
@@ -21,6 +23,7 @@
     "href": "/benefits-check-up",
     "icon": "medical",
     "order": 2,
-    "image": "../assets/check-up-cards/benefits-coverage-check-up.webp"
+    "image": "../assets/check-up-cards/benefits-coverage-check-up.webp",
+    "imageAlt": "Stethoscope and pen resting on a medical form"
   }
 ]

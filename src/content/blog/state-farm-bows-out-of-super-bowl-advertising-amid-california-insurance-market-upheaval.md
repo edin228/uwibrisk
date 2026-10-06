@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["News"]
 tags: ["News"]
 heroImage: "../../assets/blog/state-farm-nonrenewing-california-homeowners.webp"
-heroAlt: ""
+heroAlt: "State Farm corporate campus with its sign in front of office buildings"
 draft: false
 hygraphId: "cm5zrbqsl7o0z07n8av2mq07f"
 ---

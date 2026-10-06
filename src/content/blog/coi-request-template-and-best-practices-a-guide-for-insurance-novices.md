@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/coi-request-template-and-best-practices-a-guide-for-insurance-novices.jpg"
-heroAlt: ""
+heroAlt: "Clipboard with a “COI Request” form next to an insurance document and pen"
 draft: false
 hygraphId: "cmgc889g1d5q207mx8jrb96uj"
 ---

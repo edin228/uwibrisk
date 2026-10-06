@@ -10,7 +10,7 @@ author: null
 categories: ["Education"]
 tags: ["Educational", "Business"]
 heroImage: "../../assets/blog/4-things-to-consider-when-building-your-small-business-insurance-portfolio.jpg"
-heroAlt: ""
+heroAlt: "Team reviewing charts and reports on a wooden table with coffee and a tablet"
 draft: false
 hygraphId: "cl5jwkxfo6r3z0an7fw7kmqnb"
 ---

@@ -10,6 +10,8 @@ export interface UrlMapping {
   status: 301 | 302 | 308 | 410;
   kind: 'static' | 'blog' | 'team' | 'page' | 'listing-page' | 'landing' | 'form' | 'dropped';
   note?: string;
+  /** Owner decision behind a redirect (see scripts/export-config.mjs). */
+  approved?: string;
   /** Set when the owner still needs to decide; `to` is the current proposal. */
   decision?: string;
 }
@@ -20,7 +22,7 @@ export const urlMap: UrlMapping[] = [
     "from": "/",
     "to": "/",
     "kind": "static",
-    "note": "Home page (hard-coded layout + Hygraph data). Redesign."
+    "note": "Home page (hard-coded layout + Hygraph data). Placeholder until the redesign."
   },
   {
     "status": 301,
@@ -48,22 +50,21 @@ export const urlMap: UrlMapping[] = [
     "from": "/contact",
     "to": "/contact",
     "kind": "static",
-    "note": "Contact page (CMS text + Hygraph contact form -> needs a form API route). Hygraph page (template GraphForm)."
+    "note": "Contact page: CMS text + advisor-matching wizard (src/data/legacy/contact.ts). Hygraph page (template GraphForm)."
   },
   {
     "status": 301,
     "from": "/coi",
     "to": "/coi",
     "kind": "static",
-    "note": "COI & client portal page (hard-coded in old app). Hygraph page (template DualColumn)."
+    "note": "COI & client portal links (src/data/legacy/coi.ts). Hygraph page (template DualColumn)."
   },
   {
     "status": 301,
     "from": "/waiver",
     "to": "/waiver",
     "kind": "static",
-    "note": "Hard-coded page in old app; content not in Hygraph.",
-    "decision": "Rebuild or retire /waiver (content only exists in old pages/waiver.js)."
+    "note": "Waiver-tab demo page (src/data/legacy/waiver.ts)."
   },
   {
     "status": 301,
@@ -105,110 +106,98 @@ export const urlMap: UrlMapping[] = [
     "from": "/coverage-and-cost-estimates",
     "to": "/coverage-and-cost-estimates",
     "kind": "static",
-    "note": "Grid page (quote/check-up cards). Hygraph page (template Grid)."
+    "note": "Quote cards + niche programs. Hygraph page (template Grid)."
   },
   {
     "status": 301,
     "from": "/sales-team",
     "to": "/sales-team",
     "kind": "static",
-    "note": "Producers list (team data, isProducer). Hygraph page (template SingleColumn)."
+    "note": "Producers list (team data, isProducer) + copy in src/data/legacy/sales-team.ts. Hygraph page (template SingleColumn)."
   },
   {
     "status": 301,
     "from": "/safeco-faq",
     "to": "/safeco-faq",
     "kind": "static",
-    "note": "Hard-coded FAQ in old app; content not in Hygraph.",
-    "decision": "Rebuild /safeco-faq from old pages/safeco-faq.js or retire it."
+    "note": "Safeco FAQ (src/data/legacy/safeco-faq.ts)."
   },
   {
     "status": 301,
     "from": "/search",
     "to": "/search",
     "kind": "static",
-    "note": "Blog search (Hygraph _search).",
-    "decision": "Site search: rebuild client-side (e.g. Pagefind) or redirect /search -> /blog."
+    "note": "Site search, rebuilt with Pagefind."
   },
   {
     "status": 301,
     "from": "/trusted-advisor",
     "to": "/trusted-advisor",
     "kind": "static",
-    "note": "Hard-coded landing page in old app.",
-    "decision": "Rebuild /trusted-advisor (content only in old pages/trusted-advisor.js)."
+    "note": "Trusted Advisor landing page (src/data/legacy/trusted-advisor.ts)."
   },
   {
     "status": 301,
     "from": "/coffee-and-contracts",
     "to": "/coffee-and-contracts",
     "kind": "static",
-    "note": "Hard-coded landing page in old app.",
-    "decision": "Rebuild /coffee-and-contracts (content only in old components/coffee/*)."
+    "note": "Coffee & Contracts landing page (src/data/legacy/coffee-and-contracts.ts)."
   },
   {
     "status": 301,
     "from": "/hotels",
     "to": "/hotels",
     "kind": "static",
-    "note": "Hard-coded hotels microsite.",
-    "decision": "Rebuild hotels microsite (content only in old components/hotels/content.js)."
+    "note": "Hotels microsite (src/data/legacy/hotels.ts)."
   },
   {
     "status": 301,
     "from": "/hotels/coverage",
     "to": "/hotels/coverage",
     "kind": "static",
-    "note": "Hard-coded hotels microsite.",
-    "decision": "See /hotels."
+    "note": "Hotels microsite."
   },
   {
     "status": 301,
     "from": "/hotels/why-uwib",
     "to": "/hotels/why-uwib",
     "kind": "static",
-    "note": "Hard-coded hotels microsite.",
-    "decision": "See /hotels."
+    "note": "Hotels microsite."
   },
   {
     "status": 301,
     "from": "/hotels/risk-briefs",
     "to": "/hotels/risk-briefs",
     "kind": "static",
-    "note": "Hard-coded hotels microsite.",
-    "decision": "See /hotels."
+    "note": "Hotels microsite."
   },
   {
     "status": 301,
     "from": "/hotels/risk-briefs/housekeeping-injuries",
     "to": "/hotels/risk-briefs/housekeeping-injuries",
     "kind": "static",
-    "note": "Hard-coded hotels risk brief.",
-    "decision": "See /hotels."
+    "note": "Hotels risk brief."
   },
   {
     "status": 301,
     "from": "/hotels/risk-briefs/ransomware-readiness",
     "to": "/hotels/risk-briefs/ransomware-readiness",
     "kind": "static",
-    "note": "Hard-coded hotels risk brief.",
-    "decision": "See /hotels."
+    "note": "Hotels risk brief."
   },
   {
     "status": 301,
     "from": "/hotels/risk-briefs/renovation-season",
     "to": "/hotels/risk-briefs/renovation-season",
     "kind": "static",
-    "note": "Hard-coded hotels risk brief.",
-    "decision": "See /hotels."
+    "note": "Hotels risk brief."
   },
   {
     "status": 301,
     "from": "/hotels/risk-briefs/guest-amenities",
     "to": "/hotels/risk-briefs/guest-amenities",
     "kind": "static",
-    "note": "Hard-coded hotels risk brief.",
-    "decision": "See /hotels."
+    "note": "Hotels risk brief."
   },
   {
     "status": 301,
@@ -216,15 +205,14 @@ export const urlMap: UrlMapping[] = [
     "to": "/southern-states-dirt-hauling-and-excavation-contractors",
     "kind": "static",
     "note": "Page was only the dropped Dirt Haulers video (which forwarded to the dirt-hauling survey when finished).",
-    "decision": "Proposed 301 to the dirt-hauling survey form; alternative: the dirt-haulers blog post."
+    "approved": "301 to the dirt-hauling survey (owner approved)."
   },
   {
     "status": 301,
     "from": "/commercial-options",
     "to": "/commercial-options",
     "kind": "static",
-    "note": "Hard-coded page (quote cards).",
-    "decision": "Rebuild or redirect /commercial-options -> /get-quotes."
+    "note": "Large/small business quote chooser (src/data/legacy/commercial-options.ts)."
   },
   {
     "status": 301,
@@ -232,7 +220,7 @@ export const urlMap: UrlMapping[] = [
     "to": "/benefits-solutions",
     "kind": "static",
     "note": "Hard-coded duplicate/older version of the benefits-solutions landing page.",
-    "decision": "Proposed 301 to /benefits-solutions."
+    "approved": "301 to /benefits-solutions (owner approved)."
   },
   {
     "status": 301,
@@ -240,15 +228,14 @@ export const urlMap: UrlMapping[] = [
     "to": "/contact",
     "kind": "static",
     "note": "Old contact page variant.",
-    "decision": "Proposed 301 to /contact."
+    "approved": "301 to /contact (owner approved)."
   },
   {
     "status": 301,
     "from": "/resources",
     "to": "/resources",
     "kind": "static",
-    "note": "Stub page in old app (\"Resources\" text only); also the nav dropdown slug.",
-    "decision": "Retire (/resources -> /office-resources?) or build a resources hub."
+    "note": "Resources stub page (src/data/legacy/resources.ts); also the nav dropdown slug."
   },
   {
     "status": 301,
@@ -302,12 +289,6 @@ export const urlMap: UrlMapping[] = [
     "status": 301,
     "from": "/blog/contract-fail",
     "to": "/blog/contract-fail",
-    "kind": "blog"
-  },
-  {
-    "status": 301,
-    "from": "/blog/how-independent-agents-can-help-condo-clients-reduce",
-    "to": "/blog/how-independent-agents-can-help-condo-clients-reduce",
     "kind": "blog"
   },
   {
@@ -969,22 +950,32 @@ export const urlMap: UrlMapping[] = [
     "from": "/blog/amazon-sells-everything-even-insurance",
     "to": "/blog",
     "kind": "blog",
-    "note": "isActive = false (still published, so currently reachable at /blog/<slug>)",
-    "decision": "Inactive post (still published): confirm 301 -> /blog or re-activate."
+    "note": "isActive = false (was still published and reachable); 301 -> /blog",
+    "approved": "301 to /blog (owner approved)."
   },
   {
     "status": 301,
     "from": "/blog/increase-chances-of-career-success-5-cliches-that-work-to-get-you-started",
     "to": "/blog",
     "kind": "blog",
-    "note": "cut by owner (copied content); 301 -> /blog"
+    "note": "cut by owner (copied content); 301 -> /blog",
+    "approved": "Owner decision (scripts/export-config.mjs)."
   },
   {
     "status": 301,
     "from": "/blog/excellence-in-the-workplace-maturity-is-an-expected-element",
     "to": "/blog",
     "kind": "blog",
-    "note": "cut by owner (copied content); 301 -> /blog"
+    "note": "cut by owner (copied content); 301 -> /blog",
+    "approved": "Owner decision (scripts/export-config.mjs)."
+  },
+  {
+    "status": 301,
+    "from": "/blog/how-independent-agents-can-help-condo-clients-reduce",
+    "to": "/blog/how-independent-agents-can-help-condo-clients-reduce-risk",
+    "kind": "blog",
+    "note": "duplicate of how-independent-agents-can-help-condo-clients-reduce-risk (owner decision); 301 -> /blog/how-independent-agents-can-help-condo-clients-reduce-risk",
+    "approved": "Owner decision (scripts/export-config.mjs)."
   },
   {
     "status": 301,
@@ -1100,7 +1091,7 @@ export const urlMap: UrlMapping[] = [
     "to": "/team",
     "kind": "team",
     "note": "Inactive team member (page was still reachable on the old site).",
-    "decision": "Confirm 301 -> /team for former team members."
+    "approved": "301 to /team (owner approved)."
   },
   {
     "status": 301,
@@ -1108,7 +1099,7 @@ export const urlMap: UrlMapping[] = [
     "to": "/team",
     "kind": "team",
     "note": "Inactive team member (page was still reachable on the old site).",
-    "decision": "Confirm 301 -> /team for former team members."
+    "approved": "301 to /team (owner approved)."
   },
   {
     "status": 301,
@@ -1116,7 +1107,7 @@ export const urlMap: UrlMapping[] = [
     "to": "/team",
     "kind": "team",
     "note": "Inactive team member (page was still reachable on the old site).",
-    "decision": "Confirm 301 -> /team for former team members."
+    "approved": "301 to /team (owner approved)."
   },
   {
     "status": 301,
@@ -1124,7 +1115,7 @@ export const urlMap: UrlMapping[] = [
     "to": "/team",
     "kind": "team",
     "note": "Inactive team member (page was still reachable on the old site).",
-    "decision": "Confirm 301 -> /team for former team members."
+    "approved": "301 to /team (owner approved)."
   },
   {
     "status": 301,
@@ -1132,7 +1123,7 @@ export const urlMap: UrlMapping[] = [
     "to": "/team",
     "kind": "team",
     "note": "Inactive team member (page was still reachable on the old site).",
-    "decision": "Confirm 301 -> /team for former team members."
+    "approved": "301 to /team (owner approved)."
   },
   {
     "status": 301,

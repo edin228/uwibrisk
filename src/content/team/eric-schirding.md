@@ -13,9 +13,18 @@ order: null
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/eric-schirding.png"
+photoAlt: "Portrait of Eric Schirding, Co-Founder"
+motionPhotos:
+  - src: "../../assets/team/eric-schirding-motion-1.jpg"
+    alt: "Portrait of Eric Schirding, Co-Founder"
+  - src: "../../assets/team/eric-schirding-motion-2.jpg"
+    alt: "Portrait of Eric Schirding, Co-Founder"
+  - src: "../../assets/team/eric-schirding-motion-3.png"
+    alt: "Portrait of Eric Schirding, Co-Founder"
 pets:
   - name: "Cosmo"
     photo: "../../assets/pets/cosmo.jpg"
+    photoAlt: "Cosmo, a brown curly-coated doodle, sitting on a rug"
     bio: null
 hygraphId: "cl76nnp4771qa0alm0c87qi23"
 ---

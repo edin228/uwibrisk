@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/insurance-tips-for-millennials-bridging-the-knowledge-gap.webp"
-heroAlt: ""
+heroAlt: "Young woman on the phone taking notes at a laptop"
 draft: false
 hygraphId: "cltorq5ymgexp07n1elnhes3a"
 ---

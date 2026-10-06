@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/scheduling-jewelry-watches-and-fine-art-on-your-insurance-policy.jpg"
-heroAlt: ""
+heroAlt: "Gold watch, diamond rings and a framed painting on a calendar page marked “Insurance”"
 draft: false
 hygraphId: "cmfjnez51untb07my8kirztn9"
 ---

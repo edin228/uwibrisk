@@ -13,6 +13,8 @@ order: 4
 hasTeamPage: true
 miniBio: null
 photo: "../../assets/team/monica-lopez.jpg"
+photoAlt: "Portrait of Monica Lopez, Group & Individual Benefits Account Manager"
+motionPhotos: []
 pets: []
 hygraphId: "cl76nz88g75vj0all3akxng8t"
 ---

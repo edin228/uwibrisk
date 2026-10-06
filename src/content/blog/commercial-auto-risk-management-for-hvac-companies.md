@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/commercial-auto-risk-management-for-hvac-companies.jpg"
-heroAlt: ""
+heroAlt: "White work van with ladders on the roof parked outside an office building"
 draft: false
 hygraphId: "cmgksvfk42rib07lpmmiptevc"
 ---

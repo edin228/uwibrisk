@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/cyber-risk-is-moving-faster-than-ever-is-your-organization-ready.jpg"
-heroAlt: ""
+heroAlt: "Cursor pointing at the word “Security” on a dark screen"
 draft: false
 hygraphId: "cmtkn5ked7ofw07mw21rlk0jk"
 ---

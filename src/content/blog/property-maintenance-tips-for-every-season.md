@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/property-maintenance-tips-for-every-season.jpg"
-heroAlt: ""
+heroAlt: "Row of fabric leaves in autumn colors hanging on a string"
 draft: false
 hygraphId: "clyywb0ww347i07n0snfcz48y"
 ---

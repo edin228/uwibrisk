@@ -10,7 +10,7 @@ author: "dana-coates"
 categories: ["Education"]
 tags: ["Educational"]
 heroImage: "../../assets/blog/leveraging-technology-how-independent-agencies-can-help-clients-adapt-to-the-digital-transformation-in-insurance.webp"
-heroAlt: ""
+heroAlt: "Hands reviewing charts on a tablet and printed reports at a white desk"
 draft: false
 hygraphId: "cm677lhn83d5l07mwpqfidijq"
 ---

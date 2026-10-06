@@ -5,12 +5,14 @@
   "description": null,
   "template": "customLandingPage",
   "headerImage": null,
+  "headerImageAlt": "",
   "formEmbed": null,
   "components": [
     {
       "type": "PageHeader",
       "header": "Benefits & HR Solutions",
-      "image": "../../assets/landing/benefits-solutions-1.png"
+      "image": "../../assets/landing/benefits-solutions-1.png",
+      "imageAlt": "UWIB Risk & Insurance Solutions logo"
     },
     {
       "type": "WideCard",
@@ -22,7 +24,10 @@
       "videoUrl": null,
       "buttons": [],
       "images": [
-        "../../assets/landing/benefits-solutions-2.jpg"
+        {
+          "src": "../../assets/landing/benefits-solutions-2.jpg",
+          "alt": "Overhead view of hands using a phone at a desk below a monitor showing a business report"
+        }
       ]
     },
     {
