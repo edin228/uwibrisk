@@ -1,21 +1,166 @@
 ---
-import LegacyImg from '../components/legacy/LegacyImg.astro';
+/** /commercial-options: choose the large- or small-business commercial quote path. */
+import { Image } from 'astro:assets';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
 import { heading, meta, options } from '../data/legacy/commercial-options';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const title = heading.charAt(0) + heading.slice(1).toLowerCase();
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{heading}</h1>
-    {
-      options.map((o) => (
-        <a href={o.href}>
-          <LegacyImg image={o.image} width={400} />
-          <h2>{o.title}</h2>
-          <ul>{o.criteria.map((c) => <li>{c}</li>)}</ul>
-          <p>{o.text}</p>
-        </a>
-      ))
+<SiteLayout title={meta.title} description={meta.description}>
+  <PageIntro
+    title={title}
+    lead={meta.description}
+    crumbs={[{ label: 'Get a quote', href: '/get-quotes' }, { label: title }]}
+    flush
+  />
+
+  <LabelSection eyebrow="Business size" space="compact" class="options-section">
+    <ul class="options">
+      {
+        options.map((o) => (
+          <li>
+            <a href={o.href}>
+              <span class="frame">
+                <Image src={o.image.src} alt={o.image.alt} widths={[460, 920]} sizes="(max-width: 760px) 100vw, 462px" />
+              </span>
+              <div class="body">
+                <div class="head">
+                  <h2>{o.title}</h2>
+                  <span class="go" aria-hidden="true">
+                    →
+                  </span>
+                </div>
+                <ul class="criteria">
+                  {o.criteria.map((c) => (
+                    <li>{c}</li>
+                  ))}
+                </ul>
+                <p>{o.text}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </LabelSection>
+</SiteLayout>
+
+<style>
+  :global(section.options-section.options-section) {
+    padding-bottom: clamp(80px, 8.3vw, 120px);
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .options > li {
+    display: flex;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top: 3px solid var(--color-mustard);
+    background: var(--color-surface);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .frame {
+    display: block;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  a:hover img {
+    transform: scale(1.03);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px 32px 32px;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  h2 {
+    font-size: clamp(28px, 1rem + 1.2vw, 34px);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  a:hover h2 {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+  }
+
+  .go {
+    color: var(--color-gold);
+    font-size: 20px;
+    transition: transform 0.2s ease;
+  }
+
+  a:hover .go {
+    transform: translateX(4px);
+  }
+
+  .criteria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .criteria li {
+    padding: 7px 12px;
+    border: 1px solid #d6d6d6;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  .body p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  @media (max-width: 760px) {
+    .options {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
     }
-  </div>
-</BaseLayout>
+
+    .body {
+      padding: 22px 20px 24px;
+    }
+  }
+</style>

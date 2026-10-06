@@ -1,0 +1,111 @@
+---
+/**
+ * State license numbers as a column-first grid (4 columns on desktop, fewer as the
+ * column narrows). Rows come from the licenses page body (see rich-text.ts splitLicenses).
+ */
+import type { LicenseRow } from './rich-text';
+
+interface Props {
+  rows: LicenseRow[];
+}
+const { rows } = Astro.props;
+const perColumn = (cols: number) => Math.ceil(rows.length / cols);
+const style = [4, 3, 2].map((c) => `--rows-${c}: ${perColumn(c)}`).join('; ');
+---
+
+<div class="license-grid">
+  <dl style={style}>
+    {
+      rows.map((row, i) => (
+        <div
+          class="row"
+          data-top-4={i % perColumn(4) === 0 ? '' : undefined}
+          data-top-3={i % perColumn(3) === 0 ? '' : undefined}
+          data-top-2={i % perColumn(2) === 0 ? '' : undefined}
+        >
+          <dt>{row.state}</dt>
+          <dd>{row.number}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
+
+<style>
+  .license-grid {
+    container-type: inline-size;
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 20px;
+    margin: 0;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    padding-block: 10px;
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  dt {
+    color: var(--color-ink);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--color-muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  @container (min-width: 440px) {
+    dl {
+      grid-auto-flow: column;
+      grid-template-rows: repeat(var(--rows-2), auto);
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 0;
+    }
+
+    .row[data-top-2] {
+      border-top: 1px solid var(--color-ink);
+    }
+  }
+
+  @container (min-width: 660px) {
+    dl {
+      grid-template-rows: repeat(var(--rows-3), auto);
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .row[data-top-2] {
+      border-top: 0;
+    }
+
+    .row[data-top-3] {
+      border-top: 1px solid var(--color-ink);
+    }
+  }
+
+  @container (min-width: 900px) {
+    dl {
+      grid-template-rows: repeat(var(--rows-4), auto);
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .row[data-top-3] {
+      border-top: 0;
+    }
+
+    .row[data-top-4] {
+      border-top: 1px solid var(--color-ink);
+    }
+  }
+</style>

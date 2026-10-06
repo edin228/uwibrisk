@@ -1,0 +1,111 @@
+---
+/** "On this page" list for the label column. Sticky on desktop; highlights the section in view. */
+import type { TocItem } from './rich-text';
+
+interface Props {
+  items: TocItem[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="toc" aria-labelledby="toc-heading" data-toc>
+  <p class="toc-heading" id="toc-heading">On this page</p>
+  <ol>
+    {
+      items.map((item, i) => (
+        <li>
+          <a href={`#${item.slug}`} aria-current={i === 0 ? 'true' : undefined}>
+            {item.text}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<script>
+  for (const toc of document.querySelectorAll<HTMLElement>('[data-toc]')) {
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+    const targets = links
+      .map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+      .filter((el): el is HTMLElement => el !== null);
+    const setActive = (id: string) => {
+      for (const a of links) {
+        if (a.hash.slice(1) === id) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      }
+    };
+    // The active section is the last heading above the upper third of the viewport.
+    const update = () => {
+      const line = window.innerHeight / 3;
+      let current = targets[0];
+      for (const t of targets) if (t.getBoundingClientRect().top <= line) current = t;
+      if (current) setActive(current.id);
+    };
+    let frame = 0;
+    window.addEventListener(
+      'scroll',
+      () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(update);
+      },
+      { passive: true },
+    );
+    update();
+  }
+</script>
+
+<style>
+  .toc {
+    position: sticky;
+    top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .toc-heading {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: var(--tracking-label);
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--color-rule);
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    margin-left: -1px;
+    padding: 7px 0 7px 14px;
+    border-left: 2px solid transparent;
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-ink);
+  }
+
+  a[aria-current] {
+    border-left-color: var(--color-ink);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 1100px) {
+    .toc {
+      position: static;
+    }
+  }
+</style>

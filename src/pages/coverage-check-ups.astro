@@ -1,14 +1,26 @@
 ---
+/** /coverage-check-ups: business, personal and benefits check-up worksheets. */
 import CardGrid from '../components/CardGrid.astro';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
 import { listingPages } from '../data/legacy/listing-pages';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import { checkUpCards } from '../lib/cards';
-const meta = listingPages['coverage-check-ups'];
+
+const copy = listingPages['coverage-check-ups'];
+const cards = await checkUpCards();
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{meta.heading}</h1>
-    <CardGrid cards={await checkUpCards()} />
-  </div>
-</BaseLayout>
+<SiteLayout title={copy.title} description={copy.description}>
+  <PageIntro title={copy.heading} lead={copy.lead} crumbs={[{ label: 'Resources', href: '/resources' }, { label: copy.heading }]} flush />
+
+  <LabelSection eyebrow="Check-ups" space="compact" class="check-ups">
+    <CardGrid cards={cards} columns={3} level="h2" />
+  </LabelSection>
+</SiteLayout>
+
+<style>
+  :global(section.check-ups.check-ups) {
+    padding-bottom: clamp(80px, 8.3vw, 120px);
+  }
+</style>

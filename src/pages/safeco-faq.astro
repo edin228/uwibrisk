@@ -1,7 +1,11 @@
 ---
-import LegacyImg from '../components/legacy/LegacyImg.astro';
+/** /safeco-faq: questions about Safeco's non-renewals, with FAQPage structured data. */
+import { Image } from 'astro:assets';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
 import { faqs, intro, logo, meta } from '../data/legacy/safeco-faq';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -9,12 +13,98 @@ const faqSchema = {
 };
 ---
 
-<BaseLayout title={meta.title} description={meta.description} searchable>
+<SiteLayout title={meta.title} description={meta.description} searchable>
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
-  <article class="container">
-    <LegacyImg image={logo} width={300} />
-    <h1>Safeco FAQ</h1>
-    <p>{intro}</p>
-    {faqs.map((f) => <details><summary>{f.question}</summary><p>{f.answer}</p></details>)}
-  </article>
-</BaseLayout>
+  <PageIntro title={meta.title} lead={intro} crumbs={[{ label: 'Resources', href: '/resources' }, { label: meta.title }]} flush />
+
+  <LabelSection eyebrow="Questions" space="compact" class="faq-section">
+    <Image slot="label" class="logo" src={logo.src} alt={logo.alt} width={320} />
+    <div class="faqs">
+      {
+        faqs.map((f, i) => (
+          <details open={i === 0}>
+            <summary>
+              <span class="q">{f.question}</span>
+              <span class="icon" aria-hidden="true" />
+            </summary>
+            <p>{f.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </LabelSection>
+</SiteLayout>
+
+<style>
+  :global(section.faq-section.faq-section) {
+    padding-bottom: clamp(80px, 8.3vw, 120px);
+  }
+
+  .logo {
+    width: 160px;
+    height: auto;
+    margin-top: 14px;
+  }
+
+  .faqs {
+    border-top: 1px solid var(--color-ink);
+  }
+
+  details {
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding-block: 22px;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .q {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: clamp(20px, 1rem + 0.5vw, 24px);
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+
+  summary:hover .q {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .icon::before {
+    content: '+';
+    color: var(--color-gold);
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  details[open] .icon::before {
+    content: '–';
+  }
+
+  details p {
+    max-width: 680px;
+    padding-bottom: 24px;
+    font-size: 16px;
+    line-height: 27px;
+  }
+
+  @media (max-width: 1100px) {
+    .logo {
+      width: 120px;
+      margin-top: 4px;
+    }
+  }
+</style>

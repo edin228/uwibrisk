@@ -1,28 +1,329 @@
 ---
-import CardGrid from '../components/CardGrid.astro';
-import { listingPages } from '../data/legacy/listing-pages';
-import BaseLayout from '../layouts/BaseLayout.astro';
+/**
+ * /carriers: carrier directory. "Report a claim" in the header points here, so each
+ * carrier leads with its claims line and online claim link.
+ */
 import { getCollection } from 'astro:content';
-const carriers = (await getCollection('carriers')).sort((a, b) => a.data.name.localeCompare(b.data.name));
-const cards = carriers.map((c) => ({
-  title: c.data.name,
-  href: c.data.website,
-  image: c.data.logo,
-  imageAlt: c.data.logoAlt,
-  text: [
-    c.data.phones.general && `General: ${c.data.phones.general}`,
-    c.data.phones.claims && `Claims: ${c.data.phones.claims}`,
-    c.data.phones.billing && `Billing: ${c.data.phones.billing}`,
-  ]
-    .filter(Boolean)
-    .join(' · '),
-}));
-const meta = listingPages['carriers'];
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
+import Button from '../components/ui/Button.astro';
+import { listingPages } from '../data/legacy/listing-pages';
+import { company } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const copy = listingPages.carriers;
+
+/** "800-366-5810" -> tel:+18003665810. Empty strings in the data count as missing. */
+const phone = (value: string | null) => {
+  const label = value?.trim();
+  if (!label) return null;
+  const digits = label.replace(/\D/g, '');
+  return { label, href: `tel:${digits.length === 10 ? `+1${digits}` : digits}` };
+};
+
+const carriers = (await getCollection('carriers'))
+  .sort((a, b) => a.data.name.localeCompare(b.data.name))
+  .map((c) => ({
+    id: c.id,
+    name: c.data.name,
+    claims: phone(c.data.phones.claims),
+    claimLink: c.data.claimLink,
+    general: phone(c.data.phones.general),
+    billing: phone(c.data.phones.billing),
+    links: [
+      c.data.claimLink && { label: 'File a claim online', href: c.data.claimLink },
+      c.data.payLink && { label: 'Make a payment', href: c.data.payLink },
+      c.data.website && { label: 'Website', href: c.data.website },
+    ].filter((l): l is { label: string; href: string } => Boolean(l)),
+  }));
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{meta.heading}</h1>
-    <CardGrid cards={cards} />
-  </div>
-</BaseLayout>
+<SiteLayout title={copy.title} description={copy.description} closing={false}>
+  <PageIntro title={copy.heading} lead={copy.lead} crumbs={[{ label: 'Client center' }, { label: copy.heading }]} flush />
+
+  <LabelSection eyebrow="Report a claim" space="compact" class="directory">
+    <div slot="label" class="claim-help">
+      <p>{copy.claimText}</p>
+      <Button href={company.phoneHref} variant="ink" block>Call {company.phone}</Button>
+      <label class="search">
+        <span class="visually-hidden">Search carriers</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          <path d="M20 20l-4-4" fill="none" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+        <input type="search" placeholder="Search carriers" autocomplete="off" data-carrier-search />
+      </label>
+    </div>
+
+    <ul class="carriers" data-carriers>
+      {
+        carriers.map((c) => (
+          <li data-name={c.name.toLowerCase()}>
+            <h2 class="name">{c.name}</h2>
+            <div class="claims">
+              <span class="label">Claims</span>
+              {c.claims ? (
+                <a class="claims-phone" href={c.claims.href}>
+                  {c.claims.label}
+                </a>
+              ) : c.claimLink ? (
+                <a class="claims-phone" href={c.claimLink} target="_blank" rel="noopener">
+                  File online<span aria-hidden="true"> ↗</span>
+                  <span class="visually-hidden"> with {c.name} (opens in a new tab)</span>
+                </a>
+              ) : (
+                <a class="claims-phone" href={company.phoneHref}>
+                  <span class="visually-hidden">Call UWIB at </span>
+                  {company.phone}
+                </a>
+              )}
+            </div>
+            <dl class="phones">
+              {c.general && (
+                <div>
+                  <dt>General</dt>
+                  <dd>
+                    <a href={c.general.href}>{c.general.label}</a>
+                  </dd>
+                </div>
+              )}
+              {c.billing && (
+                <div>
+                  <dt>Billing</dt>
+                  <dd>
+                    <a href={c.billing.href}>{c.billing.label}</a>
+                  </dd>
+                </div>
+              )}
+            </dl>
+            <ul class="links">
+              {c.links.map((l) => (
+                <li>
+                  <a href={l.href} target="_blank" rel="noopener">
+                    {l.label}
+                    <span aria-hidden="true"> ↗</span>
+                    <span class="visually-hidden"> for {c.name} (opens in a new tab)</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="empty" hidden data-carrier-empty>No carriers match that search.</p>
+  </LabelSection>
+</SiteLayout>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('[data-carrier-search]');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-carriers] > li')];
+  const empty = document.querySelector<HTMLElement>('[data-carrier-empty]');
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let shown = 0;
+    for (const li of items) {
+      const match = !q || (li.dataset.name ?? '').includes(q);
+      li.hidden = !match;
+      if (match) shown++;
+    }
+    if (empty) empty.hidden = shown > 0;
+  });
+</script>
+
+<style>
+  .claim-help {
+    position: sticky;
+    top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 6px;
+  }
+
+  .claim-help p {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 52px;
+    margin-top: 12px;
+    padding-inline: 16px;
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .search:focus-within {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 2px;
+  }
+
+  .carriers {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-ink);
+    list-style: none;
+  }
+
+  .carriers > li {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 8px 24px;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .carriers > li[hidden] {
+    display: none;
+  }
+
+  .name {
+    font-size: 23px;
+    letter-spacing: -0.015em;
+    line-height: 29px;
+  }
+
+  .claims {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .label,
+  dt {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  dt {
+    color: var(--color-faint);
+  }
+
+  .claims-phone {
+    color: var(--color-ink);
+    font-size: 20px;
+    font-weight: 650;
+    line-height: 28px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .claims-phone:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
+  }
+
+  .phones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .phones div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  dd a {
+    color: var(--color-body);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  dd a:hover {
+    color: var(--color-ink);
+    text-decoration: underline;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .links a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .empty {
+    padding-top: 24px;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 1100px) {
+    .claim-help {
+      position: static;
+      max-width: 560px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .carriers > li {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px 24px;
+    }
+
+    .name,
+    .links {
+      grid-column: 1 / -1;
+    }
+
+    .links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carriers > li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

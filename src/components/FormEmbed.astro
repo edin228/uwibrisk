@@ -1,21 +1,62 @@
 ---
+/**
+ * Renders a third-party form/video embed exactly as it was configured in Hygraph.
+ * The raw HTML (including Jotform's own scripts) is printed unchanged, so Jotform's
+ * auto-resize keeps working: `jsform/<id>` scripts write the iframe and resize it, and
+ * iframe embeds ship Jotform's `for-form-embed-handler.js` call. This component only
+ * sizes the result: full width, a minimum height while the form loads, 16:9 video.
+ */
 import type { FormEmbed } from '../data/forms';
 
-/** Renders a third-party form/video embed exactly as it was configured in Hygraph. */
 interface Props {
   embed: FormEmbed;
+  /** Accessible name for the embed region. */
+  title?: string;
 }
-const { embed } = Astro.props;
+const { embed, title } = Astro.props;
 ---
 
-<div class="form-embed" data-embed-type={embed.type}>
+<div class="form-embed" data-embed-type={embed.type} role={title ? 'region' : undefined} aria-label={title}>
   <Fragment set:html={embed.rawHtml} />
 </div>
 
 <style>
+  .form-embed {
+    width: 100%;
+  }
+
   .form-embed :global(iframe) {
+    display: block;
     width: 100%;
     max-width: 100%;
     border: 0;
+  }
+
+  /* Jotform sets the real height itself once the form has loaded. */
+  .form-embed[data-embed-type='jotform'] {
+    min-height: 540px;
+  }
+
+  .form-embed[data-embed-type='jotform'] :global(iframe) {
+    min-width: 100%;
+    min-height: 540px;
+  }
+
+  .form-embed[data-embed-type='iframe'] :global(iframe) {
+    min-height: 675px;
+  }
+
+  .form-embed[data-embed-type='video'] :global(iframe) {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .form-embed[data-embed-type='script'] {
+    min-height: 400px;
+  }
+
+  /* Wrapper markup left over from the old site's Tailwind classes. */
+  .form-embed > :global(div) {
+    width: 100%;
   }
 </style>

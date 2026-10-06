@@ -1,8 +1,15 @@
 ---
-/** Rich-text CMS page (privacy, terms, licenses, careers, ...). Design: Paper "Simple page — Desktop (Licenses)". */
-import { Image } from 'astro:assets';
+/**
+ * Rich-text CMS page (privacy, terms, licenses, careers, ...).
+ * Design: Paper "Simple page — Desktop (Licenses)": solid header, breadcrumbs and an
+ * "On this page" TOC in the label column, title/lead/last-updated and prose in the
+ * content column. Header images are not shown (the design is text-first); the image is
+ * still used as the social share image.
+ */
 import { type CollectionEntry, render } from 'astro:content';
 import Callout from '../Callout.astro';
+import PageIntro from '../content/PageIntro.astro';
+import RichBody from '../content/RichBody.astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 interface Props {
@@ -10,24 +17,33 @@ interface Props {
 }
 const { page } = Astro.props;
 const { Content } = await render(page);
-const { title, description, headerImage, headerAlt } = page.data;
+const { slug, description, headerImage, updatedDate } = page.data;
+
+/** Legal/disclosure pages: show "Last updated", no closing call to action. */
+const LEGAL = new Set(['licenses', 'privacy-policy', 'terms-of-use', 'compensation-disclosure']);
+/** About-type pages end with the mustard closing band. */
+const WITH_CLOSING = new Set(['our-history', 'our-core-values']);
+/** Leads for pages whose CMS entry has no description (copy from the approved mockup). */
+const LEADS: Record<string, string> = {
+  licenses:
+    'UWIB Risk & Insurance Solutions (United Western Insurance Brokers) holds producer licenses in the following states and territories.',
+};
+
+// Some CMS titles are lower case ("terms of use"); show them in sentence case.
+const title = page.data.title.charAt(0).toUpperCase() + page.data.title.slice(1);
+const lead = description ?? LEADS[slug];
+const legal = LEGAL.has(slug);
 ---
 
-<SiteLayout title={title} description={description ?? undefined} searchable>
-  <article class="container page">
-    <h1>{title}</h1>
-    {description && <p class="lead">{description}</p>}
-    {headerImage && <Image src={headerImage} alt={headerAlt} width={1312} loading="eager" />}
-    <div class="prose"><Content components={{ Callout }} /></div>
-  </article>
+<SiteLayout
+  title={title}
+  description={lead ?? undefined}
+  image={headerImage ?? undefined}
+  closing={WITH_CLOSING.has(slug) ? {} : false}
+  searchable
+>
+  <PageIntro title={title} lead={lead} crumbs={[{ label: 'About', href: '/about' }, { label: title }]} updated={legal ? updatedDate : undefined} />
+  <RichBody title={title} licenses={slug === 'licenses'}>
+    <Content components={{ Callout }} />
+  </RichBody>
 </SiteLayout>
-
-<style>
-  .page {
-    padding-block: 96px;
-  }
-  .lead {
-    margin-block: 24px;
-    font-size: var(--text-lead);
-  }
-</style>

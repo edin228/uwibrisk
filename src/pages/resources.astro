@@ -1,14 +1,30 @@
 ---
-import { getCollection } from 'astro:content';
+/**
+ * /resources. The old page only printed "Resources"; the links come from the
+ * "Resources" dropdown of the old navigation (src/data/navigation.json) plus the
+ * client center links from src/data/site.ts.
+ */
+import { getEntry } from 'astro:content';
+import IndexList from '../components/content/IndexList.astro';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
 import { heading, meta } from '../data/legacy/resources';
-import BaseLayout from '../layouts/BaseLayout.astro';
-const nav = await getCollection('navigation');
-const resources = nav.find((n) => n.id === 'resources');
+import { clientLinks } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const nav = await getEntry('navigation', 'resources');
+const resources = (nav?.data.children ?? []).map((c) => ({ title: c.title, href: c.href }));
+const client = clientLinks.map((l) => ({ title: l.label, href: l.href }));
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{heading}</h1>
-    {resources && <ul>{resources.data.children.map((c) => <li><a href={c.href}>{c.title}</a></li>)}</ul>}
-  </div>
-</BaseLayout>
+<SiteLayout title={meta.title} description={meta.description}>
+  <PageIntro title={heading} lead={meta.description} crumbs={[{ label: 'Home', href: '/' }, { label: heading }]} flush />
+
+  <LabelSection eyebrow={heading} space="compact">
+    <IndexList items={resources} size="md" />
+  </LabelSection>
+
+  <LabelSection eyebrow="Client center" space="default">
+    <IndexList items={client} size="md" numbered={false} />
+  </LabelSection>
+</SiteLayout>

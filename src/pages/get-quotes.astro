@@ -1,14 +1,46 @@
 ---
+/** /get-quotes ("Get a quote" in the header): quote cards, then other quote forms and worksheets. */
 import CardGrid from '../components/CardGrid.astro';
-import { listingPages } from '../data/legacy/listing-pages';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import IndexList from '../components/content/IndexList.astro';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
+import TextLink from '../components/ui/TextLink.astro';
+import { forms } from '../data/forms';
+import { listingPages, quoteFormSlugs } from '../data/legacy/listing-pages';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import { quoteCards } from '../lib/cards';
-const meta = listingPages['get-quotes'];
+
+const copy = listingPages['get-quotes'];
+const checkUps = listingPages['coverage-check-ups'];
+const cards = await quoteCards();
+const quoteForms = quoteFormSlugs.map((slug) => {
+  const form = forms.find((f) => f.slug === slug);
+  if (!form) throw new Error(`/get-quotes lists unknown form page "${slug}"`);
+  return { title: form.title, href: `/${form.slug}` };
+});
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{meta.heading}</h1>
-    <CardGrid cards={await quoteCards()} />
-  </div>
-</BaseLayout>
+<SiteLayout
+  title={copy.title}
+  description={copy.description}
+  closing={{ primary: { label: 'Contact an advisor →', href: '/contact' } }}
+>
+  <PageIntro title={copy.heading} lead={copy.lead} crumbs={[{ label: 'Home', href: '/' }, { label: copy.heading }]} flush />
+
+  <LabelSection eyebrow="Coverage" space="compact">
+    <CardGrid cards={cards} columns={3} level="h2" />
+  </LabelSection>
+
+  <LabelSection eyebrow={copy.formsEyebrow} space="default">
+    <IndexList items={quoteForms} size="md" />
+    <p class="more">
+      <TextLink href="/coverage-check-ups">{checkUps.heading} →</TextLink>
+    </p>
+  </LabelSection>
+</SiteLayout>
+
+<style>
+  .more {
+    margin-top: 32px;
+  }
+</style>

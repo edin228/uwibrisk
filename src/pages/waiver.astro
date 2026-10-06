@@ -1,12 +1,12 @@
 ---
+/** /waiver: demo of the Waiver Electronic "sign your waiver" tab (not indexed). */
+import PageIntro from '../components/content/PageIntro.astro';
 import { meta, text, waiverTab } from '../data/legacy/waiver';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 ---
 
-<BaseLayout title={meta.title} description={meta.description} noindex>
-  <div class="container">
-    <p>{text}</p>
-    <div {...waiverTab.attributes}></div>
-    <script is:inline src={waiverTab.scriptSrc}></script>
-  </div>
-</BaseLayout>
+<SiteLayout title={meta.title} description={meta.description} noindex closing={false}>
+  <PageIntro title={meta.title} lead={`${text}.`} crumbs={[{ label: 'Home', href: '/' }, { label: meta.title }]} />
+  <div {...waiverTab.attributes}></div>
+  <script is:inline src={waiverTab.scriptSrc}></script>
+</SiteLayout>

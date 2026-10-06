@@ -1,0 +1,55 @@
+---
+/** Small black "call us" box (Paper "Form page", "Questions about a certificate?"). */
+import { company } from '../../data/site';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  /** Defaults to the main line. */
+  phone?: { label: string; href: string };
+}
+const { eyebrow, heading, phone = { label: company.phone, href: company.phoneHref } } = Astro.props;
+---
+
+<aside class="help-box">
+  <p class="eyebrow on-dark">{eyebrow}</p>
+  <p class="heading">{heading}</p>
+  <a class="phone" href={phone.href}>{phone.label}</a>
+  <slot />
+</aside>
+
+<style>
+  .help-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 22px;
+    background: var(--color-night);
+    color: var(--color-paper);
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    line-height: 14px;
+  }
+
+  .heading {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .phone {
+    color: var(--color-paper);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+  .phone:hover {
+    color: var(--color-mustard);
+  }
+</style>

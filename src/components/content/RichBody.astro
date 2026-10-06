@@ -1,0 +1,216 @@
+---
+/**
+ * Body of a rich-text CMS page: "On this page" TOC in the label column, prose in the
+ * content column. Pass the rendered entry as the default slot (<Content />); the HTML is
+ * normalized (fake bold headings -> h2, sentence case) before it is printed.
+ *
+ * The licenses page gets a dedicated layout: state license grid first, then the
+ * California email notice as a collapsible callout.
+ */
+import LicenseGrid from './LicenseGrid.astro';
+import PageToc from './PageToc.astro';
+import { headingsOf, normalizeHeadings, splitLicenses, type TocItem } from './rich-text';
+
+interface Props {
+  title: string;
+  /** Use the licenses layout when the body has that shape. */
+  licenses?: boolean;
+}
+const { title, licenses: wantLicenses = false } = Astro.props;
+
+const html = normalizeHeadings(await Astro.slots.render('default'), title);
+const licenses = wantLicenses ? splitLicenses(html) : null;
+
+const NOTICE_ID = 'california-email-notice';
+const toc: TocItem[] = licenses
+  ? [
+      { slug: 'state-licenses', text: 'State licenses' },
+      { slug: NOTICE_ID, text: 'California email notice' },
+    ]
+  : headingsOf(html);
+---
+
+<div class="rich-body">
+  <div class="inner">
+    <div class="label-col">
+      {toc.length >= 2 && <PageToc items={toc} />}
+    </div>
+    <div class="content-col">
+      {
+        licenses ? (
+          <>
+            <section class="licenses" aria-labelledby="state-licenses">
+              <h2 id="state-licenses" class="section-title">
+                State licenses
+              </h2>
+              <LicenseGrid rows={licenses.rows} />
+              {licenses.rest && <div class="prose" set:html={licenses.rest} />}
+            </section>
+            {licenses.notice && (
+              <section class="notice" id={NOTICE_ID} aria-labelledby="notice-heading">
+                <h2 id="notice-heading" class="notice-title">
+                  License numbers on emails (California)
+                </h2>
+                <p class="notice-summary">
+                  Starting January 1, 2023, California Insurance Code section 1725.5 requires most types of insurance
+                  producers to include their license number on emails that involve an activity requiring a license.
+                </p>
+                <details>
+                  <summary>
+                    <span class="when-closed">Read the full notice +</span>
+                    <span class="when-open">Hide the full notice –</span>
+                  </summary>
+                  <div class="prose notice-body" set:html={licenses.notice} />
+                </details>
+              </section>
+            )}
+          </>
+        ) : (
+          <div class="prose" set:html={html} />
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .rich-body {
+    padding-bottom: clamp(80px, 7.6vw, 110px);
+  }
+
+  .inner {
+    display: flex;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .label-col {
+    flex-shrink: 0;
+    width: var(--label-col);
+  }
+
+  .content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    flex: 1;
+    min-width: 0;
+    max-width: 948px;
+  }
+
+  .prose {
+    max-width: 760px;
+  }
+
+  /* First element sits on the section's top edge, level with the TOC heading. */
+  .prose > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(h2) {
+    margin-top: 2.2em;
+    font-size: clamp(26px, 1rem + 1vw, 32px);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .prose :global(h2 + *) {
+    margin-top: 0.75em;
+  }
+
+  .prose :global(img) {
+    height: auto;
+  }
+
+  .section-title {
+    margin-bottom: 20px;
+    font-size: clamp(26px, 1rem + 1vw, 32px);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .licenses .prose {
+    margin-top: 24px;
+  }
+
+  .notice {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 700px;
+    padding: 28px;
+    border-left: 3px solid var(--color-mustard);
+    background: var(--color-surface);
+  }
+
+  .notice-title {
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    line-height: 30px;
+  }
+
+  .notice-summary {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  summary {
+    display: inline-block;
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 18px;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-mustard);
+    text-underline-offset: 4px;
+  }
+
+  .when-open,
+  details[open] .when-closed {
+    display: none;
+  }
+
+  details[open] .when-open {
+    display: inline;
+  }
+
+  .notice-body {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-rule);
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  @media (max-width: 1100px) {
+    .inner {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .label-col {
+      width: auto;
+    }
+
+    .label-col:empty {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .notice {
+      padding: 22px 20px;
+    }
+  }
+</style>

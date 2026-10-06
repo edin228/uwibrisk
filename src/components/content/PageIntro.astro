@@ -1,0 +1,140 @@
+---
+/**
+ * Opening block of text-first pages (Paper "Simple page — Desktop (Licenses)"):
+ * breadcrumbs in the 300px label column, big title + lead in the content column.
+ * Use with <SiteLayout header="solid">. Extra content (buttons, meta) goes in the default slot.
+ */
+import Breadcrumbs from '../site/Breadcrumbs.astro';
+import FormattedDate from '../FormattedDate.astro';
+
+interface Props {
+  title: string;
+  lead?: string | null | undefined;
+  crumbs?: { label: string; href?: string }[];
+  /** Shown as "Last updated <date>". */
+  updated?: Date | undefined;
+  /** Background: white (default) or the warm gray surface. */
+  surface?: 'paper' | 'surface';
+  /** Tighter bottom padding when a full-bleed section follows directly. */
+  flush?: boolean;
+}
+const { title, lead, crumbs, updated, surface = 'paper', flush = false } = Astro.props;
+---
+
+<header class:list={['page-intro', `surface-${surface}`, { flush }]}>
+  <div class="inner">
+    <div class="label-col">
+      {crumbs && crumbs.length > 0 && <Breadcrumbs items={crumbs} tone="light" />}
+    </div>
+    <div class="content-col">
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      {
+        updated && (
+          <p class="meta">
+            <span class="meta-label">Last updated</span>
+            <FormattedDate date={updated} format="short" />
+          </p>
+        )
+      }
+      <slot />
+    </div>
+  </div>
+</header>
+
+<style>
+  .page-intro {
+    padding-block: clamp(56px, 6.7vw, 96px) clamp(40px, 4.4vw, 64px);
+  }
+
+  .surface-surface {
+    background: var(--color-surface);
+  }
+
+  .flush {
+    padding-bottom: clamp(32px, 3.3vw, 48px);
+  }
+
+  .inner {
+    display: flex;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .label-col {
+    flex-shrink: 0;
+    width: var(--label-col);
+    padding-top: 12px;
+  }
+
+  .content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    flex: 1;
+    min-width: 0;
+    max-width: 948px;
+  }
+
+  h1 {
+    font-size: clamp(46px, 1.4rem + 4.1vw, 76px);
+    letter-spacing: -0.05em;
+    line-height: 1.03;
+  }
+
+  .lead {
+    max-width: 700px;
+    color: var(--color-body);
+    font-size: var(--text-lead);
+    line-height: 29px;
+    text-wrap: pretty;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-body);
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .meta-label {
+    color: var(--color-faint);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1100px) {
+    .inner {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .label-col {
+      width: auto;
+      padding-top: 0;
+    }
+
+    .label-col:empty {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .content-col {
+      gap: 16px;
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

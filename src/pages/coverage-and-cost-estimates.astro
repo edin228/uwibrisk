@@ -1,16 +1,25 @@
 ---
+/** /coverage-and-cost-estimates: quote cards plus the niche (industry) programs. */
 import CardGrid from '../components/CardGrid.astro';
+import IndexList from '../components/content/IndexList.astro';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
 import { listingPages } from '../data/legacy/listing-pages';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import { programCards, quoteCards } from '../lib/cards';
-const meta = listingPages['coverage-and-cost-estimates'];
+
+const copy = listingPages['coverage-and-cost-estimates'];
+const [cards, programs] = await Promise.all([quoteCards(), programCards()]);
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{meta.heading}</h1>
-    <CardGrid cards={await quoteCards()} />
-    <h2>{meta.secondaryHeading}</h2>
-    <CardGrid cards={await programCards()} />
-  </div>
-</BaseLayout>
+<SiteLayout title={copy.title} description={copy.description}>
+  <PageIntro title={copy.heading} crumbs={[{ label: 'Resources', href: '/resources' }, { label: copy.heading }]} flush />
+
+  <LabelSection eyebrow="Coverage" space="compact">
+    <CardGrid cards={cards} columns={3} level="h2" />
+  </LabelSection>
+
+  <LabelSection eyebrow={copy.secondaryHeading} space="default">
+    <IndexList items={programs} />
+  </LabelSection>
+</SiteLayout>

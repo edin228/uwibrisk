@@ -1,16 +1,36 @@
 ---
+/**
+ * /programs ("Industries" in the header). Featured programs with their own pages
+ * (the homepage industry index), then every program from src/data/programs.json.
+ */
 import CardGrid from '../components/CardGrid.astro';
+import IndexList from '../components/content/IndexList.astro';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
+import { industries } from '../data/home';
 import { listingPages } from '../data/legacy/listing-pages';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { programCards, quoteCards } from '../lib/cards';
-const meta = listingPages['programs'];
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { programCards } from '../lib/cards';
+
+const copy = listingPages.programs;
+const featured = industries.items.map((item) => ({
+  title: item.label,
+  text: item.caption,
+  href: item.href,
+  image: item.photo.src,
+  imageAlt: item.photo.alt,
+}));
+const programs = await programCards();
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{meta.heading}</h1>
-    <CardGrid cards={await programCards()} />
-    <h2>{meta.secondaryHeading}</h2>
-    <CardGrid cards={await quoteCards()} />
-  </div>
-</BaseLayout>
+<SiteLayout title={copy.title} description={copy.description}>
+  <PageIntro title={copy.heading} lead={industries.heading} crumbs={[{ label: 'Home', href: '/' }, { label: copy.heading }]} flush />
+
+  <LabelSection eyebrow={copy.featuredEyebrow} space="compact">
+    <CardGrid cards={featured} columns={3} level="h2" />
+  </LabelSection>
+
+  <LabelSection eyebrow={copy.allEyebrow} intro={`${programs.length} programs`} space="default">
+    <IndexList items={programs} />
+  </LabelSection>
+</SiteLayout>

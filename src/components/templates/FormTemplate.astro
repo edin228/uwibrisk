@@ -1,31 +1,251 @@
 ---
-/** Jotform / vendor embed page. Design: Paper "Form page — Desktop (Request a certificate)". */
+/**
+ * Jotform / vendor embed page. Design: Paper "Form page — Desktop (Request a certificate)":
+ * warm gray page, intro column on the left (breadcrumbs, title, lead, optional checklist,
+ * call box), the embed in a white card with a mustard top rule on the right.
+ */
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import HelpBox from '../content/HelpBox.astro';
+import Breadcrumbs from '../site/Breadcrumbs.astro';
 import FormEmbed from '../FormEmbed.astro';
 import type { FormPage } from '../../data/forms';
+import { quoteFormSlugs } from '../../data/legacy/listing-pages';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 interface Props {
   form: FormPage;
 }
 const { form } = Astro.props;
+const path = `/${form.slug}`;
+
+interface Extra {
+  title?: string;
+  lead?: string;
+  checklist?: string[];
+  help?: { eyebrow: string; heading: string };
+}
+/** Page-specific copy from the approved mockup. */
+const EXTRAS: Record<string, Extra> = {
+  'certificates-of-insurance': {
+    title: 'Request a certificate of insurance',
+    lead: 'For a job, lease or contract that asks for proof of coverage. Tell us who needs it and what the contract requires, and we’ll take it from there.',
+    checklist: [
+      'The certificate holder’s name and mailing address',
+      'Whether they need to be named as additional insured',
+      'Any specific wording or limits the contract requires',
+    ],
+    help: { eyebrow: 'Questions about a certificate?', heading: 'Call your account team.' },
+  },
+};
+
+/** Forms existing clients use; everything else is for prospects. */
+const CLIENT_FORMS = new Set(['certificates-of-insurance', 'client-portal-request', 'upload-files', 'broker-authorization-letter', 'feedback']);
+/** Quote forms and worksheets listed on /get-quotes (besides the quote cards). */
+const QUOTE_FORMS = new Set(quoteFormSlugs);
+
+const [programs, quoteCards, checkUpCards] = await Promise.all([
+  getCollection('programs'),
+  getCollection('quoteCards'),
+  getCollection('checkUpCards'),
+]);
+
+const section = (() => {
+  if (CLIENT_FORMS.has(form.slug)) return { label: 'Client center' };
+  if (programs.some((p) => p.data.url === path)) return { label: 'Industries', href: '/programs' };
+  if (QUOTE_FORMS.has(form.slug) || quoteCards.some((c) => c.data.href === path)) return { label: 'Get a quote', href: '/get-quotes' };
+  if (form.slug.includes('check-up') || checkUpCards.some((c) => c.data.href === path)) {
+    return { label: 'Coverage check-ups', href: '/coverage-check-ups' };
+  }
+  return { label: 'Resources', href: '/resources' };
+})();
+
+const extra = EXTRAS[form.slug] ?? {};
+// A few CMS titles are just the slug ("flood-quote"); prefer the quote card label then.
+const cmsTitle =
+  form.title === form.slug ? (quoteCards.find((c) => c.data.href === path)?.data.label ?? form.title.replace(/-/g, ' ')) : form.title;
+const title = extra.title ?? cmsTitle;
+const lead = extra.lead ?? form.wordingUnderTitle;
+const crumbLabel = form.slug === 'certificates-of-insurance' ? 'Request a certificate' : title;
+const help =
+  extra.help ??
+  (CLIENT_FORMS.has(form.slug)
+    ? { eyebrow: 'Questions?', heading: 'Call your account team.' }
+    : { eyebrow: 'Questions?', heading: 'Talk to a person.' });
 ---
 
-<SiteLayout title={form.title} description={form.wordingUnderTitle ?? undefined} closing={false}>
-  <article class="container page">
-    <h1>{form.title}</h1>
-    {form.wordingUnderTitle && <p class="lead">{form.wordingUnderTitle}</p>}
-    {form.headerImage && <Image src={form.headerImage} alt={form.headerImageAlt} width={1312} loading="eager" />}
-    <FormEmbed embed={form.embed} />
-  </article>
+<SiteLayout title={title} description={lead ?? undefined} image={form.headerImage ?? undefined} closing={false}>
+  <div class="form-page">
+    <div class="inner">
+      <div class="intro">
+        <Breadcrumbs items={[section, { label: crumbLabel }]} tone="light" />
+        <h1 class:list={{ long: title.length > 40 }}>{title}</h1>
+        {lead && <p class="lead">{lead}</p>}
+        {
+          extra.checklist && (
+            <div class="checklist">
+              <p class="eyebrow">What you’ll need</p>
+              <ul>
+                {extra.checklist.map((item) => (
+                  <li>
+                    <span class="tick" aria-hidden="true">
+                      ✓
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+        {
+          form.headerImage && (
+            <Image
+              class="photo"
+              src={form.headerImage}
+              alt={form.headerImageAlt}
+              widths={[400, 800]}
+              sizes="(max-width: 1100px) 100vw, 400px"
+            />
+          )
+        }
+      </div>
+      <div class="help">
+        <HelpBox eyebrow={help.eyebrow} heading={help.heading} />
+      </div>
+      <div class="card">
+        <FormEmbed embed={form.embed} title={title} />
+      </div>
+    </div>
+  </div>
 </SiteLayout>
 
 <style>
-  .page {
-    padding-block: 96px;
+  .form-page {
+    background: var(--color-surface);
+    padding-block: clamp(48px, 6.1vw, 88px) clamp(72px, 8.3vw, 120px);
   }
+
+  .inner {
+    display: grid;
+    grid-template-areas:
+      'intro card'
+      'help card';
+    grid-template-columns: 400px minmax(0, 848px);
+    grid-template-rows: auto 1fr;
+    gap: 28px 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    grid-area: intro;
+  }
+
+  .help {
+    grid-area: help;
+  }
+
+  h1 {
+    font-size: clamp(40px, 1.5rem + 2.4vw, 56px);
+    letter-spacing: -0.045em;
+    line-height: 1.07;
+  }
+
+  h1.long {
+    font-size: clamp(34px, 1.3rem + 1.6vw, 42px);
+    letter-spacing: -0.035em;
+  }
+
   .lead {
-    margin-block: 24px;
-    font-size: var(--text-lead);
+    color: var(--color-body);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 4px;
+  }
+
+  .checklist .eyebrow {
+    font-size: 11px;
+    letter-spacing: var(--tracking-label);
+    line-height: 14px;
+  }
+
+  .checklist ul {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #dadada;
+    list-style: none;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    padding-block: 12px;
+    border-bottom: 1px solid #dadada;
+    color: var(--color-ink);
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .tick {
+    flex-shrink: 0;
+    width: 16px;
+    color: var(--color-gold);
+  }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .card {
+    grid-area: card;
+    align-self: start;
+    padding: 44px;
+    border-top: 3px solid var(--color-mustard);
+    background: var(--color-paper);
+  }
+
+  @media (max-width: 1100px) {
+    .inner {
+      grid-template-areas:
+        'intro'
+        'card'
+        'help';
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto;
+      gap: 40px;
+    }
+
+    .intro,
+    .help {
+      max-width: 640px;
+    }
+
+    .photo {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .intro {
+      gap: 20px;
+    }
+
+    .card {
+      margin-inline: calc(-1 * var(--gutter));
+      padding: 24px var(--gutter);
+    }
   }
 </style>

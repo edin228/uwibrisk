@@ -1,19 +1,106 @@
 ---
-import { cards, heading, meta } from '../data/legacy/coi';
-import BaseLayout from '../layouts/BaseLayout.astro';
+/** /coi ("Request a certificate" in the header): instant certificates via the client portal, or a request form. */
+import { getEntry } from 'astro:content';
+import HelpBox from '../components/content/HelpBox.astro';
+import PageIntro from '../components/content/PageIntro.astro';
+import LabelSection from '../components/site/LabelSection.astro';
+import Button from '../components/ui/Button.astro';
+import TextLink from '../components/ui/TextLink.astro';
+import { cards, meta } from '../data/legacy/coi';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { isExternal } from '../lib/cards';
+
+const page = await getEntry('pages', 'coi');
+const cmsTitle = page?.data.title ?? 'Certificate of Insurance';
+const title = cmsTitle.charAt(0) + cmsTitle.slice(1).toLowerCase();
 ---
 
-<BaseLayout title={meta.title} description={meta.description}>
-  <div class="container">
-    <h1>{heading}</h1>
-    {
-      cards.map((c) => (
-        <article>
-          <h2><a href={c.href}>{c.title}</a></h2>
-          {c.subtitle && <p>{c.subtitle}</p>}
-          <a href={c.secondary.href}>{c.secondary.label}</a>
-        </article>
-      ))
+<SiteLayout title={title} description={meta.description} closing={false}>
+  <PageIntro
+    title={title}
+    lead={meta.description}
+    crumbs={[{ label: 'Client center' }, { label: 'Request a certificate' }]}
+    surface="surface"
+    flush
+  />
+
+  <LabelSection eyebrow="Two ways to get one" surface="surface" space="compact" class="coi-options">
+    <ul class="options">
+      {
+        cards.map((c) => (
+          <li>
+            <h2>{c.title}</h2>
+            <p class="text">{c.text}</p>
+            <div class="actions">
+              <Button href={c.primary.href} variant="ink" block>
+                {`${c.primary.label} ${isExternal(c.primary.href) ? '↗' : '→'}`}
+              </Button>
+              <TextLink href={c.secondary.href}>
+                {`${c.secondary.label} ${isExternal(c.secondary.href) ? '↗' : '→'}`}
+              </TextLink>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="help">
+      <HelpBox eyebrow="Questions about a certificate?" heading="Call your account team." />
+    </div>
+  </LabelSection>
+</SiteLayout>
+
+<style>
+  .help {
+    max-width: 460px;
+    margin-top: 24px;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 36px;
+    border-top: 3px solid var(--color-mustard);
+    background: var(--color-paper);
+  }
+
+  h2 {
+    font-size: clamp(30px, 1rem + 1.4vw, 38px);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  .text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-top: 10px;
+  }
+
+  @media (max-width: 760px) {
+    .options {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
     }
-  </div>
-</BaseLayout>
+
+    li {
+      padding: 28px 24px;
+    }
+  }
+</style>

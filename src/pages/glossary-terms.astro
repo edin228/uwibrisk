@@ -1,25 +1,396 @@
 ---
+/**
+ * /glossary-terms: every glossary term grouped A–Z, with a Business/Personal filter and a
+ * text search. Without JavaScript all terms are listed and the letter links still work.
+ */
 import { getCollection } from 'astro:content';
+import PageIntro from '../components/content/PageIntro.astro';
 import { listingPages } from '../data/legacy/listing-pages';
-import BaseLayout from '../layouts/BaseLayout.astro';
-const meta = listingPages['glossary-terms'];
-const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term));
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const copy = listingPages['glossary-terms'];
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'en', { numeric: true }));
+
+const letterOf = (term: string) => {
+  const c = term.charAt(0).toUpperCase();
+  return /[A-Z]/.test(c) ? c : '#';
+};
+const groups = [...new Set(terms.map((t) => letterOf(t.data.term)))].map((letter) => ({
+  letter,
+  id: letter === '#' ? 'terms-0-9' : `terms-${letter.toLowerCase()}`,
+  terms: terms.filter((t) => letterOf(t.data.term) === letter),
+}));
+const alphabet = ['#', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+const types = ['Business', 'Personal'] as const;
+const count = (type: string) => terms.filter((t) => t.data.type === type).length;
 ---
 
-<BaseLayout title={meta.title} description={meta.description} searchable>
-  <div class="container">
-    <h1>{meta.heading}</h1>
-    <dl>
-      {
-        terms.map((t) => (
-          <>
-            <dt id={t.id}>
-              <strong>{t.data.term}</strong> <span class="label">{t.data.type}</span>
-            </dt>
-            <dd>{t.data.definition}</dd>
-          </>
-        ))
-      }
-    </dl>
+<SiteLayout title={copy.title} description={copy.description} searchable>
+  <PageIntro title={copy.heading} lead={copy.lead} crumbs={[{ label: 'Resources', href: '/resources' }, { label: copy.heading }]} flush />
+
+  <div class="glossary" data-glossary>
+    <div class="row toolbar">
+      <div class="label-col">
+        <p class="eyebrow">Filter</p>
+      </div>
+      <div class="content-col controls">
+        <div class="chips" role="group" aria-label="Term type">
+          <button type="button" class="chip" aria-pressed="true" data-type="">
+            All <span class="n">{terms.length}</span>
+          </button>
+          {
+            types.map((type) => (
+              <button type="button" class="chip" aria-pressed="false" data-type={type}>
+                {type} <span class="n">{count(type)}</span>
+              </button>
+            ))
+          }
+        </div>
+        <label class="search">
+          <span class="visually-hidden">Search terms</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M20 20l-4-4" fill="none" stroke="currentColor" stroke-width="2"></path>
+          </svg>
+          <input type="search" placeholder="Search terms" autocomplete="off" data-search />
+        </label>
+        <nav class="letters" aria-label="Jump to letter">
+          {
+            alphabet.map((letter) => {
+              const group = groups.find((g) => g.letter === letter);
+              return group ? (
+                <a href={`#${group.id}`} data-letter={group.id}>
+                  {letter}
+                </a>
+              ) : (
+                <span aria-hidden="true">{letter}</span>
+              );
+            })
+          }
+        </nav>
+        <p class="status" aria-live="polite" data-status>{terms.length} terms</p>
+      </div>
+    </div>
+
+    {
+      groups.map((g) => (
+        <section class="row group" id={g.id} aria-labelledby={`${g.id}-heading`} data-group>
+          <div class="label-col">
+            <h2 class="letter" id={`${g.id}-heading`}>
+              {g.letter === '#' ? '0–9' : g.letter}
+            </h2>
+          </div>
+          <dl class="content-col terms">
+            {g.terms.map((t) => (
+              <div class="term" id={t.id} data-type={t.data.type} data-text={`${t.data.term} ${t.data.definition}`.toLowerCase()}>
+                <dt>
+                  <span class="name">{t.data.term}</span>
+                  <span class="type">{t.data.type}</span>
+                </dt>
+                <dd>{t.data.definition}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))
+    }
+    <p class="row empty" hidden data-empty>
+      <span class="label-col"></span>
+      <span class="content-col">No terms match your search.</span>
+    </p>
   </div>
-</BaseLayout>
+</SiteLayout>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-glossary]')) {
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('.chip')];
+    const input = root.querySelector<HTMLInputElement>('[data-search]');
+    const groups = [...root.querySelectorAll<HTMLElement>('[data-group]')];
+    const status = root.querySelector<HTMLElement>('[data-status]');
+    const empty = root.querySelector<HTMLElement>('[data-empty]');
+    const total = root.querySelectorAll('.term').length;
+    let type = '';
+
+    const apply = () => {
+      const q = (input?.value ?? '').trim().toLowerCase();
+      let shown = 0;
+      for (const group of groups) {
+        let inGroup = 0;
+        for (const term of group.querySelectorAll<HTMLElement>('.term')) {
+          const match = (!type || term.dataset.type === type) && (!q || (term.dataset.text ?? '').includes(q));
+          term.hidden = !match;
+          if (match) inGroup++;
+        }
+        group.hidden = inGroup === 0;
+        root.querySelector(`[data-letter="${group.id}"]`)?.toggleAttribute('data-off', inGroup === 0);
+        shown += inGroup;
+      }
+      if (status) status.textContent = shown === total ? `${total} terms` : `${shown} of ${total} terms`;
+      if (empty) empty.hidden = shown > 0;
+    };
+
+    for (const chip of chips) {
+      chip.addEventListener('click', () => {
+        type = chip.dataset.type ?? '';
+        for (const c of chips) c.setAttribute('aria-pressed', String(c === chip));
+        apply();
+      });
+    }
+    input?.addEventListener('input', apply);
+  }
+</script>
+
+<style>
+  .glossary {
+    padding-bottom: clamp(80px, 8.3vw, 120px);
+  }
+
+  .row {
+    display: flex;
+    gap: 64px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .row[hidden] {
+    display: none;
+  }
+
+  .label-col {
+    flex-shrink: 0;
+    width: var(--label-col);
+  }
+
+  .content-col {
+    flex: 1;
+    min-width: 0;
+    max-width: 948px;
+  }
+
+  .toolbar {
+    padding-bottom: 40px;
+  }
+
+  .toolbar .eyebrow {
+    padding-top: 12px;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: center;
+    gap: 20px 24px;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 9px 16px;
+    border: 1px solid #d6d6d6;
+    background: none;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    cursor: pointer;
+  }
+
+  .chip:hover {
+    border-color: var(--color-ink);
+  }
+
+  .chip[aria-pressed='true'] {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 700;
+  }
+
+  .n {
+    margin-left: 4px;
+    opacity: 0.6;
+    font-weight: 500;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding-inline: 16px;
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .search:focus-within {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 2px;
+  }
+
+  .search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .letters {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .letters a,
+  .letters span {
+    display: grid;
+    place-items: center;
+    min-width: 34px;
+    height: 40px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .letters a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .letters a:hover {
+    background: var(--color-mustard);
+  }
+
+  .letters span,
+  .letters a[data-off] {
+    color: #c4c4c4;
+    font-weight: 500;
+  }
+
+  .letters a[data-off] {
+    pointer-events: none;
+  }
+
+  .status {
+    grid-column: 1 / -1;
+    margin-top: -8px;
+    color: var(--color-muted);
+    font-size: 13px;
+  }
+
+  .group {
+    padding-block: 28px;
+  }
+
+  .letter {
+    position: sticky;
+    top: 24px;
+    font-size: clamp(44px, 1.5rem + 2.6vw, 64px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .terms {
+    margin: 0;
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .term {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 8px 32px;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--color-rule);
+    scroll-margin-top: 24px;
+  }
+
+  .term[hidden] {
+    display: none;
+  }
+
+  .term:target {
+    background: #fff8e1;
+  }
+
+  dt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .name {
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 20px;
+  }
+
+  .type {
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  .empty {
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 1100px) {
+    .row {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .label-col {
+      width: auto;
+    }
+
+    .toolbar .label-col {
+      display: none;
+    }
+
+    .letter {
+      position: static;
+      font-size: 40px;
+    }
+
+    .empty .label-col {
+      display: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .controls {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .term {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .group {
+      padding-block: 28px;
+    }
+  }
+</style>
