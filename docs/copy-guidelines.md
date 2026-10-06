@@ -24,6 +24,7 @@ A review list of existing copy that may break this rule is generated in
 
 - Office hours, response times ("answered within one business day"), counts ("20+ carriers", "50 years"), specialties, survey or form lengths ("takes 5 minutes") and similar claims must come from real data or be confirmed by the owner before publishing.
 - When in doubt, leave the claim out and ask.
+- Don't promise that a specific person will always be your contact ("the same people at every renewal"). Staff change; promise a team that knows your account instead.
 
 ## 4. Photography
 
