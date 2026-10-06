@@ -1,0 +1,12 @@
+---
+import { meta, text, waiverTab } from '../data/legacy/waiver';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={meta.title} description={meta.description} noindex>
+  <div class="container">
+    <p>{text}</p>
+    <div {...waiverTab.attributes}></div>
+    <script is:inline src={waiverTab.scriptSrc}></script>
+  </div>
+</BaseLayout>

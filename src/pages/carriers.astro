@@ -1,0 +1,28 @@
+---
+import CardGrid from '../components/CardGrid.astro';
+import { listingPages } from '../data/legacy/listing-pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const carriers = (await getCollection('carriers')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const cards = carriers.map((c) => ({
+  title: c.data.name,
+  href: c.data.website,
+  image: c.data.logo,
+  imageAlt: c.data.logoAlt,
+  text: [
+    c.data.phones.general && `General: ${c.data.phones.general}`,
+    c.data.phones.claims && `Claims: ${c.data.phones.claims}`,
+    c.data.phones.billing && `Billing: ${c.data.phones.billing}`,
+  ]
+    .filter(Boolean)
+    .join(' · '),
+}));
+const meta = listingPages['carriers'];
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{meta.heading}</h1>
+    <CardGrid cards={cards} />
+  </div>
+</BaseLayout>

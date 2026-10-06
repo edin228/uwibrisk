@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import { listingPages } from '../data/legacy/listing-pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const meta = listingPages['glossary-terms'];
+const terms = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term));
+---
+
+<BaseLayout title={meta.title} description={meta.description} searchable>
+  <div class="container">
+    <h1>{meta.heading}</h1>
+    <dl>
+      {
+        terms.map((t) => (
+          <>
+            <dt id={t.id}>
+              <strong>{t.data.term}</strong> <span class="label">{t.data.type}</span>
+            </dt>
+            <dd>{t.data.definition}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </div>
+</BaseLayout>

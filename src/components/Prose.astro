@@ -1,0 +1,10 @@
+---
+/** Renders plain paragraphs separated by blank lines (used for data strings with line breaks). */
+interface Props {
+  text: string | null | undefined;
+}
+const { text } = Astro.props;
+const paragraphs = (text ?? '').split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+---
+
+{paragraphs.map((p) => <p>{p}</p>)}

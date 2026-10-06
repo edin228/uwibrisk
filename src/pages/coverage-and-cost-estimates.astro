@@ -1,0 +1,16 @@
+---
+import CardGrid from '../components/CardGrid.astro';
+import { listingPages } from '../data/legacy/listing-pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { programCards, quoteCards } from '../lib/cards';
+const meta = listingPages['coverage-and-cost-estimates'];
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{meta.heading}</h1>
+    <CardGrid cards={await quoteCards()} />
+    <h2>{meta.secondaryHeading}</h2>
+    <CardGrid cards={await programCards()} />
+  </div>
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+import LegacyImg from '../components/legacy/LegacyImg.astro';
+import { faqs, intro, logo, meta } from '../data/legacy/safeco-faq';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.question, acceptedAnswer: { '@type': 'Answer', text: f.answer } })),
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description} searchable>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(faqSchema)} />
+  <article class="container">
+    <LegacyImg image={logo} width={300} />
+    <h1>Safeco FAQ</h1>
+    <p>{intro}</p>
+    {faqs.map((f) => <details><summary>{f.question}</summary><p>{f.answer}</p></details>)}
+  </article>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import { cards, heading, meta } from '../data/legacy/coi';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{heading}</h1>
+    {
+      cards.map((c) => (
+        <article>
+          <h2><a href={c.href}>{c.title}</a></h2>
+          {c.subtitle && <p>{c.subtitle}</p>}
+          <a href={c.secondary.href}>{c.secondary.label}</a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

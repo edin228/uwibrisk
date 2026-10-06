@@ -1,0 +1,162 @@
+---
+/**
+ * Top-level CMS URLs that keep their old path: rich-text pages, Hygraph form/embed
+ * pages and component landing pages. Plain rendering until the redesign.
+ */
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import FormEmbed from '../components/FormEmbed.astro';
+import Prose from '../components/Prose.astro';
+import { type FormPage, forms } from '../data/forms';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+type Entry =
+  | { kind: 'page'; page: CollectionEntry<'pages'> }
+  | { kind: 'form'; form: FormPage }
+  | { kind: 'landing'; landing: CollectionEntry<'landing'>; form: FormPage | undefined };
+
+export async function getStaticPaths() {
+  // Slugs with their own route file (getStaticPaths cannot see module-level values).
+  const DEDICATED_ROUTES = new Set(['contact']);
+  const [pages, landings] = await Promise.all([
+    // /contact has its own route (CMS text + advisor wizard).
+    getCollection('pages', ({ data }) => data.hasBody && !DEDICATED_ROUTES.has(data.slug)),
+    getCollection('landing'),
+  ]);
+  const landingSlugs = new Set(landings.map((l) => l.data.slug));
+  const paths: { params: { slug: string }; props: Entry }[] = [
+    ...pages.map((page) => ({ params: { slug: page.data.slug }, props: { kind: 'page' as const, page } })),
+    ...forms
+      .filter((form) => !landingSlugs.has(form.slug))
+      .map((form) => ({ params: { slug: form.slug }, props: { kind: 'form' as const, form } })),
+    ...landings.map((landing) => ({
+      params: { slug: landing.data.slug },
+      props: {
+        kind: 'landing' as const,
+        landing,
+        form: forms.find((f) => f.slug === landing.data.formEmbed),
+      },
+    })),
+  ];
+  return paths;
+}
+
+const entry = Astro.props as Entry;
+const Content = entry.kind === 'page' ? (await render(entry.page)).Content : null;
+const title =
+  entry.kind === 'page' ? entry.page.data.title : entry.kind === 'form' ? entry.form.title : entry.landing.data.title;
+const description =
+  entry.kind === 'page'
+    ? entry.page.data.description
+    : entry.kind === 'form'
+      ? entry.form.wordingUnderTitle
+      : entry.landing.data.description;
+const Callout = (await import('../components/Callout.astro')).default;
+---
+
+<BaseLayout title={title} description={description ?? undefined} searchable={entry.kind !== 'form'}>
+  <article class="container page">
+    <h1>{title}</h1>
+    {description && <p class="lead">{description}</p>}
+
+    {
+      entry.kind === 'page' && (
+        <>
+          {entry.page.data.headerImage && (
+            <Image src={entry.page.data.headerImage} alt={entry.page.data.headerAlt} width={1312} loading="eager" />
+          )}
+          <div class="prose">{Content && <Content components={{ Callout }} />}</div>
+        </>
+      )
+    }
+
+    {
+      entry.kind === 'form' && (
+        <>
+          {entry.form.headerImage && (
+            <Image src={entry.form.headerImage} alt={entry.form.headerImageAlt} width={1312} loading="eager" />
+          )}
+          <FormEmbed embed={entry.form.embed} />
+        </>
+      )
+    }
+
+    {
+      entry.kind === 'landing' && (
+        <>
+          {entry.landing.data.headerImage && (
+            <Image src={entry.landing.data.headerImage} alt={entry.landing.data.headerImageAlt} width={640} />
+          )}
+          {entry.landing.data.components.map((c) => (
+            <section class="block">
+              {c.type === 'PageHeader' && (
+                <>
+                  {c.header && <h2>{c.header}</h2>}
+                  {c.image && <Image src={c.image} alt={c.imageAlt} width={960} />}
+                </>
+              )}
+              {c.type === 'InfoCard' && (
+                <>
+                  <h3>{c.title}</h3>
+                  <p>{c.description}</p>
+                </>
+              )}
+              {c.type === 'WideCard' && (
+                <>
+                  {c.header && <h2>{c.header}</h2>}
+                  <Prose text={c.text} />
+                  {c.images.map((img) => (
+                    <Image src={img.src} alt={img.alt} width={960} />
+                  ))}
+                  {c.useVideo && c.videoUrl && (
+                    <p>
+                      <a href={c.videoUrl}>Watch the video</a>
+                    </p>
+                  )}
+                  {c.buttons.map((b) => b.href && <a class="button" href={b.href}>{b.label}</a>)}
+                </>
+              )}
+              {c.type === 'ActionBanner' && (
+                <>
+                  {c.title && <h2>{c.title}</h2>}
+                  {c.description && <p>{c.description}</p>}
+                  {c.buttons.map((b) => b.href && <a class="button" href={b.href}>{b.label}</a>)}
+                </>
+              )}
+              {c.type === 'IconBanner' && (
+                <>
+                  {c.title && <h2>{c.title}</h2>}
+                  <ul>
+                    {c.items.map((item) => (
+                      <li>
+                        <strong>{item.label}</strong>
+                        {item.description && <> &mdash; {item.description}</>}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </section>
+          ))}
+          {entry.form && <FormEmbed embed={entry.form.embed} />}
+        </>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-block: 48px;
+  }
+  .lead {
+    font-size: var(--text-lead);
+  }
+  .block {
+    margin-block: 40px;
+  }
+  .button {
+    display: inline-block;
+    margin-right: 16px;
+  }
+</style>

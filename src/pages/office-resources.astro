@@ -1,0 +1,16 @@
+---
+import CardGrid from '../components/CardGrid.astro';
+import { listingPages } from '../data/legacy/listing-pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const resources = (await getCollection('officeResources')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const cards = resources.map((r) => ({ title: r.data.title, href: r.data.link, text: r.data.category, image: r.data.image, imageAlt: r.data.imageAlt }));
+const meta = listingPages['office-resources'];
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{meta.heading}</h1>
+    <CardGrid cards={cards} />
+  </div>
+</BaseLayout>

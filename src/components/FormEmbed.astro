@@ -1,0 +1,21 @@
+---
+import type { FormEmbed } from '../data/forms';
+
+/** Renders a third-party form/video embed exactly as it was configured in Hygraph. */
+interface Props {
+  embed: FormEmbed;
+}
+const { embed } = Astro.props;
+---
+
+<div class="form-embed" data-embed-type={embed.type}>
+  <Fragment set:html={embed.rawHtml} />
+</div>
+
+<style>
+  .form-embed :global(iframe) {
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+  }
+</style>

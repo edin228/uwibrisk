@@ -1,0 +1,73 @@
+---
+import LegacyForm from '../../components/legacy/LegacyForm.astro';
+import LegacyImg from '../../components/legacy/LegacyImg.astro';
+import MicrositeShell from '../../components/legacy/MicrositeShell.astro';
+import { hotelsContactForm } from '../../data/legacy/forms';
+import { brand, briefCover, coverageAreas, HOTEL_PATHS, landing, meta, serviceTeam } from '../../data/legacy/hotels';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const { hero, risks, briefFeature, coveragePreview, process, team, contact } = landing;
+---
+
+<BaseLayout title={meta.home.title} description={meta.home.description} canonical="/hotels" image={hero.image.src} searchable>
+  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
+    <div class="container">
+      <section>
+        <p class="label">{hero.eyebrow}</p>
+        <h1>{hero.heading}</h1>
+        <p>{hero.text}</p>
+        <p><a href={hero.primaryCta.href}>{hero.primaryCta.label}</a> · <a href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a></p>
+        <p class="label">{hero.trust}</p>
+        <LegacyImg image={hero.image} />
+        <p class="label">{hero.imageCaption}</p>
+        <ul>{landing.credibility.map((c) => <li>{c}</li>)}</ul>
+      </section>
+      <section>
+        <p class="label">{risks.eyebrow}</p>
+        <h2>{risks.heading}</h2>
+        <p>{risks.text}</p>
+        {risks.items.map((r) => <article><h3>{r.number} {r.title}</h3><p>{r.text}</p></article>)}
+      </section>
+      <section>
+        <p class="label">{briefFeature.eyebrow}</p>
+        <h2>{briefFeature.heading}</h2>
+        <p>{briefFeature.text}</p>
+        <p class="label">{briefCover.title} · {briefCover.issue} · {briefCover.focusLabel}: {briefCover.focus}</p>
+        <ul>{briefFeature.topics.map((t) => <li>{t}</li>)}</ul>
+        <a href={briefFeature.cta.href}>{briefFeature.cta.label}</a>
+      </section>
+      <section>
+        <p class="label">{coveragePreview.eyebrow}</p>
+        <h2>{coveragePreview.heading}</h2>
+        <p>{coveragePreview.text}</p>
+        <ul>{coverageAreas.map((a) => <li><a href={`${HOTEL_PATHS.coverage}#${a.id}`}>{a.number} {a.title}</a>: {a.includes.join(', ')}</li>)}</ul>
+      </section>
+      <section>
+        <p class="label">{process.eyebrow}</p>
+        <h2>{process.heading}</h2>
+        {process.steps.map((s) => <article><p class="label">{s.label}</p><h3>{s.title}</h3><p>{s.text}</p></article>)}
+      </section>
+      <section id="team">
+        <p class="label">{team.eyebrow}</p>
+        <h2>{team.heading}</h2>
+        <p>{team.text}</p>
+        <article>
+          <LegacyImg image={team.lead.image} width={320} />
+          <h3>{team.lead.name}</h3><p class="label">{team.lead.role}</p>
+          <p>{team.lead.bio}</p>
+          <a href={team.lead.link.href}>{team.lead.link.label}</a>
+        </article>
+        <p class="label">{team.serviceEyebrow}</p>
+        <h3>{team.serviceHeading}</h3>
+        {serviceTeam.map((m) => <article><LegacyImg image={m} width={240} /><h4>{m.name}</h4><p class="label">{m.role}</p></article>)}
+        <p>{team.serviceText}</p>
+      </section>
+      <section id="contact">
+        <p class="label">{contact.eyebrow}</p>
+        <h2>{contact.heading}</h2>
+        <p>{contact.text}</p>
+        <p><strong>{contact.direct.label}</strong> {contact.direct.name}, {contact.direct.role}: <a href={`mailto:${contact.direct.email}`}>{contact.direct.email}</a></p>
+        <LegacyForm form={hotelsContactForm} />
+      </section>
+    </div>
+  </MicrositeShell>
+</BaseLayout>

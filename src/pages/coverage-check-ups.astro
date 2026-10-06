@@ -1,0 +1,14 @@
+---
+import CardGrid from '../components/CardGrid.astro';
+import { listingPages } from '../data/legacy/listing-pages';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { checkUpCards } from '../lib/cards';
+const meta = listingPages['coverage-check-ups'];
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{meta.heading}</h1>
+    <CardGrid cards={await checkUpCards()} />
+  </div>
+</BaseLayout>

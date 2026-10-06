@@ -1,0 +1,73 @@
+---
+import LegacyForm from '../components/legacy/LegacyForm.astro';
+import LegacyImg from '../components/legacy/LegacyImg.astro';
+import { trustedAdvisorForm } from '../data/legacy/forms';
+import * as t from '../data/legacy/trusted-advisor';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const { hero, learned, responsibility, awareness, auditRisk, insureTax, ambassador, personalNote, conversationCta, conversation, library, footer } = t;
+---
+
+<BaseLayout title={t.meta.title} description={t.meta.description} image={personalNote.image.src} searchable>
+  <div class="container">
+    <nav aria-label="Trusted Advisor sections">{t.nav.map((n) => <a href={n.href}>{n.label} </a>)} <a href={t.cta.href}>{t.cta.label}</a></nav>
+    <p class="label">{hero.label}</p>
+    <h1>{hero.heading}</h1>
+    <p>{hero.text}</p>
+    <p class="label">{hero.byline}</p>
+    <blockquote>{hero.quote.map((q) => <p>{q}</p>)}</blockquote>
+    <section id="learned">
+      <h2>{learned.number} {learned.heading}</h2>
+      <p><strong>{learned.lead}</strong></p>
+      {learned.paragraphs.map((p) => <p>{p}</p>)}
+      <blockquote>{learned.quote}</blockquote>
+    </section>
+    <section id="responsibility">
+      <h2>{responsibility.number} {responsibility.heading}</h2>
+      <p>{responsibility.text}</p>
+      {responsibility.comparison.map((x) => <article><h3>{x.title}</h3><p>{x.text}</p></article>)}
+      <ol>{responsibility.list.map((x) => <li>{x}</li>)}</ol>
+    </section>
+    <section>
+      <p class="label">{awareness.eyebrow}</p><h2>{awareness.heading}</h2><p>{awareness.text}</p>
+      <blockquote>{awareness.quote}</blockquote>
+    </section>
+    <section id="audit-risk">
+      <p class="label">{auditRisk.eyebrow}</p><h2>{auditRisk.heading}</h2><p>{auditRisk.text}</p><p>{auditRisk.conclusion}</p>
+      <ol>{auditRisk.impacts.map((x) => <li><strong>{x.title}</strong>: {x.text}</li>)}</ol>
+    </section>
+    <section id="insuretax">
+      <p class="label">{insureTax.eyebrow}</p><p>{insureTax.wordmark}</p><h2>{insureTax.heading}</h2>
+      {insureTax.paragraphs.map((p) => <p>{p}</p>)}
+      <ul>{insureTax.notes.map((n) => <li><strong>{n.label}</strong>: {n.text}</li>)}</ul>
+    </section>
+    <section id="ambassador">
+      <p class="label">{ambassador.eyebrow}</p><h2>{ambassador.heading}</h2><p>{ambassador.text}</p>
+      {ambassador.steps.map((s) => <article><p class="label">{s.label}</p><h3>{s.title}</h3><p>{s.text}</p></article>)}
+    </section>
+    <section>
+      <LegacyImg image={personalNote.image} width={420} />
+      <p><strong><a href={personalNote.teamPage}>{personalNote.name}</a></strong>, {personalNote.role}, {personalNote.company}</p>
+      <p class="label">{personalNote.eyebrow}</p><h2>{personalNote.heading}</h2>
+      <p>{personalNote.intro}</p>
+      {personalNote.lesson.map((l) => <p><strong>{l}</strong></p>)}
+      <p>{personalNote.closing}</p>
+      <blockquote>{personalNote.quote}</blockquote>
+    </section>
+    <section>
+      <p class="label">{conversationCta.eyebrow}</p><h2>{conversationCta.heading}</h2><p>{conversationCta.text}</p>
+      <p>{conversationCta.noPressure.join(' · ')}</p>
+    </section>
+    <section id="conversation">
+      <p class="label">{conversation.eyebrow}</p><h2>{conversation.heading}</h2><p>{conversation.text}</p>
+      <LegacyForm form={trustedAdvisorForm} />
+    </section>
+    <section>
+      <p class="label">{library.eyebrow}</p><h2>{library.heading}</h2><p>{library.text}</p>
+      {library.items.map((i) => <article><h3>{i.title}</h3><p>{i.text}</p><em>{i.status}</em></article>)}
+    </section>
+    <footer>
+      <p>{footer.tagline}</p>
+      <nav aria-label="Footer">{footer.links.map((l) => <a href={l.href}>{l.label} </a>)}</nav>
+    </footer>
+  </div>
+</BaseLayout>

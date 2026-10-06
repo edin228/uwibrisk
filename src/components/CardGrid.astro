@@ -1,0 +1,41 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+interface Card {
+  title: string;
+  href?: string | null;
+  text?: string | null;
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+interface Props {
+  cards: Card[];
+}
+const { cards } = Astro.props;
+---
+
+<ul class="card-grid">
+  {
+    cards.map((c) => (
+      <li>
+        {c.image && <Image src={c.image} alt={c.imageAlt ?? ''} width={320} />}
+        <h3>{c.href ? <a href={c.href}>{c.title}</a> : c.title}</h3>
+        {c.text && <p>{c.text}</p>}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 32px;
+    padding: 0;
+    list-style: none;
+  }
+  .card-grid img {
+    width: 100%;
+    height: auto;
+  }
+</style>

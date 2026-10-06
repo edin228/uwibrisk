@@ -1,0 +1,47 @@
+---
+import MicrositeShell from '../../../components/legacy/MicrositeShell.astro';
+import { brand, briefCover, briefs, HOTEL_PATHS, libraryPage, meta } from '../../../data/legacy/hotels';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const { hero, newsletter, featured, topics, moreHeading, cta } = libraryPage;
+const featuredBrief = briefs.find((b) => b.slug === featured.slug);
+---
+
+<BaseLayout title={meta.briefs.title} description={meta.briefs.description} searchable>
+  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
+    <div class="container">
+      <p class="label">{hero.eyebrow}</p>
+      <h1>{hero.heading}</h1>
+      <p>{hero.text}</p>
+      <form action={HOTEL_PATHS.home} method="get">
+        <p class="label">{newsletter.eyebrow}</p>
+        <h2>{newsletter.heading}</h2>
+        <label>Work email <input type="email" name="email" placeholder={newsletter.placeholder} required /></label>
+        <button type="submit">{newsletter.button}</button>
+      </form>
+      <section>
+        <p class="label">{briefCover.title} · {briefCover.issue}</p>
+        <p class="label">{featured.eyebrow}</p>
+        <h2>{featuredBrief?.title}</h2>
+        <p>{featured.text}</p>
+        <a href={`${HOTEL_PATHS.briefs}/${featured.slug}`}>{featured.linkLabel}</a>
+      </section>
+      <p><strong>All topics</strong> {topics.join(' · ')}</p>
+      <h2 id="briefs">{moreHeading}</h2>
+      {
+        briefs
+          .filter((b) => b.slug !== featured.slug)
+          .map((b) => (
+            <article>
+              <p class="label">{b.category}</p>
+              <h3>{b.title}</h3>
+              <p>{b.description}</p>
+              <a href={`${HOTEL_PATHS.briefs}/${b.slug}`}>Read brief →</a>
+            </article>
+          ))
+      }
+      <p class="label">{cta.eyebrow}</p>
+      <h2>{cta.heading}</h2>
+      <a href={cta.href}>{cta.label}</a>
+    </div>
+  </MicrositeShell>
+</BaseLayout>

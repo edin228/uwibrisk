@@ -1,0 +1,53 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { heading, isProducerMatch, meta, producers, steps } from '../data/legacy/contact';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', 'contact');
+const Content = page ? (await render(page)).Content : null;
+const forms = await getCollection('hygraphForms');
+const industries =
+  forms.flatMap((f) => f.data.fields).find((f) => f.kind === 'select' && f.name === 'Industry');
+const team = await getCollection('team');
+const activeProducers = producers
+  .filter((p) => !p.inactive)
+  .map((p) => ({ ...p, member: team.find((t) => t.id === p.slug) }));
+void isProducerMatch; // routing rules for the redesigned wizard (src/data/legacy/contact.ts)
+---
+
+<BaseLayout title={meta.title} description={meta.description} searchable>
+  <div class="container">
+    <h1>{page?.data.title ?? 'Contact'}</h1>
+    <div class="prose">{Content && <Content />}</div>
+    <h2>{heading}</h2>
+    <ol>
+      <li>{steps.state.question}</li>
+      <li>{steps.lineOfBusiness.question} ({steps.lineOfBusiness.options.map((o) => o.label).join(' / ')})</li>
+      <li>
+        Personal: {steps.personalAssets.question} Yes: {steps.personalHighNetWorth.text} No:
+        <a href={steps.personalStandard.cta.href}>{steps.personalStandard.cta.label}</a>
+      </li>
+      <li>
+        Business: {steps.business.heading}. {steps.business.industry}
+        {industries?.kind === 'select' && <>({industries.options.map((o) => o.label).join(', ')})</>},
+        {steps.business.employees} {steps.business.revenue}
+      </li>
+    </ol>
+    <h3>Account executives</h3>
+    <ul>
+      {
+        activeProducers.map((p) => (
+          <li>
+            <a href={`/team/${p.slug}`}>{p.name}</a>
+            {p.member?.data.meetingLink && (
+              <>
+                {' '}
+                &middot; <a href={p.member.data.meetingLink}>{steps.business.cta}</a>
+              </>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>

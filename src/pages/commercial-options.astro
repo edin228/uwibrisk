@@ -1,0 +1,21 @@
+---
+import LegacyImg from '../components/legacy/LegacyImg.astro';
+import { heading, meta, options } from '../data/legacy/commercial-options';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{heading}</h1>
+    {
+      options.map((o) => (
+        <a href={o.href}>
+          <LegacyImg image={o.image} width={400} />
+          <h2>{o.title}</h2>
+          <ul>{o.criteria.map((c) => <li>{c}</li>)}</ul>
+          <p>{o.text}</p>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

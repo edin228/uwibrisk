@@ -1,0 +1,25 @@
+---
+import MicrositeShell from '../../components/legacy/MicrositeShell.astro';
+import { brand, HOTEL_PATHS, meta, whyPage } from '../../data/legacy/hotels';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const { hero, pointOfView, intro, points, stages, cta } = whyPage;
+---
+
+<BaseLayout title={meta.why.title} description={meta.why.description} searchable>
+  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
+    <div class="container">
+      <p class="label">{hero.eyebrow}</p>
+      <h1>{hero.heading}</h1>
+      <p>{hero.text}</p>
+      <aside><p class="label">{pointOfView.eyebrow}</p><h2>{pointOfView.heading}</h2><p>{pointOfView.text}</p></aside>
+      <h2>{intro.heading}</h2>
+      <p>{intro.text}</p>
+      {points.map((p) => <article><h3>{p.number} {p.title}</h3><p>{p.text}</p></article>)}
+      <p class="label">{stages.eyebrow}</p>
+      <h2>{stages.heading}</h2>
+      {stages.items.map((s) => <article><h3>{s.number} {s.title}</h3><p>{s.text}</p></article>)}
+      <h2>{cta.heading}</h2>
+      <a href={cta.href}>{cta.label}</a>
+    </div>
+  </MicrositeShell>
+</BaseLayout>

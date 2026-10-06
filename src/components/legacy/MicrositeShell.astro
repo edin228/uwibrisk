@@ -1,0 +1,58 @@
+---
+/** Plain header/footer for the old landing-page microsites (hotels, coffee). */
+import { Image } from 'astro:assets';
+import logo from '../../assets/brand/uwib-wide-white.png';
+import { altFor } from '../../lib/alt';
+
+interface Link {
+  label: string;
+  href: string;
+}
+interface Props {
+  brand: { label: string; descriptor: string; nav: Link[]; cta: Link; tagline: string; footerLinks: Link[] };
+  home: string;
+}
+const { brand, home } = Astro.props;
+---
+
+<header class="shell container">
+  <a href={home} aria-label={`${brand.label} home`} class="brand">
+    <Image src={logo} alt={altFor('src/assets/brand/uwib-wide-white.png')} width={160} />
+    <span>{brand.descriptor}</span>
+  </a>
+  <nav aria-label={brand.label}>
+    {brand.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a href={brand.cta.href}>{brand.cta.label}</a>
+  </nav>
+</header>
+<slot />
+<footer class="shell container">
+  <p>{brand.tagline}</p>
+  <nav aria-label={`${brand.label} footer`}>{brand.footerLinks.map((l) => <a href={l.href}>{l.label}</a>)}</nav>
+  <p class="label">© 2026 UWIB Risk &amp; Insurance Solutions</p>
+</footer>
+
+<style>
+  .shell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 16px;
+  }
+  .brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+</style>

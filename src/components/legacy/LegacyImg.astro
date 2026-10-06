@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import type { LegacyImage } from '../../data/legacy/hotels';
+interface Props {
+  image: LegacyImage;
+  width?: number;
+}
+const { image, width = 960 } = Astro.props;
+---
+
+<Image src={image.src} alt={image.alt} width={width} />

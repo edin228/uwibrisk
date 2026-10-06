@@ -1,0 +1,56 @@
+---
+import MicrositeShell from '../../../components/legacy/MicrositeShell.astro';
+import { brand, briefDisclaimer, briefs, HOTEL_PATHS, type RiskBrief } from '../../../data/legacy/hotels';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return briefs.map((brief) => ({ params: { slug: brief.slug }, props: { brief } }));
+}
+interface Props {
+  brief: RiskBrief;
+}
+const { brief } = Astro.props;
+---
+
+<BaseLayout title={`${brief.title} | UWIB Risk`} description={brief.description} type="article" searchable>
+  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
+    <article class="container">
+      <p class="label"><a href={HOTEL_PATHS.briefs}>Risk Brief</a> / {brief.category} / Issue {brief.issue}</p>
+      <p class="label">{brief.label}</p>
+      <h1>{brief.title}</h1>
+      <p>{brief.description}</p>
+      <p class="label">{brief.date} · {brief.readTime} · California Hospitality Risk Brief</p>
+      <p><strong>{brief.introduction}</strong></p>
+      <p>{brief.lead}</p>
+      {
+        brief.sections.map((s, i) => (
+          <section>
+            <h2>{s.title}</h2>
+            {s.paragraphs.map((p) => <p>{p}</p>)}
+            {i === 0 && (
+              <aside>
+                <p class="label">Questions to ask</p>
+                <ul>{brief.questions.map((q) => <li>{q}</li>)}</ul>
+              </aside>
+            )}
+          </section>
+        ))
+      }
+      <aside>
+        <p class="label">Question to consider</p>
+        <p>{brief.consider}</p>
+        <p class="label">In this brief</p>
+        <ul>{brief.outline.map((o) => <li>{o}</li>)}</ul>
+        <p>{briefDisclaimer}</p>
+      </aside>
+      <section>
+        <p class="label">Manager checklist</p>
+        <h2>{brief.checklistTitle}</h2>
+        <ol>{brief.checklist.map((c) => <li>{c}</li>)}</ol>
+      </section>
+      <p class="label">Keep the conversation going</p>
+      <h2>{brief.cta}</h2>
+      <p><a href={`${HOTEL_PATHS.home}#contact`}>Request a review →</a> · <a href={HOTEL_PATHS.briefs}>Back to all briefs</a></p>
+    </article>
+  </MicrositeShell>
+</BaseLayout>

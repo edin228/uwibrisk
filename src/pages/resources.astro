@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import { heading, meta } from '../data/legacy/resources';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const nav = await getCollection('navigation');
+const resources = nav.find((n) => n.id === 'resources');
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="container">
+    <h1>{heading}</h1>
+    {resources && <ul>{resources.data.children.map((c) => <li><a href={c.href}>{c.title}</a></li>)}</ul>}
+  </div>
+</BaseLayout>

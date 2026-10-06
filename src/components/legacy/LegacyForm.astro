@@ -1,0 +1,104 @@
+---
+import { LEGACY_FORM_ID, type LegacyForm } from '../../data/legacy/forms';
+
+/**
+ * Minimal, functional version of the old hard-coded forms. Posts the same JSON
+ * payload as the old React forms to /api/submit. Styling comes with the redesign.
+ */
+interface Props {
+  form: LegacyForm;
+}
+const { form } = Astro.props;
+const keys = Object.fromEntries(form.fields.map((f) => [f.name, f.payloadKey]));
+---
+
+<form
+  class="legacy-form"
+  data-legacy-form
+  data-form-id={LEGACY_FORM_ID}
+  data-source={form.source}
+  data-keys={JSON.stringify(keys)}
+  data-prefill-email={form.prefillEmailFromQuery ? '' : undefined}
+  data-success={form.successMessage}
+  data-error={form.errorMessage}
+>
+  <h3>{form.heading}</h3>
+  <p class="label">{form.responseNote}</p>
+  <input class="honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  {
+    form.fields.map((field) => (
+      <label>
+        <span>{field.label}</span>
+        {field.type === 'textarea' ? (
+          <textarea name={field.name} rows="3" required={field.required} placeholder={field.placeholder} />
+        ) : field.type === 'select' ? (
+          <select name={field.name} required={field.required}>
+            <option value="" disabled selected>
+              Select
+            </option>
+            {field.options?.map((o) => <option>{o}</option>)}
+          </select>
+        ) : (
+          <input
+            name={field.name}
+            type={field.type}
+            required={field.required}
+            placeholder={field.placeholder}
+            autocomplete={field.autocomplete}
+          />
+        )}
+      </label>
+    ))
+  }
+  <button type="submit">{form.submitLabel}</button>
+  <p class="label">{form.consent}</p>
+  <p class="status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-legacy-form]')) {
+    if (form.dataset.prefillEmail !== undefined) {
+      const email = new URLSearchParams(location.search).get('email');
+      const input = form.querySelector<HTMLInputElement>('input[name="email"]');
+      if (email && input) input.value = email;
+    }
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const values = Object.fromEntries(new FormData(form).entries());
+      if (values.website) return;
+      const keys = JSON.parse(form.dataset.keys ?? '{}') as Record<string, string>;
+      const payload: Record<string, unknown> = { id: form.dataset.formId };
+      for (const [name, key] of Object.entries(keys)) payload[key] = values[name] ?? '';
+      payload.Source = form.dataset.source;
+      const status = form.querySelector('.status');
+      const button = form.querySelector('button');
+      if (button) button.disabled = true;
+      try {
+        const response = await fetch('/api/submit', { method: 'POST', body: JSON.stringify(payload) });
+        if (!response.ok) throw new Error('Submission failed');
+        form.reset();
+        if (status) status.textContent = form.dataset.success ?? '';
+      } catch {
+        if (status) status.textContent = form.dataset.error ?? '';
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  }
+</script>
+
+<style>
+  .legacy-form {
+    display: grid;
+    gap: 12px;
+    max-width: 640px;
+  }
+  .legacy-form label {
+    display: grid;
+    gap: 4px;
+  }
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+  }
+</style>

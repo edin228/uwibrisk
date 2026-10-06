@@ -1,0 +1,30 @@
+---
+import MicrositeShell from '../../components/legacy/MicrositeShell.astro';
+import { brand, coverageAreas, coveragePage, HOTEL_PATHS, meta } from '../../data/legacy/hotels';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const { hero, includesLabel, cta } = coveragePage;
+---
+
+<BaseLayout title={meta.coverage.title} description={meta.coverage.description} searchable>
+  <MicrositeShell brand={brand} home={HOTEL_PATHS.home}>
+    <div class="container">
+      <p class="label">{hero.eyebrow}</p>
+      <h1>{hero.heading}</h1>
+      <p>{hero.text}</p>
+      <nav aria-label="Jump to coverage section"><strong>Jump to</strong> {coverageAreas.map((a) => <a href={`#${a.id}`}>{a.shortTitle} </a>)}</nav>
+      {
+        coverageAreas.map((a) => (
+          <section id={a.id}>
+            <h2>{a.number} {a.title}</h2>
+            <p>{a.summary}</p>
+            <p class="label">{includesLabel}</p>
+            <ul>{a.includes.map((i) => <li>{i}</li>)}</ul>
+          </section>
+        ))
+      }
+      <p class="label">{cta.eyebrow}</p>
+      <h2>{cta.heading}</h2>
+      <a href={cta.href}>{cta.label}</a>
+    </div>
+  </MicrositeShell>
+</BaseLayout>
