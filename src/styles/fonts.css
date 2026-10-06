@@ -1,0 +1,11 @@
+/* Self-hosted fonts. Lora 400–700 (roman + italic), Inter variable. */
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/400-italic.css";
+@import "@fontsource/lora/500.css";
+@import "@fontsource/lora/500-italic.css";
+@import "@fontsource/lora/600.css";
+@import "@fontsource/lora/600-italic.css";
+@import "@fontsource/lora/700.css";
+@import "@fontsource/lora/700-italic.css";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/inter/wght-italic.css";

@@ -1,0 +1,82 @@
+/* Minimal base styles. The real design system lands once the Paper designs are final. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: var(--radius);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(40px, 6vw, var(--text-h1)); }
+h2 { font-size: clamp(32px, 4.5vw, var(--text-h2)); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+
+a {
+  color: var(--color-gold);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, var(--gutter));
+}
+
+.label {
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -100px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+.prose {
+  max-width: 72ch;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-mustard);
+}

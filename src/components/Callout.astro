@@ -1,0 +1,37 @@
+---
+/**
+ * Stub for highlighted blocks migrated from Hygraph rich-text `class` nodes
+ * (`cta-box` in blog posts, `button-link` on partner-with-uwib).
+ * Styling is intentionally minimal until the final design lands.
+ */
+interface Props {
+  variant?: 'cta-box' | 'button-link';
+}
+
+const { variant = 'cta-box' } = Astro.props;
+---
+
+<aside class:list={['callout', `callout--${variant}`]}>
+  <slot />
+</aside>
+
+<style>
+  .callout {
+    margin-block: 2rem;
+  }
+  .callout--cta-box {
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-mustard);
+  }
+  .callout--button-link :global(a) {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-label);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+</style>

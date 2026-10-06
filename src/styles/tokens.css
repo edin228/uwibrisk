@@ -1,0 +1,39 @@
+/* Design tokens (source: Paper design file). Sharp corners everywhere: no radius tokens. */
+:root {
+  /* Color */
+  --color-paper: #ffffff;
+  --color-ink: #111111;
+  --color-body: #3f3f3f;
+  --color-muted: #666666;
+  --color-rule: #e2e2e2;
+  --color-ink-body: #c8c8c8;
+  --color-ink-rule: #3a3a3a;
+  --color-mustard: #f4c430;
+  --color-gold: #8a6b00;
+  --color-surface: #f3f3f1;
+
+  /* Type families (self-hosted via @fontsource, see src/styles/fonts.css) */
+  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale */
+  --text-label: 12px;
+  --text-sm: 14px;
+  --text-body: 17px;
+  --text-lead: 18px;
+  --text-h4: 23px;
+  --text-h3: 32px;
+  --text-h2: 52px;
+  --text-h1: 68px;
+
+  /* Tracking */
+  --tracking-display: -0.035em;
+  --tracking-label: 0.16em;
+
+  /* Layout */
+  --container: 1312px;
+  --gutter: 64px;
+
+  /* Shape */
+  --radius: 0;
+}

@@ -1,0 +1,73 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Social share image (local asset). */
+  image?: ImageMetadata | undefined;
+  /** Override the canonical path (defaults to the current URL). */
+  canonical?: string | undefined;
+  /** og:type, e.g. "website" or "article". */
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  publishedTime?: Date | undefined;
+}
+
+const SITE_NAME = 'UWIB Risk & Insurance Solutions';
+const DEFAULT_DESCRIPTION =
+  'Independent insurance brokerage with offices in Pasadena, CA, Coeur d’Alene, ID, and Nashville, TN.';
+
+const {
+  title,
+  description = DEFAULT_DESCRIPTION,
+  image,
+  canonical,
+  type = 'website',
+  noindex = false,
+  publishedTime,
+} = Astro.props;
+
+const fullTitle = title === SITE_NAME ? title : `${title} | UWIB Risk`;
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
+const ogImage = image
+  ? new URL((await getImage({ src: image, width: 1200, format: 'jpg' })).src, Astro.site)
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot name="header" />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
