@@ -1,0 +1,113 @@
+{
+  "$generated": "scripts/export-hygraph.mjs",
+  "slug": "hvac",
+  "title": "HVAC",
+  "description": null,
+  "template": "customLandingPage",
+  "headerImage": null,
+  "formEmbed": null,
+  "components": [
+    {
+      "type": "PageHeader",
+      "header": "Smarter Insurance for HVAC Contractors",
+      "image": "../../assets/landing/hvac-1.png"
+    },
+    {
+      "type": "ActionBanner",
+      "title": "Take Control of Your Risk — We’re Here to Help",
+      "description": "We're proud to support and partner with leading professionals in the HVAC industry.",
+      "buttons": [
+        {
+          "label": "Contact Us",
+          "href": "/contact"
+        },
+        {
+          "label": "Get a Quick Quote",
+          "href": "/qualifying-survey-for-electrical-contractors"
+        }
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Lower Costs, Safer Crews, Stronger Business",
+      "text": "Many HVAC businesses rely on carriers to handle every aspect of a claim—expecting top-tier service.\nBut when carriers fall short, delays and costly claim extensions follow.\n\nWithout aggressive oversight, your Experience Modification Factor (Ex-Mod) rises—leading to higher premiums.\n\nWe help you manage claims actively, reduce costs, and protect your bottom line.\n",
+      "showBackgroundColor": false,
+      "textOnLeft": true,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/landing/hvac-2.jpg"
+      ]
+    },
+    {
+      "type": "IconBanner",
+      "title": "Our Core Services",
+      "items": [
+        {
+          "label": "Injury Analysis",
+          "description": "We review adjuster notes and help your team identify the real root causes.",
+          "icon": "search"
+        },
+        {
+          "label": "Return-to-Work Coordination",
+          "description": "Design safe, effective back‑to‑work plans that minimize downtime",
+          "icon": "activity"
+        },
+        {
+          "label": "Reserving & Closure Oversight",
+          "description": "Audit carrier logic, reduce inflated reserves, and speed up closures.",
+          "icon": "medical"
+        }
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Why Oversight Saves HVAC Companies Money",
+      "text": "Employers who dedicate internal staff to claims see measurable cost reductions— UWIB Risk delivers that same expertise at a fraction of the cost.\n\n**Direct Loss-Run Access**\n\nCarriers send claims data directly to us—no middlemen, no delays.\n\n**Claim Tracking from Day One**\n\nWe log every new claim event‑by‑event, from first report through closure.\n\n**Aggressive Carrier Follow-Up**\n\nWe keep pressure on carriers for timely decisions and fast closures.\n",
+      "showBackgroundColor": false,
+      "textOnLeft": false,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/landing/hvac-3.jpg"
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Measurable Benefits",
+      "text": "**Faster Claim Closures**\n\nClaims are resolved promptly, cutting ongoing costs and administrative overhead.\n\n**Fewer Legal Disputes**\n\nProactive management minimizes disputes, keeping claims out of court and saving legal fees.\n\n**Quicker Return to Work**\n\nTailored return‑to‑work plans get technicians back on the job sooner, reducing lost‑time expenses.\n\n**Lower Reserve Levels**\n\nExpert guidance reduces reserves and keeps your Ex-Mod in check.\n",
+      "showBackgroundColor": true,
+      "textOnLeft": true,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg"
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Protect Your HVAC Crews Behind the Wheel",
+      "text": "Auto accidents are one of the most expensive—and avoidable—risks HVAC companies face. That’s why UWIB sponsors a no-cost Driver Safety Program designed for service businesses like yours.\n\nMobile-Friendly Courses your technicians can complete on the go\navailable in English and Spanish\nCovers distracted and defensive driving, vehicle safety basics, and more\nCertificates of Completion to support compliance and underwriting",
+      "showBackgroundColor": false,
+      "textOnLeft": false,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [
+        {
+          "label": "Learn More About Driver Safety",
+          "href": "/driver-safety"
+        },
+        {
+          "label": "Contact Us",
+          "href": "/contact"
+        }
+      ],
+      "images": [
+        "../../assets/landing/hvac-5.jpg"
+      ]
+    }
+  ]
+}

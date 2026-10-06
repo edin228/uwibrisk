@@ -1,0 +1,103 @@
+{
+  "$generated": "scripts/export-hygraph.mjs",
+  "slug": "earthquake-quote",
+  "title": "Earthquake Quote",
+  "description": null,
+  "template": "customLandingPage",
+  "headerImage": null,
+  "formEmbed": null,
+  "components": [
+    {
+      "type": "PageHeader",
+      "header": "Earthquake Insurance",
+      "image": "../../assets/landing/earthquake-quote-1.png"
+    },
+    {
+      "type": "ActionBanner",
+      "title": "Close your Gap in Coverage with UWIB",
+      "description": "We're proud to serve and have relationships with the best insurance carriers",
+      "buttons": [
+        {
+          "label": "Contact Us",
+          "href": "/contact"
+        },
+        {
+          "label": "Get Quote",
+          "href": "http://www.getquake.com/uwib"
+        }
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Why UWIB?",
+      "text": "If you experience a total loss in an earthquake, can you afford to rebuild, replace your belongings, find another place to live, and pay off your existing loan? You can protect your home, belongings, and equity for less than a daily cup of coffee. That’s the support you won’t get from FEMA.",
+      "showBackgroundColor": false,
+      "textOnLeft": true,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [
+        {
+          "label": "Get a quote today!",
+          "href": "http://www.getquake.com/uwib"
+        }
+      ],
+      "images": [
+        "../../assets/landing/earthquake-quote-2.jpg"
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Natural Disasters are on the Rise",
+      "text": "As of 2024, there is greater shaking possible in California than previously mapped by The National Seismic Hazard Model from the United States Geological Survey. Compared with the prior 2018 model, California locations have up to a 10% increase in the chances of experiencing a damaging earthquake. The new USGS data also marks the chances of a 7.0 magnitude earthquake being 80% greater statewide than noted in 2018.",
+      "showBackgroundColor": true,
+      "textOnLeft": false,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [
+        {
+          "label": "Contact UWIB",
+          "href": "http://www.getquake.com/uwib"
+        }
+      ],
+      "images": [
+        "../../assets/landing/earthquake-quote-3.jpg"
+      ]
+    },
+    {
+      "type": "IconBanner",
+      "title": "EQ banner",
+      "items": [
+        {
+          "label": "Safety",
+          "description": "You are protected from fire, wind, theft, and plumbing losses, but you still risk losing your home to an earthquake.",
+          "icon": "apartment"
+        },
+        {
+          "label": "Peace of Mind",
+          "description": "Having earthquake coverage can get you back into your home months faster because contractors will want to work with insured clients first.",
+          "icon": "handshake"
+        },
+        {
+          "label": "Security",
+          "description": "Has your home equity increased? Make sure you've protected your investment with adequate insurance.",
+          "icon": "payment"
+        }
+      ]
+    },
+    {
+      "type": "ActionBanner",
+      "title": "Close your Gap in Coverage with UWIB",
+      "description": "We're proud to serve and have relationships with the best insurance carriers",
+      "buttons": [
+        {
+          "label": "Contact Us",
+          "href": "/contact"
+        },
+        {
+          "label": "Get Quote",
+          "href": "http://www.getquake.com/uwib"
+        }
+      ]
+    }
+  ]
+}

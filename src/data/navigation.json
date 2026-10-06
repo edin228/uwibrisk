@@ -1,0 +1,160 @@
+[
+  {
+    "id": "blog",
+    "text": "Blog",
+    "href": "/blog",
+    "external": false,
+    "externalUrl": null,
+    "openInNewTab": false,
+    "highlight": false,
+    "isDropdown": false,
+    "order": 0,
+    "children": []
+  },
+  {
+    "id": "contact-an-advisor",
+    "text": "Contact an Advisor",
+    "href": "/contact",
+    "external": false,
+    "externalUrl": null,
+    "openInNewTab": false,
+    "highlight": false,
+    "isDropdown": false,
+    "order": 0,
+    "children": []
+  },
+  {
+    "id": "programs",
+    "text": "Programs",
+    "href": "/programs",
+    "external": false,
+    "externalUrl": null,
+    "openInNewTab": false,
+    "highlight": false,
+    "isDropdown": false,
+    "order": 1,
+    "children": []
+  },
+  {
+    "id": "make-a-payment",
+    "text": "Make a Payment",
+    "href": "https://uwibrisk.epaypolicy.com/",
+    "external": true,
+    "externalUrl": "https://uwibrisk.epaypolicy.com/",
+    "openInNewTab": false,
+    "highlight": false,
+    "isDropdown": false,
+    "order": 2,
+    "children": []
+  },
+  {
+    "id": "contact",
+    "text": "Contact",
+    "href": "/about",
+    "external": false,
+    "externalUrl": null,
+    "openInNewTab": false,
+    "highlight": false,
+    "isDropdown": true,
+    "order": 3,
+    "children": [
+      {
+        "title": "Our History",
+        "href": "/our-history"
+      },
+      {
+        "title": "Our Carriers",
+        "href": "/carriers"
+      },
+      {
+        "title": "Our Values",
+        "href": "/core-values"
+      },
+      {
+        "title": "Join Our Sales Team",
+        "href": "/careers"
+      },
+      {
+        "title": "Agency Partnerships",
+        "href": "/partner-with-uwib"
+      },
+      {
+        "title": "Meet Our Sales Team",
+        "href": "/sales-team"
+      },
+      {
+        "title": "Meet Our Team",
+        "href": "/team"
+      },
+      {
+        "title": "Contact An Advisor",
+        "href": "/contact"
+      }
+    ]
+  },
+  {
+    "id": "resources",
+    "text": "Resources",
+    "href": "/resources",
+    "external": false,
+    "externalUrl": null,
+    "openInNewTab": false,
+    "highlight": false,
+    "isDropdown": true,
+    "order": 3,
+    "children": [
+      {
+        "title": "Certificate of Insurance",
+        "href": "/coi"
+      },
+      {
+        "title": "First Interview",
+        "href": "/initial-client-interview"
+      },
+      {
+        "title": "Broker Resources",
+        "href": "/office-resources"
+      },
+      {
+        "title": "Blog",
+        "href": "/blog"
+      },
+      {
+        "title": "Insurance Term Glossary",
+        "href": "/glossary-terms"
+      },
+      {
+        "title": "Coverage Check Ups",
+        "href": "/coverage-check-ups"
+      },
+      {
+        "title": "Coverage and Cost Estimates",
+        "href": "/coverage-and-cost-estimates"
+      },
+      {
+        "title": "Upload Files",
+        "href": "/upload-files"
+      },
+      {
+        "title": "Benefits Solutions",
+        "href": "/benefits-solutions"
+      },
+      {
+        "title": "HO Worksheet",
+        "href": "/ho-worksheet"
+      }
+    ]
+  },
+  {
+    "id": "coi-and-client-portal",
+    "text": "COI & Client Portal",
+    "href": "/coi",
+    "external": false,
+    "externalUrl": "https://clientportal.vertafore.com/Login/3004020-1",
+    "openInNewTab": false,
+    "highlight": true,
+    "isDropdown": false,
+    "order": 100,
+    "children": []
+  }
+]

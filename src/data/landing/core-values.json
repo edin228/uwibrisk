@@ -1,0 +1,79 @@
+{
+  "$generated": "scripts/export-hygraph.mjs",
+  "slug": "core-values",
+  "title": "Our Values",
+  "description": null,
+  "template": "customLandingPage",
+  "headerImage": null,
+  "formEmbed": null,
+  "components": [
+    {
+      "type": "PageHeader",
+      "header": null,
+      "image": "../../assets/landing/core-values-1.png"
+    },
+    {
+      "type": "ActionBanner",
+      "title": "Our Vision",
+      "description": "To be the trusted partner in delivering innovative and personalized insurance solutions, ensuring peace of mind for our clients.",
+      "buttons": [
+        {
+          "label": "Contact Us",
+          "href": "/contact"
+        }
+      ]
+    },
+    {
+      "type": "IconBanner",
+      "title": null,
+      "items": [
+        {
+          "label": "Listening",
+          "description": "We are committed to being excellent listeners.",
+          "icon": "handshake"
+        },
+        {
+          "label": "Learning",
+          "description": "We are committed to a lifelong learning, and we act based on lessons learned.",
+          "icon": "scale"
+        },
+        {
+          "label": "Leading",
+          "description": "We lead by example and through service to the greater good.",
+          "icon": "star"
+        }
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Our Mission",
+      "text": "We recognize that life is unpredictable, and no insurance policy can eliminate every risk. But we believe in doing everything we can to help our clients feel prepared and protected.\n\n- **Understanding First** – We take the time to listen and understand each client’s unique concerns so that we can provide coverage that truly makes sense for them.\n- **Navigating Uncertainty** – Insurance can be complex, but we strive to simplify the process, offering guidance that empowers our clients to make informed decisions.\n- **Evolving with the Times** – Risks change, and so do we. By staying ahead of trends and embracing innovation, we adapt to keep our clients protected in a shifting world.\n- **Building Trust, Not Just Policies** – A policy is just paper; relationships are what matter. We aim to earn trust through honesty, responsiveness, and a genuine commitment to our clients’ well-being.\n- **Striving for Excellence, Not Perfection** – No one can predict the future, but we can promise to show up every day ready to help, improve, and refine what we do.",
+      "showBackgroundColor": false,
+      "textOnLeft": false,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/blog/essential-insurance-considerations-for-new-entrepreneurs.webp"
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "How We Achieve This",
+      "text": "**Dedicated Professionals**\nOur team values expertise, integrity, and the willingness to go the extra mile for our clients.\n\n**Advanced Analytics**\nWe leverage data and insights to guide better risk management strategies, ensuring clients receive tailored coverage.\n\n**Client-Centric Approach**\nPeople are at the heart of every decision we make. We believe great insurance is about more than just policies—it’s about peace of mind.",
+      "showBackgroundColor": true,
+      "textOnLeft": true,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [
+        {
+          "label": "Contact an Advisor",
+          "href": "/contact"
+        }
+      ],
+      "images": [
+        "../../assets/blog/independent-contractors-vs-employees-understanding-liability-and-risk.webp"
+      ]
+    }
+  ]
+}

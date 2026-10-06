@@ -1,0 +1,26 @@
+[
+  {
+    "id": "business-coverage-check-up",
+    "label": "Business Coverage Check-Up",
+    "href": "/business-coverage-check-up",
+    "icon": "agency",
+    "order": 0,
+    "image": "../assets/blog/protecting-your-assets-essential-coverage-for-domestic-employees-and-household-staff.jpg"
+  },
+  {
+    "id": "personal-coverage-check-up",
+    "label": "Personal Coverage Check-Up",
+    "href": "/personal-coverage-check-up",
+    "icon": "house",
+    "order": 1,
+    "image": "../assets/check-up-cards/personal-coverage-check-up.jpg"
+  },
+  {
+    "id": "benefits-coverage-check-up",
+    "label": "Benefits Coverage Check-Up",
+    "href": "/benefits-check-up",
+    "icon": "medical",
+    "order": 2,
+    "image": "../assets/check-up-cards/benefits-coverage-check-up.webp"
+  }
+]

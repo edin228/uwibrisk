@@ -1,0 +1,47 @@
+{
+  "$generated": "scripts/export-hygraph.mjs",
+  "slug": "privateclient",
+  "title": "Private Client Services",
+  "description": "As you continue to grow your wealth and make plans for the future, ordinary insurance protection likely isn’t enough. UWIB Risk Insurance Solutions Private Client Services (UWIB PCS) has the expertise and specialty solutions that can help you protect the things you care about most.",
+  "template": "LandingPage",
+  "headerImage": "../../assets/landing/privateclient-header.png",
+  "formEmbed": "privateclient",
+  "components": [
+    {
+      "type": "InfoCard",
+      "title": "Home",
+      "description": "Don't settle for standard insurance, contact us for the protection you deserve.",
+      "icon": "house"
+    },
+    {
+      "type": "InfoCard",
+      "title": "Investment Properties",
+      "description": "Trust us for comprehensive coverage, specialized options and protection of your Investment Properties.",
+      "icon": "apartment"
+    },
+    {
+      "type": "InfoCard",
+      "title": "Business",
+      "description": "Trust us for comprehensive coverage and personalized options for your business.",
+      "icon": "agency"
+    },
+    {
+      "type": "InfoCard",
+      "title": "Collectibles",
+      "description": "Trust us for comprehensive coverage, specialized options and protection of your Collectibles.",
+      "icon": "ring"
+    },
+    {
+      "type": "InfoCard",
+      "title": "Auto",
+      "description": "Trust us for comprehensive coverage, specialized options and protection of your prized possession.",
+      "icon": "car"
+    },
+    {
+      "type": "InfoCard",
+      "title": "Special Interests",
+      "description": "Trust us for comprehensive coverage, specialized options and protection of your Special Interests.",
+      "icon": "horse"
+    }
+  ]
+}

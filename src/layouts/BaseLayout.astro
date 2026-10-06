@@ -33,7 +33,9 @@ const {
 } = Astro.props;
 
 const fullTitle = title === SITE_NAME ? title : `${title} | UWIB Risk`;
-const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site);
+// Old site URLs had no trailing slash; keep canonicals in that form.
+const canonicalPath = canonical ?? (Astro.url.pathname.replace(/\/+$/, '') || '/');
+const canonicalURL = new URL(canonicalPath, Astro.site);
 const ogImage = image
   ? new URL((await getImage({ src: image, width: 1200, format: 'jpg' })).src, Astro.site)
   : undefined;

@@ -1,0 +1,323 @@
+[
+  {
+    "id": "contact-form",
+    "name": "Contact Form",
+    "pages": [
+      "contact"
+    ],
+    "fields": [
+      {
+        "kind": "input",
+        "name": "Name",
+        "label": "Name",
+        "placeholder": "Name",
+        "required": true,
+        "inputType": "TEXT"
+      },
+      {
+        "kind": "input",
+        "name": "Email",
+        "label": "Email",
+        "placeholder": "Email",
+        "required": true,
+        "inputType": "EMAIL"
+      },
+      {
+        "kind": "input",
+        "name": "Phone",
+        "label": "Phone",
+        "placeholder": "Best number to reach you",
+        "required": false,
+        "inputType": "TEL"
+      },
+      {
+        "kind": "select",
+        "name": "US States",
+        "label": "State",
+        "required": true,
+        "options": [
+          {
+            "value": "CA",
+            "label": "CA"
+          },
+          {
+            "value": "AL",
+            "label": "AL"
+          },
+          {
+            "value": "AZ",
+            "label": "AZ"
+          },
+          {
+            "value": "AR",
+            "label": "AR"
+          },
+          {
+            "value": "CO",
+            "label": "CO"
+          },
+          {
+            "value": "CT",
+            "label": "CT"
+          },
+          {
+            "value": "DE",
+            "label": "DE"
+          },
+          {
+            "value": "FL",
+            "label": "FL"
+          },
+          {
+            "value": "GA",
+            "label": "GA"
+          },
+          {
+            "value": "ID",
+            "label": "ID"
+          },
+          {
+            "value": "IL",
+            "label": "IL"
+          },
+          {
+            "value": "IN",
+            "label": "IN"
+          },
+          {
+            "value": "IA",
+            "label": "IA"
+          },
+          {
+            "value": "KS",
+            "label": "KS"
+          },
+          {
+            "value": "KY",
+            "label": "KY"
+          },
+          {
+            "value": "LA",
+            "label": "LA"
+          },
+          {
+            "value": "ME",
+            "label": "ME"
+          },
+          {
+            "value": "MD",
+            "label": "MD"
+          },
+          {
+            "value": "MA",
+            "label": "MA"
+          },
+          {
+            "value": "MI",
+            "label": "MI"
+          },
+          {
+            "value": "MN",
+            "label": "MN"
+          },
+          {
+            "value": "MS",
+            "label": "MS"
+          },
+          {
+            "value": "MO",
+            "label": "MO"
+          },
+          {
+            "value": "MT",
+            "label": "MT"
+          },
+          {
+            "value": "NE",
+            "label": "NE"
+          },
+          {
+            "value": "NV",
+            "label": "NV"
+          },
+          {
+            "value": "NH",
+            "label": "NH"
+          },
+          {
+            "value": "NJ",
+            "label": "NJ"
+          },
+          {
+            "value": "NM",
+            "label": "NM"
+          },
+          {
+            "value": "NY",
+            "label": "NY"
+          },
+          {
+            "value": "NC",
+            "label": "NC"
+          },
+          {
+            "value": "ND",
+            "label": "ND"
+          },
+          {
+            "value": "OH",
+            "label": "OH"
+          },
+          {
+            "value": "OK",
+            "label": "OK"
+          },
+          {
+            "value": "OR",
+            "label": "OR"
+          },
+          {
+            "value": "PA",
+            "label": "PA"
+          },
+          {
+            "value": "RI",
+            "label": "RI"
+          },
+          {
+            "value": "SC",
+            "label": "SC"
+          },
+          {
+            "value": "SD",
+            "label": "SD"
+          },
+          {
+            "value": "TN",
+            "label": "TN"
+          },
+          {
+            "value": "TX",
+            "label": "TX"
+          },
+          {
+            "value": "UT",
+            "label": "UT"
+          },
+          {
+            "value": "VT",
+            "label": "VT"
+          },
+          {
+            "value": "VA",
+            "label": "VA"
+          },
+          {
+            "value": "WA",
+            "label": "WA"
+          },
+          {
+            "value": "WV",
+            "label": "WV"
+          },
+          {
+            "value": "WI",
+            "label": "WI"
+          },
+          {
+            "value": "WY",
+            "label": "WY"
+          }
+        ]
+      },
+      {
+        "kind": "select",
+        "name": "InsuranceType",
+        "label": "What Insurance are you interested in?",
+        "required": true,
+        "options": [
+          {
+            "value": "Business Insurance",
+            "label": "Business Insurance"
+          },
+          {
+            "value": "Personal Insurance",
+            "label": "Personal Insurance"
+          }
+        ]
+      },
+      {
+        "kind": "select",
+        "name": "Industry",
+        "label": "What Industry is in your business in?",
+        "required": true,
+        "options": [
+          {
+            "value": "Agriculture",
+            "label": "Agriculture"
+          },
+          {
+            "value": "Contracting Trades",
+            "label": "Contracting Trades"
+          },
+          {
+            "value": "Entertainment",
+            "label": "Entertainment"
+          },
+          {
+            "value": "Law",
+            "label": "Law"
+          },
+          {
+            "value": "Medical",
+            "label": "Medical"
+          },
+          {
+            "value": "Mfg/Wholesale/Import/Export",
+            "label": "Mfg/Wholesale/Import/Export"
+          },
+          {
+            "value": "Municipal Insurance",
+            "label": "Municipal Insurance"
+          },
+          {
+            "value": "Real Estate Investment",
+            "label": "Real Estate Investment"
+          },
+          {
+            "value": "Restaurant/Coffee Bar",
+            "label": "Restaurant/Coffee Bar"
+          },
+          {
+            "value": "Retail",
+            "label": "Retail"
+          },
+          {
+            "value": "Security",
+            "label": "Security"
+          },
+          {
+            "value": "Software & Technology",
+            "label": "Software & Technology"
+          },
+          {
+            "value": "Transportation/Automotive",
+            "label": "Transportation/Automotive"
+          },
+          {
+            "value": "Other Professional Services",
+            "label": "Other Professional Services"
+          }
+        ]
+      },
+      {
+        "kind": "input",
+        "name": "Estimated Revenue",
+        "label": "Estimated Annual Revenue",
+        "placeholder": "Estimated Annual Revenue",
+        "required": true,
+        "inputType": "NUMBER"
+      }
+    ]
+  }
+]

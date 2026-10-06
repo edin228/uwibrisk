@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+import { type CollectionEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts, getTeam } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const [team, posts] = await Promise.all([getTeam(), getPosts()]);
+  return team
+    .filter((member) => member.data.hasTeamPage)
+    .map((member) => ({
+      params: { slug: member.id },
+      props: { member, posts: posts.filter((p) => p.data.author?.id === member.id) },
+    }));
+}
+
+interface Props {
+  member: CollectionEntry<'team'>;
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { member, posts } = Astro.props;
+const { Content } = await render(member);
+const { data } = member;
+---
+
+<BaseLayout
+  title={data.name}
+  description={data.miniBio ?? `${data.name}, ${data.role} at UWIB Risk & Insurance Solutions.`}
+  image={data.photo}
+>
+  <article class="container member">
+    <Image src={data.photo} alt={data.name} width={480} loading="eager" />
+    <div>
+      <p class="label"><a href="/team">Team</a></p>
+      <h1>{data.name}</h1>
+      <p class="role">{data.role}</p>
+      <ul class="contact">
+        {data.email && <li><a href={`mailto:${data.email}`}>{data.email}</a></li>}
+        {data.phone && <li><a href={`tel:${data.phone.replace(/[^\d+]/g, '')}`}>{data.phone}</a></li>}
+        {data.meetingLink && <li><a href={data.meetingLink} rel="noopener">Book a meeting</a></li>}
+      </ul>
+      <div class="prose"><Content /></div>
+      {
+        data.pets.length > 0 && (
+          <section>
+            <h2>Pets</h2>
+            <ul class="pets">
+              {data.pets.map((pet) => (
+                <li>
+                  <Image src={pet.photo} alt={pet.name} width={240} />
+                  <p>{pet.name}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+      {
+        posts.length > 0 && (
+          <section>
+            <h2>Articles</h2>
+            <ul>
+              {posts.slice(0, 10).map((post) => (
+                <li>
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .member {
+    display: grid;
+    grid-template-columns: minmax(200px, 400px) 1fr;
+    gap: var(--gutter);
+    padding-block: 48px;
+  }
+  .member > img {
+    width: 100%;
+    height: auto;
+  }
+  .role {
+    font-size: var(--text-lead);
+  }
+  .contact,
+  .pets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+  }
+  .pets img {
+    width: 160px;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+  @media (max-width: 800px) {
+    .member {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

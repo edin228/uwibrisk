@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getEntry, render } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const author = post.data.author ? await getEntry(post.data.author) : undefined;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.heroImage}
+  type="article"
+  publishedTime={post.data.pubDate}
+>
+  <article class="container">
+    <p class="label"><a href="/blog">Blog</a></p>
+    <h1>{post.data.title}</h1>
+    <p class="label">
+      <FormattedDate date={post.data.pubDate} />
+      {author && <> &middot; <a href={`/team/${author.id}`}>{author.data.name}</a></>}
+    </p>
+    <Image src={post.data.heroImage} alt={post.data.heroAlt} width={1312} loading="eager" />
+    <div class="prose">
+      <Content />
+    </div>
+    {
+      author?.data.miniBio && (
+        <aside class="about-author">
+          <h2>About the author</h2>
+          <p>{author.data.miniBio}</p>
+        </aside>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  article {
+    padding-block: 48px;
+  }
+  .about-author {
+    max-width: 72ch;
+    margin-top: 48px;
+    padding: 24px;
+    background: var(--color-surface);
+  }
+  .about-author h2 {
+    font-size: var(--text-h4);
+  }
+</style>

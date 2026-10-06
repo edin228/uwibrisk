@@ -1,0 +1,281 @@
+[
+  {
+    "id": "wunderite",
+    "title": "Wunderite",
+    "link": "https://app.wunderite.com/",
+    "category": "CRM",
+    "order": 1,
+    "altLogoText": "Wunderite",
+    "image": "../assets/office-resources/wunderite.png"
+  },
+  {
+    "id": "coterie-self-service",
+    "title": "Coterie Self-Service",
+    "link": "https://app.coterieinsurance.com/quote?p=sean%40uwib.com",
+    "category": "Insurtech",
+    "order": 2,
+    "altLogoText": "Coterie Self-Service",
+    "image": "../assets/office-resources/coterie-self-service.png"
+  },
+  {
+    "id": "agencyzoom",
+    "title": "AgencyZoom",
+    "link": "https://app.agencyzoom.com/login",
+    "category": "CRM",
+    "order": 3,
+    "altLogoText": "AgencyZoom",
+    "image": "../assets/office-resources/agencyzoom.svg"
+  },
+  {
+    "id": "amtrust",
+    "title": "AmTrust",
+    "link": "https://ao.amtrustgroup.com/",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "AmTrust",
+    "image": "../assets/office-resources/amtrust.png"
+  },
+  {
+    "id": "arrowhead",
+    "title": "Arrowhead",
+    "link": "https://www.arrowheadexchange.com/aex/login.jsp",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "Arrowhead",
+    "image": "../assets/office-resources/arrowhead.png"
+  },
+  {
+    "id": "bhhc",
+    "title": "BHHC",
+    "link": "https://www.bhhc.com/",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "BHHC",
+    "image": "../assets/office-resources/bhhc.png"
+  },
+  {
+    "id": "bondexchange",
+    "title": "BondExchange",
+    "link": "https://app.bondexchange.com/login.cfm",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "BondExchange",
+    "image": "../assets/office-resources/bondexchange.png"
+  },
+  {
+    "id": "brinq",
+    "title": "Brinq",
+    "link": "https://brinq.io/",
+    "category": "Office",
+    "order": 3,
+    "altLogoText": "Brinq",
+    "image": "../assets/office-resources/brinq.png"
+  },
+  {
+    "id": "chubb",
+    "title": "Chubb",
+    "link": "https://extpga01.chubb.com/Login?LOCALE=en_US",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "Chubb",
+    "image": "../assets/office-resources/chubb.png"
+  },
+  {
+    "id": "cna",
+    "title": "CNA",
+    "link": "https://www.cna.com/web/guest/cna/agentcenterpublic",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "CNA",
+    "image": "../assets/office-resources/cna.png"
+  },
+  {
+    "id": "corelogic",
+    "title": "CoreLogic",
+    "link": "https://clientsso.corelogic.com/pf/adapter2adapter.ping?SpSessionAuthnAdapterId=Storefront&IdpAdapterId=CLAuthPCVAdapter3SFv2PCF23&TargetResource=https://store.corelogic.com:443/success&referrer=Homepage",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "CoreLogic",
+    "image": "../assets/office-resources/corelogic.png"
+  },
+  {
+    "id": "coterie",
+    "title": "Coterie",
+    "link": "https://dashboard.coterieinsurance.com/login",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "COTERIE",
+    "image": "../assets/office-resources/coterie-self-service.png"
+  },
+  {
+    "id": "employers",
+    "title": "Employers",
+    "link": "https://login.employers.com/signin",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "Employers",
+    "image": "../assets/office-resources/employers.png"
+  },
+  {
+    "id": "erisk",
+    "title": "ERisk",
+    "link": "https://www.bamapplication.com/ssl/OnLineApplication.asp?Broker=WHKE0EW52L",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "ERisk",
+    "image": "../assets/office-resources/erisk.jpg"
+  },
+  {
+    "id": "gigins",
+    "title": "Gigins",
+    "link": "https://app.gigins.com/gigscr/wsisa.dll/WService=gigbr/Route.htm",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "Gigins",
+    "image": "../assets/office-resources/gigins.gif"
+  },
+  {
+    "id": "insuredmine",
+    "title": "InsuredMine",
+    "link": "https://uwib.insuredmine.com/agent/session/loginone",
+    "category": "CRM",
+    "order": 3,
+    "altLogoText": "InsuredMine",
+    "image": "../assets/office-resources/insuredmine.png"
+  },
+  {
+    "id": "liberty-mutual",
+    "title": "Liberty Mutual",
+    "link": "https://agent.libertymutual.com/start",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "Liberty Mutual",
+    "image": "../assets/office-resources/liberty-mutual.png"
+  },
+  {
+    "id": "lio-hoa",
+    "title": "LIO - HOA",
+    "link": "https://mylioinsurance.com/login",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "LIO - HOA",
+    "image": "../assets/office-resources/lio-hoa.png"
+  },
+  {
+    "id": "lost-business-survey",
+    "title": "Lost Business Survey",
+    "link": "/lost-business-survey",
+    "category": "Office",
+    "order": 3,
+    "altLogoText": "Lost Business Survey",
+    "image": "../assets/office-resources/lost-business-survey.png"
+  },
+  {
+    "id": "naics-to-sic",
+    "title": "NAICS to SIC",
+    "link": "https://siccode.com/naics-to-sic-conversion",
+    "category": "Office",
+    "order": 3,
+    "altLogoText": "NAICS to SIC",
+    "image": "../assets/office-resources/lost-business-survey.png"
+  },
+  {
+    "id": "prowriters",
+    "title": "ProWriters",
+    "link": "https://www.prowritersins-app.com/portal/account/login",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "ProWriters",
+    "image": "../assets/office-resources/prowriters.png"
+  },
+  {
+    "id": "rocketreferrals",
+    "title": "RocketReferrals",
+    "link": "https://app.rocketreferrals.com/accounts/login",
+    "category": "CRM",
+    "order": 3,
+    "altLogoText": "RocketReferrals",
+    "image": "../assets/office-resources/rocketreferrals.png"
+  },
+  {
+    "id": "the-hanover",
+    "title": "The Hanover",
+    "link": "https://signon.allmerica.com/ciss/afc_login_controller.jsp",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "The Hanover",
+    "image": "../assets/office-resources/the-hanover.png"
+  },
+  {
+    "id": "the-hartford",
+    "title": "The Hartford",
+    "link": "https://account.thehartford.com/agent/login?goto=https:%2F%2Fagency.thehartford.com%2Fhome",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "The Hartford",
+    "image": "../assets/office-resources/the-hartford.png"
+  },
+  {
+    "id": "travelers",
+    "title": "Travelers",
+    "link": "https://www.travelers.com/foragents",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "Travelers",
+    "image": "../assets/office-resources/travelers.png"
+  },
+  {
+    "id": "umbrellapro",
+    "title": "UmbrellaPro",
+    "link": "https://www.umbrellapro.com/Login.aspx",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "UmbrellaPro",
+    "image": "../assets/office-resources/umbrellapro.png"
+  },
+  {
+    "id": "us-assure",
+    "title": "US Assure",
+    "link": "https://buildersrisk.usassure.com/brhome",
+    "category": "Carriers",
+    "order": 3,
+    "altLogoText": "US Assure",
+    "image": "../assets/office-resources/us-assure.png"
+  },
+  {
+    "id": "uwib-intranet",
+    "title": "UWIB Intranet",
+    "link": "https://loop.cloud.microsoft/p/eyJ3Ijp7InUiOiJodHRwczovL3V3aWJjb20uc2hhcmVwb2ludC5jb20vP25hdj1jejBsTWtZbVpEMWlJVVkyYVRCR2VVVmZWRVV0ZWxJNFpIVjBkM1Y0Y1MxVFNURm5hSEJ2YWpGQ2NrTk9lRkpqUXpOVlRqRm1WVkl3TUhKU2VtaFVOR2MwTVZBd2FXRkdOV2NtWmowd01UWkJSVVZZVjFCSE5VaFZSRUZTUmsxUlFrVkpTa2hXVmtwQk1rcEdTa2hDSm1NOUptWnNkV2xrUFRFJTNEIiwiciI6ZmFsc2V9LCJwIjp7InUiOiJodHRwczovL3V3aWJjb20uc2hhcmVwb2ludC5jb20vOmZsOi9yL2NvbnRlbnRzdG9yYWdlL0NTUF8xN2I0YTgxNy0zZjIxLTRmNGMtYjM0Ny1jNzZlYjcwYmIxYWIvRG9jdW1lbnQlMjBMaWJyYXJ5L0xvb3BBcHBEYXRhL1VudGl0bGVkLmxvb3A%2FZD13NmUyMThlNzIyMzFhNDE1ZDhjNGVjNDFmN2U1MzRkYzImY3NmPTEmd2ViPTEmbmF2PWN6MGxNa1pqYjI1MFpXNTBjM1J2Y21GblpTVXlSa05UVUY4eE4ySTBZVGd4TnkwelpqSXhMVFJtTkdNdFlqTTBOeTFqTnpabFlqY3dZbUl4WVdJbVpEMWlJVVkyYVRCR2VVVmZWRVV0ZWxJNFpIVjBkM1Y0Y1MxVFNURm5hSEJ2YWpGQ2NrTk9lRkpqUXpOVlRqRm1WVkl3TUhKU2VtaFVOR2MwTVZBd2FXRkdOV2NtWmowd01UWkJSVVZZVjB4VFVsbFJWelJIVWtSTVZrRlpXVlJYUlVRMU4wWkhWRTlESm1NOUpUSkdKbVpzZFdsa1BURW1ZVDFNYjI5d1FYQndKbkE5SlRRd1pteDFhV1I0SlRKR2JHOXZjQzF3WVdkbExXTnZiblJoYVc1bGNpWjRQU1UzUWlVeU1uY2xNaklsTTBFbE1qSlVNRkpVVlVoNE1XUXliR2xaTWpsMFRHNU9iMWxZU214alJ6bHdZbTVSZFZreU9YUm1SMGxvVW1wYWNFMUZXalZTVmpsVlVsTXhObFZxYUd0a1dGSXpaRmhvZUV4V1RrcE5WMlJ2WTBjNWNVMVZTbmxSTURVMFZXMU9SRTB4Vms5TlYxcFdWV3BCZDJOc1NqWmhSbEV3V25wUmVGVkVRbkJaVlZreFdqTjNkMDFVV2tKU1ZWWlpWakZDU0U1VmFGWlNSVVpUVW1zeFVsRnJWa3BUYTJoWFZtdHdRazFyY0VkVGEyaERKVEl5SlRKREpUSXlhU1V5TWlVelFTVXlNamN6WldZeE5ERXlMVFV3T0RFdE5Ea3daUzA0T1RRNExUbGpZalJsTkRFd1lXRTJPU1V5TWlVM1JBJTNEJTNEIiwiciI6ZmFsc2V9LCJpIjp7ImkiOiI3M2VmMTQxMi01MDgxLTQ5MGUtODk0OC05Y2I0ZTQxMGFhNjkifX0%3D",
+    "category": "Office",
+    "order": 3,
+    "altLogoText": "UWIB Intranet",
+    "image": "../assets/office-resources/lost-business-survey.png"
+  },
+  {
+    "id": "vertafore-ams360",
+    "title": "Vertafore AMS360",
+    "link": "https://platform.vertafore.com/",
+    "category": "Office",
+    "order": 3,
+    "altLogoText": "Vertafore AMS360",
+    "image": "../assets/office-resources/vertafore-ams360.svg"
+  },
+  {
+    "id": "lio-other",
+    "title": "LIO - Other",
+    "link": "https://app.mylioinsurance.com/login",
+    "category": "Insurtech",
+    "order": 4,
+    "altLogoText": "LIO - Other",
+    "image": "../assets/office-resources/lio-hoa.png"
+  },
+  {
+    "id": "residential-property-worksheet",
+    "title": "Residential Property Worksheet",
+    "link": "/residential-property-worksheet",
+    "category": "Office",
+    "order": 6,
+    "altLogoText": "Residential Property Worksheet",
+    "image": "../assets/office-resources/lost-business-survey.png"
+  }
+]

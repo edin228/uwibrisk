@@ -1,0 +1,41 @@
+[
+  {
+    "id": "nashville",
+    "state": "Tennessee",
+    "stateCode": "TN",
+    "city": "Nashville",
+    "address": "859 Novalis St",
+    "zip": "37135",
+    "phone": "(615) 234-0282",
+    "email": "josh@uwib.com",
+    "established": 2022,
+    "order": 1,
+    "image": "../assets/offices/nashville.jpg"
+  },
+  {
+    "id": "pasadena",
+    "state": "California",
+    "stateCode": "CA",
+    "city": "Pasadena",
+    "address": "16 S. Oakland Ave., Ste. 205",
+    "zip": "91101",
+    "phone": "(800) 378-5554",
+    "email": "helpdesk@uwib.com",
+    "established": 1995,
+    "order": 2,
+    "image": "../assets/offices/pasadena.jpg"
+  },
+  {
+    "id": "coeur-dalene",
+    "state": "Idaho",
+    "stateCode": "ID",
+    "city": "Coeur d'Alene",
+    "address": "1447 W Timor Ave",
+    "zip": "83815",
+    "phone": "(208) 600-6229",
+    "email": "jesse@uwib.com",
+    "established": 2020,
+    "order": 3,
+    "image": "../assets/blog/putting-your-strongest-people-in-positions-to-win.jpg"
+  }
+]

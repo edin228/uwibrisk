@@ -1,0 +1,338 @@
+[
+  {
+    "id": "all-risks",
+    "name": "All RIsks",
+    "phones": {
+      "general": "800-366-5810",
+      "claims": "800-366-5810",
+      "billing": "800-366-5810"
+    },
+    "website": "https://www.allrisks.com/",
+    "claimLink": "https://www.allrisks.com/how-can-we-help/claims/",
+    "payLink": "https://www.allrisks.com/how-can-we-help/make-a-payment/",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/all-risks.png"
+  },
+  {
+    "id": "allstate",
+    "name": "Allstate",
+    "phones": {
+      "general": "800-676-5456",
+      "claims": "800-669-2214",
+      "billing": "800-901-1732"
+    },
+    "website": "https://amig.com/",
+    "claimLink": "https://www.allstate.com/claims/file-claim.aspx",
+    "payLink": "https://myaccountrwd.allstate.com/anoN/Account/login",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/allstate.png"
+  },
+  {
+    "id": "arrowhead",
+    "name": "Arrowhead",
+    "phones": {
+      "general": "619-881-8600",
+      "claims": "",
+      "billing": ""
+    },
+    "website": "https://www.arrowheadgrp.com/",
+    "claimLink": "https://www.arrowheadgrp.com/claims/",
+    "payLink": null,
+    "showInCarousel": false,
+    "logo": "../assets/carriers/arrowhead.png"
+  },
+  {
+    "id": "btis",
+    "name": "BTIS",
+    "phones": {
+      "general": "877-649-6682",
+      "claims": "",
+      "billing": ""
+    },
+    "website": "https://my.btisinc.com/",
+    "claimLink": null,
+    "payLink": null,
+    "showInCarousel": false,
+    "logo": "../assets/carriers/btis.png"
+  },
+  {
+    "id": "builders",
+    "name": "Builders",
+    "phones": {
+      "general": "678-309-4000 ",
+      "claims": "800-883-9305",
+      "billing": null
+    },
+    "website": "https://www.bldrs.com/",
+    "claimLink": "https://www.bldrs.com/claims-center/",
+    "payLink": "https://bol.bldrs.com/CheckEntrySearch",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/builders.png"
+  },
+  {
+    "id": "chubb",
+    "name": "Chubb",
+    "phones": {
+      "general": "213-612-0880",
+      "claims": "800-252-4670",
+      "billing": null
+    },
+    "website": "https://www.chubb.com/us-en/",
+    "claimLink": "https://www.chubb.com/us-en/claims.html",
+    "payLink": "https://www.chubb.com/quickbillpayContent/ng/pay/#/generic?returnToURL=https:%2F%2Fwww.chubb.com%2Fus-en%2Flog-in%2F",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/chubb.png"
+  },
+  {
+    "id": "cna",
+    "name": "CNA",
+    "phones": {
+      "general": " 800-262-2000",
+      "claims": "877-574-0540",
+      "billing": "877-276-7507"
+    },
+    "website": "https://www.cna.com/web/guest/cna/home",
+    "claimLink": "https://www.cna.com/web/guest/cna/claim-center",
+    "payLink": "https://billing.cna.com/",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/cna.png"
+  },
+  {
+    "id": "cna-surety",
+    "name": "CNA Surety",
+    "phones": {
+      "general": "800-331-6053",
+      "claims": "877-672-6115",
+      "billing": ""
+    },
+    "website": "https://www.cnasurety.com/cna/guest/cnasurety/",
+    "claimLink": "https://www.cnasurety.com/cna/guest/cnasurety/claimservices/%21ut/p/b1/04_Sj9CPykssy0xPLMnMz0vMAfGjzOJNDLy9Q3xMQo28TF0cDTz9_IIDLB2djP3NzIEKIoEKDHAARwNC-r30o9Jz8pOAVoXrR-FV7GMAVYDHMj-P_NxU_YLciMrggHRFAAOrDXM%21/dl4/d5/L2dBISEvZ0FBIS9nQSEh/",
+    "payLink": "https://onlinepay.cnasurety.com/EpayWeb/",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/cna-surety.png"
+  },
+  {
+    "id": "foremost",
+    "name": "Foremost",
+    "phones": {
+      "general": "800-527-3905",
+      "claims": "800-527-3907",
+      "billing": "800-532-4221"
+    },
+    "website": "https://www.foremost.com/",
+    "claimLink": "https://www.foremost.com/claims/",
+    "payLink": "https://css.foremost.com/PrimaryAuthn/?ref=po",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/foremost.png"
+  },
+  {
+    "id": "geovera",
+    "name": "GeoVera",
+    "phones": {
+      "general": "800-324-6020",
+      "claims": "800-859-8734 ",
+      "billing": null
+    },
+    "website": "https://www.geovera.com/",
+    "claimLink": "https://www.mygeosource.com/ClaimsHelp.aspx",
+    "payLink": "https://www.mygeosource.com/",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/geovera.png"
+  },
+  {
+    "id": "hagerty",
+    "name": "Hagerty",
+    "phones": {
+      "general": "877-922-9701",
+      "claims": "800-385-0274",
+      "billing": "888-220-9565"
+    },
+    "website": "https://www.hagerty.com/",
+    "claimLink": "https://www.hagerty.com/insurance/claims",
+    "payLink": "https://login.hagerty.com/TemporaryAccess?purpose=PayBill",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/hagerty.png"
+  },
+  {
+    "id": "hanover",
+    "name": "Hanover",
+    "phones": {
+      "general": "508-855-1000",
+      "claims": "800-628-0250",
+      "billing": "800-573-1187"
+    },
+    "website": "https://www.hanover.com/",
+    "claimLink": "https://www.hanover.com/claims/claims-services/report-claim",
+    "payLink": "https://www.hanover.com/pay-your-bill",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/hanover.png"
+  },
+  {
+    "id": "hartford",
+    "name": "Hartford",
+    "phones": {
+      "general": "866-467-8730",
+      "claims": "800-327-3636",
+      "billing": null
+    },
+    "website": "https://www.thehartford.com/",
+    "claimLink": "https://thehartford.worxbranding.com/general-liability/?_ga=GA1.1.494969759.1647632955",
+    "payLink": null,
+    "showInCarousel": true,
+    "logo": "../assets/carriers/hartford.png"
+  },
+  {
+    "id": "k-and-k",
+    "name": "K&K",
+    "phones": {
+      "general": "800-637-4757",
+      "claims": "800-237-2917",
+      "billing": null
+    },
+    "website": "https://www.kandkinsurance.com/Pages/Home.aspx",
+    "claimLink": "https://www.kandkinsurance.com/Pages/Claims.aspx",
+    "payLink": null,
+    "showInCarousel": false,
+    "logo": "../assets/carriers/k-and-k.png"
+  },
+  {
+    "id": "kemper",
+    "name": "Kemper",
+    "phones": {
+      "general": "866-860-9348",
+      "claims": "888-252-2799",
+      "billing": "877-252-7878"
+    },
+    "website": "https://www.kemper.com/",
+    "claimLink": "https://www.kemper.com/claims/report-a-claim",
+    "payLink": "https://www.ekemper.com/KemperCustomerPublic/login.jspx",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/kemper.png"
+  },
+  {
+    "id": "liberty-mutual",
+    "name": "Liberty Mutual",
+    "phones": {
+      "general": " 844-629-8984",
+      "claims": "800-225-2467",
+      "billing": "844-629-8984"
+    },
+    "website": "https://www.libertymutual.com/",
+    "claimLink": "https://www.libertymutual.com/log-in?target=reportClaim",
+    "payLink": "https://eservice.libertymutual.com/account/billing/pwol#pwolLanding",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/liberty-mutual.png"
+  },
+  {
+    "id": "mercury",
+    "name": "Mercury",
+    "phones": {
+      "general": "866-632-6775",
+      "claims": "800-503-3724",
+      "billing": null
+    },
+    "website": "https://www.mercuryinsurance.com/",
+    "claimLink": "https://mercury.assured.claims/",
+    "payLink": "https://www.mercuryinsurance.com/payment/options.html",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/mercury.png"
+  },
+  {
+    "id": "metlife",
+    "name": "MetLife",
+    "phones": {
+      "general": "800-638-5433",
+      "claims": " 800-854-6011",
+      "billing": "800-638-5000"
+    },
+    "website": "https://www.metlife.com/",
+    "claimLink": "https://www.metlife.com/support-and-manage/file-a-claim/",
+    "payLink": "https://online.metlife.com/paymentcenter/web/public/us/quickpay",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/metlife.png"
+  },
+  {
+    "id": "national-general",
+    "name": "National General",
+    "phones": {
+      "general": "877-468-3466",
+      "claims": "800-468-3466",
+      "billing": "877-468-3466"
+    },
+    "website": "https://nationalgeneral.com/",
+    "claimLink": "https://claims.nationalgeneral.com/",
+    "payLink": "https://www.mynatgenpolicy.com/",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/national-general.png"
+  },
+  {
+    "id": "nationwide",
+    "name": "Nationwide",
+    "phones": {
+      "general": "877-669-6877",
+      "claims": "800-421-3535",
+      "billing": "888-891-0267"
+    },
+    "website": "https://www.nationwide.com/",
+    "claimLink": "https://www.nationwide.com/personal/insurance/claims/",
+    "payLink": "https://www.nationwide.com/personal/member-services/pay-bill",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/nationwide.png"
+  },
+  {
+    "id": "philadelphia-insurance-companies",
+    "name": "Philadelphia Insurance Companies",
+    "phones": {
+      "general": "877-438-7459",
+      "claims": "800-765-9749",
+      "billing": "877-438-7459"
+    },
+    "website": "https://www.phly.com/Home/Index.aspx",
+    "claimLink": "https://www.phly.com/Claims/default.aspx",
+    "payLink": "https://www.phly.com/myphly/login.aspx",
+    "showInCarousel": false,
+    "logo": "../assets/carriers/philadelphia-insurance-companies.png"
+  },
+  {
+    "id": "prime-insurance-company",
+    "name": "Prime Insurance Company",
+    "phones": {
+      "general": "801-304-5500",
+      "claims": "801-304-5530",
+      "billing": "801-304-3725"
+    },
+    "website": "https://www.primeis.com/",
+    "claimLink": "https://www.claimsdirectaccess.com/submit-a-claim/",
+    "payLink": null,
+    "showInCarousel": false,
+    "logo": "../assets/carriers/prime-insurance-company.png"
+  },
+  {
+    "id": "tokio-marine",
+    "name": "Tokio Marine",
+    "phones": {
+      "general": "800-605-2282",
+      "claims": null,
+      "billing": null
+    },
+    "website": "https://www.worldtrips.com/",
+    "claimLink": "https://www.worldtrips.com/insurance-resources/claims-guide/",
+    "payLink": null,
+    "showInCarousel": false,
+    "logo": "../assets/carriers/tokio-marine.png"
+  },
+  {
+    "id": "travelers",
+    "name": "Travelers",
+    "phones": {
+      "general": "800-842-5075",
+      "claims": "800-252-4633",
+      "billing": "800-842-5075"
+    },
+    "website": "https://www.travelers.com/",
+    "claimLink": "https://www.travelers.com/claims/report-claim",
+    "payLink": "https://www.travelers.com/pay-your-bill?lob=bi",
+    "showInCarousel": true,
+    "logo": "../assets/carriers/travelers.png"
+  }
+]

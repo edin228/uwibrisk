@@ -1,0 +1,61 @@
+[
+  {
+    "id": "karrah-mym4c8",
+    "text": "Quick response time, care of accounts, and general helpfulness!",
+    "from": "Karrah",
+    "subText": "Client since 2017",
+    "highlight": false,
+    "teamMembers": []
+  },
+  {
+    "id": "heidi-s-edy1v4",
+    "text": "My experience with UWIB and specifically Dana and Gina Coates and their team is second-to-none.  Always caring and will do right by the customer first and foremost.  People that are a true pleasure to work with and are good at what they do!",
+    "from": "Heidi S.",
+    "subText": "Client since 2011",
+    "highlight": true,
+    "teamMembers": [
+      "gina-coates",
+      "dana-coates"
+    ]
+  },
+  {
+    "id": "pbwjsg",
+    "text": "About once a year, I have a question or need to request documentation of our insurance coverage.  Each time I call your Administrative staff, I am taken care of promptly, in a most thorough fashion.  Your workers are pleasant and competent.",
+    "from": "",
+    "subText": "Client since 2014",
+    "highlight": false,
+    "teamMembers": [
+      "dana-coates"
+    ]
+  },
+  {
+    "id": "casey-w-ffio2j",
+    "text": "Can't begin to say how grateful I am for Josh and the UWIB team! They were incredibly fast, responsive and helpful in getting us quotes and new policies when we needed them on the quick — both for commercial and residential! We'll be planning to use them for other needs as they arise.",
+    "from": "Casey W.",
+    "subText": "Client since 2021",
+    "highlight": true,
+    "teamMembers": [
+      "josh-acosta"
+    ]
+  },
+  {
+    "id": "iliana-ljrr39",
+    "text": "Eric is extremely responsive and diligent.  I trust his opinion and support.",
+    "from": "Iliana",
+    "subText": "Client since 2015",
+    "highlight": false,
+    "teamMembers": [
+      "eric-schirding"
+    ]
+  },
+  {
+    "id": "brian-6dxkjx",
+    "text": "I really appreciated Christa following us extremely closely to remind and assist us in renewing our CTC Nonprofit clinic’s Director and Officers liability and EPLI insurance policies. She was extremely informative, helpful, resourceful, efficient, understanding, and accommodating.",
+    "from": "Brian",
+    "subText": "Client since 2019",
+    "highlight": true,
+    "teamMembers": [
+      "christa-ritner"
+    ]
+  }
+]

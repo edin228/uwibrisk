@@ -1,0 +1,79 @@
+{
+  "$generated": "scripts/export-hygraph.mjs",
+  "slug": "driver-safety",
+  "title": "Driver Safety",
+  "description": null,
+  "template": "customLandingPage",
+  "headerImage": null,
+  "formEmbed": null,
+  "components": [
+    {
+      "type": "PageHeader",
+      "header": "Prevent Auto Claims Before They Happen",
+      "image": "../../assets/landing/driver-safety-1.png"
+    },
+    {
+      "type": "ActionBanner",
+      "title": "Take Control of Your Fleet Risk — We’re Here to Help",
+      "description": "We're proud to support and partner with companies committed to safer drivers and smarter operations.",
+      "buttons": [
+        {
+          "label": "Contact Us",
+          "href": "/contact"
+        }
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Training that reduces risk—at no extra cost to you.",
+      "text": "Auto accidents are one of the costliest claims a business can face. That’s why UWIB sponsors driver safety training for your team—because prevention is the best protection.\n\nOur training helps reduce the likelihood of accidents, injuries, and insurance claims—without adding expense to your budget.\n",
+      "showBackgroundColor": false,
+      "textOnLeft": true,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/landing/hvac-5.jpg"
+      ]
+    },
+    {
+      "type": "IconBanner",
+      "title": "What You and Your Employees Get",
+      "items": [
+        {
+          "label": "Bilingual Access",
+          "description": "Courses available in English and Spanish to support your full workforce.",
+          "icon": "comment"
+        },
+        {
+          "label": "Certificate of Completion",
+          "description": "Employees receive a certificate to recognize their training—and your commitment to safety.",
+          "icon": "certificate"
+        },
+        {
+          "label": "Mobile-Friendly",
+          "description": "Online access makes it easy to complete anytime, anywhere.",
+          "icon": "phone"
+        },
+        {
+          "label": "Covers Key Risks",
+          "description": "Training includes distracted driving, defensive driving, and vehicle safety basics.",
+          "icon": "client"
+        }
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Why Work with UWIB",
+      "text": "We’re more than just your insurance agency—we’re your partner in prevention. \n\n**Lower Risk Without Raising Costs**\n\nWe fully sponsor the training—no cost to you.\n\n**Reduce Claims & Improve Compliance**\n\nTrained drivers are less likely to cause accidents, and completion certificates help document your efforts.\n\n**Boost Carrier Confidence**\n\nDemonstrating proactive risk management can improve how underwriters view your business.\n\n**Support a Culture of Safety**\n\nTraining shows your team that safety is a top priority—on and off the road.\n",
+      "showBackgroundColor": false,
+      "textOnLeft": false,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/blog/get-ready-workers-comp-rates-are-likely-going-up-across-the-country.jpg"
+      ]
+    }
+  ]
+}

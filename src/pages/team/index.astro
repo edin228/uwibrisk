@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getTeam } from '../../lib/content';
+
+const team = await getTeam();
+---
+
+<BaseLayout title="Our Team" description="Meet the team at UWIB Risk & Insurance Solutions.">
+  <section class="container">
+    <h1>Our Team</h1>
+    <ul class="team">
+      {
+        team.map((member) => (
+          <li>
+            <Image src={member.data.photo} alt={member.data.name} width={320} />
+            <h2>
+              {member.data.hasTeamPage ? <a href={`/team/${member.id}`}>{member.data.name}</a> : member.data.name}
+            </h2>
+            <p class="label">{member.data.role}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .team {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 32px;
+    padding: 0;
+    list-style: none;
+  }
+  .team img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+  .team h2 {
+    margin-bottom: 0;
+    font-size: var(--text-h4);
+  }
+  .team a {
+    color: inherit;
+  }
+</style>

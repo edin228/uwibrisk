@@ -1,0 +1,82 @@
+[
+  {
+    "id": "coverage-for-your-business",
+    "label": "Coverage For Your Business",
+    "href": "/commercial-options",
+    "icon": "agency",
+    "order": 0,
+    "image": "../assets/quote-cards/coverage-for-your-business.jpg"
+  },
+  {
+    "id": "employee-benefits-payroll-and-hr",
+    "label": "Employee Benefits, Payroll and HR",
+    "href": "/benefits-quote",
+    "icon": "medical",
+    "order": 1,
+    "image": "../assets/quote-cards/employee-benefits-payroll-and-hr.jpg"
+  },
+  {
+    "id": "home-and-auto-coverage",
+    "label": "Home & Auto Coverage",
+    "href": "/personal-quote",
+    "icon": "house",
+    "order": 2,
+    "image": "../assets/quote-cards/home-and-auto-coverage.jpg"
+  },
+  {
+    "id": "personal-flood-coverage",
+    "label": "Personal Flood Coverage",
+    "href": "/flood-quote",
+    "icon": "flood",
+    "order": 3,
+    "image": "../assets/quote-cards/personal-flood-coverage.jpg"
+  },
+  {
+    "id": "life",
+    "label": "Life",
+    "href": "/life-insurance-needs",
+    "icon": "life",
+    "order": 4,
+    "image": "../assets/quote-cards/life.webp"
+  },
+  {
+    "id": "travel",
+    "label": "Travel",
+    "href": "/travel-insurance",
+    "icon": "travel",
+    "order": 5,
+    "image": "../assets/quote-cards/travel.webp"
+  },
+  {
+    "id": "bonds",
+    "label": "Bonds",
+    "href": "https://bxsurety.com/bx-pro-landing/92507",
+    "icon": "certificate",
+    "order": 6,
+    "image": "../assets/quote-cards/bonds.webp"
+  },
+  {
+    "id": "pet",
+    "label": "Pet",
+    "href": "https://agency.petinsurance.com/uwib",
+    "icon": "pet",
+    "order": 7,
+    "image": "../assets/quote-cards/pet.jpg"
+  },
+  {
+    "id": "drone",
+    "label": "Drone",
+    "href": "https://uwib.portal.skywatch.ai/brokerLoginhttps://uwib.portal.skywatch.ai/brokerLogin",
+    "icon": "drone",
+    "order": 8,
+    "image": "../assets/quote-cards/drone.webp"
+  },
+  {
+    "id": "earthquake",
+    "label": "Earthquake",
+    "href": "/earthquake-quote",
+    "icon": "apartment",
+    "order": 10,
+    "image": "../assets/landing/earthquake-quote-3.jpg"
+  }
+]

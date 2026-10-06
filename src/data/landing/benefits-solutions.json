@@ -1,0 +1,45 @@
+{
+  "$generated": "scripts/export-hygraph.mjs",
+  "slug": "benefits-solutions",
+  "title": "Benefits Solutions",
+  "description": null,
+  "template": "customLandingPage",
+  "headerImage": null,
+  "formEmbed": null,
+  "components": [
+    {
+      "type": "PageHeader",
+      "header": "Benefits & HR Solutions",
+      "image": "../../assets/landing/benefits-solutions-1.png"
+    },
+    {
+      "type": "WideCard",
+      "header": "Deliver Benefits Electronically",
+      "text": "**Online Enrollment** – Allow your employees to review plan options and enroll securely online\n\n**HR Documents** – Provide employee handbooks and important legal notifications to employees, with an e-signature receipt\n\n**Seamless Integration** – Link to your company’s Payroll, PTO, Performance Reviews and Company Directory automatically",
+      "showBackgroundColor": true,
+      "textOnLeft": true,
+      "useVideo": false,
+      "videoUrl": null,
+      "buttons": [],
+      "images": [
+        "../../assets/landing/benefits-solutions-2.jpg"
+      ]
+    },
+    {
+      "type": "WideCard",
+      "header": "Portal Introduction",
+      "text": "Watch our brief video to see how to:\n\n**• Easily Onboard Employees**\n\n**• Select Medical Plans and Enroll Dependents**\n\n**• Quickly Check Status of Enrollment**",
+      "showBackgroundColor": false,
+      "textOnLeft": false,
+      "useVideo": true,
+      "videoUrl": "https://player.vimeo.com/video/223334793",
+      "buttons": [
+        {
+          "label": "Benefits Check-Up",
+          "href": "/benefits-check-up"
+        }
+      ],
+      "images": []
+    }
+  ]
+}
