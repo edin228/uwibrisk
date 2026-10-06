@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="Search the UWIB Risk website.">
+  <div class="container">
+    <h1>Search</h1>
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+    <div id="search"></div>
+    <script is:inline src="/pagefind/pagefind-ui.js"></script>
+    <script is:inline>
+      // eslint-disable-next-line no-undef
+      new PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) {
+        const input = document.querySelector('#search input');
+        if (input) {
+          input.value = q;
+          input.dispatchEvent(new Event('input'));
+        }
+      }
+    </script>
+    <noscript>Search needs JavaScript. Browse the <a href="/blog">blog</a> instead.</noscript>
+  </div>
+</BaseLayout>
