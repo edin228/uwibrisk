@@ -22,7 +22,7 @@ const RULES: [Topic, RegExp][] = [
   // Culture, leadership and agency-of-the-future essays.
   [
     'Leadership',
-    /strongest people|reality hit|good leaders|internal barriers|technology serves people|2030 insurance agency|leveraging technology/i,
+    /strongest people|good leaders|internal barriers|technology serves people|2030 insurance agency|leveraging technology/i,
   ],
   ['Workers’ comp', /workers[’']? ?comp|safety committee/i],
   ['Cyber', /cyber|\bdata\b|froze my credit|wire fraud/i],
@@ -33,7 +33,10 @@ const RULES: [Topic, RegExp][] = [
   ],
 ];
 
-const TOPIC_OVERRIDES: Record<string, Topic> = {};
+const TOPIC_OVERRIDES: Record<string, Topic> = {
+  // A homeowner's fire story; the title doesn't say so.
+  'reality-hit-and-i-was-caught-totally-off-guard': 'Home',
+};
 
 /** Full topic record (slug, chip label, short name) for a post. */
 export function topicInfo(post: CollectionEntry<'blog'>): TopicInfo {
