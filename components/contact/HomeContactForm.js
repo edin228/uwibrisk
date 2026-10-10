@@ -1,14 +1,63 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { getPage, getTeam } from "../../services";
-import { useEffect } from "react";
-import { useRef } from "react";
 import Map from "./Map";
 import Link from "next/link";
-import Dropdown from "../form/Dropdown";
 import CurrencyInput from "react-currency-input-field";
 import { getIcon } from "../../utils/utils";
+import companyInfo from "../../utils/companyInfo";
+
+function AdvisorPhoto({ advisor }) {
+  const photoUrl = advisor.photo?.url;
+  const [failedPhotoUrl, setFailedPhotoUrl] = useState(null);
+
+  if (photoUrl && photoUrl !== failedPhotoUrl) {
+    return (
+      <motion.img
+        className="object-cover w-full h-full"
+        src={photoUrl}
+        alt={advisor.name}
+        initial={false}
+        onError={() => setFailedPhotoUrl(photoUrl)}
+      />
+    );
+  }
+
+  return (
+    <div
+      className="flex items-center justify-center w-full h-full text-2xl font-bold bg-zinc-700"
+      role="img"
+      aria-label={`${advisor.name} photo unavailable`}
+    >
+      <span aria-hidden="true">
+        {advisor.name
+          .split(" ")
+          .map((name) => name[0])
+          .join("")}
+      </span>
+    </div>
+  );
+}
+
+function ContactAdvisorFallback() {
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full gap-4 text-center text-white">
+      <div className="text-2xl font-bold">
+        Let us help you find the right advisor
+      </div>
+      <p>Contact our team to discuss your insurance needs.</p>
+      <a
+        className="p-2 font-bold rounded-md bg-[#eab308]"
+        href={`tel:${companyInfo.phone.replace(/\D/g, "")}`}
+      >
+        Call {companyInfo.phone}
+      </a>
+      <a className="underline" href={`mailto:${companyInfo.email}`}>
+        Email our team
+      </a>
+    </div>
+  );
+}
 
 function HomeContactForm() {
   const [page, setPage] = useState(0);
@@ -18,7 +67,9 @@ function HomeContactForm() {
   const [selectedIndustry, setSelectedIndustry] = useState("");
   const [estimatedRevenue, setEstimatedRevenue] = useState("1000000");
   const [contactData, setContactData] = useState(null);
-  const [team, setTeam] = useState(null);
+  const [team, setTeam] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   const [plAssets, setPlAssets] = useState(null);
 
@@ -26,23 +77,27 @@ function HomeContactForm() {
 
   useEffect(() => {
     const handler = async () => {
-      const data = await getPage("contact");
-      const tm = await getTeam();
-      const form = data?.forms[0].fields;
-      setContactData(form);
-      setTeam(tm?.teamMembers);
+      try {
+        const [data, tm] = await Promise.all([getPage("contact"), getTeam()]);
+        const form = data?.forms?.[0]?.fields;
+        if (!form) throw new Error("Contact form is unavailable");
+        setContactData(form);
+        setTeam(tm?.teamMembers ?? []);
+      } catch {
+        setLoadError(true);
+      } finally {
+        setIsLoading(false);
+      }
     };
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
     handler();
-    return () => {};
   }, []);
 
   const changePage = (direction) => {
     const value = direction == "forward" ? 1 : -1;
     const newPage = page + value;
-    const finalPageValue =
-      newPage >= 0 && newPage <= contactData?.length ? newPage : 0;
+    const finalPageValue = newPage >= 0 && newPage <= 3 ? newPage : 0;
     setPage(finalPageValue);
   };
 
@@ -69,24 +124,20 @@ function HomeContactForm() {
 
   const industryOptions = contactData?.find((x) => x.name == "Industry");
 
-  const jesseObj = team?.filter((x) => x.name == "Jesse Nielsen")[0];
-  const danaObj = team?.filter((x) => x.name == "Dana Coates")[0];
-  const ericObj = team?.filter((x) => x.name == "Eric Schirding")[0];
-  const joshObj = team?.filter((x) => x.name == "Josh Acosta")[0];
-  const nickObj = team?.filter((x) => x.name == "Nick Latshaw")[0];
-  const davidObj = team?.filter((x) => x.name == "David Murphy")[0];
-
+  const jesseObj = team.find((advisor) => advisor.name === "Jesse Nielsen");
+  // An advisor may be unpublished or removed from the CMS.
   const producers = [
-    jesseObj,
-    // danaObj,
-    ericObj,
-    joshObj,
-    nickObj,
-    davidObj
-  ];
+    "Jesse Nielsen",
+    "Eric Schirding",
+    "Josh Acosta",
+    "Nick Latshaw",
+    "David Murphy",
+  ]
+    .map((name) => team.find((advisor) => advisor.name === name))
+    .filter(Boolean);
 
   const validAgent = (agent) => {
-    console.log(agent)
+    if (!agent) return false;
     let valid = true;
     const employeeCount = parseInt(numberOfEmployees, 10);
     const projectedSales = parseInt(estimatedRevenue, 10);
@@ -270,6 +321,20 @@ function HomeContactForm() {
     return valid ? true : false;
   };
 
+  const matchingProducers = producers.filter(validAgent);
+
+  if (isLoading || loadError) {
+    return (
+      <div className="flex items-center justify-center w-full h-[500px] p-4 rounded-md shadow-lg bg-zinc-800/70">
+        {isLoading ? (
+          <p role="status" className="text-white">Loading contact form...</p>
+        ) : (
+          <ContactAdvisorFallback />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative flex flex-col w-full h-[500px] transition duration-200 ease-out ${
@@ -360,19 +425,15 @@ function HomeContactForm() {
         )}
         {page == 3 &&
           selectedLineofBusiness == "Personal Insurance" &&
-          plAssets == "Yes" && (
+          plAssets == "Yes" &&
+          (jesseObj ? (
             <div className="flex flex-col justify-center w-full h-full text-white">
               <div className="flex items-center justify-center w-full mb-2">
                 <div className="flex flex-col items-center justify-center">
                   <div className="text-2xl font-bold">Jesse Nielsen</div>
                   <div className="font-bold ">Account Executive</div>
                   <div className="relative w-[150px] h-[150px] overflow-hidden rounded-lg shadow-lg my-4">
-                    <motion.img
-                      className="object-cover w-full h-full"
-                      src={jesseObj.photo.url}
-                      alt=""
-                      initial={false}
-                    />
+                    <AdvisorPhoto advisor={jesseObj} />
                   </div>
                   <div className="flex w-[400px] px-4 text-center">
                     Jesse Nielsen is the perfect asset to help navigate your
@@ -392,7 +453,9 @@ function HomeContactForm() {
                 </div>
               </div>
             </div>
-          )}
+          ) : (
+            <ContactAdvisorFallback />
+          ))}
         {page == 3 &&
           selectedLineofBusiness == "Personal Insurance" &&
           plAssets == "No" && (
@@ -415,78 +478,14 @@ function HomeContactForm() {
         {page == 2 && selectedLineofBusiness == "Business Insurance" && (
           <div className="flex flex-col items-center justify-center w-full h-full gap-2 text-white">
             <div className="flex items-center justify-center w-full gap-4">
-              <div
-                className={`${
-                  validAgent(jesseObj) ? "visible" : "opacity-30"
-                }  relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={jesseObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
-              <div
-                className={`${
-                  validAgent(davidObj) ? "visible" : "opacity-30"
-                }  relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={davidObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
-              {/* <div
-                className={`${
-                  validAgent(danaObj) ? "visible" : "opacity-30"
-                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={danaObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div> */}
-              <div
-                className={`${
-                  validAgent(ericObj) ? "visible" : "opacity-30"
-                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={ericObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
-              <div
-                className={`${
-                  validAgent(joshObj) ? "visible" : "opacity-30"
-                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={joshObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
-              <div
-                className={`${
-                  validAgent(nickObj) ? "visible" : "opacity-30"
-                } relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
-              >
-                <motion.img
-                  className="object-cover w-full h-full"
-                  src={nickObj.photo.url}
-                  alt=""
-                  initial={false}
-                />
-              </div>
+              {producers.map((advisor) => (
+                <div
+                  key={advisor.id}
+                  className={`${validAgent(advisor) ? "visible" : "opacity-30"} relative w-[75px] h-[75px] overflow-hidden rounded-lg shadow-lg my-4`}
+                >
+                  <AdvisorPhoto advisor={advisor} />
+                </div>
+              ))}
             </div>
             <div className="flex items-center justify-center w-full mb-1 font-bold text-center 2xl:text-2xl 2xl:w-3/4">
               <div>Lets match you with the right advisor</div>
@@ -502,7 +501,7 @@ function HomeContactForm() {
                   onChange={(e) => setSelectedIndustry(e.target.value)}
                   value={selectedIndustry}
                 >
-                  {industryOptions.formOptions.map(
+                  {industryOptions?.formOptions?.map(
                     ({ option, ...opt }, index) => (
                       <option
                         className="text-white bg-zinc-700"
@@ -552,41 +551,35 @@ function HomeContactForm() {
         )}
         {page == 3 && selectedLineofBusiness == "Business Insurance" && (
           <div className="flex w-full overflow-x-auto text-white h-[90%] z-[50] gap-4">
-            {producers
-              .filter((x) => validAgent(x))
-              .map((prod) => (
-                <div
-                  key={prod.id}
-                  className="flex flex-col justify-center w-full h-full text-white"
-                >
-                  <div className="flex items-center justify-center mb-2">
-                    <div className="flex flex-col items-center justify-center">
-                      <div className="text-2xl font-bold">{prod.name}</div>
-                      <div className="font-bold ">Account Executive</div>
-                      <div className="relative w-[150px] h-[150px] overflow-hidden rounded-lg shadow-lg my-4">
-                        <motion.img
-                          className="object-cover w-full h-full"
-                          src={prod.photo.url}
-                          alt=""
-                          initial={false}
-                        />
-                      </div>
-                      <div className="flex px-4 text-center hidden">
-                        {prod.miniBio ? prod.miniBio : ""}
-                      </div>
-                      <div className="flex justify-center mt-4">
-                        <Link href={prod.meetingLink ? prod.meetingLink : "#"}>
-                          <button
-                            className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
-                          >
-                            Schedule a Consultation
-                          </button>
-                        </Link>
-                      </div>
+            {matchingProducers.length === 0 && <ContactAdvisorFallback />}
+            {matchingProducers.map((prod) => (
+              <div
+                key={prod.id}
+                className="flex flex-col justify-center w-full h-full text-white"
+              >
+                <div className="flex items-center justify-center mb-2">
+                  <div className="flex flex-col items-center justify-center">
+                    <div className="text-2xl font-bold">{prod.name}</div>
+                    <div className="font-bold ">Account Executive</div>
+                    <div className="relative w-[150px] h-[150px] overflow-hidden rounded-lg shadow-lg my-4">
+                      <AdvisorPhoto advisor={prod} />
+                    </div>
+                    <div className="flex px-4 text-center hidden">
+                      {prod.miniBio ? prod.miniBio : ""}
+                    </div>
+                    <div className="flex justify-center mt-4">
+                      <Link href={prod.meetingLink ? prod.meetingLink : "#"}>
+                        <button
+                          className={`bg-[#eab308] text-shadow min-w-[250px] p-2 rounded-md  font-bold border-[2px] border-[#eab308]  transition duration-200 `}
+                        >
+                          Schedule a Consultation
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         )}
       </div>
@@ -604,7 +597,6 @@ function HomeContactForm() {
           <div className="flex justify-end w-full">
             <button
               className={`p-2  text-white shadow-lg rounded-lg flex items-center gap-2 yellow-button-gradient ${
-                page == contactData?.length ||
                 (page == 3 && selectedLineofBusiness == "Personal Insurance") ||
                 page == 1 ||
                 (page == 2 && selectedLineofBusiness == "Personal Insurance") ||
