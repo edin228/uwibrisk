@@ -25,22 +25,36 @@ const { members, eyebrow, heading, text, link, surface = 'paper' } = Astro.props
       {eyebrow && <p class="eyebrow">{eyebrow}</p>}
       <h2 id="team-strip-heading">{heading}</h2>
     </div>
-    {
-      (text || link) && (
-        <div class="aside">
-          {text && <p>{text}</p>}
-          {link && <TextLink href={link.href}>{link.label}</TextLink>}
+    <div class="aside">
+      {text && <p>{text}</p>}
+      <div class="aside-foot">
+        {link && <TextLink href={link.href}>{link.label}</TextLink>}
+        <div class="controls">
+          <button type="button" class="arrow" data-dir="-1" aria-label="Previous team members" disabled>
+            <span aria-hidden="true">←</span>
+          </button>
+          <button type="button" class="arrow" data-dir="1" aria-label="More team members">
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
-      )
-    }
+      </div>
+    </div>
   </div>
 
   <ul class="strip">
     {
       members.map((m) => (
         <li>
-          <a href={`/team/${m.id}`}>
-            <Image src={m.data.photo} alt={m.data.photoAlt} width={560} widths={[280, 560]} sizes="280px" data-color />
+          <a href={`/team/${m.id}`} draggable="false">
+            <Image
+              src={m.data.photo}
+              alt={m.data.photoAlt}
+              width={560}
+              widths={[280, 560]}
+              sizes="280px"
+              draggable="false"
+              data-color
+            />
             <span class="name">{m.data.name}</span>
             <span class="role">{m.data.role}</span>
           </a>
@@ -49,6 +63,80 @@ const { members, eyebrow, heading, text, link, surface = 'paper' } = Astro.props
     }
   </ul>
 </section>
+
+<script>
+  // The strip has no visible scrollbar, so give it arrow buttons and, for mouse
+  // users, click-and-drag. Touch devices already swipe natively.
+  for (const section of document.querySelectorAll<HTMLElement>('.team-strip')) {
+    const strip = section.querySelector<HTMLElement>('.strip')!;
+    const [prev, next] = section.querySelectorAll<HTMLButtonElement>('.arrow');
+    const smooth = window.matchMedia('(prefers-reduced-motion: no-preference)');
+
+    const sync = () => {
+      const max = strip.scrollWidth - strip.clientWidth;
+      prev.disabled = strip.scrollLeft <= 1;
+      next.disabled = strip.scrollLeft >= max - 1;
+    };
+    strip.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+
+    for (const btn of [prev, next]) {
+      btn.addEventListener('click', () => {
+        const step = Math.max(strip.clientWidth * 0.8, 300) * Number(btn.dataset.dir);
+        strip.scrollBy({ left: step, behavior: smooth.matches ? 'smooth' : 'auto' });
+      });
+    }
+
+    let pointer: number | null = null;
+    let startX = 0;
+    let startScroll = 0;
+    let dragged = false;
+
+    strip.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      pointer = e.pointerId;
+      startX = e.clientX;
+      startScroll = strip.scrollLeft;
+      dragged = false;
+    });
+
+    strip.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== pointer) return;
+      const dx = e.clientX - startX;
+      if (!dragged) {
+        if (Math.abs(dx) < 5) return;
+        // Capture only once it's a real drag, so a plain click still reaches the link.
+        dragged = true;
+        strip.setPointerCapture(e.pointerId);
+        strip.classList.add('is-dragging');
+      }
+      strip.scrollLeft = startScroll - dx;
+    });
+
+    const end = (e: PointerEvent) => {
+      if (e.pointerId !== pointer) return;
+      pointer = null;
+      if (strip.hasPointerCapture(e.pointerId)) strip.releasePointerCapture(e.pointerId);
+      // Dropping the class turns scroll snapping back on, which settles on a card.
+      strip.classList.remove('is-dragging');
+    };
+    strip.addEventListener('pointerup', end);
+    strip.addEventListener('pointercancel', end);
+
+    // A drag that ends over a portrait shouldn't open that person's page.
+    strip.addEventListener(
+      'click',
+      (e) => {
+        if (!dragged) return;
+        e.preventDefault();
+        e.stopPropagation();
+        dragged = false;
+      },
+      true,
+    );
+  }
+</script>
 
 <style>
   .team-strip {
@@ -96,6 +184,47 @@ const { members, eyebrow, heading, text, link, surface = 'paper' } = Astro.props
     line-height: 25px;
   }
 
+  .aside-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    align-self: stretch;
+  }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .arrow {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--color-ink);
+    background: none;
+    color: var(--color-ink);
+    font-size: 18px;
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      opacity 0.15s;
+  }
+
+  .arrow:hover:not(:disabled) {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .arrow:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+
   .strip {
     display: flex;
     gap: 20px;
@@ -110,6 +239,22 @@ const { members, eyebrow, heading, text, link, surface = 'paper' } = Astro.props
 
   .strip::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (pointer: fine) {
+    .strip {
+      cursor: grab;
+    }
+  }
+
+  .strip.is-dragging {
+    scroll-snap-type: none;
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .strip.is-dragging a {
+    pointer-events: none;
   }
 
   .strip li {
