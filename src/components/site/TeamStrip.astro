@@ -69,7 +69,8 @@ const { members, eyebrow, heading, text, link, surface = 'paper' } = Astro.props
   // users, click-and-drag. Touch devices already swipe natively.
   for (const section of document.querySelectorAll<HTMLElement>('.team-strip')) {
     const strip = section.querySelector<HTMLElement>('.strip')!;
-    const [prev, next] = section.querySelectorAll<HTMLButtonElement>('.arrow');
+    const prev = section.querySelector<HTMLButtonElement>('.arrow[data-dir="-1"]')!;
+    const next = section.querySelector<HTMLButtonElement>('.arrow[data-dir="1"]')!;
     const smooth = window.matchMedia('(prefers-reduced-motion: no-preference)');
 
     const sync = () => {
