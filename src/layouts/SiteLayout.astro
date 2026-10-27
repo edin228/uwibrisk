@@ -13,16 +13,18 @@ import BaseLayout from './BaseLayout.astro';
 type BaseProps = ComponentProps<typeof BaseLayout>;
 interface Props extends BaseProps {
   header?: 'overlay' | 'solid';
+  /** Main-nav href to mark current (see SiteHeader). */
+  section?: string;
   /** Closing band props, or false to omit it. */
   closing?: ComponentProps<typeof ClosingCta> | false;
 }
 
-const { header = 'solid', closing = {}, ...base } = Astro.props;
+const { header = 'solid', section, closing = {}, ...base } = Astro.props;
 ---
 
 <BaseLayout {...base}>
   <slot name="head" slot="head" />
-  <SiteHeader slot="header" variant={header} />
+  <SiteHeader slot="header" variant={header} section={section} />
   <slot />
   <Fragment slot="footer">
     {closing !== false && <ClosingCta {...closing} />}

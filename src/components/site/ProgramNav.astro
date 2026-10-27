@@ -1,0 +1,203 @@
+---
+/**
+ * Program bar under the site header for programs with their own sub-pages or
+ * sections (boutique hotels, Coffee & Contracts): "Industries / <name>", the
+ * program's links and its call to action. Sticks to the top on desktop once the
+ * site header scrolls away.
+ */
+interface Link {
+  label: string;
+  href: string;
+  /** Highlight on every path that starts with this (otherwise exact match). */
+  activePrefix?: string;
+}
+
+interface Props {
+  name: string;
+  home: string;
+  nav: Link[];
+  cta: { label: string; href: string };
+}
+const { name, home, nav, cta } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (l: Link) => (l.activePrefix ? path.startsWith(l.activePrefix) : path === l.href);
+---
+
+<nav class="program-nav" aria-label={name}>
+  <div class="inner">
+    <p class="trail">
+      <a href="/programs" class="parent">Industries</a>
+      <span class="sep" aria-hidden="true">/</span>
+      <a href={home} class="name" aria-current={path === home ? 'page' : undefined}>{name}</a>
+    </p>
+    <ul class="links">
+      {
+        nav.map((l) => (
+          <li>
+            <a href={l.href} aria-current={isActive(l) ? 'page' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={cta.href} class="cta">{cta.label}</a>
+  </div>
+</nav>
+
+<style>
+  .program-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  /* In-page links (#team, #contact) shouldn't land under the sticky bar. */
+  :global(html) {
+    scroll-padding-top: 72px;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    height: 60px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .trail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    flex-shrink: 0;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .trail a {
+    text-decoration: none;
+  }
+
+  .parent {
+    color: var(--color-muted);
+  }
+
+  .parent:hover {
+    color: var(--color-ink);
+  }
+
+  .sep {
+    color: var(--color-faint);
+  }
+
+  .name {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 17px;
+  }
+
+  .links {
+    display: flex;
+    gap: 28px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    display: block;
+    padding-block: 6px;
+    border-bottom: 2px solid transparent;
+    color: var(--color-body);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .links a:hover {
+    color: var(--color-ink);
+  }
+
+  .links a[aria-current='page'] {
+    border-bottom-color: var(--color-mustard);
+    color: var(--color-ink);
+  }
+
+  .cta {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    background: var(--color-mustard);
+    color: var(--color-ink);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .cta:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  @media (max-width: 900px) {
+    .program-nav {
+      position: static;
+    }
+
+    :global(html) {
+      scroll-padding-top: 0;
+    }
+
+    .inner {
+      flex-wrap: wrap;
+      gap: 0 16px;
+      height: auto;
+      padding-block: 12px 0;
+    }
+
+    .trail {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .parent,
+    .sep {
+      display: none;
+    }
+
+    .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cta {
+      padding: 8px 12px;
+    }
+
+    /* Links drop to their own row and scroll sideways if they don't fit. */
+    .links {
+      order: 1;
+      width: calc(100% + 2 * var(--gutter));
+      margin: 10px calc(-1 * var(--gutter)) 0;
+      padding-inline: var(--gutter);
+      gap: 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .links a {
+      padding-block: 10px;
+    }
+  }
+</style>

@@ -1,15 +1,14 @@
 ---
-import MicrositeFooter from '../../components/legacy/MicrositeFooter.astro';
-import MicrositeHeader from '../../components/legacy/MicrositeHeader.astro';
+import ProgramNav from '../../components/site/ProgramNav.astro';
 import { brand, coverageAreas, coveragePage, meta } from '../../data/legacy/hotels';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import '../../styles/microsites/hotels.css';
 
 const { hero, jumpLabel, includesLabel, cta } = coveragePage;
 ---
 
-<BaseLayout title={meta.coverage.title} description={meta.coverage.description} searchable>
-  <MicrositeHeader slot="header" brand={brand} />
+<SiteLayout title={meta.coverage.title} description={meta.coverage.description} searchable section="/programs" closing={false}>
+  <ProgramNav {...brand} />
   <div class="hm-site">
     <section class="hm-coverageHero">
       <div>
@@ -49,5 +48,4 @@ const { hero, jumpLabel, includesLabel, cta } = coveragePage;
       <a href={cta.href} class="hm-button">{cta.label}</a>
     </section>
   </div>
-  <MicrositeFooter slot="footer" brand={brand} />
-</BaseLayout>
+</SiteLayout>

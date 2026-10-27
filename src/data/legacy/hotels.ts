@@ -24,21 +24,14 @@ export interface MicrositeLink {
   href: string;
 }
 
-/** Header/footer of the old landing-page microsites (hotels, Coffee & Contracts). */
+/** Program bar under the site header (hotels, Coffee & Contracts): props of ProgramNav. */
 export interface MicrositeBrand {
+  /** Shown as "Industries / <name>". */
+  name: string;
   home: string;
-  /** Accessible name of the home link ("<label> home"). */
-  label: string;
-  /** Two-line descriptor next to the logo. */
-  descriptor: string;
-  navLabel: string;
   /** `activePrefix`: highlight the item on every path that starts with it (otherwise exact match). */
   nav: (MicrositeLink & { activePrefix?: string })[];
   cta: MicrositeLink;
-  tagline: string;
-  footerColumns: MicrositeLink[][];
-  legalLinks: MicrositeLink[];
-  copyright: string;
 }
 
 export const HOTEL_PATHS = {
@@ -69,37 +62,17 @@ export const meta = {
   },
 };
 
-/** Microsite header/footer (shared shell). */
+/** Program bar under the site header. */
 export const brand: MicrositeBrand = {
+  name: 'Boutique hotels',
   home: HOTEL_PATHS.home,
-  label: 'UWIB boutique hotel insurance',
-  descriptor: 'Boutique hotel\ninsurance',
-  navLabel: 'Boutique hotel insurance',
   nav: [
     { label: 'Why UWIB', href: HOTEL_PATHS.why },
     { label: 'Coverage', href: HOTEL_PATHS.coverage },
     { label: 'Hotel Risk Brief', href: HOTEL_PATHS.briefs, activePrefix: HOTEL_PATHS.briefs },
-    { label: 'About', href: `${HOTEL_PATHS.home}#team` },
+    { label: 'Team', href: `${HOTEL_PATHS.home}#team` },
   ],
   cta: { label: 'Request a review', href: `${HOTEL_PATHS.home}#contact` },
-  tagline: 'Independent insurance guidance for California boutique hotels.',
-  footerColumns: [
-    [
-      { label: 'Why UWIB', href: HOTEL_PATHS.why },
-      { label: 'Coverage', href: HOTEL_PATHS.coverage },
-      { label: 'Risk Brief', href: HOTEL_PATHS.briefs },
-    ],
-    [
-      { label: 'About', href: `${HOTEL_PATHS.home}#team` },
-      { label: 'Contact', href: `${HOTEL_PATHS.home}#contact` },
-      { label: 'Privacy', href: '/privacy-policy' },
-    ],
-  ],
-  legalLinks: [
-    { label: 'State licenses', href: '/licenses' },
-    { label: 'Privacy policy', href: '/privacy-policy' },
-  ],
-  copyright: '© 2026 UWIB Risk & Insurance Solutions',
 };
 
 export const coverageAreas: {

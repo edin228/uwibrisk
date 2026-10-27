@@ -2,20 +2,19 @@
 import LegacyForm from '../components/legacy/LegacyForm.astro';
 import LegacyImg from '../components/legacy/LegacyImg.astro';
 import Lines from '../components/legacy/Lines.astro';
-import MicrositeFooter from '../components/legacy/MicrositeFooter.astro';
-import MicrositeHeader from '../components/legacy/MicrositeHeader.astro';
 import MicrositeIcon from '../components/legacy/MicrositeIcon.astro';
+import ProgramNav from '../components/site/ProgramNav.astro';
 import * as c from '../data/legacy/coffee-and-contracts';
 import { coffeeContactForm } from '../data/legacy/forms';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
 import '../styles/microsites/hotels.css';
 import '../styles/microsites/coffee.css';
 
 const { hero, about, differentiators, whoWeServe, approach, team, contact } = c;
 ---
 
-<BaseLayout title={c.meta.title} description={c.meta.description} image={hero.image.src} searchable>
-  <MicrositeHeader slot="header" brand={c.brand} />
+<SiteLayout title={c.meta.title} description={c.meta.description} image={hero.image.src} searchable section="/programs" closing={false}>
+  <ProgramNav {...c.brand} />
   <div class="hm-site">
     <section class="hm-landingHero">
       <div class="hm-heroCopy">
@@ -187,5 +186,4 @@ const { hero, about, differentiators, whoWeServe, approach, team, contact } = c;
       <LegacyForm form={coffeeContactForm} variant="landing" />
     </section>
   </div>
-  <MicrositeFooter slot="footer" brand={c.brand} />
-</BaseLayout>
+</SiteLayout>

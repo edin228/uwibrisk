@@ -2,20 +2,19 @@
 import LegacyForm from '../../components/legacy/LegacyForm.astro';
 import LegacyImg from '../../components/legacy/LegacyImg.astro';
 import Lines from '../../components/legacy/Lines.astro';
-import MicrositeFooter from '../../components/legacy/MicrositeFooter.astro';
-import MicrositeHeader from '../../components/legacy/MicrositeHeader.astro';
 import MicrositeIcon from '../../components/legacy/MicrositeIcon.astro';
 import RiskBriefCover from '../../components/legacy/RiskBriefCover.astro';
+import ProgramNav from '../../components/site/ProgramNav.astro';
 import { hotelsContactForm } from '../../data/legacy/forms';
 import { brand, coverageAreas, HOTEL_PATHS, landing, meta, serviceTeam } from '../../data/legacy/hotels';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
 import '../../styles/microsites/hotels.css';
 
 const { hero, risks, briefFeature, coveragePreview, process, team, contact } = landing;
 ---
 
-<BaseLayout title={meta.home.title} description={meta.home.description} canonical="/hotels" image={hero.image.src} searchable>
-  <MicrositeHeader slot="header" brand={brand} />
+<SiteLayout title={meta.home.title} description={meta.home.description} canonical="/hotels" image={hero.image.src} searchable section="/programs" closing={false}>
+  <ProgramNav {...brand} />
   <div class="hm-site">
     <section class="hm-landingHero">
       <div class="hm-heroCopy">
@@ -168,5 +167,4 @@ const { hero, risks, briefFeature, coveragePreview, process, team, contact } = l
       <LegacyForm form={hotelsContactForm} variant="landing" />
     </section>
   </div>
-  <MicrositeFooter slot="footer" brand={brand} />
-</BaseLayout>
+</SiteLayout>

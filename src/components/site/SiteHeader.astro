@@ -9,10 +9,13 @@ import { clientLinks, company, primaryNav, quoteLink } from '../../data/site';
 
 interface Props {
   variant?: 'overlay' | 'solid';
+  /** Main-nav href to mark current when the URL doesn't sit under it (e.g. '/programs' on /hotels). */
+  section?: string;
 }
-const { variant = 'solid' } = Astro.props;
+const { variant = 'solid', section } = Astro.props;
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const isCurrent = (href: string) => href !== '/' && (path === href || path.startsWith(`${href}/`));
+const isCurrent = (href: string) =>
+  href === section || (href !== '/' && (path === href || path.startsWith(`${href}/`)));
 ---
 
 <header class:list={['site-header', `site-header--${variant}`]} data-site-header>

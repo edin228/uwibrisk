@@ -22,10 +22,8 @@ export const meta = {
 };
 
 export const brand: MicrositeBrand = {
+  name: 'Coffee & Contracts',
   home: HOME,
-  label: 'Coffee & Contracts',
-  descriptor: 'Coffee &\ncontracts',
-  navLabel: 'Coffee & Contracts',
   nav: [
     { label: 'About', href: `${HOME}#about` },
     { label: 'Who we serve', href: `${HOME}#who-we-serve` },
@@ -33,24 +31,6 @@ export const brand: MicrositeBrand = {
     { label: 'Team', href: `${HOME}#team` },
   ],
   cta: { label: 'Get a quick quote', href: `${HOME}#contact` },
-  tagline: 'Coffee & Contracts, a division of UWIB. Insurance and risk guidance for the specialty coffee community.',
-  footerColumns: [
-    [
-      { label: 'About', href: `${HOME}#about` },
-      { label: 'Who we serve', href: `${HOME}#who-we-serve` },
-      { label: 'Our approach', href: `${HOME}#approach` },
-    ],
-    [
-      { label: 'Team', href: `${HOME}#team` },
-      { label: 'Privacy', href: '/privacy-policy' },
-      { label: 'Licensing', href: '/licenses' },
-    ],
-  ],
-  legalLinks: [
-    { label: 'State licenses', href: '/licenses' },
-    { label: 'Privacy policy', href: '/privacy-policy' },
-  ],
-  copyright: '© 2026 UWIB Risk & Insurance Solutions',
 };
 
 export const hero = {
