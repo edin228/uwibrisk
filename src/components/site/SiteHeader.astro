@@ -148,6 +148,12 @@ const isCurrent = (href: string) => href !== '/' && (path === href || path.start
     border-bottom: 1px solid rgb(255 255 255 / 0.14);
   }
 
+  .site-header--overlay .bar {
+    background: rgb(12 12 12 / 0.2);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
   .site-header--solid .bar {
     border-bottom-color: transparent;
   }
