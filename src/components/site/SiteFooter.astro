@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import landscape from '../../assets/brand/footer-landscape.jpg';
 import logo from '../../assets/brand/uwib-wide-light.webp';
 import { company, footerColumns, legalLinks, siteOffices } from '../../data/site';
 
@@ -7,6 +8,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
+  <div class="content">
   <div class="inner">
     <div class="brand-col">
       <a href="/" class="brand" aria-label={`${company.name} home`}>
@@ -61,6 +63,12 @@ const year = new Date().getFullYear();
       }
     </ul>
   </div>
+  </div>
+
+  <!-- Engraved panorama of the three office regions: San Gabriels, a north Idaho lake, Tennessee hills. -->
+  <div class="art" aria-hidden="true">
+    <Image src={landscape} alt="" widths={[800, 1440, 2172]} sizes="100vw" data-color />
+  </div>
 </footer>
 
 <script>
@@ -77,7 +85,29 @@ const year = new Date().getFullYear();
   .site-footer {
     background: var(--color-night);
     color: #d6d6d6;
-    padding: 72px var(--gutter) 36px;
+    padding-top: 72px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    padding-inline: var(--gutter);
+  }
+
+  .art {
+    /* The image's top fifth is empty sky; tuck it up under the legal row. */
+    margin-top: -5vw;
+  }
+
+  .art img {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 240px;
+    object-fit: cover;
+    object-position: 50% 100%;
+    /* Fade the top edge so the sky melts into the footer background. */
+    mask-image: linear-gradient(to bottom, transparent, #000 22%);
   }
 
   .inner,
@@ -191,6 +221,7 @@ const year = new Date().getFullYear();
     justify-content: space-between;
     gap: 8px 24px;
     padding-top: 20px;
+    padding-bottom: 32px;
     border-top: 1px solid #262626;
     color: #6a6a6a;
     font-size: 11px;
@@ -224,7 +255,19 @@ const year = new Date().getFullYear();
 
   @media (max-width: 760px) {
     .site-footer {
-      padding: 56px 20px 32px;
+      padding-top: 56px;
+    }
+
+    .content {
+      padding-inline: 20px;
+    }
+
+    .art {
+      margin-top: -72px;
+    }
+
+    .art img {
+      min-height: 300px;
     }
 
     .inner {
