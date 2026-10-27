@@ -36,6 +36,10 @@ const RULES: [Topic, RegExp][] = [
 const TOPIC_OVERRIDES: Record<string, Topic> = {
   // A homeowner's fire story; the title doesn't say so.
   'reality-hit-and-i-was-caught-totally-off-guard': 'Home',
+  // Construction risk on a data center build; "data" would file it under Cyber.
+  'building-an-ai-data-center-the-small-details-carry-big-risk': 'Business',
+  // An essay on InsurTech and judgment, alongside the other agency-of-the-future pieces.
+  'when-innovation-outruns-judgment-who-is-managing-the-risk': 'Leadership',
 };
 
 /** Full topic record (slug, chip label, short name) for a post. */

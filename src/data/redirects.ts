@@ -947,6 +947,18 @@ export const urlMap: UrlMapping[] = [
   },
   {
     "status": 301,
+    "from": "/blog/when-innovation-outruns-judgment-who-is-managing-the-risk",
+    "to": "/blog/when-innovation-outruns-judgment-who-is-managing-the-risk",
+    "kind": "blog"
+  },
+  {
+    "status": 301,
+    "from": "/blog/building-an-ai-data-center-the-small-details-carry-big-risk",
+    "to": "/blog/building-an-ai-data-center-the-small-details-carry-big-risk",
+    "kind": "blog"
+  },
+  {
+    "status": 301,
     "from": "/blog/amazon-sells-everything-even-insurance",
     "to": "/blog",
     "kind": "blog",

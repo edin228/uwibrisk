@@ -4,10 +4,11 @@
 >
 > **AI-drafted:** every description below was written by an AI assistant after looking at the image. Please skim and correct anything inaccurate (names, places, text in images).
 
-268 images, 251 with alt text, 17 missing.
+271 images, 253 with alt text, 18 missing.
 
 Missing:
 
+- `src/assets/brand/footer-landscape.jpg`
 - `src/assets/brand/uwib-wide-light.webp`
 - `src/assets/photos/breakfast.jpg`
 - `src/assets/photos/building.jpg`
@@ -34,6 +35,7 @@ Missing:
 | `src/assets/blog/a-comprehensive-guide-to-inland-marine-insurance-tools-equipment-and-installatio.jpg` | Hard hat, gloves, drill and tools around a sign reading “Inland Marine Insurance” |
 | `src/assets/blog/annual-business-insurance-review-checklist-essential-steps-for-protection.jpg` | Hand checking off an “Annual Business Insurance Review” checklist on a clipboard beside a laptop |
 | `src/assets/blog/beyond-covid-what-businesses-learned-about-risk-resilience-and-revenue-protection.webp` | Man wearing a headset working alone at a computer in a bright, empty office |
+| `src/assets/blog/building-an-ai-data-center-the-small-details-carry-big-risk.jpg` | Rows of black server racks with blue indicator lights in a data center aisle |
 | `src/assets/blog/business-owner-s-policy-bop-vs-standalone-policies-making-the-right-choice-for-y.jpg` | Illustration of a businesswoman between two signs: “BOP” vs. “Standalone Policies” |
 | `src/assets/blog/certificates-of-insurance-cois-what-clients-actually-need.jpg` | Certificate of insurance form on a desk with a pen, glasses and coffee |
 | `src/assets/blog/classic-and-collector-car-insurance-basics-a-comprehensive-guide.jpg` | Hand holding up a red classic sports car above a laptop and notebook |
@@ -128,6 +130,7 @@ Missing:
 | `src/assets/blog/what-is-medical-malpractice-insurance-and-why-is-it-essential.jpg` | Doctor holding a chalkboard sign reading “Medical Malpractice Insurance” |
 | `src/assets/blog/what-kind-of-insurance-does-a-coffee-shop-need.webp` | Barista pouring latte art into a cup of coffee |
 | `src/assets/blog/what-to-do-if-you-lose-your-home-practical-tips-for-navigating-insurance-and-recovery.webp` | Burned debris and charred framing on the ground after a fire |
+| `src/assets/blog/when-innovation-outruns-judgment-who-is-managing-the-risk.jpg` | Three businesspeople in conversation in a hotel lounge overlooking a city skyline, with a laptop and coffee in the foreground |
 | `src/assets/blog/when-to-increase-liability-limits-on-auto-insurance.jpg` | Car keys and a calculator on an insurance policy document |
 | `src/assets/blog/why-accountants-need-insurance-even-if-their-math-is-always-right.jpg` | Woman in a blazer using a calculator and laptop over printed charts |
 | `src/assets/blog/why-good-leaders-must-eventually-become-less-important.jpg` | Overhead view of four colleagues working with laptops at a white conference table |
@@ -137,6 +140,7 @@ Missing:
 | `src/assets/blog/your-house-burns-down-do-you-actually-have-to-rebuild.jpg` | Burned-out house beside a model home, an insurance policy and a pen at sunset |
 | `src/assets/blog/your-insurancesimplified-discover-the-power-of-our-client-portal.jpg` | Person typing on a laptop while sitting on a gray sofa |
 | `src/assets/blog/youre-not-alone-navigating-natural-disasters-together.webp` | Satellite view of wildfires burning across mountains and a city at night |
+| `src/assets/brand/footer-landscape.jpg` | (missing) |
 | `src/assets/brand/uwib-wide-light.webp` | (missing) |
 | `src/assets/brand/uwib-wide-white.png` | UWIB Risk & Insurance Solutions logo |
 | `src/assets/carriers/all-risks.png` | All Risks logo |
@@ -194,13 +198,13 @@ Missing:
 | `src/assets/legacy/trusted-advisor-dana-coates.jpg` | Portrait of Dana Coates, Director of Strategic Partnerships |
 | `src/assets/office-resources/agencyzoom.svg` | AgencyZoom logo |
 | `src/assets/office-resources/amtrust.png` | AmTrust logo |
+| `src/assets/office-resources/araya-formerly-corelogic.png` | Araya logo |
 | `src/assets/office-resources/arrowhead.png` | Arrowhead logo |
 | `src/assets/office-resources/bhhc.png` | Berkshire Hathaway Homestate Companies logo |
 | `src/assets/office-resources/bondexchange.png` | BondExchange logo |
 | `src/assets/office-resources/brinq.png` | Brinq logo |
 | `src/assets/office-resources/chubb.png` | Chubb logo |
 | `src/assets/office-resources/cna.png` | CNA logo |
-| `src/assets/office-resources/corelogic.png` | CoreLogic logo |
 | `src/assets/office-resources/coterie-self-service.png` | Coterie logo |
 | `src/assets/office-resources/employers.png` | Employers logo |
 | `src/assets/office-resources/erisk.jpg` | E-Risk Services logo |

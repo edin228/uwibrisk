@@ -40,6 +40,16 @@
     "imageAlt": "AmTrust logo"
   },
   {
+    "id": "araya-formerly-corelogic",
+    "title": "Araya (formerly CoreLogic)",
+    "link": "https://araya.cotality.com/dashboard",
+    "category": "Insurtech",
+    "order": 3,
+    "altLogoText": "Araya (formerly CoreLogic)",
+    "image": "../assets/office-resources/araya-formerly-corelogic.png",
+    "imageAlt": "Araya logo"
+  },
+  {
     "id": "arrowhead",
     "title": "Arrowhead",
     "link": "https://www.arrowheadexchange.com/aex/login.jsp",
@@ -98,16 +108,6 @@
     "altLogoText": "CNA",
     "image": "../assets/office-resources/cna.png",
     "imageAlt": "CNA logo"
-  },
-  {
-    "id": "corelogic",
-    "title": "CoreLogic",
-    "link": "https://clientsso.corelogic.com/pf/adapter2adapter.ping?SpSessionAuthnAdapterId=Storefront&IdpAdapterId=CLAuthPCVAdapter3SFv2PCF23&TargetResource=https://store.corelogic.com:443/success&referrer=Homepage",
-    "category": "Insurtech",
-    "order": 3,
-    "altLogoText": "CoreLogic",
-    "image": "../assets/office-resources/corelogic.png",
-    "imageAlt": "CoreLogic logo"
   },
   {
     "id": "coterie",
