@@ -52,7 +52,13 @@ export const clientLinks: NavLink[] = [
   { label: 'Client portal', href: company.clientPortalUrl, external: true },
 ];
 
-export const quoteLink: NavLink = { label: 'Get a quote', href: '/get-quotes' };
+/** Header call to action ("Start your coverage", not "Get a quote": Dana wants it to read consultative). */
+export const quoteLink: NavLink & { shortLabel: string } = {
+  label: 'Start your coverage',
+  /** Phones narrower than ~400px, where the full label crowds the logo and menu button. */
+  shortLabel: 'Start coverage',
+  href: '/get-quotes',
+};
 
 export const footerColumns: { title: string; links: NavLink[] }[] = [
   {

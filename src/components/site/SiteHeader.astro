@@ -58,7 +58,9 @@ const isCurrent = (href: string) =>
     </nav>
 
     <div class="mobile-actions">
-      <a href={quoteLink.href} class="quote quote--sm">{quoteLink.label}</a>
+      <a href={quoteLink.href} class="quote quote--sm" aria-label={quoteLink.label}>
+        <span class="label-long">{quoteLink.label}</span><span class="label-short" aria-hidden="true">{quoteLink.shortLabel}</span>
+      </a>
       <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
         <span class="visually-hidden">Menu</span>
         <span class="lines" aria-hidden="true"><span></span><span></span></span>
@@ -282,6 +284,10 @@ const isCurrent = (href: string) =>
       line-height: 14px;
     }
 
+    .label-short {
+      display: none;
+    }
+
     .menu-toggle {
       display: grid;
       place-items: center;
@@ -357,6 +363,30 @@ const isCurrent = (href: string) =>
       color: #e6e6e6;
       font-size: 16px;
       text-decoration: none;
+    }
+
+    @media (max-width: 400px) {
+      .brand img {
+        width: 128px;
+      }
+
+      .quote--sm {
+        padding-inline: 10px;
+      }
+
+      .label-long {
+        display: none;
+      }
+
+      .label-short {
+        display: inline;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .brand img {
+        width: 112px;
+      }
     }
 
     .mobile-call {

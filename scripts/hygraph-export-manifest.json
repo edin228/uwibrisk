@@ -418,7 +418,7 @@
     "src/data/office-resources.json": "5de7ee2374d721e5dfe878e93ac7f0d8237e8d2edc91fb083a87c607173ce148",
     "src/data/offices.json": "cfcf7b8c0ddd1ed3dbe90af00504cd4343886e15512b262b835b4e0c41cd70fb",
     "src/data/programs.json": "6359613c9b3cb13fea3058dd68314db4459c7a6862479d4c4c9ed36e804d0fa4",
-    "src/data/quote-cards.json": "ece1edb6a4b1a9b923587e966b3574283b0314082253f7058557d8493fed270e",
+    "src/data/quote-cards.json": "6f8c45bbfa000ab9e724ce3a8f58a34f75bcd7882cee338a287d4efe38bb473d",
     "src/data/redirects.ts": "1254f3a42a3ff9fd825cc2fe629463b9422e3f6a9f6bfa004986cf3a5038951a",
     "src/data/testimonials.json": "951dbed427ef8351cc5250974d4cbc86dd81ebc55a7bd1cbd431b490f752ac06"
   }

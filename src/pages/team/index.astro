@@ -32,7 +32,7 @@ const lead = `${capitalize(numberWord(members.length))} people across ${offices}
   </TeamIntro>
 
   <div class="groups" data-groups>
-    {groups.map((g, i) => <TeamGroup id={g.id} label={g.label} members={g.members} last={i === groups.length - 1} />)}
+    {groups.map((g, i) => <TeamGroup id={g.id} label={g.label} members={g.members} also={g.also} last={i === groups.length - 1} />)}
   </div>
   <p class="visually-hidden" aria-live="polite" data-filter-status></p>
 </SiteLayout>
@@ -54,7 +54,9 @@ const lead = `${capitalize(numberWord(members.length))} people across ${offices}
       for (const g of groups) {
         const visible = filter === 'all' || g.dataset.group === filter;
         g.hidden = !visible;
-        if (visible) shown += g.querySelectorAll('li').length;
+        // Filtered on its own, a group also shows people borrowed from other groups.
+        g.classList.toggle('is-solo', filter !== 'all');
+        if (visible) shown += g.querySelectorAll(filter === 'all' ? 'li:not([data-also])' : 'li').length;
       }
       if (status) status.textContent = `Showing ${shown} ${shown === 1 ? 'person' : 'people'}`;
     });

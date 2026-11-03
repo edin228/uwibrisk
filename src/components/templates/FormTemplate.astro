@@ -53,7 +53,7 @@ const [programs, quoteCards, checkUpCards] = await Promise.all([
 const section = (() => {
   if (CLIENT_FORMS.has(form.slug)) return { label: 'Client center' };
   if (programs.some((p) => p.data.url === path)) return { label: 'Industries', href: '/programs' };
-  if (QUOTE_FORMS.has(form.slug) || quoteCards.some((c) => c.data.href === path)) return { label: 'Get a quote', href: '/get-quotes' };
+  if (QUOTE_FORMS.has(form.slug) || quoteCards.some((c) => c.data.href === path)) return { label: 'Start your coverage', href: '/get-quotes' };
   if (form.slug.includes('check-up') || checkUpCards.some((c) => c.data.href === path)) {
     return { label: 'Coverage check-ups', href: '/coverage-check-ups' };
   }

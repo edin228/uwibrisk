@@ -21,7 +21,7 @@ export const options: { title: string; href: string; icon: string; criteria: str
     title: 'Small Business',
     href: '/commercial-quote',
     icon: 'handshake',
-    criteria: ['Under $2M in revenue', 'Under 50 Employees'],
+    criteria: ['Under $2M in revenue', 'Up to 50 Employees'],
     text: 'Insurance solutions to protect your business and support your growth',
     image: { src: smallBusiness, alt: altFor('src/assets/commercial-options/small-business.webp') },
   },

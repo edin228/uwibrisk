@@ -21,7 +21,7 @@ export const hvac: IndustryProgram = {
     position: '50% 30%',
     height: 680,
     actions: [
-      { label: 'See if you qualify →', href: survey },
+      { label: 'See if our program is a good fit →', href: survey },
       { label: 'Talk to a contractor specialist', href: '/contact' },
     ],
   },

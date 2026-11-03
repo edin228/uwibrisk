@@ -1,12 +1,12 @@
 /** Homepage copy and curated lists (design: Paper "Home — Desktop" / "Home — Mobile"). */
-import { company } from './site';
+import { ROOTS_YEAR } from './about';
 import { photos, type Photo } from './photos';
 
 export const hero = {
-  eyebrow: `Independent since ${company.founded}`,
+  eyebrow: `Roots dating back to ${ROOTS_YEAR}`,
   heading: ['Protect what', 'you’ve built.'],
   text: 'Business, home and benefits coverage, placed with care across two dozen carriers and looked after by people who know your name.',
-  cta: { label: 'Start a quote →', href: '/get-quotes' },
+  cta: { label: 'Start your coverage →', href: '/get-quotes' },
   photo: photos.house,
 };
 

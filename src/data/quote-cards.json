@@ -83,7 +83,7 @@
   {
     "id": "earthquake",
     "label": "Earthquake",
-    "href": "/earthquake-quote",
+    "href": "https://www.getquake.com/uwib",
     "icon": "apartment",
     "order": 10,
     "image": "../assets/landing/earthquake-quote-3.jpg",

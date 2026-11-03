@@ -5,10 +5,27 @@ type Member = CollectionEntry<'team'>;
 type Category = Member['data']['category'];
 
 /** Listing groups in display order (as in the "Team — Desktop" mockup). */
-export const TEAM_GROUPS: { id: string; label: string; categories: Category[]; order?: string[] }[] = [
-  // Owner's order for leadership; anyone not listed follows.
+export const TEAM_GROUPS: {
+  id: string;
+  label: string;
+  categories: Category[];
+  /** Owner's order; anyone not listed follows. */
+  order?: string[];
+  /**
+   * People from other groups who are also listed here. They show when this group is
+   * filtered on its own, but not in the "Everyone" view, so nobody appears twice.
+   */
+  also?: string[];
+}[] = [
   { id: 'leadership', label: 'Leadership', categories: ['Management'], order: ['eric-schirding', 'josh-acosta', 'gina-coates'] },
-  { id: 'account-executives', label: 'Account executives', categories: ['Sales'] },
+  {
+    id: 'account-executives',
+    label: 'Account executives',
+    categories: ['Sales'],
+    // The co-founders also work as account executives (Dana, Nov 2026).
+    also: ['eric-schirding', 'josh-acosta'],
+    order: ['eric-schirding', 'josh-acosta', 'nick-latshaw', 'jesse-nielsen'],
+  },
   { id: 'client-service', label: 'Client service', categories: ['Service'] },
   { id: 'operations', label: 'Operations', categories: ['AccountingOperationsManagement', 'Operations'] },
 ];
@@ -16,17 +33,19 @@ export const TEAM_GROUPS: { id: string; label: string; categories: Category[]; o
 /**
  * Split members (already in getTeam() order) into the listing groups. Within a
  * group, members keep category order first (so Operations lists agency operations
- * before the rest), then team order. Empty groups are dropped.
+ * before the rest), then team order. Empty groups are dropped. `also` lists the ids
+ * of members borrowed from other groups (see TEAM_GROUPS).
  */
 export function groupTeam(members: Member[]) {
   return TEAM_GROUPS.map((group) => {
-    const inGroup = group.categories.flatMap((c) => members.filter((m) => m.data.category === c));
+    const also = members.filter((m) => group.also?.includes(m.id));
+    const inGroup = [...group.categories.flatMap((c) => members.filter((m) => m.data.category === c)), ...also];
     const rank = (m: Member) => {
       const i = group.order?.indexOf(m.id) ?? -1;
       return i === -1 ? Number.MAX_SAFE_INTEGER : i;
     };
-    return { ...group, members: inGroup.toSorted((a, b) => rank(a) - rank(b)) };
-  }).filter((g) => g.members.length > 0);
+    return { ...group, members: inGroup.toSorted((a, b) => rank(a) - rank(b)), also: also.map((m) => m.id) };
+  }).filter((g) => g.members.length > g.also.length);
 }
 
 export const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? name;

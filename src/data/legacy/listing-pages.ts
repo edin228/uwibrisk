@@ -13,9 +13,10 @@ export interface ListingCopy {
 
 export const listingPages = {
   'get-quotes': {
-    title: 'Get a Quote',
+    title: 'Start Your Coverage',
     description: 'Get insurance quotes from United Western Insurance Brokers',
-    heading: 'Get a quote',
+    // Was "Get a quote"; renamed to sound less like a price check (Dana, Nov 2026).
+    heading: 'Start your coverage',
     // new
     lead: 'Pick the kind of coverage you need to open the matching quote form.',
     // new

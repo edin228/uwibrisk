@@ -72,6 +72,11 @@ export const OFFICE_OVERRIDES = {
  * The export fails if a `find` string is no longer present, so stale rules surface.
  */
 export const TEXT_FIXES = {
+  'src/data/quote-cards.json': [
+    // Dana: like the other instant-quote cards, Earthquake should open the quoting
+    // site directly instead of the /earthquake-quote landing page.
+    { find: '"href": "/earthquake-quote",', replace: '"href": "https://www.getquake.com/uwib",' },
+  ],
   'src/content/pages/contact.md': [
     // Owner: the main number is (800) 378-5554.
     { find: 'Phone: (626) 397 -4700', replace: 'Phone: (800) 378-5554' },
