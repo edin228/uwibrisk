@@ -7,14 +7,10 @@ interface Props {
   id: string;
   label: string;
   members: CollectionEntry<'team'>[];
-  /** Ids of members from other groups: hidden until this group is filtered on its own. */
-  also?: string[];
   /** Extra bottom padding for the last group. */
   last?: boolean;
 }
-const { id, label, members, also = [], last = false } = Astro.props;
-const people = (n: number) => (n === 1 ? '1 person' : `${n} people`);
-const ownCount = members.filter((m) => !also.includes(m.id)).length;
+const { id, label, members, last = false } = Astro.props;
 const headingId = `group-${id}-heading`;
 ---
 
@@ -22,23 +18,12 @@ const headingId = `group-${id}-heading`;
   <div class="inner">
     <div class="group-label">
       <h2 id={headingId}>{label}</h2>
-      <p class="count">
-        {
-          also.length > 0 ? (
-            <>
-              <span class="count-own">{people(ownCount)}</span>
-              <span class="count-all">{people(members.length)}</span>
-            </>
-          ) : (
-            people(members.length)
-          )
-        }
-      </p>
+      <p class="count">{members.length === 1 ? '1 person' : `${members.length} people`}</p>
     </div>
     <ul class="grid">
       {
         members.map((m) => (
-          <li data-also={also.includes(m.id) ? '' : undefined}>
+          <li>
             <MemberCard member={m} />
           </li>
         ))
@@ -88,24 +73,6 @@ const headingId = `group-${id}-heading`;
     color: var(--color-faint);
     font-size: 13px;
     line-height: 18px;
-  }
-
-  /* "Everyone" view: borrowed members are already listed in their own group. */
-  li[data-also],
-  .count-all {
-    display: none;
-  }
-
-  .group.is-solo li[data-also] {
-    display: block;
-  }
-
-  .group.is-solo .count-all {
-    display: inline;
-  }
-
-  .group.is-solo .count-own {
-    display: none;
   }
 
   .grid {

@@ -111,8 +111,16 @@ export const team = {
   heading: 'Faces, not phone trees.',
   text: 'You’ll have their direct line and email from day one, and a team that already knows your account when you call.',
   link: { label: 'Meet the team →', href: '/team' },
-  /** Team slugs shown first, in this order; the rest follow in team order. */
-  featured: ['josh-acosta', 'eric-schirding', 'stephanie-fregosi', 'crystal-van-eekhout', 'christa-ritner'],
+  /** Team slugs shown first, in this order: account executives, then account managers; the rest follow in team order. */
+  featured: [
+    'josh-acosta',
+    'eric-schirding',
+    'jesse-nielsen',
+    'nick-latshaw',
+    'stephanie-fregosi',
+    'crystal-van-eekhout',
+    'christa-ritner',
+  ],
 };
 
 export const insights = {

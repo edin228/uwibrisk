@@ -11,10 +11,7 @@ export const TEAM_GROUPS: {
   categories: Category[];
   /** Owner's order; anyone not listed follows. */
   order?: string[];
-  /**
-   * People from other groups who are also listed here. They show when this group is
-   * filtered on its own, but not in the "Everyone" view, so nobody appears twice.
-   */
+  /** People from other groups who are also listed here (they appear in both groups). */
   also?: string[];
 }[] = [
   { id: 'leadership', label: 'Leadership', categories: ['Management'], order: ['eric-schirding', 'josh-acosta', 'gina-coates'] },
@@ -33,8 +30,7 @@ export const TEAM_GROUPS: {
 /**
  * Split members (already in getTeam() order) into the listing groups. Within a
  * group, members keep category order first (so Operations lists agency operations
- * before the rest), then team order. Empty groups are dropped. `also` lists the ids
- * of members borrowed from other groups (see TEAM_GROUPS).
+ * before the rest), then team order. Empty groups are dropped.
  */
 export function groupTeam(members: Member[]) {
   return TEAM_GROUPS.map((group) => {
@@ -44,8 +40,8 @@ export function groupTeam(members: Member[]) {
       const i = group.order?.indexOf(m.id) ?? -1;
       return i === -1 ? Number.MAX_SAFE_INTEGER : i;
     };
-    return { ...group, members: inGroup.toSorted((a, b) => rank(a) - rank(b)), also: also.map((m) => m.id) };
-  }).filter((g) => g.members.length > g.also.length);
+    return { ...group, members: inGroup.toSorted((a, b) => rank(a) - rank(b)) };
+  }).filter((g) => g.members.length > 0);
 }
 
 export const firstName = (name: string) => name.trim().split(/\s+/)[0] ?? name;
