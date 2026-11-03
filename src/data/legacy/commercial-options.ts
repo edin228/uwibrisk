@@ -13,7 +13,7 @@ export const options: { title: string; href: string; icon: string; criteria: str
     title: 'Large Business',
     href: '/initial-client-interview',
     icon: 'apartment',
-    criteria: ['Over $2M in revenue', '50+ Employees'],
+    criteria: ['Over $2M in revenue', '51+ Employees'],
     text: 'Tailored insurance solutions to meet your large-scale business needs and coverage',
     image: { src: largeBusiness, alt: altFor('src/assets/commercial-options/large-business.webp') },
   },
