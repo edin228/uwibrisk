@@ -120,6 +120,9 @@ export const team = {
     'stephanie-fregosi',
     'crystal-van-eekhout',
     'christa-ritner',
+    'monica-lopez',
+    'harrison-santiago',
+    'jaimie-le',
   ],
 };
 
